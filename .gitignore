@@ -1,0 +1,16 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Claude Code local data
+.claude/
+
+# Pipeline-generated outputs (run pipeline.py to regenerate)
+Teambuilding Code/students_combined.csv
+Teambuilding Code/teams.csv
+Teambuilding Code/teams_summary.csv
+
+# Test run outputs and logs
+Teambuilding Code/tests/
+*.log

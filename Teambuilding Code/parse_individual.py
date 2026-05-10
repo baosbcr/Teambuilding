@@ -106,11 +106,11 @@ def parse_block(name, rows):
     if not studylines_selected:
         warnings.append("no studyline selected")
     elif len(studylines_selected) > 1:
-        warnings.append(f"multiple studylines {studylines_selected} — using first")
+        warnings.append(f"multiple studylines {studylines_selected} -- using first")
     if not personalities_selected:
         warnings.append("no personality selected")
     elif len(personalities_selected) > 1:
-        warnings.append(f"multiple personalities {personalities_selected} — using first")
+        warnings.append(f"multiple personalities {personalities_selected} -- using first")
 
     label = student_number or name
     for w in warnings:
@@ -121,6 +121,7 @@ def parse_block(name, rows):
         return None
 
     return {
+        "student_name":     name,
         "student_number":   student_number or name,
         "studyline":        studylines_selected[0]     if studylines_selected     else "UNKNOWN",
         "personality_type": personalities_selected[0]  if personalities_selected  else "UNKNOWN",
@@ -141,6 +142,29 @@ def process_file(in_path, category):
     return students
 
 
+def load_all_surveys(survey_dir: Path) -> list[dict]:
+    """Read every survey XLSX/CSV in survey_dir; return flat list of survey records."""
+    in_paths = sorted(
+        p for p in survey_dir.iterdir()
+        if p.suffix.lower() in (".xlsx", ".xlsm", ".csv")
+        and not p.name.startswith("~$")
+    )
+    if not in_paths:
+        sys.exit(f"No survey files found in '{survey_dir}'")
+    records: list[dict] = []
+    for p in in_paths:
+        cat = detect_category(p.name)
+        if cat is None:
+            sys.exit(
+                f"Could not detect category for '{p.name}' - "
+                "rename the file or check _CATEGORY_PATTERNS in parse_individual.py"
+            )
+        for s in process_file(p, cat):
+            s["allocation_category"] = cat
+            records.append(s)
+    return records
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("inputs", nargs="+", help="One or more .xlsx/.csv files, or a single directory")
@@ -158,6 +182,7 @@ def main():
             p for p in folder.iterdir()
             if p.suffix.lower() in (".xlsx", ".xlsm", ".csv")
             and p.resolve() != out_path.resolve()
+            and not p.name.startswith("~$")  # skip Office lock files
         )
         if not in_paths:
             sys.exit(f"No .xlsx/.xlsm/.csv files found in '{folder}'")
@@ -183,9 +208,10 @@ def main():
             s["allocation_category"] = category
             all_students.append(s)
 
-    fieldnames = ["student_number", "allocation_category", "studyline", "personality_type"]
+    fieldnames = ["student_number", "student_name", "allocation_category",
+                  "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(all_students)
 
