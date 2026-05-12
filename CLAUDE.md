@@ -4,7 +4,7 @@
 
 Automate formation of diverse project teams for a DTU innovation course. Students self-enrol into one of four challenges (A, B, C, D) plus an Overflow group and a Late Entries group, then fill a survey indicating their studyline and personality type (MBTI). The pipeline reads those survey exports, deduplicates and verifies student records, and assigns students to balanced teams that maximise studyline and personality diversity.
 
-Target: zero-touch deployment on a server — a human provides the export files, runs `pipeline.py`, and gets `teams.csv`.
+Interfaces: a Flask web app (`app.py`) for browser-based use, and a CLI (`pipeline.py`) for direct execution. Both produce identical output.
 
 ---
 
@@ -13,19 +13,18 @@ Target: zero-touch deployment on a server — a human provides the export files,
 ```
 Teambuilding/                            <- project root
   CLAUDE.md                              <- this file
+  app.py                                 <- Flask web interface (primary entry point)
+  requirements.txt                       <- pip dependencies (flask, openpyxl)
+  templates/
+    index.html                           <- upload form with all levers exposed
   Learn Exports/
     Individual Reports/                  <- one XLSX per group (pipeline input)
     Group Exports/                       <- group-membership CSV (pipeline input)
-    Summary Reports/                     <- per-question aggregate XLSXs (test data only)
-  Teambuilding Code/                     <- all Python scripts + intermediate outputs
-    parse_individual.py                  <- XLSX reader utility (used by resolve.py)
+  Teambuilding Code/                     <- pipeline scripts
+    parse_individual.py                  <- XLSX reader utility
     resolve.py                           <- Step 1: group-export-first build + survey match
     form_teams.py                        <- Step 2: team formation algorithm
-    pipeline.py                          <- orchestrates both steps
-    mock_students.py                     <- generates SYNTHETIC test data (NOT production)
-    students_combined.csv                <- intermediate (Step 1 output, group-export-first)
-    teams.csv                            <- final team assignments
-    teams_summary.csv                    <- per-team diversity statistics
+    pipeline.py                          <- CLI orchestrator (both steps in sequence)
 ```
 
 ---
@@ -51,10 +50,6 @@ Single CSV exported post-deadline from DTU Learn. Columns used:
 - `Group Name` — which challenge group they enrolled in
 
 This file is the **ground truth** for group membership. The pipeline auto-detects the most recently modified CSV in this folder unless `--groups` is specified.
-
-### Summary Reports (`Learn Exports/Summary Reports/`)
-
-Aggregate XLSX/CSV files showing per-question response distributions. **These are only used by `mock_students.py` to generate synthetic test data.** They play no role in the production pipeline.
 
 ---
 
@@ -110,13 +105,18 @@ Greedy team formation with snake-draft assignment.
    - Phase 2b: form new flex teams, same priority
    - Phase 2c: distribute remaining students one-by-one into teams with room
 
-### `pipeline.py` — Orchestrator
+### `pipeline.py` — CLI Orchestrator
 
 Runs Steps 1-2 in sequence. Shortcut: `--skip-build CSV` (supply a pre-built student list, skips step 1).
 
-### `mock_students.py` — Test Data Generator Only
+### `app.py` — Flask Web Interface
 
-Generates synthetic student records from Summary Reports. **Not part of the production pipeline.** Do not confuse with the real data parser (`parse_individual.py`).
+Browser-based front end wrapping the same pipeline modules. Accepts file uploads (Individual Reports, Group Export, optional classlist), exposes all levers as form fields, and returns a `teams.zip` containing:
+- `teams.csv` — one row per student
+- `teams_summary.csv` — per-team diversity stats (if requested)
+- `run_log.txt` — full pipeline output with a settings header and log message guide
+
+Run locally with `python app.py` (serves on `0.0.0.0:5000`). On the Pi, managed by systemd (`teambuilding.service`) and starts automatically on boot. For production, replace Flask's dev server with a WSGI server (e.g. gunicorn).
 
 ---
 
