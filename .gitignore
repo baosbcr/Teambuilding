@@ -6,6 +6,9 @@ __pycache__/
 # Claude Code local data
 .claude/
 
+# Local session files
+Session.txt
+
 # Pipeline-generated outputs (run pipeline.py to regenerate)
 Teambuilding Code/students_combined.csv
 Teambuilding Code/teams.csv

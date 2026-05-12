@@ -28,7 +28,7 @@ Teambuilding/                              <- project root
   CLAUDE.md                                <- developer/AI context
   Learn Exports/
     Individual Reports/                    <- (YOU PROVIDE) one XLSX per survey group
-    Group Exports/                         <- (YOU PROVIDE) group-membership CSV
+    Group Exports/                         <- (YOU PROVIDE) group-membership CSV from day 1 (eg https://learn.inside.dtu.dk/d2l/lms/group/group_list.d2l?ou=321369&categoryId=24711)
     Summary Reports/                       <- test/mock data only, not used in production
   Teambuilding Code/
     pipeline.py                            <- run this to produce teams
@@ -44,6 +44,8 @@ Teambuilding/                              <- project root
 ---
 
 ## Step 1 — Provide the Input Files
+
+> **Naming note:** Both input files come from DTU Learn exports. This guide uses **survey** as shorthand for the Individual Attempts exports (found under Surveys in Learn) and **group export** for the group-membership export (found under Groups). Both are Learn exports — the shorter names are just a convention for readability.
 
 ### Individual Reports (required)
 
