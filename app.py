@@ -70,16 +70,69 @@ def run():
             seed          = int(request.form.get("seed", 42))
             include_summary = "summary" in request.form
 
-            # Build log header with run settings
+            # Build log header with run settings and message guide
+            _cross_desc = {
+                "survey-wins":     "survey answers used, student stays in their group export challenge",
+                "joker":           "survey ignored, student gets UNKNOWN attributes in their group export challenge",
+                "survey-overrules":"survey answers used AND student moves to the challenge they surveyed for",
+            }
+            _missing_desc = {
+                "keep":     "included with UNKNOWN studyline and personality in their enrolled group",
+                "overflow": "moved to the flex/overflow pool",
+                "skip":     "excluded from team formation entirely",
+            }
+            _dropped_desc = {
+                "keep":    "included with their survey category",
+                "exclude": "removed from the output",
+            }
+
             log_buf = io.StringIO()
             log_buf.write(
                 f"DTU Team Formation — Run Log\n"
-                f"Date     : {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
-                f"Settings : ideal={ideal}  min={team_min}  max={team_max}  "
-                f"max-groups={max_groups}  seed={seed}  "
-                f"w-studyline={w_studyline}  w-personality={w_personality}\n"
-                f"Levers   : cross-challenge={cross_challenge}  missing={missing_mode}  "
-                f"dropped={dropped_mode}  late-entry-overrules={late_entry_overrules}\n"
+                f"Date : {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+                f"{'='*60}\n\n"
+
+                f"RUN SETTINGS\n"
+                f"  Team sizes  : target {ideal}, min {team_min}, max {team_max}, "
+                f"max {max_groups} teams per challenge\n"
+                f"  Diversity   : studyline weight {w_studyline}, personality weight {w_personality}\n"
+                f"  Seed        : {seed}  "
+                f"(use the same seed to reproduce identical assignments)\n\n"
+
+                f"EDGE CASE LEVERS\n"
+                f"  cross-challenge={cross_challenge}\n"
+                f"    Student filled a survey for a different challenge than their group export:\n"
+                f"    {_cross_desc[cross_challenge]}.\n\n"
+                f"  missing={missing_mode}\n"
+                f"    Student in the group export who never filled any survey:\n"
+                f"    {_missing_desc[missing_mode]}.\n\n"
+                f"  dropped={dropped_mode}\n"
+                f"    Student with a survey but absent from the group export (and classlist):\n"
+                f"    {_dropped_desc[dropped_mode]}.\n\n"
+                f"  late-entry-overrules={late_entry_overrules}\n"
+                f"    Student whose group export shows overflow or a challenge but who filled\n"
+                f"    the Late Entries survey: "
+                + ("moved to the late entry pool.\n\n" if late_entry_overrules
+                   else "kept in their group export category.\n\n") +
+
+                f"LOG MESSAGE GUIDE\n"
+                f"  WARNING [Name]: Q1 ID 's12345' corrected to 's67890'\n"
+                f"    The student typed the wrong ID in the survey. Corrected automatically\n"
+                f"    using the group export.\n\n"
+                f"  INFO [Name]: Q1 'Full Name' -> 's253672' via name lookup\n"
+                f"    The student typed their full name instead of their student ID.\n"
+                f"    Resolved from the group export by name match.\n\n"
+                f"  INFO [sXXXXX]: survey in 'late entry', export 'overflow' - moved to late entry\n"
+                f"    Late-entry-overrules triggered. Student moved to the late entry pool.\n\n"
+                f"  INFO [sXXXXX]: survey in 'challenge A', export 'challenge D' - survey data used, category kept\n"
+                f"    Cross-challenge case (survey-wins): survey answers used, student stays\n"
+                f"    in their group export challenge.\n\n"
+                f"  INFO [missing]: sXXXXX  Name  (challenge A - UNKNOWN)\n"
+                f"    Student found in the group export but no survey matched them.\n"
+                f"    Included with UNKNOWN attributes per missing={missing_mode}.\n\n"
+                f"  INFO [not in export]: sXXXXX  Name - late entry, kept\n"
+                f"    Student appears in the Late Entries survey but not in the group export.\n"
+                f"    Kept as a late entry (registered after the export was taken).\n\n"
                 f"{'='*60}\n\n"
             )
 
