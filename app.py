@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Flask web interface for the DTU Teambuilding pipeline."""
 
+import contextlib
 import csv
+import datetime
 import io
 import sys
 import tempfile
@@ -68,40 +70,56 @@ def run():
             seed          = int(request.form.get("seed", 42))
             include_summary = "summary" in request.form
 
-            # Step 1: build student list
-            export_rows   = _resolve.load_group_export_rows(group_path)
-            name_lookup   = _resolve.build_name_lookup(export_rows)
-            classlist_ids = _resolve.load_classlist(classlist_path) if classlist_path else None
-            survey_records = _parse.load_all_surveys(reports_dir)
-            students = _resolve.build_student_list(
-                group_export_rows    = export_rows,
-                survey_records       = survey_records,
-                name_lookup          = name_lookup,
-                classlist_ids        = classlist_ids,
-                cross_challenge      = cross_challenge,
-                missing_mode         = missing_mode,
-                dropped_mode         = dropped_mode,
-                late_entry_overrules = late_entry_overrules,
+            # Build log header with run settings
+            log_buf = io.StringIO()
+            log_buf.write(
+                f"DTU Team Formation — Run Log\n"
+                f"Date     : {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+                f"Settings : ideal={ideal}  min={team_min}  max={team_max}  "
+                f"max-groups={max_groups}  seed={seed}  "
+                f"w-studyline={w_studyline}  w-personality={w_personality}\n"
+                f"Levers   : cross-challenge={cross_challenge}  missing={missing_mode}  "
+                f"dropped={dropped_mode}  late-entry-overrules={late_entry_overrules}\n"
+                f"{'='*60}\n\n"
             )
 
-            combined_path = tmpdir / "students_combined.csv"
-            fieldnames = ["student_number", "student_name", "allocation_category",
-                          "studyline", "personality_type"]
-            with open(combined_path, "w", newline="", encoding="utf-8") as f:
-                writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
-                writer.writeheader()
-                writer.writerows(students)
+            # Run pipeline, capturing all output into the log
+            with contextlib.redirect_stdout(log_buf), contextlib.redirect_stderr(log_buf):
 
-            # Step 2: form teams
-            cfg = _form.Config(
-                ideal=ideal, team_min=team_min, team_max=team_max,
-                max_groups=max_groups, w_studyline=w_studyline,
-                w_personality=w_personality, seed=seed,
-            )
-            cfg.validate()
-            teams_path   = tmpdir / "teams.csv"
-            summary_path = tmpdir / "teams_summary.csv" if include_summary else None
-            _form.run(cfg, combined_path, teams_path, summary_path)
+                # Step 1: build student list
+                export_rows   = _resolve.load_group_export_rows(group_path)
+                name_lookup   = _resolve.build_name_lookup(export_rows)
+                classlist_ids = _resolve.load_classlist(classlist_path) if classlist_path else None
+                survey_records = _parse.load_all_surveys(reports_dir)
+                students = _resolve.build_student_list(
+                    group_export_rows    = export_rows,
+                    survey_records       = survey_records,
+                    name_lookup          = name_lookup,
+                    classlist_ids        = classlist_ids,
+                    cross_challenge      = cross_challenge,
+                    missing_mode         = missing_mode,
+                    dropped_mode         = dropped_mode,
+                    late_entry_overrules = late_entry_overrules,
+                )
+
+                combined_path = tmpdir / "students_combined.csv"
+                fieldnames = ["student_number", "student_name", "allocation_category",
+                              "studyline", "personality_type"]
+                with open(combined_path, "w", newline="", encoding="utf-8") as f:
+                    writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+                    writer.writeheader()
+                    writer.writerows(students)
+
+                # Step 2: form teams
+                cfg = _form.Config(
+                    ideal=ideal, team_min=team_min, team_max=team_max,
+                    max_groups=max_groups, w_studyline=w_studyline,
+                    w_personality=w_personality, seed=seed,
+                )
+                cfg.validate()
+                teams_path   = tmpdir / "teams.csv"
+                summary_path = tmpdir / "teams_summary.csv" if include_summary else None
+                _form.run(cfg, combined_path, teams_path, summary_path)
 
             # Package results into a zip
             zip_buf = io.BytesIO()
@@ -109,6 +127,7 @@ def run():
                 zf.write(teams_path, "teams.csv")
                 if include_summary and summary_path and summary_path.exists():
                     zf.write(summary_path, "teams_summary.csv")
+                zf.writestr("run_log.txt", log_buf.getvalue())
             zip_buf.seek(0)
 
             response = send_file(
