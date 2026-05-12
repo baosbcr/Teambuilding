@@ -111,12 +111,14 @@ def run():
                     zf.write(summary_path, "teams_summary.csv")
             zip_buf.seek(0)
 
-            return send_file(
+            response = send_file(
                 zip_buf,
                 mimetype="application/zip",
                 as_attachment=True,
                 download_name="teams.zip",
             )
+            response.set_cookie("download_ready", "1", max_age=10, samesite="Lax")
+            return response
 
     except SystemExit as e:
         return render_template("index.html", error=str(e)), 500

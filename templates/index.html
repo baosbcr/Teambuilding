@@ -227,8 +227,18 @@
 
 <script>
 function startRun(e) {
+  document.cookie = 'download_ready=; max-age=0; path=/';
   document.getElementById('overlay').classList.add('show');
   document.querySelector('.submit-btn').disabled = true;
+
+  const poll = setInterval(() => {
+    if (document.cookie.split(';').some(c => c.trim().startsWith('download_ready='))) {
+      document.cookie = 'download_ready=; max-age=0; path=/';
+      clearInterval(poll);
+      document.getElementById('overlay').classList.remove('show');
+      document.querySelector('.submit-btn').disabled = false;
+    }
+  }, 500);
 }
 </script>
 
