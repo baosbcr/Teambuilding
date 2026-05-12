@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DTU Team Formation</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f2f2f2; color: #222; }
+
+    header { background: #990000; color: white; padding: 1.25rem 2rem; }
+    header h1 { font-size: 1.4rem; font-weight: 600; }
+    header p  { font-size: 0.875rem; opacity: 0.85; margin-top: 0.2rem; }
+
+    main { max-width: 780px; margin: 2rem auto; padding: 0 1rem 4rem; }
+
+    .card { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .card h2 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 1.1rem; }
+
+    .field { margin-bottom: 1rem; }
+    .field:last-child { margin-bottom: 0; }
+    .field label { display: block; font-size: 0.875rem; font-weight: 500; margin-bottom: 0.3rem; }
+    .field small  { display: block; color: #888; font-size: 0.8rem; margin-top: 0.25rem; line-height: 1.4; }
+
+    input[type="file"] {
+      display: block; width: 100%; border: 2px dashed #ddd; border-radius: 6px;
+      padding: 0.75rem 1rem; font-size: 0.875rem; cursor: pointer; background: #fafafa;
+      transition: border-color 0.15s;
+    }
+    input[type="file"]:hover { border-color: #990000; }
+
+    input[type="number"], select {
+      width: 100%; border: 1px solid #ddd; border-radius: 6px;
+      padding: 0.5rem 0.75rem; font-size: 0.875rem; background: white;
+      transition: border-color 0.15s;
+    }
+    input[type="number"]:focus, select:focus { outline: none; border-color: #990000; box-shadow: 0 0 0 3px rgba(153,0,0,0.08); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+    .check-row { display: flex; align-items: center; gap: 0.6rem; }
+    .check-row input { width: 1rem; height: 1rem; cursor: pointer; accent-color: #990000; }
+    .check-row label { font-size: 0.875rem; cursor: pointer; }
+
+    details { border: 1px solid #eee; border-radius: 6px; margin-top: 1.25rem; }
+    details summary {
+      padding: 0.7rem 1rem; cursor: pointer; font-size: 0.875rem;
+      font-weight: 500; color: #555; user-select: none; list-style: none;
+    }
+    details summary::before { content: "▸ "; }
+    details[open] summary::before { content: "▾ "; }
+    details[open] summary { border-bottom: 1px solid #eee; }
+    .details-body { padding: 1.1rem 1rem; display: grid; gap: 1rem; }
+
+    .error {
+      background: #fff5f5; border: 1px solid #fca5a5; border-radius: 6px;
+      padding: 0.8rem 1rem; color: #b91c1c; font-size: 0.875rem; margin-bottom: 1.25rem;
+    }
+
+    .submit-btn {
+      display: block; width: 100%; background: #990000; color: white; border: none;
+      border-radius: 8px; padding: 0.9rem 1rem; font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: background 0.15s; margin-top: 0.5rem;
+    }
+    .submit-btn:hover    { background: #7a0000; }
+    .submit-btn:disabled { background: #bbb; cursor: not-allowed; }
+
+    /* Loading overlay */
+    #overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45); z-index: 100;
+      align-items: center; justify-content: center;
+    }
+    #overlay.show { display: flex; }
+    .spinner-card { background: white; border-radius: 10px; padding: 2.5rem 3rem; text-align: center; }
+    .spinner {
+      width: 44px; height: 44px; border: 4px solid #eee; border-top-color: #990000;
+      border-radius: 50%; animation: spin 0.75s linear infinite; margin: 0 auto 1.25rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner-card p       { color: #444; font-weight: 500; }
+    .spinner-card small   { color: #888; font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>DTU Team Formation</h1>
+  <p>Upload your Learn exports, configure the options, and download team assignments.</p>
+</header>
+
+<main>
+  {% if error %}
+  <div class="error"><strong>Error:</strong> {{ error }}</div>
+  {% endif %}
+
+  <form method="POST" action="/run" enctype="multipart/form-data" onsubmit="startRun(event)">
+
+    <!-- Input files -->
+    <div class="card">
+      <h2>Input Files</h2>
+
+      <div class="field">
+        <label>Individual Reports <span style="color:#c00">*</span></label>
+        <input type="file" name="reports" accept=".xlsx,.xlsm" multiple required>
+        <small>One XLSX per group — Challenge A–D, Overflow, Late entries. Select all files at once (Ctrl/Cmd+click).</small>
+      </div>
+
+      <div class="field">
+        <label>Group Export <span style="color:#c00">*</span></label>
+        <input type="file" name="groups" accept=".csv" required>
+        <small>Group membership CSV from DTU Learn, exported after the enrollment deadline.</small>
+      </div>
+
+      <div class="field">
+        <label>Classlist <span style="color:#aaa; font-weight:400">(optional)</span></label>
+        <input type="file" name="classlist" accept=".csv">
+        <small>Required only if you want to detect and exclude students who dropped the course.</small>
+      </div>
+    </div>
+
+    <!-- Team formation settings -->
+    <div class="card">
+      <h2>Team Settings</h2>
+
+      <div class="grid-3" style="margin-bottom:1rem">
+        <div class="field">
+          <label for="ideal">Target size</label>
+          <input type="number" name="ideal" id="ideal" value="8" min="1" max="50">
+        </div>
+        <div class="field">
+          <label for="min">Minimum size</label>
+          <input type="number" name="min" id="min" value="7" min="1" max="50">
+        </div>
+        <div class="field">
+          <label for="max">Maximum size</label>
+          <input type="number" name="max" id="max" value="10" min="1" max="50">
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="seed">Random seed</label>
+          <input type="number" name="seed" id="seed" value="42">
+          <small>Same seed → reproducible assignments.</small>
+        </div>
+        <div class="field">
+          <label for="max_groups">Max teams per challenge</label>
+          <input type="number" name="max_groups" id="max_groups" value="25" min="1">
+        </div>
+      </div>
+
+      <details>
+        <summary>Advanced — diversity weights &amp; edge cases</summary>
+        <div class="details-body">
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="w_studyline">Studyline diversity weight</label>
+              <input type="number" name="w_studyline" id="w_studyline" value="1.0" min="0" step="0.1">
+            </div>
+            <div class="field">
+              <label for="w_personality">Personality diversity weight</label>
+              <input type="number" name="w_personality" id="w_personality" value="1.0" min="0" step="0.1">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cross_challenge">Cross-challenge survey</label>
+            <select name="cross_challenge" id="cross_challenge">
+              <option value="survey-wins">survey-wins — use survey data, keep export group (default)</option>
+              <option value="joker">joker — ignore survey, assign UNKNOWN attributes</option>
+              <option value="survey-overrules">survey-overrules — use survey data AND move to survey's challenge</option>
+            </select>
+            <small>Applies when a student filled a survey for a different challenge than their group export.</small>
+          </div>
+
+          <div class="field">
+            <label for="missing">Students with no survey</label>
+            <select name="missing" id="missing">
+              <option value="keep">keep — include with UNKNOWN attributes (default)</option>
+              <option value="overflow">overflow — move to flex pool</option>
+              <option value="skip">skip — exclude entirely</option>
+            </select>
+            <small>Students present in the group export who never submitted a survey.</small>
+          </div>
+
+          <div class="field">
+            <label for="dropped">Dropped students</label>
+            <select name="dropped" id="dropped">
+              <option value="keep">keep — include with their survey category (default)</option>
+              <option value="exclude">exclude — remove from output</option>
+            </select>
+            <small>Students with a survey but absent from both the group export and classlist. Requires classlist upload.</small>
+          </div>
+
+          <div class="check-row">
+            <input type="checkbox" name="late_entry_overrules" id="late_entry_overrules" checked>
+            <label for="late_entry_overrules">Late-entry overrules — move students who filled the Late Entries survey to the late entry pool, regardless of their group export entry</label>
+          </div>
+
+        </div>
+      </details>
+    </div>
+
+    <!-- Output -->
+    <div class="card">
+      <h2>Output</h2>
+      <div class="check-row">
+        <input type="checkbox" name="summary" id="summary" checked>
+        <label for="summary">Include per-team diversity summary (<code>teams_summary.csv</code>)</label>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Run Pipeline &amp; Download Results</button>
+  </form>
+</main>
+
+<div id="overlay">
+  <div class="spinner-card">
+    <div class="spinner"></div>
+    <p>Running pipeline&hellip;</p>
+    <small>This may take up to 90 seconds.</small>
+  </div>
+</div>
+
+<script>
+function startRun(e) {
+  document.getElementById('overlay').classList.add('show');
+  document.querySelector('.submit-btn').disabled = true;
+}
+</script>
+
+</body>
+</html>
