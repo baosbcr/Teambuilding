@@ -14,6 +14,9 @@ Teambuilding Code/students_combined.csv
 Teambuilding Code/teams.csv
 Teambuilding Code/teams_summary.csv
 
+# Summary Reports (mock data generator only, not used in production)
+Learn Exports/Summary Reports/
+
 # Test run outputs and logs
 Teambuilding Code/tests/
 *.log
