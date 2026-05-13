@@ -34,11 +34,11 @@ def run():
             reports_dir = tmpdir / "reports"
             reports_dir.mkdir()
 
-            # Individual Reports (multiple XLSX)
+            # Team Formation Survey Individual Attempts (multiple XLSX)
             report_files = request.files.getlist("reports")
             saved = [f for f in report_files if f.filename]
             if not saved:
-                return render_template("index.html", error="Please upload at least one Individual Report file."), 400
+                return render_template("index.html", error="Please upload at least one Team Formation Survey Individual Attempts file."), 400
             for f in saved:
                 f.save(reports_dir / f.filename)
 
