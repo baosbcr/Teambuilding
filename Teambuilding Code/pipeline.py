@@ -15,7 +15,7 @@ written to --output / --summary.
 
 Usage:
     python pipeline.py \\
-        --reports  "Learn Exports/Individual Reports" \\
+        --reports  "Learn Exports/Team Formation Survey Individual Attempts" \\
         --groups   "Learn Exports/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv" \\
         --output   teams.csv \\
         --summary  teams_summary.csv
@@ -143,10 +143,10 @@ def main() -> None:
     # --- Input sources ---
     ap.add_argument(
         "--reports",
-        default=str(Path(__file__).parent.parent / "Learn Exports" / "Individual Reports"),
+        default=str(Path(__file__).parent.parent / "Learn Exports" / "Team Formation Survey Individual Attempts"),
         metavar="DIR",
         help="Folder containing Individual Attempts XLSX files "
-             "(default: ../Learn Exports/Individual Reports)",
+             "(default: ../Learn Exports/Team Formation Survey Individual Attempts)",
     )
     ap.add_argument(
         "--groups",

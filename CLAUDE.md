@@ -13,12 +13,14 @@ Interfaces: a Flask web app (`app.py`) for browser-based use, and a CLI (`pipeli
 ```
 Teambuilding/                            <- project root
   CLAUDE.md                              <- this file
+  README.md                              <- setup and quick-start guide
+  DOCS.md                                <- full reference: all options, edge cases, troubleshooting
   app.py                                 <- Flask web interface (primary entry point)
   requirements.txt                       <- pip dependencies (flask, openpyxl)
   templates/
     index.html                           <- upload form with all levers exposed
   Learn Exports/
-    Individual Reports/                  <- one XLSX per group (pipeline input)
+    Team Formation Survey Individual Attempts/  <- one XLSX per group (pipeline input)
     Group Exports/                       <- group-membership CSV (pipeline input)
   Teambuilding Code/                     <- pipeline scripts
     parse_individual.py                  <- XLSX reader utility
@@ -31,7 +33,7 @@ Teambuilding/                            <- project root
 
 ## Data Sources
 
-### Individual Reports (`Learn Exports/Individual Reports/`)
+### Team Formation Survey Individual Attempts (`Learn Exports/Team Formation Survey Individual Attempts/`)
 
 One XLSX per encompassing group, named after the group (e.g. "Team Formation Survey - Challenge A - Individual Attempts.xlsx"). Each file contains student blocks where:
 - The block header row = student's **DTU Learn account name** (authoritative, cannot be wrong)
@@ -191,7 +193,7 @@ Diversity = unique count / team size.
 python pipeline.py
 ```
 
-Uses defaults: reads all XLSX from `../Learn Exports/Individual Reports/`, auto-detects the most recent group export CSV from `../Learn Exports/Group Exports/`, writes `teams.csv` and optionally `teams_summary.csv`.
+Uses defaults: reads all XLSX from `../Learn Exports/Team Formation Survey Individual Attempts/`, auto-detects the most recent group export CSV from `../Learn Exports/Group Exports/`, writes `teams.csv` and optionally `teams_summary.csv`.
 
 ```
 python pipeline.py --summary teams_summary.csv --missing overflow --seed 0

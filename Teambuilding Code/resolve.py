@@ -23,7 +23,7 @@ ID normalisation is always applied; canonical IDs from the group export are
 used as authoritative keys throughout.
 
 Usage:
-    python resolve.py group_export.csv --surveys "Learn Exports/Individual Reports"
+    python resolve.py group_export.csv --surveys "Learn Exports/Team Formation Survey Individual Attempts"
     python resolve.py group_export.csv --surveys DIR \\
         --missing overflow --cross-challenge survey-overrules \\
         --classlist classlist.csv --dropped exclude \\
