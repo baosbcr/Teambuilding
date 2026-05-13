@@ -61,31 +61,7 @@ This installs `flask` and `openpyxl`. Everything else is Python standard library
 
 ---
 
-### 4a. Run via terminal (CLI — no server needed)
-
-In the same terminal, navigate into the `Teambuilding Code` subfolder:
-
-```
-cd "Teambuilding Code"
-```
-
-Then run the pipeline:
-
-```
-python pipeline.py
-```
-
-That's it. The script reads all XLSX files from `Learn Exports/Team Formation Survey Individual Attempts/` and the group export CSV from `Learn Exports/Group Exports/`, then writes `teams.csv` in the `Teambuilding Code` folder.
-
-For a full run that also produces per-team diversity stats:
-
-```
-python pipeline.py --summary teams_summary.csv
-```
-
----
-
-### 4b. Run via Flask (browser interface)
+### 4a. Run via Flask (browser interface — recommended)
 
 From the terminal opened in the project root (the folder containing `app.py`), run:
 
@@ -102,6 +78,30 @@ Upload your files using the form, adjust the levers, and click **Run**. The resu
 To stop the server, go back to the terminal and press **Ctrl + C**.
 
 > The server is also reachable from other devices on the same network via `http://<your-computer-ip>:5000`.
+
+---
+
+### 4b. Run via terminal (CLI — no server needed)
+
+In the same terminal, navigate into the `Teambuilding Code` subfolder:
+
+```
+cd "Teambuilding Code"
+```
+
+Then run the pipeline:
+
+```
+python pipeline.py
+```
+
+The script reads all XLSX files from `Learn Exports/Team Formation Survey Individual Attempts/` and the group export CSV from `Learn Exports/Group Exports/`, then writes `teams.csv` in the `Teambuilding Code` folder.
+
+For a full run that also produces per-team diversity stats:
+
+```
+python pipeline.py --summary teams_summary.csv
+```
 
 ---
 
