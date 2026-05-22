@@ -43,13 +43,16 @@ def _rows_from_csv(path):
 def _rows_from_xlsx(path):
     from openpyxl import load_workbook  # type: ignore[import-untyped]
     wb = load_workbook(path, read_only=True, data_only=True)
-    ws = wb.active
-    raw_rows = ws.iter_rows(values_only=True)
-    headers = [str(h).strip() if h is not None else "" for h in next(raw_rows)]
-    for raw in raw_rows:
-        if raw is None or all(v is None for v in raw):
-            continue
-        yield {h: (str(v).strip() if v is not None else "") for h, v in zip(headers, raw)}
+    try:
+        ws = wb.active
+        raw_rows = ws.iter_rows(values_only=True)
+        headers = [str(h).strip() if h is not None else "" for h in next(raw_rows)]
+        for raw in raw_rows:
+            if raw is None or all(v is None for v in raw):
+                continue
+            yield {h: (str(v).strip() if v is not None else "") for h, v in zip(headers, raw)}
+    finally:
+        wb.close()
 
 
 def load_rows(path):
