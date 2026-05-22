@@ -83,6 +83,17 @@ def step_build(
           f"{len(name_lookup)} distinct names")
 
     classlist_ids = _resolve.load_classlist(classlist) if classlist else None
+    if classlist_ids is None:
+        print(
+            "\nNOTE: No classlist provided.\n"
+            "  - Ghost detection is DISABLED: students who enrolled in the course but\n"
+            "    never joined a group and never filled any survey will not be flagged\n"
+            "    and will be silently absent from teams.csv.\n"
+            "  - Dropped-student filtering (--dropped) is DISABLED: all survey-only\n"
+            "    students are kept regardless of whether they are still enrolled.\n"
+            "  See the 'Classlist Export' section in README.md for how to obtain and\n"
+            "  provide this file.",
+        )
 
     print(f"\nSurvey files in '{reports_dir}':")
     survey_records = _parse.load_all_surveys(reports_dir)

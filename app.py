@@ -147,6 +147,17 @@ def run():
                 export_rows   = _resolve.load_group_export_rows(group_path)
                 name_lookup   = _resolve.build_name_lookup(export_rows)
                 classlist_ids = _resolve.load_classlist(classlist_path) if classlist_path else None
+                if classlist_ids is None:
+                    print(
+                        "NOTE: No classlist uploaded.\n"
+                        "  - Ghost detection is DISABLED: students who enrolled in the course\n"
+                        "    but never joined a group and never filled any survey will not be\n"
+                        "    flagged and will be silently absent from teams.csv.\n"
+                        "  - Dropped-student filtering (--dropped lever) is DISABLED: all\n"
+                        "    survey-only students are kept regardless of enrolment status.\n"
+                        "  See the 'Classlist Export' section in README.md for how to obtain\n"
+                        "  this file, then upload it using the Classlist field on the form.\n",
+                    )
                 survey_records = _parse.load_all_surveys(reports_dir)
                 students = _resolve.build_student_list(
                     group_export_rows    = export_rows,

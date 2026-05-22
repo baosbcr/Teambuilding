@@ -115,6 +115,7 @@ Teambuilding/                              <- project root
   Learn Exports/
     Team Formation Survey Individual Attempts/  <- (YOU PROVIDE) one XLSX per survey group
     Group Exports/                         <- (YOU PROVIDE) group-membership CSV from day 1
+    Classlist Export Students Only/        <- (optional) full classlist CSV from DTU Learn
   Teambuilding Code/
     pipeline.py                            <- run this to produce teams
     resolve.py                             <- Step 1: build canonical student list
@@ -167,12 +168,15 @@ Save the file into `Learn Exports/Group Exports/`. The pipeline auto-detects the
 
 ### Classlist Export (optional)
 
-Only needed to **exclude students who unenrolled after filling the survey**.
+Providing the classlist enables two additional checks:
+
+1. **Ghost detection** — students enrolled in the course but absent from both the group export and all surveys are flagged as `WARNING [ghost]` in the log. They will not appear in `teams.csv` and would otherwise be silently missed.
+2. **Dropped-student filtering** — students who filled a survey but are not in the group export can be cross-checked; those absent from the classlist are likely unenrolled and can be excluded with `--dropped exclude`.
 
 **How to export:**
-> DTU Learn → Classlist → Export → CSV
+> DTU Learn → **Classlist** → **Students** tab → click the **Export** button just above the student list (not the Export button at the very top of the page) → save the CSV
 
-Pass to the pipeline with `--classlist <path>`. Without this file, survey-only students are kept (safe default).
+Save the file into `Learn Exports/Classlist Export Students Only/` and pass it to the pipeline with `--classlist <path>`.
 
 ---
 

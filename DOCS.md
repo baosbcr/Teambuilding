@@ -14,7 +14,7 @@ Run from the `Teambuilding Code/` folder: `python pipeline.py [options]`
 |--------|---------|-------------|
 | `--reports DIR` | `../Learn Exports/Team Formation Survey Individual Attempts` | Folder with Individual Attempts XLSX files |
 | `--groups CSV` | auto-detect newest in `../Learn Exports/Group Exports` | Group-membership export CSV |
-| `--classlist CSV` | (none) | Classlist CSV for dropped-student detection |
+| `--classlist CSV` | (none) | Classlist CSV; flags enrolled students absent from group export and all surveys (`WARNING [ghost]`), and enables dropped-student filtering (`--dropped`) |
 | `-o / --output PATH` | `teams.csv` | Final team assignment CSV |
 | `--summary PATH` | (none) | Per-team diversity statistics CSV |
 | `--workdir DIR` | script directory | Directory for `students_combined.csv` |
@@ -115,6 +115,11 @@ INFO [missing]: sXXXXX  Name  (challenge A - UNKNOWN)
 ```
 Student in group export with no survey found.
 
+```
+WARNING [ghost]: sXXXXX - enrolled but no group or survey found
+```
+Student is in the classlist but absent from the group export and all surveys. They enrolled in the course but never joined a group or filled the survey. They will **not** appear in `teams.csv`. Only printed when `--classlist` is provided.
+
 ---
 
 ## Example Runs
@@ -151,9 +156,9 @@ python pipeline.py --skip-build students_combined.csv --seed 99
 python pipeline.py --groups "../Learn Exports/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv"
 ```
 
-**Exclude likely-dropped students (needs classlist):**
+**Flag ghost students and exclude likely-dropped students (needs classlist):**
 ```
-python pipeline.py --classlist classlist.csv --dropped exclude
+python pipeline.py --classlist "../Learn Exports/Classlist Export Students Only/classlist.csv" --dropped exclude
 ```
 
 ---

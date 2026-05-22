@@ -22,6 +22,7 @@ Teambuilding/                            <- project root
   Learn Exports/
     Team Formation Survey Individual Attempts/  <- one XLSX per group (pipeline input)
     Group Exports/                       <- group-membership CSV (pipeline input)
+    Classlist Export Students Only/      <- (optional) full classlist CSV from DTU Learn
   Teambuilding Code/                     <- pipeline scripts
     parse_individual.py                  <- XLSX reader utility
     resolve.py                           <- Step 1: group-export-first build + survey match
@@ -153,7 +154,7 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 | `--seed`            | 42           | Random seed for tie-breaking (reproducibility)        |
 | `--missing`         | keep         | Students in group export with no survey               |
 | `--cross-challenge` | survey-wins  | Student filled a survey for a different challenge     |
-| `--classlist`           | (none)       | Path to current classlist CSV for dropped-student detection |
+| `--classlist`           | (none)       | Path to current classlist CSV; enables ghost detection (enrolled but absent everywhere) and dropped-student filtering |
 | `--dropped`             | keep         | Students with a survey absent from both export and classlist |
 | `--late-entry-overrules`| on           | Students with Late Entries survey but overflow/challenge in export → moved to late entry |
 
