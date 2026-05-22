@@ -155,13 +155,21 @@ def build_name_lookup(group_export_rows: list[dict]) -> dict[str, list[tuple[str
 def load_classlist(path: Path) -> set[str]:
     """
     Return the set of canonical student IDs from a DTU Learn classlist CSV.
-    The classlist can use the same column layout as the group export
-    (Username, Email Address) or any CSV that _row_canonical_id can parse.
+    Handles both the group-export column layout (Username, Email Address) and
+    the classlist-export layout (UserName, Email).
     """
     ids: set[str] = set()
     with open(path, newline="", encoding="utf-8-sig") as f:
         for row in csv.DictReader(f):
             nid = _row_canonical_id(row)
+            if nid is None:
+                # Classlist export uses 'Email' and 'UserName' instead of
+                # 'Email Address' and 'Username' — remap and retry.
+                adapted = {
+                    "Email Address": row.get("Email", ""),
+                    "Username":      row.get("UserName", ""),
+                }
+                nid = _row_canonical_id(adapted)
             if nid:
                 ids.add(nid)
     print(f"Classlist  : {len(ids)} enrolled students from '{path.name}'")
@@ -501,6 +509,29 @@ def build_student_list(
     return final
 
 
+def flag_ghost_students(final_students: list[dict], classlist_ids: set[str]) -> list[str]:
+    """
+    Compare the finished student list against the classlist and warn about
+    students who are enrolled (classlist) but absent from both the group
+    export and all surveys — they would be silently missing from teams.csv.
+    Returns sorted list of ghost IDs.
+    """
+    final_ids = {s["student_number"] for s in final_students}
+    ghosts = sorted(classlist_ids - final_ids)
+    if ghosts:
+        print(
+            f"\n  {len(ghosts)} enrolled student(s) in classlist but absent from "
+            f"group export and all surveys:",
+            file=sys.stderr,
+        )
+        for gid in ghosts:
+            print(
+                f"  WARNING [ghost]: {gid} - enrolled but no group or survey found",
+                file=sys.stderr,
+            )
+    return ghosts
+
+
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
@@ -602,6 +633,9 @@ def main() -> None:
     print(f"\nTotal: {len(students)} students")
     for cat, n in sorted(Counter(s["allocation_category"] for s in students).items()):
         print(f"  {cat}: {n}")
+
+    if classlist_ids is not None:
+        flag_ghost_students(students, classlist_ids)
 
     fieldnames = ["student_number", "student_name", "allocation_category",
                   "studyline", "personality_type"]

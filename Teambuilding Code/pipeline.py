@@ -104,6 +104,9 @@ def step_build(
     for cat, n in sorted(Counter(s["allocation_category"] for s in students).items()):
         print(f"  {cat}: {n}")
 
+    if classlist_ids is not None:
+        _resolve.flag_ghost_students(students, classlist_ids)
+
     fieldnames = ["student_number", "student_name", "allocation_category",
                   "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:

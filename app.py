@@ -133,6 +133,10 @@ def run():
                 f"  INFO [not in export]: sXXXXX  Name - late entry, kept\n"
                 f"    Student appears in the Late Entries survey but not in the group export.\n"
                 f"    Kept as a late entry (registered after the export was taken).\n\n"
+                f"  WARNING [ghost]: sXXXXX - enrolled but no group or survey found\n"
+                f"    Student is in the classlist but absent from the group export and all\n"
+                f"    surveys. They enrolled in the course but never joined a group or filled\n"
+                f"    the survey. They will NOT appear in teams.csv.\n\n"
                 f"{'='*60}\n\n"
             )
 
@@ -154,6 +158,9 @@ def run():
                     dropped_mode         = dropped_mode,
                     late_entry_overrules = late_entry_overrules,
                 )
+
+                if classlist_ids is not None:
+                    _resolve.flag_ghost_students(students, classlist_ids)
 
                 combined_path = tmpdir / "students_combined.csv"
                 fieldnames = ["student_number", "student_name", "allocation_category",
