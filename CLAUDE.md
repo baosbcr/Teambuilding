@@ -54,6 +54,16 @@ Single CSV exported post-deadline from DTU Learn. Columns used:
 
 This file is the **ground truth** for group membership. The pipeline auto-detects the most recently modified CSV in this folder unless `--groups` is specified.
 
+### Classlist Export (`Learn Exports/Classlist Export Students Only/`)
+
+Optional CSV exported from DTU Learn (Classlist → Students tab → Export above the list). Columns used:
+- `UserName` — student username (note: capital N, differs from group export's `Username`)
+- `Email` — `sXXXXXX@student.dtu.dk` format (differs from group export's `Email Address`)
+
+`load_classlist` handles both column layouts automatically. Enables two features:
+- **Ghost detection**: students in classlist but absent from group export and all surveys → `WARNING [ghost]`
+- **Dropped-student filtering**: cross-checks survey-only students against classlist for the `--dropped` lever
+
 ---
 
 ## Script Roles
@@ -94,6 +104,8 @@ Five internal steps:
 - **N1**: Two students share a name (different IDs) → matched by ID; if ID also wrong, warns and skips auto-correct
 
 ID correction is always applied (it is required for correct matching). Warnings are always printed.
+
+**Additional function:** `flag_ghost_students(final_students, classlist_ids)` — called after `build_student_list` when a classlist is provided; diffs classlist IDs against the final output and prints `WARNING [ghost]` for any enrolled student absent from both group export and all surveys.
 
 ### `form_teams.py` — Step 2
 
@@ -185,6 +197,7 @@ Diversity = unique count / team size.
 - **Late entries students listed under another group in the export**: per the course announcement, a student who filled the Late Entries survey is on the waiting list and their group export entry (overflow or a challenge) is a staging artefact. Default (`--late-entry-overrules` on) moves them to `late entry`. Use `--no-late-entry-overrules` to keep their group export category instead.
 - **Office lock files**: `~$` prefixed XLSX files created by Excel when a file is open. Both `parse_individual.py` and `pipeline.py` skip these automatically.
 - **Ambiguous names**: two students sharing the same full name cannot be auto-corrected via name lookup. A WARNING is printed and both are left unchanged.
+- **Ghost students**: students enrolled in the course (in the classlist) who never joined a group and never filled any survey. Invisible to the pipeline — flagged only when a classlist is provided via `flag_ghost_students`. In 2026 data: 2 ghosts found (`s112544`, `s194963`).
 
 ---
 
