@@ -22,4 +22,5 @@ Learn Exports/Summary Reports/
 
 # Test run outputs and logs
 Teambuilding Code/tests/
+test_runs/
 *.log

@@ -178,8 +178,8 @@ def run():
                     _resolve.flag_ghost_students(students, classlist_ids)
 
                 combined_path = tmpdir / "students_combined.csv"
-                fieldnames = ["student_number", "email_student_number", "student_name",
-                              "allocation_category", "studyline", "personality_type"]
+                fieldnames = ["student_number", "dtu_username", "email_student_number",
+                              "student_name", "allocation_category", "studyline", "personality_type"]
                 with open(combined_path, "w", newline="", encoding="utf-8") as f:
                     writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
                     writer.writeheader()

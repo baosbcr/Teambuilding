@@ -122,8 +122,8 @@ def step_build(
     if classlist_ids is not None:
         _resolve.flag_ghost_students(students, classlist_ids)
 
-    fieldnames = ["student_number", "email_student_number", "student_name",
-                  "allocation_category", "studyline", "personality_type"]
+    fieldnames = ["student_number", "dtu_username", "email_student_number",
+                  "student_name", "allocation_category", "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()

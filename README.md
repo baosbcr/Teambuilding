@@ -190,6 +190,7 @@ Save the file into `Learn Exports/Classlist Export Students Only/` and pass it t
 | `team_id` | `A-01` | Challenge letter + team number |
 | `challenge` | `A` | Final challenge assignment |
 | `student_number` | `s253896` | Canonical student ID |
+| `dtu_username` | `nipac` | DTU Learn username when it was replaced by an email-derived ID; empty if username equals the canonical ID |
 | `email_student_number` | `s253896` | `sXXXXXX` from classlist email — only populated for non-standard usernames when a classlist was provided; empty otherwise |
 | `student_name` | `Maria Jensen` | From DTU Learn account |
 | `original_category` | `challenge A` | Category before flex placement |

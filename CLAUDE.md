@@ -182,7 +182,9 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 
 ### `teams.csv`
 
-One row per student. Fields: `team_id, challenge, student_number, email_student_number, student_name, original_category, studyline, personality_type`
+One row per student. Fields: `team_id, challenge, student_number, dtu_username, email_student_number, student_name, original_category, studyline, personality_type`
+
+`dtu_username` — populated when the student's canonical ID was derived from their group export email (e.g. `s225007`) but their DTU Learn username is non-standard (e.g. `nipac`). Preserves the username that would otherwise be silently discarded. Empty for all students whose canonical ID already equals their username.
 
 `email_student_number` — only populated for students whose `student_number` is a non-standard DTU username (not matching `s\d+`) and a classlist was provided. Contains the `sXXXXXX` derived from the classlist email for manual verification. Empty for all standard students.
 

@@ -315,8 +315,22 @@ def build_student_list(
         seen_export.add(nid)
         first = (row.get("First Name") or "").strip()
         last  = (row.get("Last Name")  or "").strip()
+
+        # Preserve the DTU Learn username when it is non-standard (not s\d+) but
+        # the canonical ID was derived from the email instead — that username is
+        # otherwise silently discarded.  Stored for informational output only;
+        # never used as a matching key.
+        raw_username = (row.get("Username") or "").strip()
+        username_id  = normalise_id(raw_username) if raw_username else None
+        dtu_username = (
+            username_id
+            if username_id and username_id != nid and not re.fullmatch(r"s\d+", username_id)
+            else ""
+        )
+
         base[nid] = {
             "student_number":      nid,
+            "dtu_username":        dtu_username,
             "student_name":        f"{first} {last}".strip(),
             "allocation_category": category,
             "studyline":           "UNKNOWN",
@@ -522,6 +536,7 @@ def build_student_list(
             )
             final.append({
                 "student_number":      nid,
+                "dtu_username":        "",
                 "student_name":        name,
                 "allocation_category": "late entry",
                 "studyline":           rec["studyline"],
@@ -538,6 +553,7 @@ def build_student_list(
                 )
                 final.append({
                     "student_number":      nid,
+                    "dtu_username":        "",
                     "student_name":        name,
                     "allocation_category": survey_cat,
                     "studyline":           rec["studyline"],
@@ -559,6 +575,7 @@ def build_student_list(
                     )
                     final.append({
                         "student_number":      nid,
+                        "dtu_username":        "",
                         "student_name":        name,
                         "allocation_category": survey_cat,
                         "studyline":           rec["studyline"],
@@ -575,6 +592,7 @@ def build_student_list(
             )
             final.append({
                 "student_number":      nid,
+                "dtu_username":        "",
                 "student_name":        name,
                 "allocation_category": survey_cat,
                 "studyline":           rec["studyline"],
@@ -593,6 +611,7 @@ def build_student_list(
         )
         final.append({
             "student_number":      raw_id,
+            "dtu_username":        "",
             "student_name":        name,
             "allocation_category": rec.get("allocation_category", "UNKNOWN"),
             "studyline":           rec.get("studyline",           "UNKNOWN"),
@@ -734,8 +753,8 @@ def main() -> None:
     if classlist_ids is not None:
         flag_ghost_students(students, classlist_ids)
 
-    fieldnames = ["student_number", "email_student_number", "student_name",
-                  "allocation_category", "studyline", "personality_type"]
+    fieldnames = ["student_number", "dtu_username", "email_student_number",
+                  "student_name", "allocation_category", "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()
