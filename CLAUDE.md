@@ -1,5 +1,11 @@
 # DTU Teambuilding — Project Context for Claude
 
+## Weekly Status Log
+
+`weekly_status.md` is a running log of work done each week, used to draft the weekly status update sent to the supervisor. **Append to it at the end of every working session** with a plain-English bullet or two describing what changed — written as if the reader has only seen the Flask app run once or twice (no internal jargon). After the user confirms they have submitted the update to their boss, **clear the bullet points under the current week heading and start fresh** for the next week.
+
+---
+
 ## Purpose
 
 Automate formation of diverse project teams for a DTU innovation course. Students self-enrol into one of four challenges (A, B, C, D) plus an Overflow group and a Late Entries group, then fill a survey indicating their studyline and personality type (MBTI). The pipeline reads those survey exports, deduplicates and verifies student records, and assigns students to balanced teams that maximise studyline and personality diversity.
