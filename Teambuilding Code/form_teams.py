@@ -315,8 +315,8 @@ def write_teams(
 ) -> None:
     """Write team assignments CSV and optional summary CSV."""
     fieldnames = [
-        "team_id", "challenge", "student_number", "student_name",
-        "original_category", "studyline", "personality_type",
+        "team_id", "challenge", "student_number", "email_student_number",
+        "student_name", "original_category", "studyline", "personality_type",
     ]
     rows = []
     for ch in CHALLENGES:
@@ -324,13 +324,14 @@ def write_teams(
             tid = f"{ch}-{t_idx:02d}"
             for student in team:
                 rows.append({
-                    "team_id":           tid,
-                    "challenge":         ch,
-                    "student_number":    student["student_number"],
-                    "student_name":      student.get("student_name", ""),
-                    "original_category": student.get("allocation_category", ""),
-                    "studyline":         student["studyline"],
-                    "personality_type":  student["personality_type"],
+                    "team_id":              tid,
+                    "challenge":            ch,
+                    "student_number":       student["student_number"],
+                    "email_student_number": student.get("email_student_number", ""),
+                    "student_name":         student.get("student_name", ""),
+                    "original_category":    student.get("allocation_category", ""),
+                    "studyline":            student["studyline"],
+                    "personality_type":     student["personality_type"],
                 })
 
     with open(out_path, "w", newline="", encoding="utf-8") as f:

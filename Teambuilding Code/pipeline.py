@@ -82,7 +82,9 @@ def step_build(
     print(f"Group export : {n_in_export} students in recognised groups, "
           f"{len(name_lookup)} distinct names")
 
-    classlist_ids = _resolve.load_classlist(classlist) if classlist else None
+    classlist_ids, username_number_map, name_number_map = (
+        _resolve.load_classlist(classlist) if classlist else (None, {}, {})
+    )
     if classlist_ids is None:
         print(
             "\nNOTE: No classlist provided.\n"
@@ -115,11 +117,13 @@ def step_build(
     for cat, n in sorted(Counter(s["allocation_category"] for s in students).items()):
         print(f"  {cat}: {n}")
 
+    _resolve.enrich_email_student_numbers(students, username_number_map, name_number_map)
+
     if classlist_ids is not None:
         _resolve.flag_ghost_students(students, classlist_ids)
 
-    fieldnames = ["student_number", "student_name", "allocation_category",
-                  "studyline", "personality_type"]
+    fieldnames = ["student_number", "email_student_number", "student_name",
+                  "allocation_category", "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()

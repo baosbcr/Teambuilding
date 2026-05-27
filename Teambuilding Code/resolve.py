@@ -79,6 +79,18 @@ def _norm_name(name: str) -> str:
     return unicodedata.normalize("NFC", name.strip().lower())
 
 
+def _parse_classlist_name(raw: str) -> str:
+    """
+    Convert classlist 'Last, First [Middle...]' format to 'First [Middle...] Last'
+    so it can be normalised consistently with group-export and survey names.
+    Falls back to the raw string if no comma is present.
+    """
+    if "," in raw:
+        last, _, first = raw.partition(",")
+        return f"{first.strip()} {last.strip()}"
+    return raw.strip()
+
+
 def _row_canonical_id(row: dict) -> str | None:
     """
     Best canonical ID for one group-export row.
@@ -93,6 +105,20 @@ def _row_canonical_id(row: dict) -> str | None:
     username = (row.get("Username") or "").strip()
     if username:
         return normalise_id(username)
+    return None
+
+
+def _row_email_number(row: dict) -> str | None:
+    """
+    Extract sXXXXXX from the email field only — no username fallback.
+    Checks both 'Email Address' (group export) and 'Email' (classlist export).
+    """
+    email = (row.get("Email Address") or row.get("Email") or "").strip()
+    if "@" in email:
+        local = email.split("@")[0].lower()
+        nid = normalise_id(local)
+        if nid and re.fullmatch(r"s\d+", nid):
+            return nid
     return None
 
 
@@ -152,28 +178,95 @@ def build_name_lookup(group_export_rows: list[dict]) -> dict[str, list[tuple[str
     return dict(lookup)
 
 
-def load_classlist(path: Path) -> set[str]:
+def load_classlist(path: Path) -> tuple[set[str], dict[str, str], dict[str, str]]:
     """
-    Return the set of canonical student IDs from a DTU Learn classlist CSV.
+    Return (classlist_ids, username_number_map, name_number_map).
+
+    classlist_ids        — set of canonical student IDs, for ghost/dropped detection.
+
+    username_number_map  — {non_standard_username: sXXXXXX}
+                           Only for rows where the username is non-standard (not s\\d+)
+                           but a student number can be recovered.  Fallback enrichment
+                           when name lookup fails.
+
+    name_number_map      — {normalised_name: sXXXXXX}
+                           Primary enrichment source: Name column (DTU Learn, same
+                           source as survey block headers) mapped to student number.
+                           Email is the primary source of sXXXXXX; if the email does
+                           not yield one (redundancy — never assume it always will),
+                           falls back to the username when that is already s\\d+.
+
     Handles both the group-export column layout (Username, Email Address) and
     the classlist-export layout (UserName, Email).
     """
     ids: set[str] = set()
+    username_number_map: dict[str, str] = {}
+    name_number_map:     dict[str, str] = {}
+
     with open(path, newline="", encoding="utf-8-sig") as f:
         for row in csv.DictReader(f):
-            nid = _row_canonical_id(row)
-            if nid is None:
-                # Classlist export uses 'Email' and 'UserName' instead of
-                # 'Email Address' and 'Username' — remap and retry.
-                adapted = {
-                    "Email Address": row.get("Email", ""),
-                    "Username":      row.get("UserName", ""),
-                }
-                nid = _row_canonical_id(adapted)
+            # Normalise to a single column layout so helpers work uniformly
+            adapted = {
+                "Email Address": row.get("Email Address") or row.get("Email", ""),
+                "Username":      row.get("Username")      or row.get("UserName", ""),
+            }
+            nid = _row_canonical_id(adapted)
             if nid:
                 ids.add(nid)
-    print(f"Classlist  : {len(ids)} enrolled students from '{path.name}'")
-    return ids
+
+            username_id = normalise_id((adapted["Username"] or "").strip())
+            email_num   = _row_email_number(adapted)
+
+            # Redundancy: if email doesn't yield sXXXXXX, fall back to username
+            # when the username itself is already a standard number.
+            student_num = email_num
+            if student_num is None and username_id and re.fullmatch(r"s\d+", username_id):
+                student_num = username_id
+
+            # username_number_map: non-standard username → recoverable student number
+            if username_id and student_num and username_id != student_num:
+                username_number_map[username_id] = student_num
+
+            # name_number_map: DTU Learn name → student number
+            raw_name = (row.get("Name") or "").strip()
+            if raw_name and student_num:
+                normalised = _norm_name(_parse_classlist_name(raw_name))
+                if normalised:
+                    name_number_map[normalised] = student_num
+
+    n_u = len(username_number_map)
+    print(f"Classlist  : {len(ids)} enrolled students from '{path.name}', "
+          f"{len(name_number_map)} name→number mappings built"
+          + (f"  ({n_u} via non-standard username)" if n_u else ""))
+    return ids, username_number_map, name_number_map
+
+
+def enrich_email_student_numbers(
+    students: list[dict],
+    username_number_map: dict[str, str],
+    name_number_map: dict[str, str],
+) -> None:
+    """
+    In-place: add 'email_student_number' to every student record.
+
+    For students whose student_number is non-standard (not s\\d+):
+      1. Try name_number_map first — DTU Learn name matched against classlist
+         Name+Email, most robust since both sides come from the same source.
+      2. Fall back to username_number_map — username matched against classlist
+         email, useful if the name lookup fails (encoding edge cases, etc.).
+    Standard s\\d+ students always get an empty string — deliberately skipped
+    to avoid surfacing spurious mismatches for students already correctly ID'd.
+
+    When no classlist was provided both maps are empty and all fields are blank.
+    """
+    for s in students:
+        snum = s.get("student_number") or ""
+        if not re.fullmatch(r"s\d+", snum):
+            name  = _norm_name(s.get("student_name") or "")
+            found = name_number_map.get(name) or username_number_map.get(snum)
+            s["email_student_number"] = found or ""
+        else:
+            s["email_student_number"] = ""
 
 
 # ---------------------------------------------------------------------------
@@ -611,7 +704,9 @@ def main() -> None:
     print(f"  {n_export} students in recognised groups, "
           f"{len(name_lookup)} distinct names")
 
-    classlist_ids = load_classlist(classlist_path) if classlist_path else None
+    classlist_ids, username_number_map, name_number_map = (
+        load_classlist(classlist_path) if classlist_path else (None, {}, {})
+    )
 
     import parse_individual as _parse
     print(f"\nLoading surveys from '{surveys_dir}' ...")
@@ -634,11 +729,13 @@ def main() -> None:
     for cat, n in sorted(Counter(s["allocation_category"] for s in students).items()):
         print(f"  {cat}: {n}")
 
+    enrich_email_student_numbers(students, username_number_map, name_number_map)
+
     if classlist_ids is not None:
         flag_ghost_students(students, classlist_ids)
 
-    fieldnames = ["student_number", "student_name", "allocation_category",
-                  "studyline", "personality_type"]
+    fieldnames = ["student_number", "email_student_number", "student_name",
+                  "allocation_category", "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         writer.writeheader()

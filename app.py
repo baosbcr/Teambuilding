@@ -146,7 +146,9 @@ def run():
                 # Step 1: build student list
                 export_rows   = _resolve.load_group_export_rows(group_path)
                 name_lookup   = _resolve.build_name_lookup(export_rows)
-                classlist_ids = _resolve.load_classlist(classlist_path) if classlist_path else None
+                classlist_ids, username_number_map, name_number_map = (
+                    _resolve.load_classlist(classlist_path) if classlist_path else (None, {}, {})
+                )
                 if classlist_ids is None:
                     print(
                         "NOTE: No classlist uploaded.\n"
@@ -170,12 +172,14 @@ def run():
                     late_entry_overrules = late_entry_overrules,
                 )
 
+                _resolve.enrich_email_student_numbers(students, username_number_map, name_number_map)
+
                 if classlist_ids is not None:
                     _resolve.flag_ghost_students(students, classlist_ids)
 
                 combined_path = tmpdir / "students_combined.csv"
-                fieldnames = ["student_number", "student_name", "allocation_category",
-                              "studyline", "personality_type"]
+                fieldnames = ["student_number", "email_student_number", "student_name",
+                              "allocation_category", "studyline", "personality_type"]
                 with open(combined_path, "w", newline="", encoding="utf-8") as f:
                     writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
                     writer.writeheader()

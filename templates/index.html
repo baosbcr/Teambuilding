@@ -58,6 +58,14 @@
       padding: 0.8rem 1rem; color: #b91c1c; font-size: 0.875rem; margin-bottom: 1.25rem;
     }
 
+    .warn-classlist {
+      background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px;
+      padding: 0.7rem 1rem; color: #92400e; font-size: 0.8rem; margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+    .warn-classlist strong { display: block; margin-bottom: 0.25rem; font-size: 0.85rem; }
+    .warn-classlist.hidden { display: none; }
+
     .submit-btn {
       display: block; width: 100%; background: #990000; color: white; border: none;
       border-radius: 8px; padding: 0.9rem 1rem; font-size: 1rem; font-weight: 600;
@@ -114,9 +122,18 @@
       </div>
 
       <div class="field">
-        <label>Classlist <span style="color:#aaa; font-weight:400">(optional)</span></label>
-        <input type="file" name="classlist" accept=".csv">
-        <small>Required only if you want to detect and exclude students who dropped the course.</small>
+        <label>Classlist</label>
+        <input type="file" name="classlist" id="classlist" accept=".csv" onchange="onClasslistChange(this)">
+        <small>Full student classlist from DTU Learn. Enables ghost detection and dropped-student filtering.</small>
+        <div class="warn-classlist" id="classlist-warn">
+          <strong>⚠ No classlist uploaded</strong>
+          Three features will be unavailable:
+          <ul style="margin: 0.3rem 0 0 1.2rem;">
+            <li><strong>Ghost detection</strong> — students enrolled in the course but absent from both the group export and all surveys will not be flagged and will be silently missing from teams.csv.</li>
+            <li><strong>Dropped-student filtering</strong> — the <em>dropped</em> lever cannot distinguish survey-only students who dropped the course from valid late additions.</li>
+            <li><strong>Student number enrichment</strong> — students with non-standard DTU usernames (e.g. alphabetic accounts like <em>nipac</em>) cannot have their numeric student number cross-referenced from classlist emails.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -226,7 +243,24 @@
 </div>
 
 <script>
+function onClasslistChange(input) {
+  document.getElementById('classlist-warn').classList.toggle('hidden', input.files.length > 0);
+}
+
 function startRun(e) {
+  const classlist = document.getElementById('classlist');
+  if (!classlist.files.length) {
+    const ok = confirm(
+      "No classlist uploaded.\n\n" +
+      "Proceeding without it means:\n" +
+      "  • Ghost detection is OFF — students enrolled in the course but absent from the group export and all surveys will be silently missing from teams.csv.\n" +
+      "  • Dropped-student filtering is OFF — the 'dropped' lever has no effect.\n" +
+      "  • Student number enrichment is OFF — students with non-standard DTU usernames (e.g. alphabetic accounts) cannot have their student number cross-referenced from classlist emails.\n\n" +
+      "Continue anyway?"
+    );
+    if (!ok) { e.preventDefault(); return; }
+  }
+
   document.cookie = 'download_ready=; max-age=0; path=/';
   document.getElementById('overlay').classList.add('show');
   document.querySelector('.submit-btn').disabled = true;

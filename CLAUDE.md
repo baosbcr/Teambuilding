@@ -57,12 +57,14 @@ This file is the **ground truth** for group membership. The pipeline auto-detect
 ### Classlist Export (`Learn Exports/Classlist Export Students Only/`)
 
 Optional CSV exported from DTU Learn (Classlist → Students tab → Export above the list). Columns used:
+- `Name` — student full name in `Last, First` format (from DTU Learn — same source as survey block headers)
 - `UserName` — student username (note: capital N, differs from group export's `Username`)
-- `Email` — `sXXXXXX@student.dtu.dk` format (differs from group export's `Email Address`)
+- `Email` — typically `sXXXXXX@student.dtu.dk`; used as primary source of student number but not assumed infallible — falls back to username if email does not yield a valid `sXXXXXX`
 
-`load_classlist` handles both column layouts automatically. Enables two features:
+`load_classlist` handles both column name layouts (group-export style and classlist-export style) automatically. Returns a 3-tuple and enables three features:
 - **Ghost detection**: students in classlist but absent from group export and all surveys → `WARNING [ghost]`
 - **Dropped-student filtering**: cross-checks survey-only students against classlist for the `--dropped` lever
+- **Email student number enrichment**: builds `name → sXXXXXX` and `username → sXXXXXX` maps used by `enrich_email_student_numbers` to populate the `email_student_number` output column for students with non-standard DTU usernames
 
 ---
 
@@ -105,7 +107,11 @@ Five internal steps:
 
 ID correction is always applied (it is required for correct matching). Warnings are always printed.
 
-**Additional function:** `flag_ghost_students(final_students, classlist_ids)` — called after `build_student_list` when a classlist is provided; diffs classlist IDs against the final output and prints `WARNING [ghost]` for any enrolled student absent from both group export and all surveys.
+**Additional functions (called after `build_student_list`):**
+- `flag_ghost_students(final_students, classlist_ids)` — diffs classlist IDs against the final output and prints `WARNING [ghost]` for any enrolled student absent from both group export and all surveys.
+- `enrich_email_student_numbers(students, username_number_map, name_number_map)` — in-place; adds `email_student_number` field to every student record. For students with non-standard canonical IDs (not matching `s\d+`), looks up first by normalised name in `name_number_map` (primary — DTU Learn name matched to classlist email), then falls back to `username_number_map`. Standard `sXXXXXX` students always get an empty string. Both maps are empty when no classlist is provided.
+
+**Helper:** `_parse_classlist_name(raw)` — converts `"Last, First"` classlist name format to `"First Last"` for consistent normalisation with group-export and survey names.
 
 ### `form_teams.py` — Step 2
 
@@ -166,7 +172,7 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 | `--seed`            | 42           | Random seed for tie-breaking (reproducibility)        |
 | `--missing`         | keep         | Students in group export with no survey               |
 | `--cross-challenge` | survey-wins  | Student filled a survey for a different challenge     |
-| `--classlist`           | (none)       | Path to current classlist CSV; enables ghost detection (enrolled but absent everywhere) and dropped-student filtering |
+| `--classlist`           | (none)       | Path to current classlist CSV; enables ghost detection, dropped-student filtering, and `email_student_number` enrichment for non-standard usernames |
 | `--dropped`             | keep         | Students with a survey absent from both export and classlist |
 | `--late-entry-overrules`| on           | Students with Late Entries survey but overflow/challenge in export → moved to late entry |
 
@@ -176,7 +182,9 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 
 ### `teams.csv`
 
-One row per student. Fields: `team_id, challenge, student_number, student_name, original_category, studyline, personality_type`
+One row per student. Fields: `team_id, challenge, student_number, email_student_number, student_name, original_category, studyline, personality_type`
+
+`email_student_number` — only populated for students whose `student_number` is a non-standard DTU username (not matching `s\d+`) and a classlist was provided. Contains the `sXXXXXX` derived from the classlist email for manual verification. Empty for all standard students.
 
 ### `teams_summary.csv`
 

@@ -168,10 +168,11 @@ Save the file into `Learn Exports/Group Exports/`. The pipeline auto-detects the
 
 ### Classlist Export (optional)
 
-Providing the classlist enables two additional checks:
+Providing the classlist enables three additional features:
 
 1. **Ghost detection** — students enrolled in the course but absent from both the group export and all surveys are flagged as `WARNING [ghost]` in the log. They will not appear in `teams.csv` and would otherwise be silently missed.
 2. **Dropped-student filtering** — students who filled a survey but are not in the group export can be cross-checked; those absent from the classlist are likely unenrolled and can be excluded with `--dropped exclude`.
+3. **Student number enrichment** — students with non-standard DTU usernames (e.g. short alphabetic accounts) get an `email_student_number` column in `teams.csv` with the `sXXXXXX` derived from their classlist email, for manual verification.
 
 **How to export:**
 > DTU Learn → **Classlist** → **Students** tab → click the **Export** button just above the student list (not the Export button at the very top of the page) → save the CSV
@@ -189,6 +190,7 @@ Save the file into `Learn Exports/Classlist Export Students Only/` and pass it t
 | `team_id` | `A-01` | Challenge letter + team number |
 | `challenge` | `A` | Final challenge assignment |
 | `student_number` | `s253896` | Canonical student ID |
+| `email_student_number` | `s253896` | `sXXXXXX` from classlist email — only populated for non-standard usernames when a classlist was provided; empty otherwise |
 | `student_name` | `Maria Jensen` | From DTU Learn account |
 | `original_category` | `challenge A` | Category before flex placement |
 | `studyline` | `Biotechnology` | From survey (or UNKNOWN) |

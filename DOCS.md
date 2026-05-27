@@ -14,7 +14,7 @@ Run from the `Teambuilding Code/` folder: `python pipeline.py [options]`
 |--------|---------|-------------|
 | `--reports DIR` | `../Learn Exports/Team Formation Survey Individual Attempts` | Folder with Individual Attempts XLSX files |
 | `--groups CSV` | auto-detect newest in `../Learn Exports/Group Exports` | Group-membership export CSV |
-| `--classlist CSV` | (none) | Classlist CSV; flags enrolled students absent from group export and all surveys (`WARNING [ghost]`), and enables dropped-student filtering (`--dropped`) |
+| `--classlist CSV` | (none) | Classlist CSV; enables ghost detection (`WARNING [ghost]`), dropped-student filtering (`--dropped`), and `email_student_number` enrichment for students with non-standard DTU usernames |
 | `-o / --output PATH` | `teams.csv` | Final team assignment CSV |
 | `--summary PATH` | (none) | Per-team diversity statistics CSV |
 | `--workdir DIR` | script directory | Directory for `students_combined.csv` |
