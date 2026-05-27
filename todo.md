@@ -3,8 +3,6 @@ Priority High:
 Reformulate team formation acording to new priority rules.
 NUmber of teams per challenge is defined then after using the overflow and late entries try to achieve similar number of participants across all challenges. 
 
-Add student number info when available from email from group export or classlist if available.
-
 Match new expected output style
 
 Priority Medium: 
