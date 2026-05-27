@@ -11,7 +11,6 @@ __pycache__/
 
 # Local session files
 Session.txt
-todo.md
 
 # Pipeline-generated outputs (run pipeline.py to regenerate)
 Teambuilding Code/students_combined.csv
