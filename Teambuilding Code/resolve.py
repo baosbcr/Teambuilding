@@ -236,7 +236,7 @@ def load_classlist(path: Path) -> tuple[set[str], dict[str, str], dict[str, str]
 
     n_u = len(username_number_map)
     print(f"Classlist  : {len(ids)} enrolled students from '{path.name}', "
-          f"{len(name_number_map)} name→number mappings built"
+          f"{len(name_number_map)} name->number mappings built"
           + (f"  ({n_u} via non-standard username)" if n_u else ""))
     return ids, username_number_map, name_number_map
 
