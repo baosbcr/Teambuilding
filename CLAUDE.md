@@ -2,7 +2,7 @@
 
 ## Weekly Status Log
 
-`weekly_status.md` is a running log of work done each week, used to draft the weekly status update sent to the supervisor. **Append to it at the end of every working session** with a plain-English bullet or two describing what changed — written as if the reader has only seen the Flask app run once or twice (no internal jargon). After the user confirms they have submitted the update to their boss, **clear the bullet points under the current week heading and start fresh** for the next week.
+`weekly_status.md` is a running work-session log used to draft status updates sent to the supervisor. There is no fixed cadence — sessions may happen on any days, and updates may be sent at any time. **Append to it at the end of every working session** with a plain-English bullet or two describing what changed — written as if the reader has only seen the Flask app run once or twice (no internal jargon). After the user confirms they have submitted the update, **delete all bullet points and start fresh** — no need to preserve headings or dates from the previous batch.
 
 ---
 
