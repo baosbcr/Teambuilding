@@ -183,7 +183,7 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 | `--cross-challenge` | survey-wins  | Student filled a survey for a different challenge     |
 | `--classlist`           | (none)       | Path to current classlist CSV; enables ghost detection, dropped-student filtering, and `email_student_number` enrichment for non-standard usernames |
 | `--dropped`             | keep         | Students with a survey absent from both export and classlist |
-| `--late-entry-overrules`| on           | Students with Late Entries survey but overflow/challenge in export → moved to late entry |
+| `--late-entry-overrules`| on           | Students in **overflow** who filled the Late Entries survey → moved to late entry. Students already in a challenge group are **never** moved (their survey provides studyline/personality data only) |
 
 ---
 
@@ -213,7 +213,9 @@ Diversity = unique count / team size.
 - **Cross-group duplicates**: students who filled more than one challenge survey. Resolved by taking the group export category.
 - **Missing survey participants**: students in the group export who never submitted. Handled by `--missing` lever.
 - **Late Entries not in Day 1 group export**: the Late Entries group is added later. Late entry students who filled the survey appear in the Individual Reports but not in the Day 1 group export; they are kept as-is with category `late entry`.
-- **Late entries students listed under another group in the export**: per the course announcement, a student who filled the Late Entries survey is on the waiting list and their group export entry (overflow or a challenge) is a staging artefact. Default (`--late-entry-overrules` on) moves them to `late entry`. Use `--no-late-entry-overrules` to keep their group export category instead.
+- **Late entries students listed under another group in the export**: two sub-cases:
+  - *In overflow + late entry survey*: student is on the waiting list with no confirmed challenge. Default (`--late-entry-overrules` on) moves them to `late entry`. Use `--no-late-entry-overrules` to keep them in overflow.
+  - *In a challenge group + late entry survey*: student already has a confirmed challenge spot — filling the late entry survey does not forfeit it. They always stay in their challenge group; the late entry survey provides studyline/personality data only.
 - **Office lock files**: `~$` prefixed XLSX files created by Excel when a file is open. Both `parse_individual.py` and `pipeline.py` skip these automatically.
 - **Ambiguous names**: two students sharing the same full name cannot be auto-corrected via name lookup. A WARNING is printed and both are left unchanged.
 - **Ghost students**: students enrolled in the course (in the classlist) who never joined a group and never filled any survey. Invisible to the pipeline — flagged only when a classlist is provided via `flag_ghost_students`. In 2026 data: 18 ghosts found with the full classlist export (Role=Student filter applied).
@@ -247,7 +249,7 @@ Skip step 1 and go straight to team formation with a pre-built student list.
 - Group export: 929 students (A=200, B=198, C=198, D=198, Overflow=135)
 - Survey: ~900 raw rows, ~893 unique after normalisation
 - 42 students in group export with no survey (--missing=keep)
-- 15 ID mismatches auto-corrected; 8 late-entry-overrules triggered; 14 total late entry students
+- 15 ID mismatches auto-corrected; 4 late-entry-overrules triggered (overflow only); 4 challenge-group students kept in challenge from late entry survey; 10 total late entry students
 - Final: 935 students, 100 teams (25 per challenge A–D), all 9–10 members (after flex levelling fix)
 - Avg studyline diversity: 0.90-0.96 per challenge; avg personality diversity: 0.85-0.90
 - Classlist (full export, Role=Student only): 952 enrolled students; 11 non-standard usernames with recoverable sXXXXXX; 18 ghost students (enrolled but absent from group export and all surveys)

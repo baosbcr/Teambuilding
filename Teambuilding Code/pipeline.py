@@ -242,9 +242,10 @@ def main() -> None:
         "--late-entry-overrules", action=argparse.BooleanOptionalAction, default=True,
         dest="late_entry_overrules",
         help=(
-            "Students whose group export shows overflow/challenge X but who filled "
-            "the Late Entries survey are moved to 'late entry' category (default: on). "
-            "Use --no-late-entry-overrules to keep their group export category instead."
+            "Students in overflow who filled the Late Entries survey are moved to "
+            "'late entry' (default: on). Students confirmed in a challenge group are "
+            "never moved — their late entry survey provides studyline/personality data "
+            "only. Use --no-late-entry-overrules to keep overflow students in overflow."
         ),
     )
 

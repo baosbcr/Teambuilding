@@ -471,16 +471,28 @@ def build_student_list(
             chosen     = diff[0]
             base[nid]["_survey_found"] = True
 
-            if survey_cat == "late entry" and late_entry_overrules:
-                # Student filled the Late Entries survey: per the course announcement,
-                # this means they missed the main deadline and are on the waiting list.
-                # Override their group export category regardless of --cross-challenge.
+            export_is_challenge = base_cat.startswith("challenge ")
+            if survey_cat == "late entry" and not export_is_challenge and late_entry_overrules:
+                # Student in overflow filled the Late Entries survey: they are on the
+                # waiting list with no confirmed challenge, so move them to late entry.
+                # Students already confirmed in a challenge group are never overruled —
+                # filling the late entry survey does not forfeit their spot.
                 base[nid]["studyline"]           = chosen["studyline"]
                 base[nid]["personality_type"]    = chosen["personality_type"]
                 base[nid]["allocation_category"] = "late entry"
                 print(
                     f"INFO [{nid}]: survey in 'late entry', export '{base_cat}' - "
                     f"moved to late entry (--late-entry-overrules)",
+                    file=sys.stderr,
+                )
+            elif survey_cat == "late entry" and export_is_challenge:
+                # Confirmed in a challenge — late entry survey is informational only;
+                # keep their challenge assignment and use the survey data.
+                base[nid]["studyline"]        = chosen["studyline"]
+                base[nid]["personality_type"] = chosen["personality_type"]
+                print(
+                    f"INFO [{nid}]: survey in 'late entry', export '{base_cat}' - "
+                    f"kept in {base_cat} (confirmed challenge group)",
                     file=sys.stderr,
                 )
             elif cross_challenge == "survey-wins":
@@ -740,9 +752,11 @@ def main() -> None:
         "--late-entry-overrules", action=argparse.BooleanOptionalAction, default=True,
         dest="late_entry_overrules",
         help=(
-            "Students whose group export shows overflow/challenge X but who filled "
-            "the Late Entries survey are moved to 'late entry' category (default: on). "
-            "Use --no-late-entry-overrules to keep their group export category instead."
+            "Students in overflow who filled the Late Entries survey are moved to "
+            "'late entry' (default: on). Students already confirmed in a challenge "
+            "group are never moved regardless of this flag — their late entry survey "
+            "is used for studyline/personality data only. "
+            "Use --no-late-entry-overrules to keep overflow students in overflow instead."
         ),
     )
     args = ap.parse_args()
