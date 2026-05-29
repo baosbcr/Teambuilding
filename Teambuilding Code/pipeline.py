@@ -140,8 +140,8 @@ def step_form(
     cfg: _form.Config,
     out_path: Path,
     summary_path: Path | None,
-) -> None:
-    """Form diverse teams."""
+) -> dict:
+    """Form diverse teams. Returns all_teams for optional further processing."""
     print(f"\n{'='*60}")
     print(f"  STEP 2: FORM TEAMS")
     print(f"{'='*60}")
@@ -151,7 +151,7 @@ def step_form(
         f"w_studyline={cfg.w_studyline}  w_personality={cfg.w_personality}  "
         f"seed={cfg.seed}"
     )
-    _form.run(cfg, combined_csv, out_path, summary_path)
+    return _form.run(cfg, combined_csv, out_path, summary_path)
 
 
 def main() -> None:
@@ -195,6 +195,24 @@ def main() -> None:
         "--summary",
         metavar="PATH",
         help="Optional per-team statistics CSV",
+    )
+    ap.add_argument(
+        "--final-output",
+        metavar="PATH",
+        dest="final_output",
+        help="Optional clean final CSV (Name, Student Number, Group) for submission",
+    )
+    ap.add_argument(
+        "--id-fallback",
+        choices=("username", "blank", "flag"),
+        default="username",
+        dest="id_fallback",
+        help=(
+            "How to fill 'Student Number' for students with no recoverable sXXXXXX. "
+            "'username' (default): use the DTU Learn username as-is. "
+            "'blank': leave the field empty. "
+            "'flag': write UNRESOLVED:<username>."
+        ),
     )
     ap.add_argument(
         "--workdir",
@@ -269,9 +287,10 @@ def main() -> None:
 
     workdir      = Path(args.workdir)
     workdir.mkdir(parents=True, exist_ok=True)
-    out_path     = Path(args.output)
-    summary_path = Path(args.summary) if args.summary else None
-    classlist    = Path(args.classlist) if args.classlist else None
+    out_path      = Path(args.output)
+    summary_path  = Path(args.summary)       if args.summary       else None
+    final_path    = Path(args.final_output)  if args.final_output  else None
+    classlist     = Path(args.classlist)     if args.classlist      else None
 
     cfg = _form.Config(
         ideal         = args.ideal,
@@ -323,7 +342,15 @@ def main() -> None:
         )
 
     # --- Step 2: form teams ---
-    step_form(combined_csv, cfg, out_path, summary_path)
+    all_teams = step_form(combined_csv, cfg, out_path, summary_path)
+
+    # --- Optional: write clean final output ---
+    if final_path:
+        decisions = _form.write_final_teams(all_teams, final_path, id_fallback=args.id_fallback)
+        print(f"\nFINAL OUTPUT RESOLUTION ({len(decisions)} non-standard cases)")
+        for d in decisions:
+            print(d)
+        print(f"Final output     -> {final_path}")
 
     print(f"\nDone.  Team assignments written to '{out_path}'.")
 

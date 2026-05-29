@@ -228,6 +228,31 @@
         <input type="checkbox" name="summary" id="summary" checked>
         <label for="summary">Include per-team diversity summary (<code>teams_summary.csv</code>)</label>
       </div>
+
+      <div class="field" style="margin-top:1rem">
+        <label>Final output mode</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="output_mode" value="auto" id="mode_auto" checked onchange="toggleFallback()">
+            Automatic — resolve identifiers by rule, log all decisions
+          </label>
+          <label>
+            <input type="radio" name="output_mode" value="interactive" id="mode_interactive" onchange="toggleFallback()">
+            Interactive — review all non-standard ID cases before downloading
+          </label>
+        </div>
+        <small>Both modes produce <code>teams_final.csv</code> (Name, Student Number, Group) alongside the full <code>teams.csv</code>.</small>
+      </div>
+
+      <div class="field" id="fallback_field" style="margin-top:0.75rem">
+        <label for="id_fallback">Fallback for unresolvable student numbers</label>
+        <select name="id_fallback" id="id_fallback">
+          <option value="username">Use DTU username as-is (default)</option>
+          <option value="blank">Leave Student Number blank</option>
+          <option value="flag">Write UNRESOLVED:&lt;username&gt;</option>
+        </select>
+        <small>Applied to students where no sXXXXXX can be found anywhere (classlist, email, or group export).</small>
+      </div>
     </div>
 
     <button type="submit" class="submit-btn">Run Pipeline &amp; Download Results</button>
@@ -245,6 +270,11 @@
 <script>
 function onClasslistChange(input) {
   document.getElementById('classlist-warn').classList.toggle('hidden', input.files.length > 0);
+}
+
+function toggleFallback() {
+  const auto = document.getElementById('mode_auto').checked;
+  document.getElementById('fallback_field').style.display = auto ? '' : 'none';
 }
 
 function startRun(e) {

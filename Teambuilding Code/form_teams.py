@@ -59,6 +59,7 @@ Usage:
 import argparse
 import csv
 import math
+import re
 import random
 import sys
 from collections import defaultdict
@@ -345,6 +346,100 @@ def write_teams(
         _write_summary(all_teams, summary_path)
 
 
+def collect_nonstandard(
+    all_teams: dict[str, list[list[dict]]],
+) -> tuple[list[dict], list[dict]]:
+    """
+    Return (resolvable, unresolvable) lists of non-standard identifier cases.
+
+    resolvable   — student_number is sXXXXXX but a non-standard dtu_username also
+                   exists; the sXXXXXX is already the correct output value, but the
+                   overseer should see and confirm the mapping.
+    unresolvable — student_number is not sXXXXXX; no guaranteed student number is
+                   available; overseer must confirm the fallback or enter one manually.
+    """
+    resolvable: list[dict] = []
+    unresolvable: list[dict] = []
+    for ch in CHALLENGES:
+        for t_idx, team in enumerate(all_teams[ch], start=1):
+            tid = f"{ch}-{t_idx:02d}"
+            for s in team:
+                sid      = s["student_number"]
+                dtu_u    = s.get("dtu_username", "")
+                email_n  = s.get("email_student_number", "")
+                name     = s.get("student_name", "")
+                standard = bool(re.fullmatch(r"s\d+", sid))
+                entry = {
+                    "name":        name,
+                    "pipeline_id": sid,
+                    "dtu_username": dtu_u,
+                    "team_id":     tid,
+                    "challenge":   ch,
+                }
+                if not standard:
+                    entry["proposed"] = email_n if email_n else sid
+                    unresolvable.append(entry)
+                elif dtu_u:
+                    entry["proposed"] = sid  # already correct sXXXXXX
+                    resolvable.append(entry)
+    return resolvable, unresolvable
+
+
+def write_final_teams(
+    all_teams: dict[str, list[list[dict]]],
+    out_path: Path,
+    resolved_ids: dict[str, str] | None = None,
+    id_fallback: str = "username",
+) -> list[str]:
+    """
+    Write Name, Student Number, Group CSV (clean final output).
+
+    resolved_ids maps pipeline student_number -> confirmed value (from interactive mode).
+    Returns a list of human-readable resolution decision strings for logging.
+    """
+    _FALLBACK_VALUES = {"username", "blank", "flag"}
+    if id_fallback not in _FALLBACK_VALUES:
+        id_fallback = "username"
+
+    decisions: list[str] = []
+    rows: list[dict] = []
+
+    for ch in CHALLENGES:
+        for t_idx, team in enumerate(all_teams[ch], start=1):
+            tid = f"{ch}-{t_idx:02d}"
+            for s in team:
+                sid     = s["student_number"]
+                name    = s.get("student_name", "")
+                email_n = s.get("email_student_number", "")
+
+                if resolved_ids and sid in resolved_ids:
+                    resolved = resolved_ids[sid]
+                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [interactive]")
+                elif re.fullmatch(r"s\d+", sid):
+                    resolved = sid  # standard — no log entry needed
+                elif email_n:
+                    resolved = email_n
+                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [email_student_number]")
+                elif id_fallback == "blank":
+                    resolved = ""
+                    decisions.append(f"  {sid} ({name}) -> ''  [blank fallback — no sXXXXXX found]")
+                elif id_fallback == "flag":
+                    resolved = f"UNRESOLVED:{sid}"
+                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [flagged — no sXXXXXX found]")
+                else:  # username (default)
+                    resolved = sid
+                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [username fallback — no sXXXXXX found]")
+
+                rows.append({"Name": name, "Student Number": resolved, "Group": tid})
+
+    with open(out_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["Name", "Student Number", "Group"])
+        writer.writeheader()
+        writer.writerows(rows)
+
+    return decisions
+
+
 def _write_summary(
     all_teams: dict[str, list[list[dict]]],
     path: Path,
@@ -476,6 +571,7 @@ def run(cfg: Config, in_path: Path, out_path: Path, summary_path: Path | None) -
     print(f"Team assignments -> {out_path}")
     if summary_path:
         print(f"Team summary     -> {summary_path}")
+    return all_teams
 
 
 def main() -> None:
