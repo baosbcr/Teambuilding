@@ -26,7 +26,7 @@ Run from the `Teambuilding Code/` folder: `python pipeline.py [options]`
 |--------|---------|---------|-------------|
 | `--missing` | `keep` | `keep` `overflow` `skip` | Students in group export who never filled the survey |
 | `--cross-challenge` | `survey-wins` | `survey-wins` `joker` `survey-overrules` | Student filled a survey for a different challenge than their group export |
-| `--late-entry-overrules` | on | `--no-late-entry-overrules` to disable | Students whose export says overflow/challenge X but filled the Late Entries survey |
+| `--late-entry-overrules` | on | `--no-late-entry-overrules` to disable | Overflow students who filled the Late Entries survey → moved to late entry pool. Challenge-group students are never moved regardless of this flag. |
 | `--dropped` | `keep` | `keep` `exclude` | Students with a survey but not in group export or classlist (needs `--classlist`) |
 
 ### Team formation
@@ -57,12 +57,17 @@ Happens when a student moved groups after completing the survey.
 
 ### B. Student filled the Late Entries survey but is in overflow or a challenge in the export
 
-Per the course announcement, filling the Late Entries survey means the student missed the main deadline and is on the waiting list. Their export entry (overflow or a challenge) is a staging artefact.
+Two sub-cases depending on whether the student has a confirmed challenge group:
 
-- **Default (`--late-entry-overrules` on):** they are moved to the late entry pool
-- **`--no-late-entry-overrules`:** they stay in their group export category
+**In overflow + late entry survey** (no confirmed challenge):
+- **Default (`--late-entry-overrules` on):** moved to the late entry pool
+- **`--no-late-entry-overrules`:** kept in overflow
 
-This lever is independent of `--cross-challenge` and takes priority over it for late-entry surveys.
+**In a challenge group + late entry survey** (confirmed challenge spot):
+- Always kept in their challenge group regardless of `--late-entry-overrules`
+- The late entry survey provides studyline/personality data only; it does not forfeit their spot
+
+This lever is independent of `--cross-challenge` and takes priority over it for late-entry surveys on overflow students.
 
 ### C. Student in group export but never filled any survey
 

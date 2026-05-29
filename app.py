@@ -110,10 +110,11 @@ def run():
                 f"    Student with a survey but absent from the group export (and classlist):\n"
                 f"    {_dropped_desc[dropped_mode]}.\n\n"
                 f"  late-entry-overrules={late_entry_overrules}\n"
-                f"    Student whose group export shows overflow or a challenge but who filled\n"
-                f"    the Late Entries survey: "
-                + ("moved to the late entry pool.\n\n" if late_entry_overrules
-                   else "kept in their group export category.\n\n") +
+                f"    Student in OVERFLOW who filled the Late Entries survey: "
+                + ("moved to the late entry pool.\n" if late_entry_overrules
+                   else "kept in overflow.\n") +
+                f"    Student in a CHALLENGE group who filled the Late Entries survey:\n"
+                f"    always kept in their challenge (survey used for attributes only).\n\n" +
 
                 f"LOG MESSAGE GUIDE\n"
                 f"  WARNING [Name]: Q1 ID 's12345' corrected to 's67890'\n"
