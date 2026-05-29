@@ -422,13 +422,13 @@ def write_final_teams(
                     decisions.append(f"  {sid} ({name}) -> '{resolved}'  [email_student_number]")
                 elif id_fallback == "blank":
                     resolved = ""
-                    decisions.append(f"  {sid} ({name}) -> ''  [blank fallback — no sXXXXXX found]")
+                    decisions.append(f"  {sid} ({name}) -> ''  [blank fallback - no sXXXXXX found]")
                 elif id_fallback == "flag":
                     resolved = f"UNRESOLVED:{sid}"
-                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [flagged — no sXXXXXX found]")
+                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [flagged - no sXXXXXX found]")
                 else:  # username (default)
                     resolved = sid
-                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [username fallback — no sXXXXXX found]")
+                    decisions.append(f"  {sid} ({name}) -> '{resolved}'  [username fallback - no sXXXXXX found]")
 
                 rows.append({"Name": name, "Student Number": resolved, "Group": tid})
 
