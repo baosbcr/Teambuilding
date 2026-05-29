@@ -85,6 +85,8 @@ def step_build(
     classlist_ids, username_number_map, name_number_map = (
         _resolve.load_classlist(classlist) if classlist else (None, {}, {})
     )
+    if classlist_ids is not None:
+        _resolve.validate_classlist_edition(classlist_ids, export_rows)
     if classlist_ids is None:
         print(
             "\nNOTE: No classlist provided.\n"

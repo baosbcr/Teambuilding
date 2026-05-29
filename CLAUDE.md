@@ -60,17 +60,20 @@ Single CSV exported post-deadline from DTU Learn. Columns used:
 
 This file is the **ground truth** for group membership. The pipeline auto-detects the most recently modified CSV in this folder unless `--groups` is specified.
 
-### Classlist Export (`Learn Exports/Classlist Export Students Only/`)
+### Classlist Export (`Learn Exports/Classlist Export All/`)
 
-Optional CSV exported from DTU Learn (Classlist → Students tab → Export above the list). Columns used:
+Optional CSV exported from DTU Learn (Classlist → All tab → Export above the list). Columns used:
 - `Name` — student full name in `Last, First` format (from DTU Learn — same source as survey block headers)
 - `UserName` — student username (note: capital N, differs from group export's `Username`)
 - `Email` — typically `sXXXXXX@student.dtu.dk`; used as primary source of student number but not assumed infallible — falls back to username if email does not yield a valid `sXXXXXX`
+- `Role` — DTU Learn role; only rows with `Role = "Student"` are processed. Other values (`Student*`, `Teacher`, `Course Responsible`, `Teaching Assistant Plus`, `Test student`) are silently skipped. Files without a `Role` column (old format) are processed as-is for backward compatibility.
 
 `load_classlist` handles both column name layouts (group-export style and classlist-export style) automatically. Returns a 3-tuple and enables three features:
 - **Ghost detection**: students in classlist but absent from group export and all surveys → `WARNING [ghost]`
 - **Dropped-student filtering**: cross-checks survey-only students against classlist for the `--dropped` lever
 - **Email student number enrichment**: builds `name → sXXXXXX` and `username → sXXXXXX` maps used by `enrich_email_student_numbers` to populate the `email_student_number` output column for students with non-standard DTU usernames
+
+`validate_classlist_edition` is called automatically after loading and warns (`WARNING [classlist]`) if fewer than 50% of group export students appear in the classlist, which indicates a wrong course edition. A 50–80% overlap triggers a softer `NOTE [classlist]`.
 
 ---
 
@@ -213,7 +216,7 @@ Diversity = unique count / team size.
 - **Late entries students listed under another group in the export**: per the course announcement, a student who filled the Late Entries survey is on the waiting list and their group export entry (overflow or a challenge) is a staging artefact. Default (`--late-entry-overrules` on) moves them to `late entry`. Use `--no-late-entry-overrules` to keep their group export category instead.
 - **Office lock files**: `~$` prefixed XLSX files created by Excel when a file is open. Both `parse_individual.py` and `pipeline.py` skip these automatically.
 - **Ambiguous names**: two students sharing the same full name cannot be auto-corrected via name lookup. A WARNING is printed and both are left unchanged.
-- **Ghost students**: students enrolled in the course (in the classlist) who never joined a group and never filled any survey. Invisible to the pipeline — flagged only when a classlist is provided via `flag_ghost_students`. In 2026 data: 2 ghosts found (`s112544`, `s194963`).
+- **Ghost students**: students enrolled in the course (in the classlist) who never joined a group and never filled any survey. Invisible to the pipeline — flagged only when a classlist is provided via `flag_ghost_students`. In 2026 data: 18 ghosts found with the full classlist export (Role=Student filter applied).
 
 ---
 
@@ -243,7 +246,9 @@ Skip step 1 and go straight to team formation with a pre-built student list.
 
 - Group export: 929 students (A=200, B=198, C=198, D=198, Overflow=135)
 - Survey: ~900 raw rows, ~893 unique after normalisation
-- ~55 students in group export who did not fill the survey (varies by correction run)
+- 42 students in group export with no survey (--missing=keep)
 - 15 ID mismatches auto-corrected; 8 late-entry-overrules triggered; 14 total late entry students
-- Final: 935 students, 100 teams (25 per challenge A–D), all 7–10 members
-- Avg studyline diversity: 0.90-0.99 per challenge; avg personality diversity: 0.82-0.93
+- Final: 935 students, 100 teams (25 per challenge A–D), all 9–10 members (after flex levelling fix)
+- Avg studyline diversity: 0.90-0.96 per challenge; avg personality diversity: 0.85-0.90
+- Classlist (full export, Role=Student only): 952 enrolled students; 11 non-standard usernames with recoverable sXXXXXX; 18 ghost students (enrolled but absent from group export and all surveys)
+- 8 non-standard username students (macoda, alesu, jcoro, kaswu, dovli, xicsu, mpabo, jhaja) have `@dtu.dk`/`@aqua.dtu.dk` emails — no sXXXXXX recoverable; email_student_number correctly empty for these

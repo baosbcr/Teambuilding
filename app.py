@@ -149,6 +149,8 @@ def run():
                 classlist_ids, username_number_map, name_number_map = (
                     _resolve.load_classlist(classlist_path) if classlist_path else (None, {}, {})
                 )
+                if classlist_ids is not None:
+                    _resolve.validate_classlist_edition(classlist_ids, export_rows)
                 if classlist_ids is None:
                     print(
                         "NOTE: No classlist uploaded.\n"

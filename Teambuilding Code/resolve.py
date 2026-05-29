@@ -42,6 +42,18 @@ MISSING_MODES         = ("keep", "overflow", "skip")
 CROSS_CHALLENGE_MODES = ("survey-wins", "joker", "survey-overrules")
 DROPPED_MODES         = ("keep", "exclude")
 
+# Roles from the DTU Learn full-classlist export.
+# "student" → enrolled student, included in classlist_ids and maps.
+# All other known roles are skipped for now; add handling here when needed.
+_CLASSLIST_ROLES: dict[str, str] = {
+    "student":                 "student",
+    "student*":                "skip",   # waitlisted / flagged — not yet enrolled
+    "test student":            "skip",   # dummy account, never a real participant
+    "teacher":                 "skip",
+    "course responsible":      "skip",
+    "teaching assistant plus": "skip",
+}
+
 _GROUP_NAME_MAP: dict[str, str] = {
     "challenge a":        "challenge A",
     "challenge b":        "challenge B",
@@ -205,6 +217,11 @@ def load_classlist(path: Path) -> tuple[set[str], dict[str, str], dict[str, str]
 
     with open(path, newline="", encoding="utf-8-sig") as f:
         for row in csv.DictReader(f):
+            raw_role   = (row.get("Role") or "").strip().lower()
+            role_class = _CLASSLIST_ROLES.get(raw_role, "skip" if raw_role else "student")
+            if role_class != "student":
+                continue
+
             # Normalise to a single column layout so helpers work uniformly
             adapted = {
                 "Email Address": row.get("Email Address") or row.get("Email", ""),
@@ -239,6 +256,34 @@ def load_classlist(path: Path) -> tuple[set[str], dict[str, str], dict[str, str]
           f"{len(name_number_map)} name->number mappings built"
           + (f"  ({n_u} via non-standard username)" if n_u else ""))
     return ids, username_number_map, name_number_map
+
+
+def validate_classlist_edition(
+    classlist_ids: set[str],
+    export_rows: list[dict],
+) -> None:
+    """
+    Warn if the classlist looks like it belongs to a different course edition.
+    A healthy same-edition classlist should cover >= 80% of group export students.
+    """
+    group_ids = {_row_canonical_id(r) for r in export_rows}
+    group_ids.discard(None)
+    if not group_ids:
+        return
+    overlap = len(group_ids & classlist_ids) / len(group_ids)
+    if overlap < 0.5:
+        print(
+            f"WARNING [classlist]: only {overlap:.0%} of group export students found "
+            f"in classlist — classlist may be from a different course edition. "
+            f"Ghost detection and dropped-student filtering will be unreliable.",
+            file=sys.stderr,
+        )
+    elif overlap < 0.8:
+        print(
+            f"NOTE [classlist]: {overlap:.0%} of group export students found in "
+            f"classlist (expected ≥80%) — verify this is the correct course export.",
+            file=sys.stderr,
+        )
 
 
 def enrich_email_student_numbers(

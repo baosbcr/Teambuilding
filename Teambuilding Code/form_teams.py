@@ -36,11 +36,11 @@ For each challenge A-D:
 Algorithm - Phase 2 (flex students)
 -------------------------------------
   1. Fill teams below --ideal size from the flex pool, prioritising challenges
-     with the fewest groups (fewest groups = greatest need).
+     with the fewest total students (fewest students = greatest need).
   2. Form new teams from remaining flex students, assigning each to the
-     challenge currently with the fewest groups (ties broken alphabetically).
+     challenge currently with the fewest total students (ties broken alphabetically).
   3. Any residual flex students (fewer than --min) are distributed one-by-one
-     to the team with the most room, again prioritising fewer-group challenges.
+     to the team with the most room, again prioritising fewest-students challenges.
 
 Diversity score and marginal gain
 ----------------------------------
@@ -197,19 +197,19 @@ def assign_to_k_teams(
 # Flex-student placement
 # ---------------------------------------------------------------------------
 
-def _challenge_by_fewest_groups(
+def _challenge_by_fewest_students(
     all_teams: dict[str, list[list[dict]]],
     exclude_at_max: bool,
     cfg: Config,
 ) -> str | None:
-    """Return the challenge letter with the fewest current teams."""
+    """Return the challenge letter with the fewest total students."""
     eligible = [
         ch for ch in CHALLENGES
         if not exclude_at_max or len(all_teams[ch]) < cfg.max_groups
     ]
     if not eligible:
         return None
-    return min(eligible, key=lambda ch: (len(all_teams[ch]), ch))
+    return min(eligible, key=lambda ch: (sum(len(t) for t in all_teams[ch]), ch))
 
 
 def place_flex_students(
@@ -231,7 +231,7 @@ def place_flex_students(
     # -----------------------------------------------------------------------
     # Phase 2a: top up under-ideal teams, challenges with fewer groups first
     # -----------------------------------------------------------------------
-    challenges_sorted = sorted(CHALLENGES, key=lambda ch: (len(all_teams[ch]), ch))
+    challenges_sorted = sorted(CHALLENGES, key=lambda ch: (sum(len(t) for t in all_teams[ch]), ch))
     for ch in challenges_sorted:
         for team in all_teams[ch]:
             while len(team) < cfg.ideal and flex_pool:
@@ -251,7 +251,7 @@ def place_flex_students(
     # Phase 2b: form new teams from remaining flex students
     # -----------------------------------------------------------------------
     while flex_pool:
-        target_ch = _challenge_by_fewest_groups(all_teams, exclude_at_max=True, cfg=cfg)
+        target_ch = _challenge_by_fewest_students(all_teams, exclude_at_max=True, cfg=cfg)
         if target_ch is None:
             # All challenges at max_groups - fall through to phase 2c
             break
@@ -283,7 +283,7 @@ def place_flex_students(
     # -----------------------------------------------------------------------
     for s in flex_pool:
         placed = False
-        for ch in sorted(CHALLENGES, key=lambda c: (len(all_teams[c]), c)):
+        for ch in sorted(CHALLENGES, key=lambda c: (sum(len(t) for t in all_teams[c]), c)):
             for team in sorted(all_teams[ch], key=len):
                 if len(team) < cfg.team_max:
                     team.append(s)
