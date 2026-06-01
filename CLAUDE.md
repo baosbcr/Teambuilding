@@ -6,7 +6,11 @@ When the user signals they are done for the session (says goodbye, asks to wrap 
 
 ## Weekly Status Log
 
-`bookkeeping/weekly_status.md` is a running work-session log used to draft status updates sent to the supervisor. There is no fixed cadence — sessions may happen on any days, and updates may be sent at any time. **Append to it at the end of every working session** with a plain-English bullet or two describing what changed — written as if the reader has only seen the Flask app run once or twice (no internal jargon). After the user confirms they have submitted the update, **delete all bullet points and start fresh** — no need to preserve headings or dates from the previous batch.
+Status messages, the task list, and the hours log all live in the **separate Bookkeeping repo** (`baosbcr/Bookkeeping`, local path `../Bookkeeping`). Do not create or edit `weekly_status.md` or `todo.md` here.
+
+`../Bookkeeping/statuses/weekly_status.md` is the running work-session log used to draft status updates for the supervisor. There is no fixed cadence — sessions may happen on any days. **Append a plain-English bullet or two at the end of every working session** — written as if the reader has only seen the Flask app run once or twice. After the user confirms they've submitted the update, **delete all bullet points and start fresh**.
+
+Use `/DtuWrap` to handle this automatically at session end.
 
 ---
 
