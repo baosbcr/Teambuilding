@@ -310,8 +310,12 @@ def enrich_email_student_numbers(
             name  = _norm_name(s.get("student_name") or "")
             found = name_number_map.get(name) or username_number_map.get(snum)
             s["email_student_number"] = found or ""
+            s["classlist_confirmed"]  = bool(found)
         else:
             s["email_student_number"] = ""
+            name = _norm_name(s.get("student_name") or "")
+            classlist_match = name_number_map.get(name)
+            s["classlist_confirmed"]  = (classlist_match == snum)
 
 
 # ---------------------------------------------------------------------------
@@ -373,6 +377,16 @@ def build_student_list(
             else ""
         )
 
+        # Determine which field the canonical ID was extracted from.
+        _email_raw = (row.get("Email Address") or "").strip()
+        _email_candidate = None
+        if "@" in _email_raw:
+            _loc = _email_raw.split("@")[0].lower()
+            _c   = normalise_id(_loc)
+            if _c and re.fullmatch(r"s\d+", _c):
+                _email_candidate = _c
+        id_source = "export:email" if _email_candidate == nid else "export:username"
+
         base[nid] = {
             "student_number":      nid,
             "dtu_username":        dtu_username,
@@ -380,6 +394,8 @@ def build_student_list(
             "allocation_category": category,
             "studyline":           "UNKNOWN",
             "personality_type":    "UNKNOWN",
+            "id_source":           id_source,
+            "q1_answer":           "",
             "_survey_found":       False,
         }
 
@@ -391,8 +407,9 @@ def build_student_list(
 
     for rec in survey_records:
         raw_id    = (rec.get("student_number") or "").strip()
-        nid       = normalise_id(raw_id)
         rec       = dict(rec)  # work on a copy
+        rec["q1_raw"] = raw_id  # original Q1 answer before any normalisation/correction
+        nid       = normalise_id(raw_id)
 
         if nid is None:
             # Try name lookup as fallback
@@ -457,6 +474,7 @@ def build_student_list(
             chosen = same[0]
             base[nid]["studyline"]        = chosen["studyline"]
             base[nid]["personality_type"] = chosen["personality_type"]
+            base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
             base[nid]["_survey_found"]    = True
             if diff:
                 print(
@@ -473,23 +491,19 @@ def build_student_list(
 
             export_is_challenge = base_cat.startswith("challenge ")
             if survey_cat == "late entry" and not export_is_challenge and late_entry_overrules:
-                # Student in overflow filled the Late Entries survey: they are on the
-                # waiting list with no confirmed challenge, so move them to late entry.
-                # Students already confirmed in a challenge group are never overruled —
-                # filling the late entry survey does not forfeit their spot.
                 base[nid]["studyline"]           = chosen["studyline"]
                 base[nid]["personality_type"]    = chosen["personality_type"]
                 base[nid]["allocation_category"] = "late entry"
+                base[nid]["q1_answer"]           = chosen.get("q1_raw", "")
                 print(
                     f"INFO [{nid}]: survey in 'late entry', export '{base_cat}' - "
                     f"moved to late entry (--late-entry-overrules)",
                     file=sys.stderr,
                 )
             elif survey_cat == "late entry" and export_is_challenge:
-                # Confirmed in a challenge — late entry survey is informational only;
-                # keep their challenge assignment and use the survey data.
                 base[nid]["studyline"]        = chosen["studyline"]
                 base[nid]["personality_type"] = chosen["personality_type"]
+                base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
                 print(
                     f"INFO [{nid}]: survey in 'late entry', export '{base_cat}' - "
                     f"kept in {base_cat} (confirmed challenge group)",
@@ -498,13 +512,13 @@ def build_student_list(
             elif cross_challenge == "survey-wins":
                 base[nid]["studyline"]        = chosen["studyline"]
                 base[nid]["personality_type"] = chosen["personality_type"]
+                base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
                 print(
                     f"INFO [{nid}]: survey in '{survey_cat}', export '{base_cat}' - "
                     f"survey data used, category kept (survey-wins)",
                     file=sys.stderr,
                 )
             elif cross_challenge == "joker":
-                # Keep UNKNOWN attributes; treat as if no useful survey found
                 base[nid]["_survey_found"] = False
                 print(
                     f"INFO [{nid}]: survey in '{survey_cat}', export '{base_cat}' - "
@@ -515,6 +529,7 @@ def build_student_list(
                 base[nid]["studyline"]           = chosen["studyline"]
                 base[nid]["personality_type"]    = chosen["personality_type"]
                 base[nid]["allocation_category"] = survey_cat
+                base[nid]["q1_answer"]           = chosen.get("q1_raw", "")
                 print(
                     f"INFO [{nid}]: survey in '{survey_cat}', export '{base_cat}' - "
                     f"moved to survey challenge (survey-overrules)",
@@ -526,6 +541,7 @@ def build_student_list(
             chosen = diff[0]
             base[nid]["studyline"]        = chosen["studyline"]
             base[nid]["personality_type"] = chosen["personality_type"]
+            base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
             base[nid]["_survey_found"]    = True
             print(
                 f"INFO [{nid}]: surveys in {diff_cats}, none match "
@@ -598,6 +614,8 @@ def build_student_list(
                 "allocation_category": "late entry",
                 "studyline":           rec["studyline"],
                 "personality_type":    rec["personality_type"],
+                "id_source":           "survey:late-entry",
+                "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
             })
             n_added += 1
 
@@ -615,6 +633,8 @@ def build_student_list(
                     "allocation_category": survey_cat,
                     "studyline":           rec["studyline"],
                     "personality_type":    rec["personality_type"],
+                    "id_source":           "survey:in-classlist",
+                "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
                 })
                 n_added += 1
             else:
@@ -637,11 +657,13 @@ def build_student_list(
                         "allocation_category": survey_cat,
                         "studyline":           rec["studyline"],
                         "personality_type":    rec["personality_type"],
+                        "id_source":           "survey:not-in-classlist",
+                "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
                     })
                     n_added += 1
 
         else:
-            # No classlist provided: keep with survey category (default)
+            # No classlist provided: enrollment status unknown
             print(
                 f"INFO [not in export]: {nid}  {name}  "
                 f"(survey: {survey_cat}) - kept",
@@ -654,6 +676,8 @@ def build_student_list(
                 "allocation_category": survey_cat,
                 "studyline":           rec["studyline"],
                 "personality_type":    rec["personality_type"],
+                "id_source":           "survey:no-classlist",
+                "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
             })
             n_added += 1
 
@@ -673,6 +697,8 @@ def build_student_list(
             "allocation_category": rec.get("allocation_category", "UNKNOWN"),
             "studyline":           rec.get("studyline",           "UNKNOWN"),
             "personality_type":    rec.get("personality_type",    "UNKNOWN"),
+            "id_source":           "survey:unresolvable",
+            "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
         })
 
     return final
@@ -813,6 +839,7 @@ def main() -> None:
         flag_ghost_students(students, classlist_ids)
 
     fieldnames = ["student_number", "dtu_username", "email_student_number",
+                  "id_source", "classlist_confirmed", "q1_answer",
                   "student_name", "allocation_category", "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")

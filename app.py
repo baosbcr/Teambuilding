@@ -151,7 +151,10 @@ def _run_pipeline(request, tmpdir: Path):
             print(
                 "NOTE: No classlist uploaded.\n"
                 "  - Ghost detection is DISABLED.\n"
-                "  - Dropped-student filtering (--dropped lever) is DISABLED.\n",
+                "  - Dropped-student filtering (--dropped lever) is DISABLED.\n"
+                "  - email_student_number enrichment is DISABLED: students with non-standard\n"
+                "    DTU usernames are fully resolved via the group export (identity and group\n"
+                "    assignment) but their sXXXXXX cannot be recovered without the classlist.\n",
             )
         survey_records = _parse.load_all_surveys(reports_dir)
         students = _resolve.build_student_list(
@@ -170,6 +173,7 @@ def _run_pipeline(request, tmpdir: Path):
 
         combined_path = tmpdir / "students_combined.csv"
         fieldnames = ["student_number", "dtu_username", "email_student_number",
+                      "id_source", "classlist_confirmed", "q1_answer",
                       "student_name", "allocation_category", "studyline", "personality_type"]
         with open(combined_path, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
@@ -293,8 +297,13 @@ def resolve():
         summary_path = session_dir / "teams_summary.csv" if include_summary else None
         zip_buf = _build_zip(teams_path, summary_path, final_path, log_text)
 
-    finally:
+    except Exception:
         shutil.rmtree(session_dir, ignore_errors=True)
+        raise
+
+    # Session dir is intentionally kept alive so the user can adjust values
+    # and re-submit the resolve form without re-running the pipeline.
+    # Temp dirs are cleaned by the OS on reboot.
 
     response = send_file(zip_buf, mimetype="application/zip", as_attachment=True, download_name="teams.zip")
     response.set_cookie("download_ready", "1", max_age=10, samesite="Lax")

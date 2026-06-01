@@ -317,7 +317,7 @@ def write_teams(
     """Write team assignments CSV and optional summary CSV."""
     fieldnames = [
         "team_id", "challenge", "student_number", "dtu_username",
-        "email_student_number", "student_name", "original_category",
+        "email_student_number", "id_source", "student_name", "original_category",
         "studyline", "personality_type",
     ]
     rows = []
@@ -331,6 +331,7 @@ def write_teams(
                     "student_number":       student["student_number"],
                     "dtu_username":         student.get("dtu_username", ""),
                     "email_student_number": student.get("email_student_number", ""),
+                    "id_source":            student.get("id_source", ""),
                     "student_name":         student.get("student_name", ""),
                     "original_category":    student.get("allocation_category", ""),
                     "studyline":            student["studyline"],
@@ -357,6 +358,8 @@ def collect_nonstandard(
                    overseer should see and confirm the mapping.
     unresolvable — student_number is not sXXXXXX; no guaranteed student number is
                    available; overseer must confirm the fallback or enter one manually.
+
+    Each entry includes a 'source' field explaining where the proposed value came from.
     """
     resolvable: list[dict] = []
     unresolvable: list[dict] = []
@@ -368,19 +371,37 @@ def collect_nonstandard(
                 dtu_u    = s.get("dtu_username", "")
                 email_n  = s.get("email_student_number", "")
                 name     = s.get("student_name", "")
+                id_src   = s.get("id_source", "")
                 standard = bool(re.fullmatch(r"s\d+", sid))
                 entry = {
-                    "name":        name,
-                    "pipeline_id": sid,
+                    "name":         name,
+                    "pipeline_id":  sid,
                     "dtu_username": dtu_u,
-                    "team_id":     tid,
-                    "challenge":   ch,
+                    "team_id":      tid,
+                    "challenge":    ch,
                 }
                 if not standard:
-                    entry["proposed"] = email_n if email_n else sid
+                    entry["proposed"]   = email_n if email_n else sid
+                    entry["q1_answer"]  = s.get("q1_answer", "")
+                    _id_badge_map = {
+                        "export:email":            "export_email",
+                        "export:username":         "export_username",
+                        "survey:late-entry":       "survey_other",
+                        "survey:in-classlist":     "survey_other",
+                        "survey:not-in-classlist": "survey_dropped",
+                        "survey:no-classlist":     "survey_unverified",
+                        "survey:unresolvable":     "survey_unverified",
+                    }
+                    entry["id_badge_key"]       = _id_badge_map.get(id_src, "export_username")
+                    entry["proposed_badge_key"] = "classlist_email" if email_n else entry["id_badge_key"]
                     unresolvable.append(entry)
                 elif dtu_u:
-                    entry["proposed"] = sid  # already correct sXXXXXX
+                    entry["proposed"]          = sid
+                    entry["q1_answer"]         = s.get("q1_answer", "")
+                    # classlist_confirmed may be bool (in-memory) or string "True"/"False" (from CSV)
+                    classlist_ok               = s.get("classlist_confirmed") in (True, "True")
+                    entry["id_badge_key"]      = "export_email"
+                    entry["proposed_badge_key"]= "classlist_email" if classlist_ok else "export_email"
                     resolvable.append(entry)
     return resolvable, unresolvable
 

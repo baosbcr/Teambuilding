@@ -44,6 +44,25 @@
     .mono { font-family: monospace; font-size: 0.85rem; }
     .team-chip { font-size: 0.75rem; color: #888; }
 
+    .source-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.45rem;
+      border-radius: 4px; white-space: nowrap;
+    }
+    .src-export-email    { background: #e3f2fd; color: #1565c0; }
+    .src-classlist-email { background: #e8f5e9; color: #2e7d32; }
+    .src-username        { background: #fff3e0; color: #e65100; }
+    .src-survey-unverified { background: #f3e5f5; color: #6a1b9a; }
+    .src-survey-dropped    { background: #ffebee; color: #b71c1c; }
+    .src-survey-other      { background: #e8f5e9; color: #1b5e20; }
+
+    .home-btn {
+      display: inline-block; margin-bottom: 1.25rem; padding: 0.5rem 1rem;
+      background: white; border: 1px solid #ddd; border-radius: 6px;
+      font-size: 0.875rem; color: #555; text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .home-btn:hover { border-color: #990000; color: #990000; }
+
     #overlay {
       display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45);
       justify-content: center; align-items: center; z-index: 100;
@@ -54,6 +73,22 @@
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
+{% macro src_badge(key) %}
+  {%- if key == "export_email" -%}
+    <span class="source-badge src-export-email">group export email</span>
+  {%- elif key == "classlist_email" -%}
+    <span class="source-badge src-classlist-email">classlist email</span>
+  {%- elif key == "survey_dropped" -%}
+    <span class="source-badge src-survey-dropped">⚠ not in classlist</span>
+  {%- elif key == "survey_unverified" -%}
+    <span class="source-badge src-survey-unverified">enrollment unverified</span>
+  {%- elif key == "survey_other" -%}
+    <span class="source-badge src-survey-other">survey (enrolled)</span>
+  {%- else -%}
+    <span class="source-badge src-username">group export username</span>
+  {%- endif -%}
+{% endmacro %}
+
 <body>
 
 <header>
@@ -62,6 +97,8 @@
 </header>
 
 <main>
+  <a href="/" class="home-btn">← New run</a>
+
   <form action="/resolve" method="POST" onsubmit="startResolve()">
     <input type="hidden" name="tmp_key" value="{{ tmp_key }}">
 
@@ -69,8 +106,9 @@
     <div class="card">
       <h2>Confirmed resolvable <span style="font-weight:400;color:#aaa">({{ resolvable|length }})</span></h2>
       <p class="desc">
-        These students have a valid student number (<code>sXXXXXX</code>) as their pipeline identifier.
-        Their DTU Learn username is shown for reference. The proposed value is pre-filled — edit only if it is wrong.
+        These students' pipeline ID is already a valid <code>sXXXXXX</code> (extracted from their
+        group export email). They also have a non-standard DTU Learn username — shown here for
+        reference. The proposed value is pre-filled and correct; edit only if something looks wrong.
       </p>
       <table>
         <thead>
@@ -78,6 +116,8 @@
             <th>Name</th>
             <th>DTU Username</th>
             <th>Pipeline ID</th>
+            <th>Survey answer</th>
+            <th>Sources</th>
             <th>Team</th>
             <th>Student Number (output)</th>
           </tr>
@@ -88,6 +128,11 @@
             <td>{{ c.name }}</td>
             <td class="mono">{{ c.dtu_username }}</td>
             <td class="mono">{{ c.pipeline_id }}</td>
+            <td class="mono">{{ c.q1_answer }}</td>
+            <td>
+              {{ src_badge(c.id_badge_key) }}
+              {% if c.proposed_badge_key != c.id_badge_key %}<br>{{ src_badge(c.proposed_badge_key) }}{% endif %}
+            </td>
             <td class="team-chip">{{ c.team_id }}</td>
             <td>
               <span class="tag tag-ok">✓ resolved</span>
@@ -104,15 +149,19 @@
     <div class="card">
       <h2>Manual input required <span style="font-weight:400;color:#aaa">({{ unresolvable|length }})</span></h2>
       <p class="desc">
-        No <code>sXXXXXX</code> could be found for these students — their DTU email uses a
-        non-standard format. The field is pre-filled with their username fallback.
-        Enter the correct student number if you know it, or leave as-is to use the username.
+        These students' pipeline ID is a non-standard username — no <code>sXXXXXX</code> was
+        extractable from the group export email. The <strong>Sources</strong> column shows where
+        the pipeline ID came from (top badge) and where the proposed value comes from (bottom badge,
+        when different). Two agreeing badges confirm independent sources point to the same student.
+        Enter the correct student number if you know it, or leave as-is.
       </p>
       <table>
         <thead>
           <tr>
             <th>Name</th>
-            <th>Pipeline ID (username)</th>
+            <th>Pipeline ID</th>
+            <th>Survey answer</th>
+            <th>Sources</th>
             <th>Team</th>
             <th>Student Number (output)</th>
           </tr>
@@ -122,9 +171,16 @@
           <tr class="row-warn">
             <td>{{ c.name }}</td>
             <td class="mono">{{ c.pipeline_id }}</td>
+            <td class="mono">{{ c.q1_answer }}</td>
+            <td>
+              {{ src_badge(c.id_badge_key) }}
+              {% if c.proposed_badge_key != c.id_badge_key %}
+                <br>{{ src_badge(c.proposed_badge_key) }}
+              {% endif %}
+            </td>
             <td class="team-chip">{{ c.team_id }}</td>
             <td>
-              <span class="tag tag-warn">⚠ no sXXXXXX found</span>
+              <span class="tag tag-warn">⚠ no sXXXXXX</span>
               <input type="text" name="id_{{ c.pipeline_id }}" value="{{ c.proposed }}">
             </td>
           </tr>

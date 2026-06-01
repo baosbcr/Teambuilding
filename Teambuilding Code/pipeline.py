@@ -95,6 +95,11 @@ def step_build(
             "    and will be silently absent from teams.csv.\n"
             "  - Dropped-student filtering (--dropped) is DISABLED: all survey-only\n"
             "    students are kept regardless of whether they are still enrolled.\n"
+            "  - email_student_number enrichment is DISABLED: students with non-standard\n"
+            "    DTU usernames (e.g. 'nipac') are fully resolved via the group export\n"
+            "    (identity, group assignment, id_source=export:username), but their\n"
+            "    sXXXXXX cannot be recovered — email_student_number will be empty.\n"
+            "    Provide the classlist to populate those numbers.\n"
             "  See the 'Classlist Export' section in README.md for how to obtain and\n"
             "  provide this file.",
         )
@@ -125,6 +130,7 @@ def step_build(
         _resolve.flag_ghost_students(students, classlist_ids)
 
     fieldnames = ["student_number", "dtu_username", "email_student_number",
+                  "id_source", "classlist_confirmed", "q1_answer",
                   "student_name", "allocation_category", "studyline", "personality_type"]
     with open(out_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
