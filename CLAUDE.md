@@ -197,13 +197,25 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 
 ## Output Files
 
+### `students_combined.csv` (intermediate)
+
+One row per student after resolve step. Fields: `student_number, dtu_username, email_student_number, id_source, classlist_confirmed, q1_answer, student_name, allocation_category, studyline, personality_type`
+
+`id_source` — where the canonical `student_number` was extracted from. Values: `export:email` (sXXXXXX from group export email field), `export:username` (group export username field, standard or non-standard), `survey:late-entry`, `survey:in-classlist`, `survey:not-in-classlist`, `survey:no-classlist`, `survey:unresolvable` (student found only in survey).
+
+`classlist_confirmed` — `True` if an independent classlist source agrees with the pipeline ID. For standard students: classlist name→number map returns the same sXXXXXX. For non-standard: classlist email gives a recoverable sXXXXXX at all. Used in the interactive review to show a second source badge.
+
+`q1_answer` — the raw value the student typed in survey Q1 before any normalisation or ID correction. Empty for students with no survey.
+
 ### `teams.csv`
 
-One row per student. Fields: `team_id, challenge, student_number, dtu_username, email_student_number, student_name, original_category, studyline, personality_type`
+One row per student. Fields: `team_id, challenge, student_number, dtu_username, email_student_number, id_source, student_name, original_category, studyline, personality_type`
 
 `dtu_username` — populated when the student's canonical ID was derived from their group export email (e.g. `s225007`) but their DTU Learn username is non-standard (e.g. `nipac`). Preserves the username that would otherwise be silently discarded. Empty for all students whose canonical ID already equals their username.
 
 `email_student_number` — only populated for students whose `student_number` is a non-standard DTU username (not matching `s\d+`) and a classlist was provided. Contains the `sXXXXXX` derived from the classlist email for manual verification. Empty for all standard students.
+
+`id_source` — carried through from `students_combined.csv`; see above.
 
 ### `teams_summary.csv`
 
