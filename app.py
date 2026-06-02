@@ -39,7 +39,7 @@ def _parse_form_params(form) -> dict:
         "cross_challenge":      form.get("cross_challenge", "survey-wins"),
         "missing_mode":         form.get("missing", "keep"),
         "dropped_mode":         form.get("dropped", "keep"),
-        "late_entry_overrules": "late_entry_overrules" in form,
+        "late_entries":         form.get("late_entries", "keep"),
         "ideal":                int(form.get("ideal", 8)),
         "team_min":             int(form.get("min", 7)),
         "team_max":             int(form.get("max", 10)),
@@ -52,6 +52,7 @@ def _parse_form_params(form) -> dict:
         "id_fallback":          form.get("id_fallback", "username"),
         "assignment_mode":      form.get("assignment_mode", "automatic"),
         "audit_f1":             "audit_f1" in form,
+        "audit_dropped":        "audit_dropped" in form,
         "force_audit_ids":      json.loads(form.get("force_audit_ids", "[]")),
     }
 
@@ -101,11 +102,11 @@ def _run_pipeline_from_files(
     When overrides is provided (interactive assignment re-run), cross_challenge is
     forced to survey-wins so confirmed students always get available survey data.
     """
-    cross_challenge      = params["cross_challenge"]
-    missing_mode         = params["missing_mode"]
-    dropped_mode         = params["dropped_mode"]
-    late_entry_overrules = params["late_entry_overrules"]
-    ideal                = params["ideal"]
+    cross_challenge = params["cross_challenge"]
+    missing_mode    = params["missing_mode"]
+    dropped_mode    = params["dropped_mode"]
+    late_entries    = params["late_entries"]
+    ideal           = params["ideal"]
     team_min             = params["team_min"]
     team_max             = params["team_max"]
     max_groups           = params["max_groups"]
@@ -152,12 +153,17 @@ def _run_pipeline_from_files(
         f"  dropped={dropped_mode}\n"
         f"    Student with a survey but absent from the group export (and classlist):\n"
         f"    {_dropped_desc[dropped_mode]}.\n\n"
-        f"  late-entry-overrules={late_entry_overrules}\n"
-        f"    Student in OVERFLOW who filled the Late Entries survey: "
-        + ("moved to the late entry pool.\n" if late_entry_overrules
-           else "kept in overflow.\n")
-        + f"    Student in a CHALLENGE group who filled the Late Entries survey:\n"
-          f"    always kept in their challenge (survey used for attributes only).\n\n"
+        f"  late-entries={late_entries}\n"
+        + {
+            "keep":                "    Overflow + late entry survey: moved to late entry.\n"
+                                   "    Challenge group + late entry survey: kept in challenge.\n"
+                                   "    Late-entry-only students (not in export): kept.\n",
+            "flex":                "    All students with a late entry survey moved to late entry.\n"
+                                   "    Late-entry-only students (not in export): kept.\n",
+            "discard-survey-only": "    Students only in the late entry survey (not in export): excluded.\n"
+                                   "    Others unaffected.\n",
+            "discard-all":         "    All students with a final late entry allocation excluded.\n",
+        }[late_entries] + "\n"
         + (f"  assignment-mode=interactive\n"
            f"    Challenge assignments reviewed and confirmed manually before team formation.\n\n"
            if overrides is not None else "")
@@ -170,7 +176,7 @@ def _run_pipeline_from_files(
         f"    The student typed their full name instead of their student ID.\n"
         f"    Resolved from the group export by name match.\n\n"
         f"  INFO [sXXXXX]: survey in 'late entry', export 'overflow' - moved to late entry\n"
-        f"    Late-entry-overrules triggered. Student moved to the late entry pool.\n\n"
+        f"    Student moved to late entry — will be distributed across challenge teams to balance numbers.\n\n"
         f"  INFO [sXXXXX]: survey in 'challenge A', export 'challenge D' - survey data used, category kept\n"
         f"    Cross-challenge case (survey-wins): survey answers used, student stays\n"
         f"    in their group export challenge.\n\n"
@@ -220,7 +226,7 @@ def _run_pipeline_from_files(
             cross_challenge      = effective_cross_challenge,
             missing_mode         = missing_mode,
             dropped_mode         = dropped_mode,
-            late_entry_overrules = late_entry_overrules,
+            late_entries         = late_entries,
             overrides            = overrides,
         )
         _resolve.enrich_email_student_numbers(students, username_number_map, name_number_map)
@@ -351,8 +357,9 @@ def run():
                     cross_challenge      = params["cross_challenge"],
                     missing_mode         = params["missing_mode"],
                     dropped_mode         = params["dropped_mode"],
-                    late_entry_overrules = params["late_entry_overrules"],
+                    late_entries         = params["late_entries"],
                     audit_f1             = params["audit_f1"],
+                    audit_dropped        = params["audit_dropped"],
                     force_audit_ids      = params["force_audit_ids"],
                 )
         except (ValueError, SystemExit) as e:

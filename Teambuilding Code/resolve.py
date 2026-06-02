@@ -330,7 +330,7 @@ def build_student_list(
     cross_challenge: str = "survey-wins",
     missing_mode: str = "keep",
     dropped_mode: str = "keep",
-    late_entry_overrules: bool = True,
+    late_entries: str = "keep",
     overrides: dict[str, str] | None = None,
 ) -> list[dict]:
     """
@@ -401,6 +401,7 @@ def build_student_list(
             "_case_type":          "E",
             "_export_challenge":   category,
             "_survey_challenges":  [],
+            "_not_in_classlist":   classlist_ids is not None and nid not in classlist_ids,
         }
 
     # ------------------------------------------------------------------
@@ -497,7 +498,9 @@ def build_student_list(
             base[nid]["_survey_found"] = True
 
             export_is_challenge = base_cat.startswith("challenge ")
-            if survey_cat == "late entry" and not export_is_challenge and late_entry_overrules:
+            if survey_cat == "late entry" and (late_entries == "flex" or not export_is_challenge):
+                # flex: move all to late entry regardless of export group
+                # keep/discard modes: move non-challenge (overflow) students to late entry
                 base[nid]["studyline"]           = chosen["studyline"]
                 base[nid]["personality_type"]    = chosen["personality_type"]
                 base[nid]["allocation_category"] = "late entry"
@@ -505,10 +508,11 @@ def build_student_list(
                 base[nid]["_case_type"]          = "late-entry-overrules"
                 print(
                     f"INFO [{nid}]: survey in 'late entry', export '{base_cat}' - "
-                    f"moved to late entry (--late-entry-overrules)",
+                    f"moved to late entry (--late-entries={late_entries})",
                     file=sys.stderr,
                 )
             elif survey_cat == "late entry" and export_is_challenge:
+                # keep/discard modes: confirmed challenge group stays in their challenge
                 base[nid]["studyline"]        = chosen["studyline"]
                 base[nid]["personality_type"] = chosen["personality_type"]
                 base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
@@ -566,11 +570,13 @@ def build_student_list(
     # Step 4: apply missing_mode for case E (in export, no survey found)
     # ------------------------------------------------------------------
     final: list[dict] = []
-    n_missing = 0
+    n_missing  = 0
+    n_dropped_export = 0
 
     for nid, record in base.items():
-        r            = dict(record)
-        survey_found = r.pop("_survey_found")
+        r                = dict(record)
+        survey_found     = r.pop("_survey_found")
+        not_in_classlist = r.get("_not_in_classlist", False)
 
         if not survey_found:
             n_missing += 1
@@ -594,12 +600,33 @@ def build_student_list(
                     file=sys.stderr,
                 )
 
+        if not_in_classlist:
+            n_dropped_export += 1
+            if dropped_mode == "exclude":
+                print(
+                    f"INFO [dropped]: {nid}  {r['student_name']} - not in classlist, excluded",
+                    file=sys.stderr,
+                )
+                continue
+            else:
+                print(
+                    f"INFO [not in classlist]: {nid}  {r['student_name']} "
+                    f"({r['allocation_category']}) - kept (--dropped=keep)",
+                    file=sys.stderr,
+                )
+
         final.append(r)
 
     if n_missing:
         print(
             f"  {n_missing} students from group export with no survey "
             f"(--missing={missing_mode})",
+            file=sys.stderr,
+        )
+    if n_dropped_export:
+        print(
+            f"  {n_dropped_export} students from group export not in classlist "
+            f"(--dropped={dropped_mode})",
             file=sys.stderr,
         )
 
@@ -615,25 +642,32 @@ def build_student_list(
         name       = rec.get("student_name", "")
 
         if survey_cat == "late entry":
-            # F1: always keep late entries
-            print(
-                f"INFO [not in export]: {nid}  {name} - late entry, kept",
-                file=sys.stderr,
-            )
-            final.append({
-                "student_number":      nid,
-                "dtu_username":        "",
-                "student_name":        name,
-                "allocation_category": "late entry",
-                "studyline":           rec["studyline"],
-                "personality_type":    rec["personality_type"],
-                "id_source":           "survey:late-entry",
-                "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
-                "_case_type":          "F1",
-                "_export_challenge":   None,
-                "_survey_challenges":  [survey_cat],
-            })
-            n_added += 1
+            # F1: student only in late entry survey, not in group export
+            if late_entries in ("discard-survey-only", "discard-all"):
+                print(
+                    f"INFO [discarded]: {nid}  {name} - late entry (not in export), "
+                    f"excluded (--late-entries={late_entries})",
+                    file=sys.stderr,
+                )
+            else:
+                print(
+                    f"INFO [not in export]: {nid}  {name} - late entry, kept",
+                    file=sys.stderr,
+                )
+                final.append({
+                    "student_number":      nid,
+                    "dtu_username":        "",
+                    "student_name":        name,
+                    "allocation_category": "late entry",
+                    "studyline":           rec["studyline"],
+                    "personality_type":    rec["personality_type"],
+                    "id_source":           "survey:late-entry",
+                    "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+                    "_case_type":          "F1",
+                    "_export_challenge":   None,
+                    "_survey_challenges":  [survey_cat],
+                })
+                n_added += 1
 
         elif classlist_ids is not None:
             if nid in classlist_ids:
@@ -730,6 +764,26 @@ def build_student_list(
             "_survey_challenges":  [unres_cat],
         })
 
+    # Step 5b: discard-all — remove all late entry students from final output
+    if late_entries == "discard-all":
+        kept, n_discarded = [], 0
+        for r in final:
+            if r.get("allocation_category") == "late entry":
+                print(
+                    f"INFO [discarded]: {r['student_number']}  {r['student_name']} - "
+                    f"late entry, excluded (--late-entries=discard-all)",
+                    file=sys.stderr,
+                )
+                n_discarded += 1
+            else:
+                kept.append(r)
+        if n_discarded:
+            print(
+                f"  {n_discarded} late entry student(s) excluded (--late-entries=discard-all)",
+                file=sys.stderr,
+            )
+        final = kept
+
     # Apply interactive overrides: explicit per-student assignment decisions
     if overrides:
         result = []
@@ -778,8 +832,9 @@ def collect_edge_cases(
     cross_challenge: str = "survey-wins",
     missing_mode: str = "keep",
     dropped_mode: str = "keep",
-    late_entry_overrules: bool = True,
+    late_entries: str = "keep",
     audit_f1: bool = False,
+    audit_dropped: bool = False,
     force_audit_ids: list[str] | None = None,
 ) -> list[dict]:
     """
@@ -800,11 +855,11 @@ def collect_edge_cases(
     Unmatched force-audit entries emit WARNING [force-audit] to stderr.
     """
     shared_kwargs = dict(
-        group_export_rows    = group_export_rows,
-        survey_records       = survey_records,
-        name_lookup          = name_lookup,
-        classlist_ids        = classlist_ids,
-        late_entry_overrules = late_entry_overrules,
+        group_export_rows = group_export_rows,
+        survey_records    = survey_records,
+        name_lookup       = name_lookup,
+        classlist_ids     = classlist_ids,
+        late_entries      = late_entries,
     )
 
     # Pass 1: ensure all students are present; maximise survey data for display
@@ -840,17 +895,24 @@ def collect_edge_cases(
     matched_force_ids: set[str] = set()
 
     for s in all_students:
-        case_type = s.get("_case_type", "happy")
-        nid       = s["student_number"]
-        is_edge   = case_type not in silent_types
-        is_forced = nid in force_id_map
+        case_type        = s.get("_case_type", "happy")
+        nid              = s["student_number"]
+        not_in_classlist = s.get("_not_in_classlist", False)
+        is_edge          = case_type not in silent_types
+        is_forced        = nid in force_id_map
+        is_dropped_audit = audit_dropped and not_in_classlist
 
-        if not is_edge and not is_forced:
+        if not is_edge and not is_forced and not is_dropped_audit:
             continue
 
         if is_forced:
             matched_force_ids.add(nid)
-            if not is_edge:
+
+        # Assign display case_type for silent students surfaced by audit flags
+        if not is_edge:
+            if is_dropped_audit:
+                case_type = "not-in-classlist"
+            elif is_forced:
                 case_type = "force-audit"
 
         edge_cases.append({
@@ -864,6 +926,7 @@ def collect_edge_cases(
             "q1_answer":          s.get("q1_answer", ""),
             "id_source":          s.get("id_source", ""),
             "classlist_confirmed": s.get("classlist_confirmed", False),
+            "not_in_classlist":   not_in_classlist,
             "auto_assignment":    auto_map.get(nid, "skip"),
         })
 
@@ -927,14 +990,16 @@ def main() -> None:
         ),
     )
     ap.add_argument(
-        "--late-entry-overrules", action=argparse.BooleanOptionalAction, default=True,
-        dest="late_entry_overrules",
+        "--late-entries", default="keep",
+        choices=["keep", "flex", "discard-survey-only", "discard-all"],
+        dest="late_entries",
         help=(
-            "Students in overflow who filled the Late Entries survey are moved to "
-            "'late entry' (default: on). Students already confirmed in a challenge "
-            "group are never moved regardless of this flag — their late entry survey "
-            "is used for studyline/personality data only. "
-            "Use --no-late-entry-overrules to keep overflow students in overflow instead."
+            "How to handle late entry students. "
+            "'keep' (default): overflow + late entry survey → late entry; "
+            "challenge-group stays in their group. "
+            "'flex': all students with a late entry survey → late entry. "
+            "'discard-survey-only': students only in the late entry survey excluded. "
+            "'discard-all': all students with a final late entry allocation excluded."
         ),
     )
     args = ap.parse_args()
@@ -978,7 +1043,7 @@ def main() -> None:
         cross_challenge      = args.cross_challenge,
         missing_mode         = args.missing,
         dropped_mode         = args.dropped,
-        late_entry_overrules = args.late_entry_overrules,
+        late_entries         = args.late_entries,
     )
 
     print(f"\nTotal: {len(students)} students")

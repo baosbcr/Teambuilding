@@ -104,7 +104,7 @@ Called by `resolve.py`; not invoked directly in the production pipeline. Skips O
 
 Group-export-first: the group export is the canonical student list; survey data is an enrichment layer.
 
-**Key function:** `build_student_list(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entry_overrules, overrides=None)`
+**Key function:** `build_student_list(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entries, overrides=None)`
 
 `overrides` is an optional `{student_number: assignment}` dict from the interactive assignment review. When a student's ID is in `overrides`, their `allocation_category` is set to the explicit value, bypassing all lever logic. `"skip"` as a value excludes the student entirely. Survey enrichment (`enrich_email_student_numbers`) always runs unchanged.
 
@@ -113,7 +113,7 @@ During the build, each student record is annotated with internal `_case_type`, `
 Five internal steps:
 1. Build base dict from group export keyed by canonical student ID (all UNKNOWN attributes); tag each with `_case_type="E"` (default: no survey found)
 2. Normalise Q1 answers in survey records and resolve them to group export IDs (matching only — Q1 is not the ID source)
-3. Enrich base entries with survey data; apply `--cross-challenge` lever for mismatched challenges; tag with `_case_type` (happy/C/D/late-entry-overrules)
+3. Enrich base entries with survey data; apply `--cross-challenge` lever for mismatched challenges; tag with `_case_type` (happy/C/D/late-entry-overrules). `late-entry-overrules` is used when a student is moved to late entry by the `--late-entries` lever.
 4. Apply `--missing` lever for students in group export with no survey found
 5. Apply `--dropped` lever for students in survey but absent from group export (and classlist); tag with `_case_type` (F1/F2/F3/F-no-classlist/unresolvable)
 6. Apply `overrides` (if provided): replace `allocation_category` for listed students, remove those with `"skip"`
@@ -121,7 +121,7 @@ Five internal steps:
 **Edge cases handled** (all except A/B surface in the interactive assignment review):
 - **Case A/B**: Survey matches group export challenge (happy path / ID corrected) — silent; auditable via force-audit list
 - **Case C**: Survey for a single different challenge → `--cross-challenge {survey-wins|joker|survey-overrules}` — reviewed in interactive mode
-- **Case D**: Surveys across multiple different challenges → export wins, data from first survey — reviewed in interactive mode
+- **Case D**: Surveys across multiple different challenges, none matching the export challenge → export wins, data from first survey — reviewed in interactive mode. If at least one survey matches the export challenge, the student is treated as happy path (Case A/B) and the extra surveys are logged as INFO only.
 - **Case E**: In group export, no survey → `--missing {keep|overflow|skip}` — reviewed in interactive mode
 - **Case F1**: Not in group export, survey from Late Entries file → always kept — opt-in to interactive review via `audit_f1` checkbox
 - **Case F2/F3**: Not in group export, survey from other file → `--classlist` + `--dropped {keep|exclude}` — reviewed in interactive mode
@@ -129,7 +129,7 @@ Five internal steps:
 
 Q1 normalisation/correction is always applied (required to match survey records to the right group export row). The resulting canonical student_number is always sourced from the group export, never from Q1. Warnings are always printed.
 
-**`collect_edge_cases(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entry_overrules, audit_f1=False, force_audit_ids=None)`**
+**`collect_edge_cases(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entries, audit_f1=False, force_audit_ids=None)`**
 
 Two-pass function used by the interactive assignment review:
 - Pass 1: runs `build_student_list` with `cross_challenge="survey-wins"`, `missing="keep"`, `dropped="keep"` to collect all students with survey data maximally populated for display.
@@ -214,7 +214,7 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 | `--cross-challenge`     | survey-wins  | Student filled a survey for a different challenge     |
 | `--classlist`           | (none)       | Path to current classlist CSV; enables ghost detection, dropped-student filtering, and `email_student_number` enrichment for non-standard usernames |
 | `--dropped`             | keep         | Students with a survey absent from both export and classlist |
-| `--late-entry-overrules`| on           | Students in **overflow** who filled the Late Entries survey → moved to late entry. Students already in a challenge group are **never** moved (their survey provides studyline/personality data only) |
+| `--late-entries`        | keep         | How to handle late entry students. `keep`: overflow + late entry survey → late entry; challenge-group stays in group. `flex`: all students with late entry survey → late entry (including challenge-group). `discard-survey-only`: students only in the late entry survey (not in export) excluded. `discard-all`: all students with a final late entry allocation excluded. |
 
 **Web app only (Challenge Assignment section):**
 
@@ -264,8 +264,8 @@ Diversity = unique count / team size.
 - **Missing survey participants**: students in the group export who never submitted. Handled by `--missing` lever.
 - **Late Entries not in Day 1 group export**: the Late Entries group is added later. Late entry students who filled the survey appear in the Individual Reports but not in the Day 1 group export; they are kept as-is with category `late entry`.
 - **Late entries students listed under another group in the export**: two sub-cases:
-  - *In overflow + late entry survey*: student is on the waiting list with no confirmed challenge. Default (`--late-entry-overrules` on) moves them to `late entry`. Use `--no-late-entry-overrules` to keep them in overflow.
-  - *In a challenge group + late entry survey*: student already has a confirmed challenge spot — filling the late entry survey does not forfeit it. They always stay in their challenge group; the late entry survey provides studyline/personality data only.
+  - *In overflow + late entry survey*: default (`--late-entries=keep`) moves them to `late entry`. With `--late-entries=flex` they are also moved to late entry (no change). With `discard-all` they are excluded.
+  - *In a challenge group + late entry survey*: default (`keep`) keeps them in their challenge group. With `--late-entries=flex` they are moved to late entry. With `discard-all` they are excluded from late entry but remain in their challenge group (their allocation is not late entry).
 - **Office lock files**: `~$` prefixed XLSX files created by Excel when a file is open. Both `parse_individual.py` and `pipeline.py` skip these automatically.
 - **Ambiguous names**: two students sharing the same full name cannot be auto-corrected via name lookup. A WARNING is printed and both are left unchanged.
 - **Ghost students**: students enrolled in the course (in the classlist) who never joined a group and never filled any survey. Invisible to the pipeline — flagged only when a classlist is provided via `flag_ghost_students`. In 2026 data: 18 ghosts found with the full classlist export (Role=Student filter applied).
@@ -299,7 +299,7 @@ Skip step 1 and go straight to team formation with a pre-built student list.
 - Group export: 929 students (A=200, B=198, C=198, D=198, Overflow=135)
 - Survey: ~900 raw rows, ~893 unique after normalisation
 - 42 students in group export with no survey (--missing=keep)
-- 15 Q1 answers corrected via name lookup (to find the right group export row); 4 late-entry-overrules triggered (overflow only); 4 challenge-group students kept in challenge from late entry survey; 10 total late entry students
+- 15 Q1 answers corrected via name lookup (to find the right group export row); 4 overflow students moved to late entry (--late-entries=keep); 4 challenge-group students kept in challenge from late entry survey; 10 total late entry students
 - Final: 935 students, 100 teams (25 per challenge A–D), all 9–10 members (after flex levelling fix)
 - Avg studyline diversity: 0.90-0.96 per challenge; avg personality diversity: 0.85-0.90
 - Classlist (full export, Role=Student only): 952 enrolled students; 11 non-standard usernames with recoverable sXXXXXX; 18 ghost students (enrolled but absent from group export and all surveys)

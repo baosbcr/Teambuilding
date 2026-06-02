@@ -77,10 +77,10 @@ Upload your files using the form, adjust the options, and click **Run**. The res
 
 **Challenge Assignment section** — controls how edge cases are handled before team formation:
 
-- **Automatic** (default): the levers (cross-challenge, missing, dropped, late-entry-overrules) decide each case silently. Expand *Lever settings* to configure them.
+- **Automatic** (default): the levers (cross-challenge, missing, dropped, late-entries) decide each case silently. Expand *Lever settings* to configure them.
 - **Interactive review**: after uploading, a review page shows every ambiguous case — students whose challenge assignment required a decision. Each row shows the student's full context (export group, survey group(s), studyline, personality, Q1 answer) with a dropdown pre-filled with the automatic suggestion. You can confirm or override any assignment. All possible targets (Challenge A–D, Overflow, Late entry, Skip) are always available — you may have information the pipeline does not (direct student contact, teacher override, etc.).
 
-  Under *Audit options* you can also opt in to reviewing late-entry students (F1 cases) and add specific student IDs or emails to always include in the review regardless of case type.
+  Under *Audit options* you can also opt in to reviewing late-entry students who are not in the group export, and add specific student IDs or emails to always include in the review regardless of case type.
 
 > **Settings are saved in your browser.** All form values — including assignment mode, levers, and audit options — are restored automatically the next time you open the app. Use the reset buttons to revert to defaults.
 
@@ -202,7 +202,7 @@ Save the file into `Learn Exports/Classlist Export Students Only/` and pass it t
 | `dtu_username` | `nipac` | DTU Learn username when it was replaced by an email-derived ID; empty if username equals the canonical ID |
 | `email_student_number` | `s253896` | `sXXXXXX` from classlist email — only populated for non-standard usernames when a classlist was provided; empty otherwise |
 | `student_name` | `Maria Jensen` | From DTU Learn account |
-| `original_category` | `challenge A` | Category before flex placement |
+| `original_category` | `challenge A` | Challenge group from the group export, before any late-entry redistribution |
 | `studyline` | `Biotechnology` | From survey (or UNKNOWN) |
 | `personality_type` | `INFJ` | MBTI type from survey (or UNKNOWN) |
 

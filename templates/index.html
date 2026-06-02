@@ -273,7 +273,7 @@
       <!-- Automatic: lever settings (collapsed) -->
       <div id="lever_section" class="assign-mode-body">
         <details id="lever_details">
-          <summary>Lever settings</summary>
+          <summary>Edge case settings</summary>
           <div class="details-body">
 
             <div class="field">
@@ -297,17 +297,23 @@
             </div>
 
             <div class="field">
-              <label for="dropped">Dropped students</label>
+              <label for="dropped">Students with a survey but not in the export</label>
               <select name="dropped" id="dropped">
                 <option value="keep">keep — include with their survey category (default)</option>
                 <option value="exclude">exclude — remove from output</option>
               </select>
-              <small>Students with a survey but absent from both the group export and classlist. Requires classlist upload.</small>
+              <small>Students who submitted a survey but do not appear in the group export or classlist — likely withdrew from the course after submitting. Only distinguishable from valid late additions when a classlist is uploaded.</small>
             </div>
 
-            <div class="check-row">
-              <input type="checkbox" name="late_entry_overrules" id="late_entry_overrules" checked>
-              <label for="late_entry_overrules">Late-entry overrules — overflow students who filled the Late Entries survey are moved to the late entry pool (students confirmed in a challenge group are always kept in their challenge)</label>
+            <div class="field">
+              <label for="late_entries">Late entries</label>
+              <select name="late_entries" id="late_entries">
+                <option value="keep">keep — overflow students moved to late entry; challenge-group students stay in their group (default)</option>
+                <option value="flex">flex — all students with a late entry survey moved to late entry, including challenge-group students</option>
+                <option value="discard-survey-only">discard survey-only — students only in the late entry survey (not in the group export) excluded from team formation</option>
+                <option value="discard-all">discard all — all late entry students excluded from team formation</option>
+              </select>
+              <small>Late entry students are not pre-assigned to a challenge — after challenge teams are formed, they are distributed into teams to balance group sizes.</small>
             </div>
 
             <div style="margin-top:0.25rem">
@@ -321,7 +327,7 @@
       <!-- Interactive: info note + audit options (collapsed) -->
       <div id="audit_section" class="assign-mode-body hidden">
         <div class="assign-info">
-          Use interactive mode when you have received direct contact from students or teachers, or know of course changes not reflected in the exports. You will see every ambiguous case with a pre-filled suggestion — confirm or override each before teams are formed. You can also add specific students below to force them into the review regardless of their case type.
+          Shows every ambiguous assignment before teams are formed, with a pre-filled suggestion you can confirm or override. Advanced options for exception handling are available below.
         </div>
         <details id="audit_details">
           <summary>Audit options</summary>
@@ -330,6 +336,11 @@
             <div class="check-row">
               <input type="checkbox" name="audit_f1" id="audit_f1">
               <label for="audit_f1">Include late-entry students (not in group export) in the review</label>
+            </div>
+
+            <div class="check-row">
+              <input type="checkbox" name="audit_dropped" id="audit_dropped">
+              <label for="audit_dropped">Include potentially unenrolled students in the review — students present in the group export or surveys but absent from the classlist. Requires classlist upload.</label>
             </div>
 
             <div class="field">
@@ -468,10 +479,11 @@ document.addEventListener('DOMContentLoaded', () => {
   bindLS('cross_challenge',    'cross_challenge',    'select');
   bindLS('missing',            'missing',            'select');
   bindLS('dropped',            'dropped',            'select');
-  bindLS('late_entry_overrules','late_entry_overrules','checkbox');
+  bindLS('late_entries','late_entries','select');
 
   // Audit options
-  bindLS('audit_f1', 'audit_f1', 'checkbox');
+  bindLS('audit_f1',      'audit_f1',      'checkbox');
+  bindLS('audit_dropped', 'audit_dropped', 'checkbox');
   const savedTags = JSON.parse(loadSetting('force_audit_ids', '[]') || '[]');
   forceAuditTags = Array.isArray(savedTags) ? savedTags : [];
   renderTags();
@@ -506,30 +518,32 @@ function toggleAssignMode() {
 // ── Reset functions ───────────────────────────────────────────────────────
 
 const LEVER_DEFAULTS = {
-  cross_challenge:       'survey-wins',
-  missing:               'keep',
-  dropped:               'keep',
-  late_entry_overrules:  true,
+  cross_challenge: 'survey-wins',
+  missing:         'keep',
+  dropped:         'keep',
+  late_entries:    'keep',
 };
 
 const AUDIT_DEFAULTS = {
-  audit_f1:        false,
+  audit_f1:      false,
+  audit_dropped: false,
   force_audit_ids: [],
 };
 
 function resetLevers() {
-  document.getElementById('cross_challenge').value      = LEVER_DEFAULTS.cross_challenge;
-  document.getElementById('missing').value              = LEVER_DEFAULTS.missing;
-  document.getElementById('dropped').value              = LEVER_DEFAULTS.dropped;
-  document.getElementById('late_entry_overrules').checked = LEVER_DEFAULTS.late_entry_overrules;
-  clearSettings(['cross_challenge','missing','dropped','late_entry_overrules']);
+  document.getElementById('cross_challenge').value = LEVER_DEFAULTS.cross_challenge;
+  document.getElementById('missing').value         = LEVER_DEFAULTS.missing;
+  document.getElementById('dropped').value         = LEVER_DEFAULTS.dropped;
+  document.getElementById('late_entries').value    = LEVER_DEFAULTS.late_entries;
+  clearSettings(['cross_challenge','missing','dropped','late_entries']);
 }
 
 function resetAuditOptions() {
-  document.getElementById('audit_f1').checked = AUDIT_DEFAULTS.audit_f1;
+  document.getElementById('audit_f1').checked      = AUDIT_DEFAULTS.audit_f1;
+  document.getElementById('audit_dropped').checked = AUDIT_DEFAULTS.audit_dropped;
   forceAuditTags = [];
   renderTags();
-  clearSettings(['audit_f1','force_audit_ids']);
+  clearSettings(['audit_f1','audit_dropped','force_audit_ids']);
 }
 
 function resetAllAssignment() {

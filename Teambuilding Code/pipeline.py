@@ -59,7 +59,7 @@ def step_build(
     cross_challenge: str,
     missing_mode: str,
     dropped_mode: str,
-    late_entry_overrules: bool = True,
+    late_entries: str = "keep",
 ) -> Path:
     """
     Build the canonical student list starting from the group export,
@@ -70,7 +70,7 @@ def step_build(
     print(f"\n{'='*60}")
     print(f"  STEP 1: BUILD STUDENT LIST")
     print(f"  cross-challenge={cross_challenge}  missing={missing_mode}  "
-          f"dropped={dropped_mode}  late-entry-overrules={late_entry_overrules}")
+          f"dropped={dropped_mode}  late-entries={late_entries}")
     print(f"{'='*60}")
 
     export_rows = _resolve.load_group_export_rows(group_export)
@@ -117,7 +117,7 @@ def step_build(
         cross_challenge      = cross_challenge,
         missing_mode         = missing_mode,
         dropped_mode         = dropped_mode,
-        late_entry_overrules = late_entry_overrules,
+        late_entries         = late_entries,
     )
 
     print(f"\nTotal : {len(students)} students")
@@ -263,13 +263,18 @@ def main() -> None:
         ),
     )
     ap.add_argument(
-        "--late-entry-overrules", action=argparse.BooleanOptionalAction, default=True,
-        dest="late_entry_overrules",
+        "--late-entries", default="keep",
+        choices=["keep", "flex", "discard-survey-only", "discard-all"],
+        dest="late_entries",
         help=(
-            "Students in overflow who filled the Late Entries survey are moved to "
-            "'late entry' (default: on). Students confirmed in a challenge group are "
-            "never moved — their late entry survey provides studyline/personality data "
-            "only. Use --no-late-entry-overrules to keep overflow students in overflow."
+            "How to handle late entry students. "
+            "'keep' (default): overflow students with a late entry survey move to the "
+            "late entry; challenge-group students stay in their group. "
+            "'flex': all students with a late entry survey move to late entry, "
+            "including those in confirmed challenge groups. "
+            "'discard-survey-only': students only found in the late entry survey (not in "
+            "the group export) are excluded; others are unaffected. "
+            "'discard-all': all students with a final late entry allocation are excluded."
         ),
     )
 
@@ -344,7 +349,7 @@ def main() -> None:
             cross_challenge      = args.cross_challenge,
             missing_mode         = args.missing,
             dropped_mode         = args.dropped,
-            late_entry_overrules = args.late_entry_overrules,
+            late_entries         = args.late_entries,
         )
 
     # --- Step 2: form teams ---

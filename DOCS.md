@@ -26,8 +26,8 @@ Run from the `Teambuilding Code/` folder: `python pipeline.py [options]`
 |--------|---------|---------|-------------|
 | `--missing` | `keep` | `keep` `overflow` `skip` | Students in group export who never filled the survey |
 | `--cross-challenge` | `survey-wins` | `survey-wins` `joker` `survey-overrules` | Student filled a survey for a different challenge than their group export |
-| `--late-entry-overrules` | on | `--no-late-entry-overrules` to disable | Overflow students who filled the Late Entries survey → moved to late entry pool. Challenge-group students are never moved regardless of this flag. |
-| `--dropped` | `keep` | `keep` `exclude` | Students with a survey but not in group export or classlist (needs `--classlist`) |
+| `--late-entries` | `keep` | `keep` `flex` `discard-survey-only` `discard-all` | How to handle students with a late entry survey. See edge case B below. |
+| `--dropped` | `keep` | `keep` `exclude` | Students absent from the classlist — whether found in the group export, a survey, or both. Since the classlist is exported last, absence from it indicates likely withdrawal. Requires `--classlist`. |
 
 ### Team formation
 
@@ -57,17 +57,16 @@ Happens when a student moved groups after completing the survey.
 
 ### B. Student filled the Late Entries survey but is in overflow or a challenge in the export
 
-Two sub-cases depending on whether the student has a confirmed challenge group:
+Late entry is a separate allocation — these students are not pre-assigned to a challenge. After each challenge's teams are formed, late entry students are distributed across them to balance sizes.
 
-**In overflow + late entry survey** (no confirmed challenge):
-- **Default (`--late-entry-overrules` on):** moved to the late entry pool
-- **`--no-late-entry-overrules`:** kept in overflow
+Controlled by `--late-entries`:
 
-**In a challenge group + late entry survey** (confirmed challenge spot):
-- Always kept in their challenge group regardless of `--late-entry-overrules`
-- The late entry survey provides studyline/personality data only; it does not forfeit their spot
-
-This lever is independent of `--cross-challenge` and takes priority over it for late-entry surveys on overflow students.
+| `--late-entries` value | Overflow + late entry survey | Challenge group + late entry survey | Late-entry-only (not in export) |
+|---|---|---|---|
+| `keep` (default) | Moved to late entry | Stays in challenge group; survey used for studyline/personality | Kept as late entry |
+| `flex` | Moved to late entry | Also moved to late entry | Kept as late entry |
+| `discard-survey-only` | Moved to late entry (unaffected by discard) | Stays in challenge group | Excluded, logged |
+| `discard-all` | Moved to late entry, then excluded | Stays in challenge group | Excluded, logged |
 
 ### C. Student in group export but never filled any survey
 
@@ -97,7 +96,7 @@ The web app (`app.py`) has a **Challenge Assignment** section that lets you choo
 
 ### Automatic mode (default)
 
-The levers (cross-challenge, missing, dropped, late-entry-overrules) decide every case silently. Expand *Lever settings* to configure them. This is equivalent to running `pipeline.py` with the corresponding flags.
+The levers (cross-challenge, missing, dropped, late-entries) decide every case silently. Expand *Lever settings* to configure them. This is equivalent to running `pipeline.py` with the corresponding flags.
 
 ### Interactive review mode
 
@@ -121,7 +120,8 @@ Dropdowns changed from the auto-suggestion are highlighted in red. Submitting th
 
 Available under *Audit options* in the interactive mode section:
 
-- **Audit late-entry students (F1 cases)**: include late-entry students not in the group export in the review. Off by default since they are always kept anyway.
+- **Audit late-entry students**: include students who appear only in the Late Entries survey (not in the group export) in the review. Off by default since they are always kept anyway — useful if you want to manually verify them.
+- **Audit potentially unenrolled students**: include students absent from the classlist in the review, regardless of their normal case type. These students are clearly marked with a "not in classlist" warning badge. Requires classlist upload.
 - **Specific students to always audit**: a tag input accepting student numbers (`s253896`, `253896`) or emails (`s253896@dtu.dk`). These students always appear in the review even if their assignment is unambiguous. Useful when you have received direct contact from a student or teacher. Unmatched entries are logged as `WARNING [force-audit]` in the run log.
 
 ### Settings persistence
@@ -147,7 +147,22 @@ A student typed their name instead of their ID; resolved from the group export.
 ```
 INFO [sXXXXX]: survey in 'late entry', export 'overflow' - moved to late entry
 ```
-Late-entry-overrules triggered.
+Student filled the Late Entries survey and was moved to late entry — they will be distributed across challenge teams after the main formation to balance group sizes.
+
+```
+INFO [discarded]: sXXXXX  Name - late entry (not in export), excluded
+```
+Student was excluded from team formation because `--late-entries` is set to `discard-survey-only` or `discard-all`.
+
+```
+INFO [not in classlist]: sXXXXX  Name (challenge A) - kept (--dropped=keep)
+```
+Student is in the group export but absent from the classlist — potentially withdrew after the export was taken. Kept by default; use `--dropped exclude` to remove them.
+
+```
+INFO [dropped]: sXXXXX  Name - not in classlist, excluded
+```
+Student was absent from the classlist and excluded because `--dropped=exclude`.
 
 ```
 INFO [sXXXXX]: survey in 'challenge A', export 'challenge D' - survey data used, category kept
