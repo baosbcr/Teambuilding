@@ -43,6 +43,45 @@ Run from the `Teambuilding Code/` folder: `python pipeline.py [options]`
 
 ---
 
+## Challenge Assignment Review (Web App)
+
+The web app (`app.py`) has a **Challenge Assignment** section that lets you choose how edge cases are handled before team formation runs.
+
+### Automatic mode (default)
+
+The levers (cross-challenge, missing, dropped, late-entry-overrules) decide every case silently. Expand *Lever settings* to configure them. This is equivalent to running `pipeline.py` with the corresponding flags.
+
+### Interactive review mode
+
+After uploading, a review page appears showing every ambiguous case. Each row contains:
+
+| Column | Description |
+|--------|-------------|
+| Student | Name, canonical ID, and ID source badges |
+| Case | The edge case type (C, D, E, F1, F2, F3, late-entry-overrules, unresolvable, or force-audit) |
+| Export group | Which challenge group the student enrolled in (from the group export) |
+| Survey group(s) | Which challenge(s) the student filled surveys for (can be multiple) |
+| Studyline / Personality | From survey; UNKNOWN if no survey found |
+| Q1 answer | Raw value from Q1 — audit reference only; not a source of the student number |
+| Assignment | Dropdown with the auto-suggested value pre-selected |
+
+All possible assignments (Challenge A–D, Overflow, Late entry, Skip) are always available in the dropdown regardless of case type — the auditor may have out-of-band information (student emails, teacher overrides) not reflected in the exports.
+
+Dropdowns changed from the auto-suggestion are highlighted in red. Submitting the form re-runs the build step with the explicit assignments applied, then proceeds to team formation and (optionally) the ID review.
+
+### Audit options
+
+Available under *Audit options* in the interactive mode section:
+
+- **Audit F1 cases**: include late-entry students (not in group export) in the review. Off by default since they are always kept anyway.
+- **Specific students to always audit**: a tag input accepting student numbers (`s253896`, `253896`) or emails (`s253896@dtu.dk`). These students always appear in the review even if their assignment is unambiguous. Unmatched entries are logged as `WARNING [force-audit]` in the run log.
+
+### Settings persistence
+
+All form settings (assignment mode, levers, audit options, team sizes, output mode) are saved in the browser's `localStorage` under the `dtutb_` key prefix. They survive browser close and app restart. Use the reset buttons to revert individual sections or all assignment settings to defaults.
+
+---
+
 ## Edge Cases Explained
 
 ### A. Student filled a survey for a different challenge than their group export
@@ -124,6 +163,11 @@ Student in group export with no survey found.
 WARNING [ghost]: sXXXXX - enrolled but no group or survey found
 ```
 Student is in the classlist but absent from the group export and all surveys. They enrolled in the course but never joined a group or filled the survey. They will **not** appear in `teams.csv`. Only printed when `--classlist` is provided.
+
+```
+WARNING [force-audit]: '<value>' did not match any student — skipped
+```
+A student identifier added to the *Specific students to always audit* field in the web app could not be matched to any student in the group export or survey records. Check the spelling and format (student number, bare digits, or email). Only printed in web app interactive mode.
 
 ---
 

@@ -73,7 +73,16 @@ You will see a line like `Running on http://0.0.0.0:5000`. Open your browser and
 
 **http://localhost:5000**
 
-Upload your files using the form, adjust the levers, and click **Run**. The results download automatically as `teams.zip`, containing `teams.csv`, optionally `teams_summary.csv`, and a `run_log.txt` with a full record of the run.
+Upload your files using the form, adjust the options, and click **Run**. The results download automatically as `teams.zip`, containing `teams.csv`, optionally `teams_summary.csv`, and a `run_log.txt` with a full record of the run.
+
+**Challenge Assignment section** — controls how edge cases are handled before team formation:
+
+- **Automatic** (default): the levers (cross-challenge, missing, dropped, late-entry-overrules) decide each case silently. Expand *Lever settings* to configure them.
+- **Interactive review**: after uploading, a review page shows every ambiguous case — students whose challenge assignment required a decision. Each row shows the student's full context (export group, survey group(s), studyline, personality, Q1 answer) with a dropdown pre-filled with the automatic suggestion. You can confirm or override any assignment. All possible targets (Challenge A–D, Overflow, Late entry, Skip) are always available — you may have information the pipeline does not (direct student contact, teacher override, etc.).
+
+  Under *Audit options* you can also opt in to reviewing late-entry students (F1 cases) and add specific student IDs or emails to always include in the review regardless of case type.
+
+> **Settings are saved in your browser.** All form values — including assignment mode, levers, and audit options — are restored automatically the next time you open the app. Use the reset buttons to revert to defaults.
 
 To stop the server, go back to the terminal and press **Ctrl + C**.
 
