@@ -331,6 +331,7 @@ def build_student_list(
     missing_mode: str = "keep",
     dropped_mode: str = "keep",
     late_entry_overrules: bool = True,
+    overrides: dict[str, str] | None = None,
 ) -> list[dict]:
     """
     Build the canonical student list, group-export-first.
@@ -397,6 +398,9 @@ def build_student_list(
             "id_source":           id_source,
             "q1_answer":           "",
             "_survey_found":       False,
+            "_case_type":          "E",
+            "_export_challenge":   category,
+            "_survey_challenges":  [],
         }
 
     # ------------------------------------------------------------------
@@ -469,6 +473,8 @@ def build_student_list(
         diff       = [r for r in records if r["allocation_category"] != base_cat]
         diff_cats  = sorted({r["allocation_category"] for r in diff})
 
+        base[nid]["_survey_challenges"] = sorted({r["allocation_category"] for r in records})
+
         if same:
             # Cases A/B: survey matches group export challenge
             chosen = same[0]
@@ -476,6 +482,7 @@ def build_student_list(
             base[nid]["personality_type"] = chosen["personality_type"]
             base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
             base[nid]["_survey_found"]    = True
+            base[nid]["_case_type"]       = "happy"
             if diff:
                 print(
                     f"INFO [{nid}]: also filled surveys in {diff_cats} - "
@@ -495,6 +502,7 @@ def build_student_list(
                 base[nid]["personality_type"]    = chosen["personality_type"]
                 base[nid]["allocation_category"] = "late entry"
                 base[nid]["q1_answer"]           = chosen.get("q1_raw", "")
+                base[nid]["_case_type"]          = "late-entry-overrules"
                 print(
                     f"INFO [{nid}]: survey in 'late entry', export '{base_cat}' - "
                     f"moved to late entry (--late-entry-overrules)",
@@ -504,6 +512,7 @@ def build_student_list(
                 base[nid]["studyline"]        = chosen["studyline"]
                 base[nid]["personality_type"] = chosen["personality_type"]
                 base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
+                base[nid]["_case_type"]       = "happy"
                 print(
                     f"INFO [{nid}]: survey in 'late entry', export '{base_cat}' - "
                     f"kept in {base_cat} (confirmed challenge group)",
@@ -513,6 +522,7 @@ def build_student_list(
                 base[nid]["studyline"]        = chosen["studyline"]
                 base[nid]["personality_type"] = chosen["personality_type"]
                 base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
+                base[nid]["_case_type"]       = "C"
                 print(
                     f"INFO [{nid}]: survey in '{survey_cat}', export '{base_cat}' - "
                     f"survey data used, category kept (survey-wins)",
@@ -520,6 +530,7 @@ def build_student_list(
                 )
             elif cross_challenge == "joker":
                 base[nid]["_survey_found"] = False
+                base[nid]["_case_type"]    = "C"
                 print(
                     f"INFO [{nid}]: survey in '{survey_cat}', export '{base_cat}' - "
                     f"treated as no survey (joker)",
@@ -530,6 +541,7 @@ def build_student_list(
                 base[nid]["personality_type"]    = chosen["personality_type"]
                 base[nid]["allocation_category"] = survey_cat
                 base[nid]["q1_answer"]           = chosen.get("q1_raw", "")
+                base[nid]["_case_type"]          = "C"
                 print(
                     f"INFO [{nid}]: survey in '{survey_cat}', export '{base_cat}' - "
                     f"moved to survey challenge (survey-overrules)",
@@ -543,6 +555,7 @@ def build_student_list(
             base[nid]["personality_type"] = chosen["personality_type"]
             base[nid]["q1_answer"]        = chosen.get("q1_raw", "")
             base[nid]["_survey_found"]    = True
+            base[nid]["_case_type"]       = "D"
             print(
                 f"INFO [{nid}]: surveys in {diff_cats}, none match "
                 f"export '{base_cat}' - export wins, data from first survey",
@@ -616,12 +629,15 @@ def build_student_list(
                 "personality_type":    rec["personality_type"],
                 "id_source":           "survey:late-entry",
                 "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+                "_case_type":          "F1",
+                "_export_challenge":   None,
+                "_survey_challenges":  [survey_cat],
             })
             n_added += 1
 
         elif classlist_ids is not None:
             if nid in classlist_ids:
-                # Enrolled but not in group export (added after export)
+                # F2: enrolled but not in group export (added after export)
                 print(
                     f"INFO [not in export]: {nid}  {name} - in classlist, kept",
                     file=sys.stderr,
@@ -634,11 +650,14 @@ def build_student_list(
                     "studyline":           rec["studyline"],
                     "personality_type":    rec["personality_type"],
                     "id_source":           "survey:in-classlist",
-                "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+                    "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+                    "_case_type":          "F2",
+                    "_export_challenge":   None,
+                    "_survey_challenges":  [survey_cat],
                 })
                 n_added += 1
             else:
-                # F2/F3: not in classlist -> likely dropped
+                # F3: not in classlist -> likely dropped
                 if dropped_mode == "exclude":
                     print(
                         f"INFO [dropped]: {nid}  {name} - not in classlist, excluded",
@@ -658,7 +677,10 @@ def build_student_list(
                         "studyline":           rec["studyline"],
                         "personality_type":    rec["personality_type"],
                         "id_source":           "survey:not-in-classlist",
-                "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+                        "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+                        "_case_type":          "F3",
+                        "_export_challenge":   None,
+                        "_survey_challenges":  [survey_cat],
                     })
                     n_added += 1
 
@@ -678,6 +700,9 @@ def build_student_list(
                 "personality_type":    rec["personality_type"],
                 "id_source":           "survey:no-classlist",
                 "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+                "_case_type":          "F-no-classlist",
+                "_export_challenge":   None,
+                "_survey_challenges":  [survey_cat],
             })
             n_added += 1
 
@@ -685,6 +710,7 @@ def build_student_list(
     for rec in unresolvable:
         name   = rec.get("student_name", "")
         raw_id = rec.get("student_number", name)
+        unres_cat = rec.get("allocation_category", "UNKNOWN")
         print(
             f"INFO [unresolvable]: '{name}' (Q1: '{raw_id}') - "
             f"kept with survey category",
@@ -694,12 +720,29 @@ def build_student_list(
             "student_number":      raw_id,
             "dtu_username":        "",
             "student_name":        name,
-            "allocation_category": rec.get("allocation_category", "UNKNOWN"),
-            "studyline":           rec.get("studyline",           "UNKNOWN"),
-            "personality_type":    rec.get("personality_type",    "UNKNOWN"),
+            "allocation_category": unres_cat,
+            "studyline":           rec.get("studyline",        "UNKNOWN"),
+            "personality_type":    rec.get("personality_type", "UNKNOWN"),
             "id_source":           "survey:unresolvable",
             "q1_answer":           rec.get("q1_raw", rec.get("student_number", "")),
+            "_case_type":          "unresolvable",
+            "_export_challenge":   None,
+            "_survey_challenges":  [unres_cat],
         })
+
+    # Apply interactive overrides: explicit per-student assignment decisions
+    if overrides:
+        result = []
+        for student in final:
+            nid = student["student_number"]
+            if nid in overrides:
+                assignment = overrides[nid]
+                if assignment == "skip":
+                    continue
+                student = dict(student)
+                student["allocation_category"] = assignment
+            result.append(student)
+        return result
 
     return final
 
@@ -725,6 +768,115 @@ def flag_ghost_students(final_students: list[dict], classlist_ids: set[str]) -> 
                 file=sys.stderr,
             )
     return ghosts
+
+
+def collect_edge_cases(
+    group_export_rows: list[dict],
+    survey_records: list[dict],
+    name_lookup: dict[str, list[tuple[str, str]]],
+    classlist_ids: set[str] | None,
+    cross_challenge: str = "survey-wins",
+    missing_mode: str = "keep",
+    dropped_mode: str = "keep",
+    late_entry_overrules: bool = True,
+    audit_f1: bool = False,
+    force_audit_ids: list[str] | None = None,
+) -> list[dict]:
+    """
+    Return a list of edge-case dicts for the interactive assignment review page.
+
+    Two-pass approach:
+      Pass 1 — build with missing/dropped=keep and cross_challenge=survey-wins so
+               every student appears and survey data is always populated for display.
+      Pass 2 — build with the real lever settings to derive auto_assignment
+               (the value that will be pre-selected in each dropdown).
+
+    Each returned dict contains:
+        case_type, student_number, student_name, export_challenge,
+        survey_challenges, studyline, personality_type, q1_answer,
+        id_source, classlist_confirmed, auto_assignment
+
+    Students in force_audit_ids always appear even if they are on the happy path.
+    Unmatched force-audit entries emit WARNING [force-audit] to stderr.
+    """
+    shared_kwargs = dict(
+        group_export_rows    = group_export_rows,
+        survey_records       = survey_records,
+        name_lookup          = name_lookup,
+        classlist_ids        = classlist_ids,
+        late_entry_overrules = late_entry_overrules,
+    )
+
+    # Pass 1: ensure all students are present; maximise survey data for display
+    all_students = build_student_list(
+        **shared_kwargs,
+        cross_challenge = "survey-wins",
+        missing_mode    = "keep",
+        dropped_mode    = "keep",
+    )
+
+    # Pass 2: real lever settings → derive auto_assignment per student
+    auto_students = build_student_list(
+        **shared_kwargs,
+        cross_challenge = cross_challenge,
+        missing_mode    = missing_mode,
+        dropped_mode    = dropped_mode,
+    )
+    auto_map = {s["student_number"]: s["allocation_category"] for s in auto_students}
+    # Students absent from auto_map were excluded by the levers (missing=skip / dropped=exclude)
+
+    # Normalise force-audit IDs: accept student number, bare digits, or email
+    force_id_map: dict[str, str] = {}  # normalised_id -> raw input string
+    for raw in (force_audit_ids or []):
+        nid = normalise_id(raw)
+        if nid:
+            force_id_map[nid] = raw
+
+    silent_types: set[str] = {"happy"}
+    if not audit_f1:
+        silent_types.add("F1")
+
+    edge_cases: list[dict] = []
+    matched_force_ids: set[str] = set()
+
+    for s in all_students:
+        case_type = s.get("_case_type", "happy")
+        nid       = s["student_number"]
+        is_edge   = case_type not in silent_types
+        is_forced = nid in force_id_map
+
+        if not is_edge and not is_forced:
+            continue
+
+        if is_forced:
+            matched_force_ids.add(nid)
+            if not is_edge:
+                case_type = "force-audit"
+
+        edge_cases.append({
+            "case_type":          case_type,
+            "student_number":     nid,
+            "student_name":       s["student_name"],
+            "export_challenge":   s.get("_export_challenge"),
+            "survey_challenges":  s.get("_survey_challenges", []),
+            "studyline":          s.get("studyline",        "UNKNOWN"),
+            "personality_type":   s.get("personality_type", "UNKNOWN"),
+            "q1_answer":          s.get("q1_answer", ""),
+            "id_source":          s.get("id_source", ""),
+            "classlist_confirmed": s.get("classlist_confirmed", False),
+            "auto_assignment":    auto_map.get(nid, "skip"),
+        })
+
+    # Warn about force-audit IDs that matched nothing in the data
+    all_ids = {s["student_number"] for s in all_students}
+    for nid, raw in force_id_map.items():
+        if nid not in matched_force_ids and nid not in all_ids:
+            print(
+                f"WARNING [force-audit]: '{raw}' did not match any student — skipped",
+                file=sys.stderr,
+            )
+
+    return edge_cases
 
 
 # ---------------------------------------------------------------------------

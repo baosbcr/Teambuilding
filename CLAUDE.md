@@ -52,7 +52,7 @@ Teambuilding/                            <- project root
 
 One XLSX per encompassing group, named after the group (e.g. "Team Formation Survey - Challenge A - Individual Attempts.xlsx"). Each file contains student blocks where:
 - The block header row = student's **DTU Learn account name** (authoritative, cannot be wrong)
-- Q1 = student's self-reported ID (unreliable — typos, name used instead of ID, wrong format)
+- Q1 = student's self-reported ID — used only as a **matching hint** to join this survey record to the right group export row; the canonical student number is always taken from the group export email (or username). Q1 is unreliable (typos, name typed instead of ID, wrong format) and is stored as `q1_answer` for audit purposes only. Its only genuine value is as a last-resort reference for students whose student number cannot be recovered from either the group export or the classlist, where it may be the correct ID with no independent verification available.
 - Q2 = studyline selection (single choice)
 - Q3 = personality type (MBTI, single choice)
 
@@ -91,7 +91,7 @@ Optional CSV exported from DTU Learn (Classlist → All tab → Export above the
 
 Reads Individual Attempts XLSX files, splits them into per-student blocks, extracts:
 - `student_name` (from Learn block header — always reliable)
-- `student_number` (from Q1 — may be wrong; resolve.py corrects it)
+- `student_number` (from Q1 — for students in the group export this is a matching hint only; `resolve.py` replaces it with the canonical ID from the group export. For survey-only students with no group export row, it becomes the initial student_number, superseded by classlist email if available.)
 - `studyline`, `personality_type` (from Q2/Q3)
 
 Key public functions:
@@ -104,25 +104,40 @@ Called by `resolve.py`; not invoked directly in the production pipeline. Skips O
 
 Group-export-first: the group export is the canonical student list; survey data is an enrichment layer.
 
-**Key function:** `build_student_list(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode)`
+**Key function:** `build_student_list(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entry_overrules, overrides=None)`
+
+`overrides` is an optional `{student_number: assignment}` dict from the interactive assignment review. When a student's ID is in `overrides`, their `allocation_category` is set to the explicit value, bypassing all lever logic. `"skip"` as a value excludes the student entirely. Survey enrichment (`enrich_email_student_numbers`) always runs unchanged.
+
+During the build, each student record is annotated with internal `_case_type`, `_export_challenge`, and `_survey_challenges` metadata fields (ignored by CSV writers via `extrasaction="ignore"`), used by `collect_edge_cases`.
 
 Five internal steps:
-1. Build base dict from group export keyed by canonical student ID (all UNKNOWN attributes)
-2. Resolve canonical IDs in survey records (normalise, correct via name lookup)
-3. Enrich base entries with survey data; apply `--cross-challenge` lever for mismatched challenges
+1. Build base dict from group export keyed by canonical student ID (all UNKNOWN attributes); tag each with `_case_type="E"` (default: no survey found)
+2. Normalise Q1 answers in survey records and resolve them to group export IDs (matching only — Q1 is not the ID source)
+3. Enrich base entries with survey data; apply `--cross-challenge` lever for mismatched challenges; tag with `_case_type` (happy/C/D/late-entry-overrules)
 4. Apply `--missing` lever for students in group export with no survey found
-5. Apply `--dropped` lever for students in survey but absent from group export (and classlist)
+5. Apply `--dropped` lever for students in survey but absent from group export (and classlist); tag with `_case_type` (F1/F2/F3/F-no-classlist/unresolvable)
+6. Apply `overrides` (if provided): replace `allocation_category` for listed students, remove those with `"skip"`
 
-**Edge cases handled:**
-- **Case A/B**: Survey matches group export challenge (happy path / ID corrected)
-- **Case C**: Survey for a single different challenge → `--cross-challenge {survey-wins|joker|survey-overrules}`
-- **Case D**: Surveys across multiple different challenges → export wins, data from first survey
-- **Case E**: In group export, no survey → `--missing {keep|overflow|skip}`
-- **Case F1**: Not in group export, survey from Late Entries file → always kept
-- **Case F2/F3**: Not in group export, survey from other file → `--classlist` + `--dropped {keep|exclude}`
+**Edge cases handled** (all except A/B surface in the interactive assignment review):
+- **Case A/B**: Survey matches group export challenge (happy path / ID corrected) — silent; auditable via force-audit list
+- **Case C**: Survey for a single different challenge → `--cross-challenge {survey-wins|joker|survey-overrules}` — reviewed in interactive mode
+- **Case D**: Surveys across multiple different challenges → export wins, data from first survey — reviewed in interactive mode
+- **Case E**: In group export, no survey → `--missing {keep|overflow|skip}` — reviewed in interactive mode
+- **Case F1**: Not in group export, survey from Late Entries file → always kept — opt-in to interactive review via `audit_f1` checkbox
+- **Case F2/F3**: Not in group export, survey from other file → `--classlist` + `--dropped {keep|exclude}` — reviewed in interactive mode
 - **N1**: Two students share a name (different IDs) → matched by ID; if ID also wrong, warns and skips auto-correct
 
-ID correction is always applied (it is required for correct matching). Warnings are always printed.
+Q1 normalisation/correction is always applied (required to match survey records to the right group export row). The resulting canonical student_number is always sourced from the group export, never from Q1. Warnings are always printed.
+
+**`collect_edge_cases(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entry_overrules, audit_f1=False, force_audit_ids=None)`**
+
+Two-pass function used by the interactive assignment review:
+- Pass 1: runs `build_student_list` with `cross_challenge="survey-wins"`, `missing="keep"`, `dropped="keep"` to collect all students with survey data maximally populated for display.
+- Pass 2: runs `build_student_list` with real lever settings to derive `auto_assignment` per student (the value pre-selected in the review dropdown). Students absent from pass 2 (excluded by `missing=skip` / `dropped=exclude`) get `auto_assignment="skip"`.
+- `force_audit_ids`: list of student identifiers (student number, bare digits, or email). Normalised via `normalise_id`. Matched students always appear in the review. Unmatched entries emit `WARNING [force-audit]: '<value>' did not match any student — skipped`.
+- Returns a list of dicts with `case_type, student_number, student_name, export_challenge, survey_challenges, studyline, personality_type, q1_answer, id_source, classlist_confirmed, auto_assignment`. `survey_challenges` is a list (can be multiple for Case D).
+- F1 cases are excluded unless `audit_f1=True`.
+- Happy-path (A/B) students are excluded unless in `force_audit_ids`.
 
 **Additional functions (called after `build_student_list`):**
 - `flag_ghost_students(final_students, classlist_ids)` — diffs classlist IDs against the final output and prints `WARNING [ghost]` for any enrolled student absent from both group export and all surveys.
@@ -149,10 +164,18 @@ Runs Steps 1-2 in sequence. Shortcut: `--skip-build CSV` (supply a pre-built stu
 
 ### `app.py` — Flask Web Interface
 
-Browser-based front end wrapping the same pipeline modules. Accepts file uploads (Individual Reports, Group Export, optional classlist), exposes all levers as form fields, and returns a `teams.zip` containing:
+Browser-based front end wrapping the same pipeline modules. Accepts file uploads (Individual Reports, Group Export, optional classlist), exposes all levers and review modes as form fields, and returns a `teams.zip` containing:
 - `teams.csv` — one row per student
 - `teams_summary.csv` — per-team diversity stats (if requested)
 - `run_log.txt` — full pipeline output with a settings header and log message guide
+
+**Two-stage interactive flow** (when `assignment_mode=interactive`):
+1. `/run` — saves uploads to a session dir, calls `collect_edge_cases`, and renders `review_assignments.html` if any edge cases exist. If no edge cases, falls through to the normal automatic run.
+2. `/review_assignments` — receives the confirmed assignments from the review form, re-runs `build_student_list` with the `overrides` dict (and `cross_challenge="survey-wins"` to ensure reviewed students get available survey data), then runs team formation. Continues to the ID review page (`/resolve`) or direct download depending on `output_mode`.
+
+Session data for the assignment review is stored in `tempfile.gettempdir()/assign_<uuid>/` and includes the uploaded files, all pipeline params, and the collected edge cases.
+
+**Settings persistence (localStorage):** All form settings — assignment mode, levers, audit options, team sizes, output mode — are saved in `localStorage` under the `dtutb_` prefix. Settings survive browser close and app restart as long as the same browser and port are used. Reset buttons clear the relevant keys and restore defaults.
 
 Run locally with `python app.py` (serves on `0.0.0.0:5000`). On the Pi, managed by systemd (`teambuilding.service`) and starts automatically on boot. For production, replace Flask's dev server with a WSGI server (e.g. gunicorn).
 
@@ -178,20 +201,28 @@ Canonical ID priority: `sXXXXXX` extracted from email > username field.
 
 All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-end):
 
-| Flag                | Default      | Description                                           |
-|---------------------|--------------|-------------------------------------------------------|
-| `--ideal`           | 8            | Target team size                                      |
-| `--min`             | 7            | Minimum team size                                     |
-| `--max`             | 10           | Maximum team size                                     |
-| `--max-groups`      | 25           | Max teams per challenge                               |
-| `--w-studyline`     | 1.0          | Weight for studyline diversity in greedy scoring      |
-| `--w-personality`   | 1.0          | Weight for personality diversity in greedy scoring    |
-| `--seed`            | 42           | Random seed for tie-breaking (reproducibility)        |
-| `--missing`         | keep         | Students in group export with no survey               |
-| `--cross-challenge` | survey-wins  | Student filled a survey for a different challenge     |
+| Flag                    | Default      | Description                                           |
+|-------------------------|--------------|-------------------------------------------------------|
+| `--ideal`               | 8            | Target team size                                      |
+| `--min`                 | 7            | Minimum team size                                     |
+| `--max`                 | 10           | Maximum team size                                     |
+| `--max-groups`          | 25           | Max teams per challenge                               |
+| `--w-studyline`         | 1.0          | Weight for studyline diversity in greedy scoring      |
+| `--w-personality`       | 1.0          | Weight for personality diversity in greedy scoring    |
+| `--seed`                | 42           | Random seed for tie-breaking (reproducibility)        |
+| `--missing`             | keep         | Students in group export with no survey               |
+| `--cross-challenge`     | survey-wins  | Student filled a survey for a different challenge     |
 | `--classlist`           | (none)       | Path to current classlist CSV; enables ghost detection, dropped-student filtering, and `email_student_number` enrichment for non-standard usernames |
 | `--dropped`             | keep         | Students with a survey absent from both export and classlist |
 | `--late-entry-overrules`| on           | Students in **overflow** who filled the Late Entries survey → moved to late entry. Students already in a challenge group are **never** moved (their survey provides studyline/personality data only) |
+
+**Web app only (Challenge Assignment section):**
+
+| Setting             | Default      | Description                                           |
+|---------------------|--------------|-------------------------------------------------------|
+| `assignment_mode`   | automatic    | `automatic`: levers decide all edge cases. `interactive`: review page shown before team formation, one row per edge case with a dropdown pre-filled with the auto-suggested assignment. All assignments (all challenges + overflow + late entry + skip) are always available to the auditor regardless of case type — the auditor may have out-of-band information not reflected in the exports. |
+| `audit_f1`          | off          | *(interactive only)* Include F1 students (late entry, not in group export) in the review. Off by default since F1 students are always kept anyway. |
+| `force_audit_ids`   | (empty)      | *(interactive only)* Comma-separated list of student identifiers (student number, bare digits, or email) to always include in the review regardless of case type. Unmatched entries emit `WARNING [force-audit]` in the run log. Settings saved in browser localStorage. |
 
 ---
 
@@ -205,7 +236,7 @@ One row per student after resolve step. Fields: `student_number, dtu_username, e
 
 `classlist_confirmed` — `True` if an independent classlist source agrees with the pipeline ID. For standard students: classlist name→number map returns the same sXXXXXX. For non-standard: classlist email gives a recoverable sXXXXXX at all. Used in the interactive review to show a second source badge.
 
-`q1_answer` — the raw value the student typed in survey Q1 before any normalisation or ID correction. Empty for students with no survey.
+`q1_answer` — the raw value the student typed in survey Q1, stored for audit purposes only. For group export students, Q1 is never the source of `student_number` — the group export email/username is. For survey-only students, classlist email supersedes Q1 when available. Q1 is only a meaningful reference when a student's sXXXXXX cannot be recovered from either the group export or the classlist — at that point it is the auditor's only lead, with no independent verification. Empty for students with no survey.
 
 ### `teams.csv`
 
@@ -227,8 +258,7 @@ Diversity = unique count / team size.
 
 ## Known Data Quality Issues
 
-- **Name used as Q1 ID**: some students type their full name in Q1 instead of their student ID. `resolve.py` detects this (normalise_id returns None), corrects it if the name is in the group export, and warns if not.
-- **Wrong ID typed**: common — typos, wrong format, copied incorrectly. Always auto-corrected via name lookup against the group export.
+- **Malformed Q1 answer**: students type a full name, a typo, or a wrong-format ID in Q1. `resolve.py` normalises and corrects the Q1 value solely to find the matching group export row — the resulting `student_number` still comes from the group export, not Q1. Q1 is only a meaningful fallback for students absent from both the group export and the classlist (i.e. no sXXXXXX is recoverable from either source), where `q1_answer` is the auditor's only lead.
 - **Non-standard usernames**: some students have short non-numeric usernames (e.g. `nipac`, `macoda`). These normalise correctly and are matched via the group export username field.
 - **Cross-group duplicates**: students who filled more than one challenge survey. Resolved by taking the group export category.
 - **Missing survey participants**: students in the group export who never submitted. Handled by `--missing` lever.
@@ -269,7 +299,7 @@ Skip step 1 and go straight to team formation with a pre-built student list.
 - Group export: 929 students (A=200, B=198, C=198, D=198, Overflow=135)
 - Survey: ~900 raw rows, ~893 unique after normalisation
 - 42 students in group export with no survey (--missing=keep)
-- 15 ID mismatches auto-corrected; 4 late-entry-overrules triggered (overflow only); 4 challenge-group students kept in challenge from late entry survey; 10 total late entry students
+- 15 Q1 answers corrected via name lookup (to find the right group export row); 4 late-entry-overrules triggered (overflow only); 4 challenge-group students kept in challenge from late entry survey; 10 total late entry students
 - Final: 935 students, 100 teams (25 per challenge A–D), all 9–10 members (after flex levelling fix)
 - Avg studyline diversity: 0.90-0.96 per challenge; avg personality diversity: 0.85-0.90
 - Classlist (full export, Role=Student only): 952 enrolled students; 11 non-standard usernames with recoverable sXXXXXX; 18 ghost students (enrolled but absent from group export and all surveys)

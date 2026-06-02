@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DTU Team Formation — Review Challenge Assignments</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f2f2f2; color: #222; }
+
+    header { background: #990000; color: white; padding: 1.25rem 2rem; }
+    header h1 { font-size: 1.4rem; font-weight: 600; }
+    header p  { font-size: 0.875rem; opacity: 0.85; margin-top: 0.2rem; }
+
+    main { max-width: 1100px; margin: 2rem auto; padding: 0 1rem 4rem; }
+
+    .card { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .card h2 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 0.5rem; }
+    .card p.desc { font-size: 0.85rem; color: #555; margin-bottom: 1.25rem; line-height: 1.5; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.855rem; }
+    th {
+      text-align: left; padding: 0.5rem 0.6rem; border-bottom: 2px solid #eee;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #888; white-space: nowrap;
+    }
+    td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    .mono { font-family: monospace; font-size: 0.82rem; }
+
+    /* Case type badges */
+    .case-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      padding: 0.2rem 0.5rem; border-radius: 4px; white-space: nowrap;
+    }
+    .case-C               { background: #fff3e0; color: #bf360c; }
+    .case-D               { background: #ffebee; color: #b71c1c; }
+    .case-E               { background: #fffde7; color: #f57f17; }
+    .case-F1              { background: #e8f5e9; color: #1b5e20; }
+    .case-F2              { background: #e3f2fd; color: #0d47a1; }
+    .case-F3              { background: #fce4ec; color: #880e4f; }
+    .case-F-no-classlist  { background: #f3e5f5; color: #4a148c; }
+    .case-late-entry      { background: #e0f2f1; color: #004d40; }
+    .case-unresolvable    { background: #fbe9e7; color: #8d1e0a; }
+    .case-force-audit     { background: #f5f5f5; color: #424242; }
+
+    /* ID source badges */
+    .id-badge {
+      display: inline-block; font-size: 0.68rem; font-weight: 600;
+      padding: 0.12rem 0.4rem; border-radius: 3px; white-space: nowrap; margin-top: 0.2rem;
+    }
+    .id-export-email    { background: #e3f2fd; color: #1565c0; }
+    .id-export-username { background: #fff3e0; color: #e65100; }
+    .id-survey          { background: #e8f5e9; color: #2e7d32; }
+    .id-survey-drop     { background: #ffebee; color: #b71c1c; }
+    .id-survey-unverif  { background: #f3e5f5; color: #6a1b9a; }
+    .id-confirmed       { background: #e8f5e9; color: #1b5e20; }
+
+    /* Challenge group badges */
+    .ch-badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 600;
+      padding: 0.12rem 0.4rem; border-radius: 3px; white-space: nowrap;
+      margin: 0.1rem 0.1rem 0.1rem 0;
+    }
+    .ch-A        { background: #e3f2fd; color: #0d47a1; }
+    .ch-B        { background: #f3e5f5; color: #4a148c; }
+    .ch-C        { background: #e8f5e9; color: #1b5e20; }
+    .ch-D        { background: #fff3e0; color: #e65100; }
+    .ch-overflow { background: #f5f5f5; color: #424242; }
+    .ch-late     { background: #e0f2f1; color: #004d40; }
+    .ch-none     { background: #f5f5f5; color: #9e9e9e; }
+
+    /* UNKNOWN attribute pill */
+    .unknown-pill { color: #bbb; font-style: italic; font-size: 0.8rem; }
+
+    /* Assignment select */
+    select.assign-sel {
+      width: 100%; min-width: 9rem; padding: 0.35rem 0.5rem;
+      border: 1px solid #ddd; border-radius: 5px; font-size: 0.82rem;
+      background: white; cursor: pointer; transition: border-color 0.15s;
+    }
+    select.assign-sel:focus { outline: none; border-color: #990000; box-shadow: 0 0 0 3px rgba(153,0,0,0.08); }
+    select.assign-sel.changed { border-color: #990000; background: #fff8f8; font-weight: 600; }
+    select.assign-sel option[value="skip"] { color: #b71c1c; }
+
+    .submit-btn {
+      display: block; width: 100%; padding: 0.9rem; background: #990000; color: white;
+      border: none; border-radius: 7px; font-size: 1rem; font-weight: 600;
+      cursor: pointer; margin-top: 1.5rem; transition: background 0.15s;
+    }
+    .submit-btn:hover { background: #7a0000; }
+
+    .home-btn {
+      display: inline-block; margin-bottom: 1.25rem; padding: 0.5rem 1rem;
+      background: white; border: 1px solid #ddd; border-radius: 6px;
+      font-size: 0.875rem; color: #555; text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .home-btn:hover { border-color: #990000; color: #990000; }
+
+    #overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+      justify-content: center; align-items: center; z-index: 100;
+    }
+    #overlay.active { display: flex; }
+    .spinner-card { background: white; border-radius: 10px; padding: 2rem 2.5rem; text-align: center; }
+    .spinner { width: 40px; height: 40px; border: 4px solid #eee; border-top-color: #990000; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner-card p { color: #444; font-weight: 500; }
+  </style>
+</head>
+
+{# ── Jinja macros ──────────────────────────────────────────────────────── #}
+
+{% macro case_badge(case_type) %}
+  {%- set labels = {
+    "C":                "C — cross-challenge",
+    "D":                "D — multi-challenge",
+    "E":                "E — no survey",
+    "F1":               "F1 — late entry",
+    "F2":               "F2 — in classlist",
+    "F3":               "F3 — not in classlist",
+    "F-no-classlist":   "F — classlist absent",
+    "late-entry-overrules": "late-entry-overrules",
+    "unresolvable":     "unresolvable",
+    "force-audit":      "force-audit",
+  } -%}
+  {%- set css = {
+    "C":                "case-C",
+    "D":                "case-D",
+    "E":                "case-E",
+    "F1":               "case-F1",
+    "F2":               "case-F2",
+    "F3":               "case-F3",
+    "F-no-classlist":   "case-F-no-classlist",
+    "late-entry-overrules": "case-late-entry",
+    "unresolvable":     "case-unresolvable",
+    "force-audit":      "case-force-audit",
+  } -%}
+  <span class="case-badge {{ css.get(case_type, 'case-force-audit') }}">
+    {{- labels.get(case_type, case_type) -}}
+  </span>
+{% endmacro %}
+
+{% macro id_source_badge(id_source, classlist_confirmed) %}
+  {%- if id_source == "export:email" -%}
+    <span class="id-badge id-export-email">export email</span>
+  {%- elif id_source == "export:username" -%}
+    <span class="id-badge id-export-username">export username</span>
+  {%- elif id_source == "survey:in-classlist" -%}
+    <span class="id-badge id-survey">survey + classlist</span>
+  {%- elif id_source == "survey:not-in-classlist" -%}
+    <span class="id-badge id-survey-drop">survey only — not in classlist</span>
+  {%- elif id_source == "survey:no-classlist" -%}
+    <span class="id-badge id-survey-unverif">survey only — no classlist</span>
+  {%- elif id_source == "survey:late-entry" -%}
+    <span class="id-badge id-survey">survey (late entry)</span>
+  {%- elif id_source == "survey:unresolvable" -%}
+    <span class="id-badge id-survey-drop">unresolvable</span>
+  {%- else -%}
+    <span class="id-badge id-export-username">{{ id_source }}</span>
+  {%- endif -%}
+  {%- if classlist_confirmed in (True, "True") %}&nbsp;<span class="id-badge id-confirmed">✓ classlist</span>{% endif %}
+{% endmacro %}
+
+{% macro ch_badge(cat) %}
+  {%- if cat is none or cat == "" -%}
+    <span class="ch-badge ch-none">—</span>
+  {%- elif cat == "challenge A" -%}<span class="ch-badge ch-A">Challenge A</span>
+  {%- elif cat == "challenge B" -%}<span class="ch-badge ch-B">Challenge B</span>
+  {%- elif cat == "challenge C" -%}<span class="ch-badge ch-C">Challenge C</span>
+  {%- elif cat == "challenge D" -%}<span class="ch-badge ch-D">Challenge D</span>
+  {%- elif cat == "overflow" -%}<span class="ch-badge ch-overflow">Overflow</span>
+  {%- elif cat == "late entry" -%}<span class="ch-badge ch-late">Late entry</span>
+  {%- else -%}<span class="ch-badge ch-none">{{ cat }}</span>
+  {%- endif -%}
+{% endmacro %}
+
+<body>
+
+<header>
+  <h1>DTU Team Formation</h1>
+  <p>Step 1b — Review challenge assignment edge cases before team formation</p>
+</header>
+
+<main>
+  <a href="/" class="home-btn">← New run</a>
+
+  <div class="card" style="margin-bottom:1.25rem">
+    <h2>{{ edge_cases|length }} case{% if edge_cases|length != 1 %}s{% endif %} require review</h2>
+    <p class="desc">
+      Each row shows a student whose challenge group assignment was decided automatically.
+      Review the information and confirm or change the assignment using the dropdown.
+      The <strong>auto-suggested</strong> value (what the configured levers would have chosen) is pre-selected.
+      All assignments — including all challenge groups, overflow, late entry, and skip — are always available.
+    </p>
+  </div>
+
+  <form action="/review_assignments" method="POST" onsubmit="startReview()">
+    <input type="hidden" name="tmp_key" value="{{ tmp_key }}">
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Case</th>
+            <th>Export group</th>
+            <th>Survey group(s)</th>
+            <th>Studyline / Personality</th>
+            <th>Q1 answer</th>
+            <th>Assignment</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in edge_cases %}
+          <tr>
+            <!-- Student -->
+            <td>
+              <div style="font-weight:500">{{ c.student_name }}</div>
+              <div class="mono" style="color:#666;margin-top:0.15rem">{{ c.student_number }}</div>
+              <div style="margin-top:0.2rem">{{ id_source_badge(c.id_source, c.classlist_confirmed) }}</div>
+            </td>
+
+            <!-- Case type -->
+            <td>{{ case_badge(c.case_type) }}</td>
+
+            <!-- Export group -->
+            <td>{{ ch_badge(c.export_challenge) }}</td>
+
+            <!-- Survey group(s) -->
+            <td>
+              {% if c.survey_challenges %}
+                {% for sc in c.survey_challenges %}{{ ch_badge(sc) }}{% endfor %}
+              {% else %}
+                <span class="unknown-pill">none</span>
+              {% endif %}
+            </td>
+
+            <!-- Attributes -->
+            <td>
+              {% if c.studyline and c.studyline != "UNKNOWN" %}
+                <div style="font-size:0.82rem">{{ c.studyline }}</div>
+              {% else %}
+                <span class="unknown-pill">UNKNOWN</span>
+              {% endif %}
+              {% if c.personality_type and c.personality_type != "UNKNOWN" %}
+                <div style="font-size:0.82rem;margin-top:0.2rem;color:#555">{{ c.personality_type }}</div>
+              {% endif %}
+            </td>
+
+            <!-- Q1 answer -->
+            <td class="mono" style="color:#888">{{ c.q1_answer if c.q1_answer else '—' }}</td>
+
+            <!-- Assignment dropdown -->
+            <td>
+              <select class="assign-sel" name="assign_{{ c.student_number }}"
+                      data-auto="{{ c.auto_assignment }}"
+                      onchange="markChanged(this)">
+                <option value="challenge A"  {% if c.auto_assignment == "challenge A"  %}selected{% endif %}>Challenge A</option>
+                <option value="challenge B"  {% if c.auto_assignment == "challenge B"  %}selected{% endif %}>Challenge B</option>
+                <option value="challenge C"  {% if c.auto_assignment == "challenge C"  %}selected{% endif %}>Challenge C</option>
+                <option value="challenge D"  {% if c.auto_assignment == "challenge D"  %}selected{% endif %}>Challenge D</option>
+                <option value="overflow"     {% if c.auto_assignment == "overflow"     %}selected{% endif %}>Overflow</option>
+                <option value="late entry"   {% if c.auto_assignment == "late entry"   %}selected{% endif %}>Late entry</option>
+                <option value="skip"         {% if c.auto_assignment == "skip"         %}selected{% endif %}>Skip (exclude)</option>
+              </select>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <button type="submit" class="submit-btn">Confirm assignments → Form teams</button>
+  </form>
+</main>
+
+<div id="overlay">
+  <div class="spinner-card">
+    <div class="spinner"></div>
+    <p>Forming teams&hellip;</p>
+  </div>
+</div>
+
+<script>
+function markChanged(sel) {
+  sel.classList.toggle('changed', sel.value !== sel.dataset.auto);
+}
+
+function startReview() {
+  document.getElementById('overlay').classList.add('active');
+}
+
+function getCookie(name) {
+  const m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+const poll = setInterval(() => {
+  if (getCookie('download_ready')) {
+    document.cookie = 'download_ready=; max-age=0; path=/';
+    document.getElementById('overlay').classList.remove('active');
+    clearInterval(poll);
+  }
+}, 500);
+</script>
+
+</body>
+</html>

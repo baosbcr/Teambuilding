@@ -74,6 +74,69 @@
     .submit-btn:hover    { background: #7a0000; }
     .submit-btn:disabled { background: #bbb; cursor: not-allowed; }
 
+    /* Radio group */
+    .radio-group { display: grid; gap: 0.5rem; margin-top: 0.25rem; }
+    .radio-group label {
+      display: flex; align-items: flex-start; gap: 0.55rem;
+      font-size: 0.875rem; font-weight: normal; cursor: pointer;
+    }
+    .radio-group input[type="radio"] {
+      width: auto; border: none; padding: 0; margin-top: 0.15rem;
+      accent-color: #990000; flex-shrink: 0;
+    }
+
+    /* Challenge assignment section */
+    .assign-mode-body { margin-top: 0.75rem; }
+    .assign-info {
+      background: #f0f7ff; border: 1px solid #bfdbfe; border-radius: 6px;
+      padding: 0.65rem 0.9rem; color: #1e40af; font-size: 0.82rem;
+      line-height: 1.5; margin-top: 0.75rem;
+    }
+    .assign-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #f0f0f0;
+      flex-wrap: wrap; gap: 0.5rem;
+    }
+    .memory-note { font-size: 0.78rem; color: #888; }
+
+    /* Reset buttons */
+    .btn-reset {
+      background: none; border: 1px solid #ddd; border-radius: 5px;
+      padding: 0.35rem 0.75rem; font-size: 0.8rem; color: #666;
+      cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-reset:hover { border-color: #990000; color: #990000; }
+    .btn-reset-text {
+      background: none; border: none; font-size: 0.8rem; color: #999;
+      cursor: pointer; text-decoration: underline; padding: 0;
+    }
+    .btn-reset-text:hover { color: #990000; }
+
+    /* Tag input for force-audit IDs */
+    .tag-input-wrap {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
+      border: 1px solid #ddd; border-radius: 6px; padding: 0.4rem 0.6rem;
+      background: white; min-height: 2.4rem; cursor: text;
+      transition: border-color 0.15s;
+    }
+    .tag-input-wrap:focus-within { border-color: #990000; box-shadow: 0 0 0 3px rgba(153,0,0,0.08); }
+    .tag-chip {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      background: #f3e8ff; color: #6b21a8; border-radius: 4px;
+      padding: 0.15rem 0.45rem; font-size: 0.8rem; font-family: monospace;
+    }
+    .tag-chip button {
+      background: none; border: none; color: #6b21a8; cursor: pointer;
+      font-size: 1rem; line-height: 1; padding: 0; opacity: 0.7;
+    }
+    .tag-chip button:hover { opacity: 1; }
+    .tag-text-input {
+      border: none; outline: none; font-size: 0.875rem; min-width: 12rem;
+      flex: 1; padding: 0.1rem 0; background: transparent;
+    }
+
+    .hidden { display: none !important; }
+
     /* Loading overlay */
     #overlay {
       display: none; position: fixed; inset: 0;
@@ -105,7 +168,7 @@
 
   <form method="POST" action="/run" enctype="multipart/form-data" onsubmit="startRun(event)">
 
-    <!-- Input files -->
+    <!-- ── Input files ─────────────────────────────────────────────── -->
     <div class="card">
       <h2>Input Files</h2>
 
@@ -137,7 +200,7 @@
       </div>
     </div>
 
-    <!-- Team formation settings -->
+    <!-- ── Team settings ───────────────────────────────────────────── -->
     <div class="card">
       <h2>Team Settings</h2>
 
@@ -169,9 +232,8 @@
       </div>
 
       <details>
-        <summary>Advanced — diversity weights &amp; edge cases</summary>
+        <summary>Advanced — diversity weights</summary>
         <div class="details-body">
-
           <div class="grid-2">
             <div class="field">
               <label for="w_studyline">Studyline diversity weight</label>
@@ -182,46 +244,121 @@
               <input type="number" name="w_personality" id="w_personality" value="1.0" min="0" step="0.1">
             </div>
           </div>
-
-          <div class="field">
-            <label for="cross_challenge">Cross-challenge survey</label>
-            <select name="cross_challenge" id="cross_challenge">
-              <option value="survey-wins">survey-wins — use survey data, keep export group (default)</option>
-              <option value="joker">joker — ignore survey, assign UNKNOWN attributes</option>
-              <option value="survey-overrules">survey-overrules — use survey data AND move to survey's challenge</option>
-            </select>
-            <small>Applies when a student filled a survey for a different challenge than their group export.</small>
-          </div>
-
-          <div class="field">
-            <label for="missing">Students with no survey</label>
-            <select name="missing" id="missing">
-              <option value="keep">keep — include with UNKNOWN attributes (default)</option>
-              <option value="overflow">overflow — move to flex pool</option>
-              <option value="skip">skip — exclude entirely</option>
-            </select>
-            <small>Students present in the group export who never submitted a survey.</small>
-          </div>
-
-          <div class="field">
-            <label for="dropped">Dropped students</label>
-            <select name="dropped" id="dropped">
-              <option value="keep">keep — include with their survey category (default)</option>
-              <option value="exclude">exclude — remove from output</option>
-            </select>
-            <small>Students with a survey but absent from both the group export and classlist. Requires classlist upload.</small>
-          </div>
-
-          <div class="check-row">
-            <input type="checkbox" name="late_entry_overrules" id="late_entry_overrules" checked>
-            <label for="late_entry_overrules">Late-entry overrules — overflow students who filled the Late Entries survey are moved to the late entry pool (students confirmed in a challenge group are always kept in their challenge)</label>
-          </div>
-
         </div>
       </details>
     </div>
 
-    <!-- Output -->
+    <!-- ── Challenge Assignment ────────────────────────────────────── -->
+    <div class="card">
+      <h2>Challenge Assignment</h2>
+
+      <div class="field">
+        <label>Assignment mode</label>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="assignment_mode" value="automatic" id="assign_auto" checked onchange="toggleAssignMode()">
+            <span>
+              <strong>Automatic</strong> — edge cases resolved by the levers below
+            </span>
+          </label>
+          <label>
+            <input type="radio" name="assignment_mode" value="interactive" id="assign_interactive" onchange="toggleAssignMode()">
+            <span>
+              <strong>Interactive review</strong> — inspect and confirm every ambiguous assignment before team formation
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Automatic: lever settings (collapsed) -->
+      <div id="lever_section" class="assign-mode-body">
+        <details id="lever_details">
+          <summary>Lever settings</summary>
+          <div class="details-body">
+
+            <div class="field">
+              <label for="cross_challenge">Cross-challenge survey</label>
+              <select name="cross_challenge" id="cross_challenge">
+                <option value="survey-wins">survey-wins — use survey data, keep export group (default)</option>
+                <option value="joker">joker — ignore survey, assign UNKNOWN attributes</option>
+                <option value="survey-overrules">survey-overrules — use survey data AND move to survey's challenge</option>
+              </select>
+              <small>Applies when a student filled a survey for a different challenge than their group export.</small>
+            </div>
+
+            <div class="field">
+              <label for="missing">Students with no survey</label>
+              <select name="missing" id="missing">
+                <option value="keep">keep — include with UNKNOWN attributes (default)</option>
+                <option value="overflow">overflow — move to flex pool</option>
+                <option value="skip">skip — exclude entirely</option>
+              </select>
+              <small>Students present in the group export who never submitted a survey.</small>
+            </div>
+
+            <div class="field">
+              <label for="dropped">Dropped students</label>
+              <select name="dropped" id="dropped">
+                <option value="keep">keep — include with their survey category (default)</option>
+                <option value="exclude">exclude — remove from output</option>
+              </select>
+              <small>Students with a survey but absent from both the group export and classlist. Requires classlist upload.</small>
+            </div>
+
+            <div class="check-row">
+              <input type="checkbox" name="late_entry_overrules" id="late_entry_overrules" checked>
+              <label for="late_entry_overrules">Late-entry overrules — overflow students who filled the Late Entries survey are moved to the late entry pool (students confirmed in a challenge group are always kept in their challenge)</label>
+            </div>
+
+            <div style="margin-top:0.25rem">
+              <button type="button" class="btn-reset" onclick="resetLevers()">Reset levers to defaults</button>
+            </div>
+
+          </div>
+        </details>
+      </div>
+
+      <!-- Interactive: info note + audit options (collapsed) -->
+      <div id="audit_section" class="assign-mode-body hidden">
+        <div class="assign-info">
+          Use interactive mode when you have received direct contact from students or teachers, or know of course changes not reflected in the exports. You will see every ambiguous case with a pre-filled suggestion — confirm or override each before teams are formed. You can also add specific students below to force them into the review regardless of their case type.
+        </div>
+        <details id="audit_details">
+          <summary>Audit options</summary>
+          <div class="details-body">
+
+            <div class="check-row">
+              <input type="checkbox" name="audit_f1" id="audit_f1">
+              <label for="audit_f1">Include late-entry students (not in group export) in the review</label>
+            </div>
+
+            <div class="field">
+              <label for="force_audit_text">Specific students to always audit</label>
+              <div class="tag-input-wrap" id="force_audit_wrap" onclick="document.getElementById('force_audit_text').focus()">
+                <!-- tag chips injected here by JS -->
+                <input type="text" id="force_audit_text" class="tag-text-input"
+                       placeholder="Type student number or email, press Enter…"
+                       onkeydown="handleTagKey(event)">
+              </div>
+              <input type="hidden" name="force_audit_ids" id="force_audit_ids" value="[]">
+              <small>Accepts any format: s253896, 253896, s253896@dtu.dk. These students appear in the review even if their assignment is unambiguous.</small>
+            </div>
+
+            <div style="margin-top:0.25rem">
+              <button type="button" class="btn-reset" onclick="resetAuditOptions()">Reset audit options to defaults</button>
+            </div>
+
+          </div>
+        </details>
+      </div>
+
+      <div class="assign-footer">
+        <button type="button" class="btn-reset-text" onclick="resetAllAssignment()">Reset all assignment settings to defaults</button>
+        <span class="memory-note">Settings saved in your browser</span>
+      </div>
+    </div>
+
+    <!-- ── Output ──────────────────────────────────────────────────── -->
     <div class="card">
       <h2>Output</h2>
       <div class="check-row">
@@ -268,6 +405,195 @@
 </div>
 
 <script>
+// ── localStorage helpers ──────────────────────────────────────────────────
+
+const LS_PREFIX = 'dtutb_';
+
+function saveSetting(key, value) {
+  try { localStorage.setItem(LS_PREFIX + key, value); } catch(e) {}
+}
+function loadSetting(key, fallback) {
+  try {
+    const v = localStorage.getItem(LS_PREFIX + key);
+    return v !== null ? v : fallback;
+  } catch(e) { return fallback; }
+}
+function clearSettings(keys) {
+  keys.forEach(k => { try { localStorage.removeItem(LS_PREFIX + k); } catch(e) {} });
+}
+
+// Bind a form element to localStorage
+function bindLS(id, key, type) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  // restore
+  const saved = loadSetting(key, null);
+  if (saved !== null) {
+    if (type === 'checkbox') el.checked = saved === 'true';
+    else if (type === 'radio') {/* handled separately */}
+    else el.value = saved;
+  }
+  // save on change
+  el.addEventListener('change', () => {
+    saveSetting(key, type === 'checkbox' ? String(el.checked) : el.value);
+  });
+}
+
+// ── Restore settings on load ──────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Team settings
+  bindLS('ideal',       'ideal',       'number');
+  bindLS('min',         'min',         'number');
+  bindLS('max',         'max',         'number');
+  bindLS('seed',        'seed',        'number');
+  bindLS('max_groups',  'max_groups',  'number');
+  bindLS('w_studyline', 'w_studyline', 'number');
+  bindLS('w_personality','w_personality','number');
+  bindLS('summary',     'summary',     'checkbox');
+
+  // Assignment mode
+  const savedMode = loadSetting('assignment_mode', 'automatic');
+  const autoEl = document.getElementById('assign_auto');
+  const intEl  = document.getElementById('assign_interactive');
+  if (savedMode === 'interactive') {
+    intEl.checked = true; autoEl.checked = false;
+  } else {
+    autoEl.checked = true; intEl.checked = false;
+  }
+  autoEl.addEventListener('change', () => { saveSetting('assignment_mode', 'automatic'); toggleAssignMode(); });
+  intEl.addEventListener('change',  () => { saveSetting('assignment_mode', 'interactive'); toggleAssignMode(); });
+
+  // Levers
+  bindLS('cross_challenge',    'cross_challenge',    'select');
+  bindLS('missing',            'missing',            'select');
+  bindLS('dropped',            'dropped',            'select');
+  bindLS('late_entry_overrules','late_entry_overrules','checkbox');
+
+  // Audit options
+  bindLS('audit_f1', 'audit_f1', 'checkbox');
+  const savedTags = JSON.parse(loadSetting('force_audit_ids', '[]') || '[]');
+  forceAuditTags = Array.isArray(savedTags) ? savedTags : [];
+  renderTags();
+
+  // Output
+  const savedOutputMode = loadSetting('output_mode', 'auto');
+  if (savedOutputMode === 'interactive') {
+    document.getElementById('mode_interactive').checked = true;
+    document.getElementById('mode_auto').checked = false;
+  }
+  document.getElementById('mode_auto').addEventListener('change', () => {
+    saveSetting('output_mode', 'auto'); toggleFallback();
+  });
+  document.getElementById('mode_interactive').addEventListener('change', () => {
+    saveSetting('output_mode', 'interactive'); toggleFallback();
+  });
+  bindLS('id_fallback', 'id_fallback', 'select');
+
+  // Apply initial visibility
+  toggleAssignMode();
+  toggleFallback();
+});
+
+// ── Assignment mode toggle ────────────────────────────────────────────────
+
+function toggleAssignMode() {
+  const isInteractive = document.getElementById('assign_interactive').checked;
+  document.getElementById('lever_section').classList.toggle('hidden', isInteractive);
+  document.getElementById('audit_section').classList.toggle('hidden', !isInteractive);
+}
+
+// ── Reset functions ───────────────────────────────────────────────────────
+
+const LEVER_DEFAULTS = {
+  cross_challenge:       'survey-wins',
+  missing:               'keep',
+  dropped:               'keep',
+  late_entry_overrules:  true,
+};
+
+const AUDIT_DEFAULTS = {
+  audit_f1:        false,
+  force_audit_ids: [],
+};
+
+function resetLevers() {
+  document.getElementById('cross_challenge').value      = LEVER_DEFAULTS.cross_challenge;
+  document.getElementById('missing').value              = LEVER_DEFAULTS.missing;
+  document.getElementById('dropped').value              = LEVER_DEFAULTS.dropped;
+  document.getElementById('late_entry_overrules').checked = LEVER_DEFAULTS.late_entry_overrules;
+  clearSettings(['cross_challenge','missing','dropped','late_entry_overrules']);
+}
+
+function resetAuditOptions() {
+  document.getElementById('audit_f1').checked = AUDIT_DEFAULTS.audit_f1;
+  forceAuditTags = [];
+  renderTags();
+  clearSettings(['audit_f1','force_audit_ids']);
+}
+
+function resetAllAssignment() {
+  document.getElementById('assign_auto').checked        = true;
+  document.getElementById('assign_interactive').checked = false;
+  saveSetting('assignment_mode', 'automatic');
+  toggleAssignMode();
+  resetLevers();
+  resetAuditOptions();
+}
+
+// ── Tag input for force-audit IDs ─────────────────────────────────────────
+
+let forceAuditTags = [];
+
+function renderTags() {
+  const wrap = document.getElementById('force_audit_wrap');
+  const text = document.getElementById('force_audit_text');
+  // Remove old chips
+  wrap.querySelectorAll('.tag-chip').forEach(el => el.remove());
+  // Re-render chips before text input
+  forceAuditTags.forEach((tag, idx) => {
+    const chip = document.createElement('span');
+    chip.className = 'tag-chip';
+    chip.innerHTML = escapeHtml(tag) +
+      ' <button type="button" onclick="removeTag(' + idx + ')">×</button>';
+    wrap.insertBefore(chip, text);
+  });
+  // Sync hidden input
+  const json = JSON.stringify(forceAuditTags);
+  document.getElementById('force_audit_ids').value = json;
+  saveSetting('force_audit_ids', json);
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function addTag(raw) {
+  const v = raw.trim();
+  if (v && !forceAuditTags.includes(v)) {
+    forceAuditTags.push(v);
+    renderTags();
+  }
+}
+
+function removeTag(idx) {
+  forceAuditTags.splice(idx, 1);
+  renderTags();
+}
+
+function handleTagKey(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    addTag(e.target.value);
+    e.target.value = '';
+  } else if (e.key === 'Backspace' && e.target.value === '' && forceAuditTags.length) {
+    forceAuditTags.pop();
+    renderTags();
+  }
+}
+
+// ── Existing helpers ──────────────────────────────────────────────────────
+
 function onClasslistChange(input) {
   document.getElementById('classlist-warn').classList.toggle('hidden', input.files.length > 0);
 }
@@ -278,6 +604,13 @@ function toggleFallback() {
 }
 
 function startRun(e) {
+  // Flush any pending tag input
+  const tagText = document.getElementById('force_audit_text');
+  if (tagText && tagText.value.trim()) {
+    addTag(tagText.value);
+    tagText.value = '';
+  }
+
   const classlist = document.getElementById('classlist');
   if (!classlist.files.length) {
     const ok = confirm(

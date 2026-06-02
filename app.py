@@ -29,50 +29,95 @@ def index():
     return render_template("index.html")
 
 
-def _run_pipeline(request, tmpdir: Path):
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def _parse_form_params(form) -> dict:
+    """Extract all form fields into a params dict."""
+    return {
+        "cross_challenge":      form.get("cross_challenge", "survey-wins"),
+        "missing_mode":         form.get("missing", "keep"),
+        "dropped_mode":         form.get("dropped", "keep"),
+        "late_entry_overrules": "late_entry_overrules" in form,
+        "ideal":                int(form.get("ideal", 8)),
+        "team_min":             int(form.get("min", 7)),
+        "team_max":             int(form.get("max", 10)),
+        "max_groups":           int(form.get("max_groups", 25)),
+        "w_studyline":          float(form.get("w_studyline", 1.0)),
+        "w_personality":        float(form.get("w_personality", 1.0)),
+        "seed":                 int(form.get("seed", 42)),
+        "include_summary":      "summary" in form,
+        "output_mode":          form.get("output_mode", "auto"),
+        "id_fallback":          form.get("id_fallback", "username"),
+        "assignment_mode":      form.get("assignment_mode", "automatic"),
+        "audit_f1":             "audit_f1" in form,
+        "force_audit_ids":      json.loads(form.get("force_audit_ids", "[]")),
+    }
+
+
+def _save_uploads(req, dest_dir: Path) -> tuple[Path, Path, Path | None]:
     """
-    Run both pipeline steps and return (all_teams, log_text, teams_path, summary_path, include_summary).
-    All output files are written into tmpdir.
+    Save uploaded files to dest_dir.
+    Returns (reports_dir, group_path, classlist_path).
     """
-    reports_dir = tmpdir / "reports"
+    reports_dir = dest_dir / "reports"
     reports_dir.mkdir(exist_ok=True)
 
-    report_files = request.files.getlist("reports")
+    report_files = req.files.getlist("reports")
     saved = [f for f in report_files if f.filename]
     if not saved:
         raise ValueError("Please upload at least one Team Formation Survey Individual Attempts file.")
     for f in saved:
         f.save(reports_dir / f.filename)
 
-    group_file = request.files.get("groups")
+    group_file = req.files.get("groups")
     if not group_file or not group_file.filename:
         raise ValueError("Please upload the Group Export CSV.")
-    group_path = tmpdir / group_file.filename
+    group_path = dest_dir / group_file.filename
     group_file.save(group_path)
 
     classlist_path = None
-    classlist_file = request.files.get("classlist")
+    classlist_file = req.files.get("classlist")
     if classlist_file and classlist_file.filename:
-        classlist_path = tmpdir / classlist_file.filename
+        classlist_path = dest_dir / classlist_file.filename
         classlist_file.save(classlist_path)
 
-    cross_challenge      = request.form.get("cross_challenge", "survey-wins")
-    missing_mode         = request.form.get("missing", "keep")
-    dropped_mode         = request.form.get("dropped", "keep")
-    late_entry_overrules = "late_entry_overrules" in request.form
-    ideal      = int(request.form.get("ideal", 8))
-    team_min   = int(request.form.get("min", 7))
-    team_max   = int(request.form.get("max", 10))
-    max_groups = int(request.form.get("max_groups", 25))
-    w_studyline   = float(request.form.get("w_studyline", 1.0))
-    w_personality = float(request.form.get("w_personality", 1.0))
-    seed          = int(request.form.get("seed", 42))
-    include_summary = "summary" in request.form
+    return reports_dir, group_path, classlist_path
+
+
+def _run_pipeline_from_files(
+    reports_dir: Path,
+    group_path: Path,
+    classlist_path: Path | None,
+    params: dict,
+    workdir: Path,
+    overrides: dict | None = None,
+):
+    """
+    Run both pipeline steps from already-saved files.
+    Returns (all_teams, log_text, teams_path, summary_path, include_summary).
+
+    When overrides is provided (interactive assignment re-run), cross_challenge is
+    forced to survey-wins so confirmed students always get available survey data.
+    """
+    cross_challenge      = params["cross_challenge"]
+    missing_mode         = params["missing_mode"]
+    dropped_mode         = params["dropped_mode"]
+    late_entry_overrules = params["late_entry_overrules"]
+    ideal                = params["ideal"]
+    team_min             = params["team_min"]
+    team_max             = params["team_max"]
+    max_groups           = params["max_groups"]
+    w_studyline          = params["w_studyline"]
+    w_personality        = params["w_personality"]
+    seed                 = params["seed"]
+    include_summary      = params["include_summary"]
 
     _cross_desc = {
-        "survey-wins":     "survey answers used, student stays in their group export challenge",
-        "joker":           "survey ignored, student gets UNKNOWN attributes in their group export challenge",
-        "survey-overrules":"survey answers used AND student moves to the challenge they surveyed for",
+        "survey-wins":      "survey answers used, student stays in their group export challenge",
+        "joker":            "survey ignored, student gets UNKNOWN attributes in their group export challenge",
+        "survey-overrules": "survey answers used AND student moves to the challenge they surveyed for",
     }
     _missing_desc = {
         "keep":     "included with UNKNOWN studyline and personality in their enrolled group",
@@ -110,10 +155,13 @@ def _run_pipeline(request, tmpdir: Path):
         f"  late-entry-overrules={late_entry_overrules}\n"
         f"    Student in OVERFLOW who filled the Late Entries survey: "
         + ("moved to the late entry pool.\n" if late_entry_overrules
-           else "kept in overflow.\n") +
-        f"    Student in a CHALLENGE group who filled the Late Entries survey:\n"
-        f"    always kept in their challenge (survey used for attributes only).\n\n" +
-
+           else "kept in overflow.\n")
+        + f"    Student in a CHALLENGE group who filled the Late Entries survey:\n"
+          f"    always kept in their challenge (survey used for attributes only).\n\n"
+        + (f"  assignment-mode=interactive\n"
+           f"    Challenge assignments reviewed and confirmed manually before team formation.\n\n"
+           if overrides is not None else "")
+        +
         f"LOG MESSAGE GUIDE\n"
         f"  WARNING [Name]: Q1 ID 's12345' corrected to 's67890'\n"
         f"    The student typed the wrong ID in the survey. Corrected automatically\n"
@@ -136,12 +184,19 @@ def _run_pipeline(request, tmpdir: Path):
         f"    Student is in the classlist but absent from the group export and all\n"
         f"    surveys. They enrolled in the course but never joined a group or filled\n"
         f"    the survey. They will NOT appear in teams.csv.\n\n"
+        f"  WARNING [force-audit]: '<value>' did not match any student — skipped\n"
+        f"    A student ID or email added to the force-audit list could not be matched\n"
+        f"    to any student in the group export or survey records.\n\n"
         f"{'='*60}\n\n"
     )
 
+    # In the interactive re-run, use survey-wins so confirmed students always
+    # get available survey data rather than UNKNOWN from the joker setting.
+    effective_cross_challenge = "survey-wins" if overrides is not None else cross_challenge
+
     with contextlib.redirect_stdout(log_buf), contextlib.redirect_stderr(log_buf):
-        export_rows   = _resolve.load_group_export_rows(group_path)
-        name_lookup   = _resolve.build_name_lookup(export_rows)
+        export_rows = _resolve.load_group_export_rows(group_path)
+        name_lookup = _resolve.build_name_lookup(export_rows)
         classlist_ids, username_number_map, name_number_map = (
             _resolve.load_classlist(classlist_path) if classlist_path else (None, {}, {})
         )
@@ -162,16 +217,17 @@ def _run_pipeline(request, tmpdir: Path):
             survey_records       = survey_records,
             name_lookup          = name_lookup,
             classlist_ids        = classlist_ids,
-            cross_challenge      = cross_challenge,
+            cross_challenge      = effective_cross_challenge,
             missing_mode         = missing_mode,
             dropped_mode         = dropped_mode,
             late_entry_overrules = late_entry_overrules,
+            overrides            = overrides,
         )
         _resolve.enrich_email_student_numbers(students, username_number_map, name_number_map)
         if classlist_ids is not None:
             _resolve.flag_ghost_students(students, classlist_ids)
 
-        combined_path = tmpdir / "students_combined.csv"
+        combined_path = workdir / "students_combined.csv"
         fieldnames = ["student_number", "dtu_username", "email_student_number",
                       "id_source", "classlist_confirmed", "q1_answer",
                       "student_name", "allocation_category", "studyline", "personality_type"]
@@ -186,11 +242,18 @@ def _run_pipeline(request, tmpdir: Path):
             w_personality=w_personality, seed=seed,
         )
         cfg.validate()
-        teams_path   = tmpdir / "teams.csv"
-        summary_path = tmpdir / "teams_summary.csv" if include_summary else None
+        teams_path   = workdir / "teams.csv"
+        summary_path = workdir / "teams_summary.csv" if include_summary else None
         all_teams = _form.run(cfg, combined_path, teams_path, summary_path)
 
     return all_teams, log_buf.getvalue(), teams_path, summary_path, include_summary
+
+
+def _run_pipeline(req, tmpdir: Path):
+    """Thin wrapper: save uploads, parse params, run full pipeline."""
+    params = _parse_form_params(req.form)
+    reports_dir, group_path, classlist_path = _save_uploads(req, tmpdir)
+    return _run_pipeline_from_files(reports_dir, group_path, classlist_path, params, tmpdir)
 
 
 def _build_zip(teams_path, summary_path, final_path, log_text):
@@ -206,27 +269,16 @@ def _build_zip(teams_path, summary_path, final_path, log_text):
     return zip_buf
 
 
-@app.route("/run", methods=["POST"])
-def run():
-    output_mode = request.form.get("output_mode", "auto")
-    id_fallback = request.form.get("id_fallback", "username")
-
-    # For interactive mode we need a persistent temp dir; for auto we clean up after.
-    tmpdir = Path(tempfile.mkdtemp())
-    try:
-        all_teams, log_text, teams_path, summary_path, include_summary = _run_pipeline(request, tmpdir)
-    except (ValueError, SystemExit) as e:
-        shutil.rmtree(tmpdir, ignore_errors=True)
-        return render_template("index.html", error=str(e)), 400
-    except Exception as e:
-        shutil.rmtree(tmpdir, ignore_errors=True)
-        return render_template("index.html", error=f"Unexpected error: {e}"), 500
-
+def _finish_run(all_teams, log_text, teams_path, summary_path, include_summary,
+                workdir, output_mode, id_fallback, cleanup_dir=None):
+    """
+    Shared final step: either show the ID review page or build the zip download.
+    cleanup_dir is removed after a successful auto download.
+    """
     if output_mode == "interactive":
         resolvable, unresolvable = _form.collect_nonstandard(all_teams)
         if resolvable or unresolvable:
-            # Persist session data for /resolve
-            tmp_key = str(uuid.uuid4())
+            tmp_key     = str(uuid.uuid4())
             session_dir = Path(tempfile.gettempdir()) / f"teams_{tmp_key}"
             session_dir.mkdir()
             with open(session_dir / "session.json", "w", encoding="utf-8") as f:
@@ -235,45 +287,183 @@ def run():
                     "log":             log_text,
                     "include_summary": include_summary,
                 }, f)
-            # Copy the already-written teams files
             shutil.copy(teams_path, session_dir / "teams.csv")
             if summary_path and summary_path.exists():
                 shutil.copy(summary_path, session_dir / "teams_summary.csv")
-            shutil.rmtree(tmpdir, ignore_errors=True)
+            if cleanup_dir:
+                shutil.rmtree(cleanup_dir, ignore_errors=True)
             return render_template(
                 "resolve.html",
                 resolvable=resolvable,
                 unresolvable=unresolvable,
                 tmp_key=tmp_key,
             )
-        # No non-standard cases — fall through to auto
 
-    # Automatic path (or interactive with no non-standard cases)
-    try:
-        final_path = tmpdir / "teams_final.csv"
-        decisions  = _form.write_final_teams(all_teams, final_path, id_fallback=id_fallback)
-        if decisions:
-            resolution_section = (
-                "\nFINAL OUTPUT RESOLUTION\n"
-                + "\n".join(decisions) + "\n"
-            )
-            log_text += resolution_section
+    # Auto path (or interactive with no non-standard IDs)
+    final_path = workdir / "teams_final.csv"
+    decisions  = _form.write_final_teams(all_teams, final_path, id_fallback=id_fallback)
+    if decisions:
+        log_text += "\nFINAL OUTPUT RESOLUTION\n" + "\n".join(decisions) + "\n"
 
-        zip_buf = _build_zip(teams_path, summary_path, final_path, log_text)
-    finally:
-        shutil.rmtree(tmpdir, ignore_errors=True)
+    zip_buf = _build_zip(teams_path, summary_path, final_path, log_text)
+    if cleanup_dir:
+        shutil.rmtree(cleanup_dir, ignore_errors=True)
 
-    response = send_file(zip_buf, mimetype="application/zip", as_attachment=True, download_name="teams.zip")
+    response = send_file(zip_buf, mimetype="application/zip",
+                         as_attachment=True, download_name="teams.zip")
     response.set_cookie("download_ready", "1", max_age=10, samesite="Lax")
     return response
 
 
+# ---------------------------------------------------------------------------
+# Routes
+# ---------------------------------------------------------------------------
+
+@app.route("/run", methods=["POST"])
+def run():
+    tmpdir = Path(tempfile.mkdtemp())
+    try:
+        params = _parse_form_params(request.form)
+        reports_dir, group_path, classlist_path = _save_uploads(request, tmpdir)
+    except (ValueError, SystemExit) as e:
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        return render_template("index.html", error=str(e)), 400
+    except Exception as e:
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        return render_template("index.html", error=f"Unexpected error: {e}"), 500
+
+    # --- Interactive assignment review ---
+    if params["assignment_mode"] == "interactive":
+        try:
+            _discard = io.StringIO()
+            with contextlib.redirect_stdout(_discard), contextlib.redirect_stderr(_discard):
+                export_rows    = _resolve.load_group_export_rows(group_path)
+                name_lookup    = _resolve.build_name_lookup(export_rows)
+                classlist_ids, _, _ = (
+                    _resolve.load_classlist(classlist_path) if classlist_path else (None, {}, {})
+                )
+                survey_records = _parse.load_all_surveys(reports_dir)
+                edge_cases = _resolve.collect_edge_cases(
+                    group_export_rows    = export_rows,
+                    survey_records       = survey_records,
+                    name_lookup          = name_lookup,
+                    classlist_ids        = classlist_ids,
+                    cross_challenge      = params["cross_challenge"],
+                    missing_mode         = params["missing_mode"],
+                    dropped_mode         = params["dropped_mode"],
+                    late_entry_overrules = params["late_entry_overrules"],
+                    audit_f1             = params["audit_f1"],
+                    force_audit_ids      = params["force_audit_ids"],
+                )
+        except (ValueError, SystemExit) as e:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+            return render_template("index.html", error=str(e)), 400
+        except Exception as e:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+            return render_template("index.html", error=f"Unexpected error: {e}"), 500
+
+        if edge_cases:
+            tmp_key     = str(uuid.uuid4())
+            session_dir = Path(tempfile.gettempdir()) / f"assign_{tmp_key}"
+            session_dir.mkdir()
+            shutil.copytree(reports_dir, session_dir / "reports")
+            shutil.copy(group_path, session_dir / group_path.name)
+            if classlist_path:
+                shutil.copy(classlist_path, session_dir / classlist_path.name)
+            with open(session_dir / "session.json", "w", encoding="utf-8") as f:
+                json.dump({
+                    "params":              params,
+                    "edge_cases":          edge_cases,
+                    "group_filename":      group_path.name,
+                    "classlist_filename":  classlist_path.name if classlist_path else None,
+                }, f)
+            shutil.rmtree(tmpdir, ignore_errors=True)
+            return render_template(
+                "review_assignments.html",
+                edge_cases=edge_cases,
+                tmp_key=tmp_key,
+            )
+        # No edge cases — fall through to normal run
+
+    # --- Normal run (automatic, or interactive with no edge cases) ---
+    try:
+        all_teams, log_text, teams_path, summary_path, include_summary = (
+            _run_pipeline_from_files(reports_dir, group_path, classlist_path, params, tmpdir)
+        )
+    except (ValueError, SystemExit) as e:
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        return render_template("index.html", error=str(e)), 400
+    except Exception as e:
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        return render_template("index.html", error=f"Unexpected error: {e}"), 500
+
+    return _finish_run(
+        all_teams, log_text, teams_path, summary_path, include_summary,
+        workdir=tmpdir,
+        output_mode=params["output_mode"],
+        id_fallback=params["id_fallback"],
+        cleanup_dir=tmpdir,
+    )
+
+
+@app.route("/review_assignments", methods=["POST"])
+def review_assignments():
+    tmp_key     = request.form.get("tmp_key", "")
+    session_dir = Path(tempfile.gettempdir()) / f"assign_{tmp_key}"
+    if not session_dir.is_dir():
+        return render_template(
+            "index.html",
+            error="Session expired or not found. Please re-run the pipeline."
+        ), 400
+
+    try:
+        with open(session_dir / "session.json", encoding="utf-8") as f:
+            data = json.load(f)
+        params             = data["params"]
+        group_filename     = data["group_filename"]
+        classlist_filename = data.get("classlist_filename")
+
+        # Build overrides dict: form fields named assign_<student_number>
+        overrides = {}
+        for key, value in request.form.items():
+            if key.startswith("assign_"):
+                overrides[key[7:]] = value.strip()
+
+        reports_dir    = session_dir / "reports"
+        group_path     = session_dir / group_filename
+        classlist_path = (session_dir / classlist_filename) if classlist_filename else None
+
+        all_teams, log_text, teams_path, summary_path, include_summary = (
+            _run_pipeline_from_files(
+                reports_dir, group_path, classlist_path, params,
+                session_dir, overrides=overrides,
+            )
+        )
+    except (ValueError, SystemExit) as e:
+        shutil.rmtree(session_dir, ignore_errors=True)
+        return render_template("index.html", error=str(e)), 400
+    except Exception as e:
+        shutil.rmtree(session_dir, ignore_errors=True)
+        return render_template("index.html", error=f"Unexpected error: {e}"), 500
+
+    return _finish_run(
+        all_teams, log_text, teams_path, summary_path, include_summary,
+        workdir=session_dir,
+        output_mode=params.get("output_mode", "auto"),
+        id_fallback=params.get("id_fallback", "username"),
+        cleanup_dir=session_dir,
+    )
+
+
 @app.route("/resolve", methods=["POST"])
 def resolve():
-    tmp_key = request.form.get("tmp_key", "")
+    tmp_key     = request.form.get("tmp_key", "")
     session_dir = Path(tempfile.gettempdir()) / f"teams_{tmp_key}"
     if not session_dir.is_dir():
-        return render_template("index.html", error="Session expired or not found. Please re-run the pipeline."), 400
+        return render_template(
+            "index.html",
+            error="Session expired or not found. Please re-run the pipeline."
+        ), 400
 
     try:
         with open(session_dir / "session.json", encoding="utf-8") as f:
@@ -282,7 +472,6 @@ def resolve():
         log_text        = data["log"]
         include_summary = data["include_summary"]
 
-        # Collect resolutions: form fields named id_<pipeline_id>
         resolved_ids = {}
         for key, value in request.form.items():
             if key.startswith("id_"):
@@ -301,11 +490,9 @@ def resolve():
         shutil.rmtree(session_dir, ignore_errors=True)
         raise
 
-    # Session dir is intentionally kept alive so the user can adjust values
-    # and re-submit the resolve form without re-running the pipeline.
-    # Temp dirs are cleaned by the OS on reboot.
-
-    response = send_file(zip_buf, mimetype="application/zip", as_attachment=True, download_name="teams.zip")
+    # Session dir kept alive so user can re-submit corrections; cleaned by OS on reboot.
+    response = send_file(zip_buf, mimetype="application/zip",
+                         as_attachment=True, download_name="teams.zip")
     response.set_cookie("download_ready", "1", max_age=10, samesite="Lax")
     return response
 
