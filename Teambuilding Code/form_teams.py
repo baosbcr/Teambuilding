@@ -323,7 +323,7 @@ def write_teams(
     rows = []
     for ch in CHALLENGES:
         for t_idx, team in enumerate(all_teams[ch], start=1):
-            tid = f"{ch}-{t_idx:02d}"
+            tid = f"{ch}{t_idx:02d}"
             for student in team:
                 rows.append({
                     "team_id":              tid,
@@ -365,7 +365,7 @@ def collect_nonstandard(
     unresolvable: list[dict] = []
     for ch in CHALLENGES:
         for t_idx, team in enumerate(all_teams[ch], start=1):
-            tid = f"{ch}-{t_idx:02d}"
+            tid = f"{ch}{t_idx:02d}"
             for s in team:
                 sid      = s["student_number"]
                 dtu_u    = s.get("dtu_username", "")
@@ -427,7 +427,7 @@ def write_final_teams(
 
     for ch in CHALLENGES:
         for t_idx, team in enumerate(all_teams[ch], start=1):
-            tid = f"{ch}-{t_idx:02d}"
+            tid = f"{ch}{t_idx:02d}"
             for s in team:
                 sid     = s["student_number"]
                 name    = s.get("student_name", "")
@@ -474,7 +474,7 @@ def _write_summary(
     dummy_weights = {"studyline": 1.0, "personality": 1.0}
     for ch in CHALLENGES:
         for t_idx, team in enumerate(all_teams[ch], start=1):
-            tid = f"{ch}-{t_idx:02d}"
+            tid = f"{ch}{t_idx:02d}"
             sl = len({s["studyline"]        for s in team})
             p  = len({s["personality_type"] for s in team})
             n  = len(team)
