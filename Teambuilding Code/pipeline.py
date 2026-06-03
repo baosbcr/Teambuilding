@@ -15,8 +15,8 @@ written to --output / --summary.
 
 Usage:
     python pipeline.py \\
-        --reports  "Learn Exports/Team Formation Survey Individual Attempts" \\
-        --groups   "Learn Exports/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv" \\
+        --reports  "path/to/Team Formation Survey Individual Attempts" \\
+        --groups   "path/to/group_export.csv" \\
         --output   teams.csv \\
         --summary  teams_summary.csv
 
@@ -169,18 +169,15 @@ def main() -> None:
     # --- Input sources ---
     ap.add_argument(
         "--reports",
-        default=str(Path(__file__).parent.parent / "Learn Exports" / "Team Formation Survey Individual Attempts"),
+        default=None,
         metavar="DIR",
-        help="Folder containing Individual Attempts XLSX files "
-             "(default: ../Learn Exports/Team Formation Survey Individual Attempts)",
+        help="Folder containing Individual Attempts XLSX files (required).",
     )
     ap.add_argument(
         "--groups",
         default=None,
         metavar="CSV",
-        help="Path to the Learn group-membership export CSV. "
-             "If omitted, the script searches ../Learn Exports/Group Exports/ "
-             "for the most-recently-modified CSV.",
+        help="Path to the Learn group-membership export CSV (required).",
     )
     ap.add_argument(
         "--classlist",
@@ -321,23 +318,16 @@ def main() -> None:
             sys.exit(f"--skip-build file not found: {combined_csv}")
         print(f"Skipping step 1; using {combined_csv}")
     else:
+        if not args.reports:
+            sys.exit("--reports is required: provide the path to the Individual Attempts folder.")
+        if not args.groups:
+            sys.exit("--groups is required: provide the path to the group export CSV.")
+
         reports_dir = Path(args.reports)
         if not reports_dir.is_dir():
             sys.exit(f"--reports directory not found: {reports_dir}")
 
-        if args.groups:
-            group_export = Path(args.groups)
-        else:
-            group_dir = Path(__file__).parent.parent / "Learn Exports" / "Group Exports"
-            csvs = sorted(group_dir.glob("*.csv"), key=lambda p: p.stat().st_mtime, reverse=True)
-            if not csvs:
-                sys.exit(
-                    f"No group export CSV found in '{group_dir}'. "
-                    "Specify one with --groups."
-                )
-            group_export = csvs[0]
-            print(f"Auto-detected group export: {group_export.name}")
-
+        group_export = Path(args.groups)
         if not group_export.exists():
             sys.exit(f"--groups file not found: {group_export}")
 

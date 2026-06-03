@@ -1,0 +1,51 @@
+﻿Section #,Q #,Q Type,Q Title,Q Text,Bonus?,Difficulty,Answer,Answer Match,# Responses
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Advanced Materials and Healthcare Engineering,UnChecked,6
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Applied Chemistry,UnChecked,6
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Aquatic Science and Technology,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Architectural Engineering,UnChecked,7
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Autonomous Systems,UnChecked,4
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Bioinformatics and Systems Biology,UnChecked,2
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Biomedical Engineering,UnChecked,21
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Biotechnology,UnChecked,32
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Business Analytics,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Chemical and Biochemical Engineering,UnChecked,9
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Civil Engineering,UnChecked,14
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Communication Technologies and System Design (Telecommunication),UnChecked,1
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Computer Science and Engineering,UnChecked,12
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Design and Innovation,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Earth and Space Physics and Engineering,UnChecked,5
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Electrical Engineering,UnChecked,8
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Engineering Acoustics,UnChecked,5
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Environmental Engineering,UnChecked,8
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Exchange Student,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Food Technology,UnChecked,6
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Human-Centered Artificial Intelligence (Digital Media Engineering),UnChecked,1
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Industrial Engineering and Management,UnChecked,7
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Materials and Manufacturing Engineering,UnChecked,2
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Mathematical Modelling and Computation,UnChecked,2
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Mechanical Engineering,UnChecked,3
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Petroleum Engineering,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Pharmaceutical Design and Engineering,UnChecked,17
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Photonics Engineering,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Physics and Nanotechnology,UnChecked,5
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Quantitative Biology and Disease Modelling,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Sustainable Energy,UnChecked,7
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Technology Entrepreneurship,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Transport and Logistics,UnChecked,0
+,2,MC,',"Your Study programif you are an exchange student and not enrolled in a specific program, please select 'Exchange Student'",,,Wind Energy,UnChecked,3
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,INTJ,UnChecked,24
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,INTP,UnChecked,11
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ENTJ,UnChecked,17
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ENTP,UnChecked,10
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,INFJ,UnChecked,16
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,INFP,UnChecked,10
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ENFJ,UnChecked,39
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ENFP,UnChecked,10
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ISTJ,UnChecked,9
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ISFJ,UnChecked,13
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ESTJ,UnChecked,8
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ESFJ,UnChecked,9
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ISTP,UnChecked,6
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ISFP,UnChecked,6
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ESTP,UnChecked,2
+,3,MC,',"Your personality typePlease select your personality type, ignoring the last character which is either an A or a T. For example, for both ISTP-A and ISTP-T, you select ISTP",,,ESFP,UnChecked,3

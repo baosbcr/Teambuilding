@@ -34,9 +34,10 @@ Teambuilding/                            <- project root
   templates/
     index.html                           <- upload form with all levers exposed
   Learn Exports/
-    Team Formation Survey Individual Attempts/  <- one XLSX per group (pipeline input)
-    Group Exports/                       <- group-membership CSV (pipeline input)
-    Classlist Export Students Only/      <- (optional) full classlist CSV from DTU Learn
+    <run>/                               <- one folder per course run (e.g. January 2026)
+      Team Formation Survey Individual Attempts/  <- one XLSX per group (pipeline input)
+      Group Exports/                     <- group-membership CSV (pipeline input)
+      Classlist Export All/              <- (optional) full classlist CSV from DTU Learn
   Teambuilding Code/                     <- pipeline scripts
     parse_individual.py                  <- XLSX reader utility
     resolve.py                           <- Step 1: group-export-first build + survey match
@@ -48,7 +49,7 @@ Teambuilding/                            <- project root
 
 ## Data Sources
 
-### Team Formation Survey Individual Attempts (`Learn Exports/Team Formation Survey Individual Attempts/`)
+### Team Formation Survey Individual Attempts (`Learn Exports/<run>/Team Formation Survey Individual Attempts/`)
 
 One XLSX per encompassing group, named after the group (e.g. "Team Formation Survey - Challenge A - Individual Attempts.xlsx"). Each file contains student blocks where:
 - The block header row = student's **DTU Learn account name** (authoritative, cannot be wrong)
@@ -58,7 +59,7 @@ One XLSX per encompassing group, named after the group (e.g. "Team Formation Sur
 
 File naming must match a category pattern in `_CATEGORY_PATTERNS` (parse_individual.py) or the pipeline aborts.
 
-### Group Export (`Learn Exports/Group Exports/`)
+### Group Export (`Learn Exports/<run>/Group Exports/`)
 
 Single CSV exported post-deadline from DTU Learn. Columns used:
 - `Username` — student's Learn username (often the canonical ID, e.g. `s253896`)
@@ -66,9 +67,9 @@ Single CSV exported post-deadline from DTU Learn. Columns used:
 - `First Name`, `Last Name` — student's full name as registered in Learn
 - `Group Name` — which challenge group they enrolled in
 
-This file is the **ground truth** for group membership. The pipeline auto-detects the most recently modified CSV in this folder unless `--groups` is specified.
+This file is the **ground truth** for group membership. Must be provided explicitly via `--groups`; there is no auto-detection.
 
-### Classlist Export (`Learn Exports/Classlist Export All/`)
+### Classlist Export (`Learn Exports/<run>/Classlist Export All/`)
 
 Optional CSV exported from DTU Learn (Classlist → All tab → Export above the list). Columns used:
 - `Name` — student full name in `Last, First` format (from DTU Learn — same source as survey block headers)
@@ -274,16 +275,22 @@ Diversity = unique count / team size.
 
 ---
 
-## Typical Run (2026 data)
+## Typical Run (January 2026 data)
+
+Both `--reports` and `--groups` are always required; there are no default paths.
+All commands run from the `Teambuilding Code/` folder.
 
 ```
-python pipeline.py
+python pipeline.py \
+    --reports "../Learn Exports/January 2026/Team Formation Survey Individual Attempts" \
+    --groups  "../Learn Exports/January 2026/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv"
 ```
 
-Uses defaults: reads all XLSX from `../Learn Exports/Team Formation Survey Individual Attempts/`, auto-detects the most recent group export CSV from `../Learn Exports/Group Exports/`, writes `teams.csv` and optionally `teams_summary.csv`.
-
 ```
-python pipeline.py --summary teams_summary.csv --missing overflow --seed 0
+python pipeline.py \
+    --reports "../Learn Exports/January 2026/Team Formation Survey Individual Attempts" \
+    --groups  "../Learn Exports/January 2026/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv" \
+    --summary teams_summary.csv --missing overflow --seed 0
 ```
 
 With per-team stats, overflow treatment for survey-skippers, and a different random seed.

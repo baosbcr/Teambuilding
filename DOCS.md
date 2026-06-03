@@ -12,8 +12,8 @@ Run from the `Teambuilding Code/` folder: `python pipeline.py [options]`
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--reports DIR` | `../Learn Exports/Team Formation Survey Individual Attempts` | Folder with Individual Attempts XLSX files |
-| `--groups CSV` | auto-detect newest in `../Learn Exports/Group Exports` | Group-membership export CSV |
+| `--reports DIR` | (required) | Folder with Individual Attempts XLSX files |
+| `--groups CSV` | (required) | Group-membership export CSV |
 | `--classlist CSV` | (none) | Classlist CSV; enables ghost detection (`WARNING [ghost]`), dropped-student filtering (`--dropped`), and `email_student_number` enrichment for students with non-standard DTU usernames |
 | `-o / --output PATH` | `teams.csv` | Final team assignment CSV |
 | `--summary PATH` | (none) | Per-team diversity statistics CSV |
@@ -190,24 +190,26 @@ A student identifier added to the *Specific students to always audit* field in t
 
 All commands run from the `Teambuilding Code/` folder.
 
-**Basic run (all defaults):**
+**Basic run:**
 ```
-python pipeline.py
+python pipeline.py \
+    --reports "../Learn Exports/January 2026/Team Formation Survey Individual Attempts" \
+    --groups  "../Learn Exports/January 2026/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv"
 ```
 
 **With per-team stats:**
 ```
-python pipeline.py --summary teams_summary.csv
+python pipeline.py --reports <dir> --groups <csv> --summary teams_summary.csv
 ```
 
 **Exclude students who never surveyed; specific seed:**
 ```
-python pipeline.py --missing skip --seed 0 --summary teams_summary.csv
+python pipeline.py --reports <dir> --groups <csv> --missing skip --seed 0 --summary teams_summary.csv
 ```
 
 **Move survey-skippers to overflow pool (flex):**
 ```
-python pipeline.py --missing overflow
+python pipeline.py --reports <dir> --groups <csv> --missing overflow
 ```
 
 **Rerun team formation without re-parsing XLSX files:**
@@ -215,14 +217,11 @@ python pipeline.py --missing overflow
 python pipeline.py --skip-build students_combined.csv --seed 99
 ```
 
-**Use a specific group export file:**
-```
-python pipeline.py --groups "../Learn Exports/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv"
-```
-
 **Flag ghost students and exclude likely-dropped students (needs classlist):**
 ```
-python pipeline.py --classlist "../Learn Exports/Classlist Export Students Only/classlist.csv" --dropped exclude
+python pipeline.py --reports <dir> --groups <csv> \
+    --classlist "../Learn Exports/January 2026/Classlist Export All/classlist.csv" \
+    --dropped exclude
 ```
 
 ---
@@ -233,7 +232,8 @@ python pipeline.py --classlist "../Learn Exports/Classlist Export Students Only/
 |---------|-------------|-----|
 | `No survey files found in '...'` | Wrong `--reports` path, or folder is empty | Check path; confirm XLSX files are in the folder |
 | `Could not detect category for '...'` | XLSX filename doesn't contain a recognisable group name | Rename file to include "Challenge A", "Overflow", or "Late entries"; or check `_CATEGORY_PATTERNS` in `parse_individual.py` |
-| `No group export CSV found in '...'` | `Learn Exports/Group Exports/` is empty | Add the exported CSV or use `--groups <path>` |
+| `--groups is required` | `--groups` flag was not passed | Provide the path to the group export CSV with `--groups <path>` |
+| `--reports is required` | `--reports` flag was not passed | Provide the path to the Individual Attempts folder with `--reports <dir>` |
 | `ModuleNotFoundError: No module named 'openpyxl'` | Library not installed | `pip install openpyxl` |
 | `ModuleNotFoundError: No module named 'flask'` | Library not installed | `pip install flask` |
 | `SyntaxError` or `TypeError` on startup | Python < 3.10 | Upgrade: `python --version` to check; install 3.10+ from python.org |

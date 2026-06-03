@@ -22,7 +22,7 @@ For the full reference (all flags, edge case behaviour, troubleshooting) see **[
    git clone <repository-url>
    ```
 
-> **Test data included:** The repository already contains exported survey and group files from the 2026 course run, so you can try the pipeline straight away without providing your own data. If you want to run it on a different year's data, simply replace the files in `Learn Exports/Team Formation Survey Individual Attempts/` and `Learn Exports/Group Exports/` with your own exports before running.
+> **Sample data included:** The repository contains exported survey and group files from multiple course runs under `Learn Exports/<run>/`. Each run folder follows the same structure. You must always pass `--reports` and `--groups` explicitly when using the CLI — there are no default paths.
 
 ---
 
@@ -98,18 +98,20 @@ In the same terminal, navigate into the `Teambuilding Code` subfolder:
 cd "Teambuilding Code"
 ```
 
-Then run the pipeline:
+Then run the pipeline, pointing it at your input files:
 
 ```
-python pipeline.py
+python pipeline.py \
+    --reports "../Learn Exports/<run>/Team Formation Survey Individual Attempts" \
+    --groups  "../Learn Exports/<run>/Group Exports/<filename>.csv"
 ```
 
-The script reads all XLSX files from `Learn Exports/Team Formation Survey Individual Attempts/` and the group export CSV from `Learn Exports/Group Exports/`, then writes `teams.csv` in the `Teambuilding Code` folder.
+Replace `<run>` with the course run folder (e.g. `January 2026`) and `<filename>` with the actual CSV name. The script writes `teams.csv` in the `Teambuilding Code` folder.
 
 For a full run that also produces per-team diversity stats:
 
 ```
-python pipeline.py --summary teams_summary.csv
+python pipeline.py --reports <dir> --groups <csv> --summary teams_summary.csv
 ```
 
 ---
@@ -122,9 +124,10 @@ Teambuilding/                              <- project root
   DOCS.md                                  <- full reference: all options, edge cases, troubleshooting
   CLAUDE.md                                <- developer/AI context
   Learn Exports/
-    Team Formation Survey Individual Attempts/  <- (YOU PROVIDE) one XLSX per survey group
-    Group Exports/                         <- (YOU PROVIDE) group-membership CSV from day 1
-    Classlist Export Students Only/        <- (optional) full classlist CSV from DTU Learn
+    <run>/                                 <- one folder per course run (e.g. January 2026)
+      Team Formation Survey Individual Attempts/  <- (YOU PROVIDE) one XLSX per survey group
+      Group Exports/                       <- (YOU PROVIDE) group-membership CSV from day 1
+      Classlist Export All/                <- (optional) full classlist CSV from DTU Learn
   Teambuilding Code/
     pipeline.py                            <- run this to produce teams
     resolve.py                             <- Step 1: build canonical student list
@@ -148,7 +151,7 @@ One XLSX file per survey group, exported from DTU Learn.
 **How to export each file:**
 > DTU Learn → Surveys → [Survey name] → Results → Export → **Individual Attempts**
 
-Save each file into `Learn Exports/Team Formation Survey Individual Attempts/`.
+Save each file into your run folder, e.g. `Learn Exports/January 2026/Team Formation Survey Individual Attempts/`.
 
 Expected files (one per group):
 - `... Challenge A ...`
@@ -171,7 +174,7 @@ One CSV file exported from DTU Learn **after the enrollment deadline**.
 **How to export:**
 > DTU Learn → Groups → Day 1 - Challenge Selection → (gear/actions menu) → **Export members** → CSV
 
-Save the file into `Learn Exports/Group Exports/`. The pipeline auto-detects the most recently modified CSV in that folder.
+Save the file into your run folder, e.g. `Learn Exports/January 2026/Group Exports/`, and pass its path to `--groups`.
 
 ---
 
@@ -186,7 +189,7 @@ Providing the classlist enables three additional features:
 **How to export:**
 > DTU Learn → **Classlist** → **Students** tab → click the **Export** button just above the student list (not the Export button at the very top of the page) → save the CSV
 
-Save the file into `Learn Exports/Classlist Export Students Only/` and pass it to the pipeline with `--classlist <path>`.
+Save the file into your run folder, e.g. `Learn Exports/January 2026/Classlist Export All/`, and pass its path to `--classlist <path>`.
 
 ---
 
