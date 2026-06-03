@@ -178,6 +178,12 @@ Browser-based front end wrapping the same pipeline modules. Accepts file uploads
 
 Session data for the assignment review is stored in `tempfile.gettempdir()/assign_<uuid>/` and includes the uploaded files, all pipeline params, and the collected edge cases.
 
+**ID confirmation badges on the review page** (`review_assignments.html`): each student row shows one or two badges derived from `id_source` and `classlist_confirmed`:
+- **group export** (blue) — `id_source` starts with `export:` (email or username). Always reliable; shown regardless of classlist.
+- **classlist** (green) — `classlist_confirmed = True` (classlist name→number map agrees). Shown alongside group export when both apply.
+- **Q1 answer** (orange) — only when neither of the above: number came solely from the student's self-typed survey answer, no independent verification. Occurs when no classlist was uploaded, or when classlist name normalisation fails for that student.
+- **Q1 answer** (red) — same as orange but `id_source` is `survey:not-in-classlist` or `survey:unresolvable` (student absent from classlist or number could not be parsed at all).
+
 **Settings persistence (localStorage):** All form settings — assignment mode, levers, audit options, team sizes, output mode — are saved in `localStorage` under the `dtutb_` prefix. Settings survive browser close and app restart as long as the same browser and port are used. Reset buttons clear the relevant keys and restore defaults.
 
 Run locally with `python app.py` (serves on `0.0.0.0:5000`). On the Pi, managed by systemd (`teambuilding.service`) and starts automatically on boot. For production, replace Flask's dev server with a WSGI server (e.g. gunicorn).
@@ -240,7 +246,7 @@ One row per student after resolve step. Fields: `student_number, dtu_username, e
 
 `id_source` — where the canonical `student_number` was extracted from. Values: `export:email` (sXXXXXX from group export email field), `export:username` (group export username field, standard or non-standard), `survey:late-entry`, `survey:in-classlist`, `survey:not-in-classlist`, `survey:no-classlist`, `survey:unresolvable` (student found only in survey).
 
-`classlist_confirmed` — `True` if an independent classlist source agrees with the pipeline ID. For standard students: classlist name→number map returns the same sXXXXXX. For non-standard: classlist email gives a recoverable sXXXXXX at all. Used in the interactive review to show a second source badge.
+`classlist_confirmed` — `True` if the classlist name→number map independently returns the same sXXXXXX as the pipeline ID. Used by the interactive review badge logic (see below).
 
 `q1_answer` — the raw value the student typed in survey Q1, stored for audit purposes only. For group export students, Q1 is never the source of `student_number` — the group export email/username is. For survey-only students, classlist email supersedes Q1 when available. Q1 is only a meaningful reference when a student's sXXXXXX cannot be recovered from either the group export or the classlist — at that point it is the auditor's only lead, with no independent verification. Empty for students with no survey.
 

@@ -132,7 +132,7 @@ Late entry students are not pre-assigned to a challenge — after challenge team
 
 Instead of the levers deciding silently, you get a review page before teams are formed. It shows every student whose assignment was ambiguous, one row per student, with their full context:
 
-- **Student** — name, canonical ID, and badges showing where the ID came from and whether it was independently confirmed by the classlist.
+- **Student** — name, canonical ID, and one or two confirmation badges. **group export** (blue) means the number came from the group export — always reliable. **classlist** (green) means the classlist independently confirms it. Both together is the strongest signal. **Q1 answer** (orange) only appears when neither source is available — the number came solely from the student's self-typed survey answer with no independent check. Q1 answer in red means the student is also absent from the classlist (likely unenrolled or a name normalisation edge case).
 - **Case** — why this student is being reviewed (e.g. cross-challenge survey, no survey, not in group export).
 - **Export group** — the challenge they enrolled in according to the group export.
 - **Survey group(s)** — which challenge(s) they filled surveys for.

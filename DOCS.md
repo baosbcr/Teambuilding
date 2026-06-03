@@ -104,7 +104,7 @@ After uploading, a review page appears showing every ambiguous case. Each row co
 
 | Column | Description |
 |--------|-------------|
-| Student | Name, canonical ID, and ID source badges |
+| Student | Name, canonical ID, and confirmation badges: **group export** (blue) — number from group export; **classlist** (green) — independently confirmed by classlist; both together — maximum confidence; **Q1 answer** (orange/red) — only when neither source is available, meaning the number came from the student's self-typed survey answer. Orange = unverified but enrolled; red = not in classlist (likely unenrolled or name mismatch). |
 | Case | The edge case type — one of the situations described in Edge Cases Explained above, shown with a short label |
 | Export group | Which challenge group the student enrolled in (from the group export) |
 | Survey group(s) | Which challenge(s) the student filled surveys for (can be multiple) |
