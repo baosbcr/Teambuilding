@@ -129,15 +129,16 @@ Five internal steps:
 
 Q1 normalisation/correction is always applied (required to match survey records to the right group export row). The resulting canonical student_number is always sourced from the group export, never from Q1. Warnings are always printed.
 
-**`collect_edge_cases(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entries, audit_f1=False, force_audit_ids=None)`**
+**`collect_edge_cases(group_export_rows, survey_records, name_lookup, classlist_ids, cross_challenge, missing_mode, dropped_mode, late_entries, audit_f1=False, audit_dropped=False, force_audit_ids=None)`**
 
 Two-pass function used by the interactive assignment review:
 - Pass 1: runs `build_student_list` with `cross_challenge="survey-wins"`, `missing="keep"`, `dropped="keep"` to collect all students with survey data maximally populated for display.
 - Pass 2: runs `build_student_list` with real lever settings to derive `auto_assignment` per student (the value pre-selected in the review dropdown). Students absent from pass 2 (excluded by `missing=skip` / `dropped=exclude`) get `auto_assignment="skip"`.
+- `audit_dropped`: when `True`, students absent from the classlist are surfaced in the review with a `not-in-classlist` case type and a warning badge, regardless of their normal case type. Requires a classlist.
 - `force_audit_ids`: list of student identifiers (student number, bare digits, or email). Normalised via `normalise_id`. Matched students always appear in the review. Unmatched entries emit `WARNING [force-audit]: '<value>' did not match any student — skipped`.
 - Returns a list of dicts with `case_type, student_number, student_name, export_challenge, survey_challenges, studyline, personality_type, q1_answer, id_source, classlist_confirmed, auto_assignment`. `survey_challenges` is a list (can be multiple for Case D).
 - F1 cases are excluded unless `audit_f1=True`.
-- Happy-path (A/B) students are excluded unless in `force_audit_ids`.
+- Happy-path (A/B) students are excluded unless in `force_audit_ids` or `audit_dropped` applies.
 
 **Additional functions (called after `build_student_list`):**
 - `flag_ghost_students(final_students, classlist_ids)` — diffs classlist IDs against the final output and prints `WARNING [ghost]` for any enrolled student absent from both group export and all surveys.
@@ -222,6 +223,7 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 |---------------------|--------------|-------------------------------------------------------|
 | `assignment_mode`   | automatic    | `automatic`: levers decide all edge cases. `interactive`: review page shown before team formation, one row per edge case with a dropdown pre-filled with the auto-suggested assignment. All assignments (all challenges + overflow + late entry + skip) are always available to the auditor regardless of case type — the auditor may have out-of-band information not reflected in the exports. |
 | `audit_f1`          | off          | *(interactive only)* Include F1 students (late entry, not in group export) in the review. Off by default since F1 students are always kept anyway. |
+| `audit_dropped`     | off          | *(interactive only)* Include students absent from the classlist in the review, regardless of their normal case type. Requires classlist upload. These students appear with a `not-in-classlist` warning badge. |
 | `force_audit_ids`   | (empty)      | *(interactive only)* Comma-separated list of student identifiers (student number, bare digits, or email) to always include in the review regardless of case type. Unmatched entries emit `WARNING [force-audit]` in the run log. Settings saved in browser localStorage. |
 
 ---
