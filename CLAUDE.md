@@ -277,18 +277,18 @@ Diversity = unique count / team size.
 
 ## Typical Run (January 2026 data)
 
-Both `--reports` and `--groups` are always required; there are no default paths.
+Both `--surveys` and `--groups` are always required; there are no default paths.
 All commands run from the `Teambuilding Code/` folder.
 
 ```
 python pipeline.py \
-    --reports "../Learn Exports/January 2026/Team Formation Survey Individual Attempts" \
+    --surveys "../Learn Exports/January 2026/Team Formation Survey Individual Attempts" \
     --groups  "../Learn Exports/January 2026/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv"
 ```
 
 ```
 python pipeline.py \
-    --reports "../Learn Exports/January 2026/Team Formation Survey Individual Attempts" \
+    --surveys "../Learn Exports/January 2026/Team Formation Survey Individual Attempts" \
     --groups  "../Learn Exports/January 2026/Group Exports/Day 1 - Challenge Selection_AllGroups_20260506105143.csv" \
     --summary teams_summary.csv --missing overflow --seed 0
 ```

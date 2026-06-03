@@ -15,7 +15,7 @@ written to --output / --summary.
 
 Usage:
     python pipeline.py \\
-        --reports  "path/to/Team Formation Survey Individual Attempts" \\
+        --surveys  "path/to/Team Formation Survey Individual Attempts" \\
         --groups   "path/to/group_export.csv" \\
         --output   teams.csv \\
         --summary  teams_summary.csv
@@ -52,7 +52,7 @@ import form_teams       as _form
 
 
 def step_build(
-    reports_dir: Path,
+    surveys_dir: Path,
     group_export: Path,
     workdir: Path,
     classlist: Path | None,
@@ -104,8 +104,8 @@ def step_build(
             "  provide this file.",
         )
 
-    print(f"\nSurvey files in '{reports_dir}':")
-    survey_records = _parse.load_all_surveys(reports_dir)
+    print(f"\nSurvey files in '{surveys_dir}':")
+    survey_records = _parse.load_all_surveys(surveys_dir)
     print(f"  {len(survey_records)} total survey records")
 
     print(f"\nMatching ...")
@@ -168,7 +168,7 @@ def main() -> None:
 
     # --- Input sources ---
     ap.add_argument(
-        "--reports",
+        "--surveys",
         default=None,
         metavar="DIR",
         help="Folder containing Individual Attempts XLSX files (required).",
@@ -318,21 +318,21 @@ def main() -> None:
             sys.exit(f"--skip-build file not found: {combined_csv}")
         print(f"Skipping step 1; using {combined_csv}")
     else:
-        if not args.reports:
-            sys.exit("--reports is required: provide the path to the Individual Attempts folder.")
+        if not args.surveys:
+            sys.exit("--surveys is required: provide the path to the Individual Attempts folder.")
         if not args.groups:
             sys.exit("--groups is required: provide the path to the group export CSV.")
 
-        reports_dir = Path(args.reports)
-        if not reports_dir.is_dir():
-            sys.exit(f"--reports directory not found: {reports_dir}")
+        surveys_dir = Path(args.surveys)
+        if not surveys_dir.is_dir():
+            sys.exit(f"--surveys directory not found: {surveys_dir}")
 
         group_export = Path(args.groups)
         if not group_export.exists():
             sys.exit(f"--groups file not found: {group_export}")
 
         combined_csv = step_build(
-            reports_dir          = reports_dir,
+            surveys_dir          = surveys_dir,
             group_export         = group_export,
             workdir              = workdir,
             classlist            = classlist,

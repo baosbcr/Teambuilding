@@ -23,7 +23,7 @@ did the August 2025 run not have an Overflow group, or was it not yet exported?
 
 The `Learn Exports/` directory now contains three run folders, each with the same subdirectory
 layout. The default CLI paths still point at the root `Learn Exports/` folders (unchanged,
-for the "active" run). Historical runs are accessed by passing `--reports`/`--groups` explicitly.
+for the "active" run). Historical runs are accessed by passing `--surveys`/`--groups` explicitly.
 
 ```
 Learn Exports/
@@ -136,7 +136,7 @@ for f in group_files:
         p = dest_dir / f.filename
         f.save(p)
         group_paths.append(p)
-return reports_dir, group_paths, classlist_path
+return surveys_dir, group_paths, classlist_path
 ```
 
 **`_run_pipeline_from_files(group_paths: list[Path], ...)`** — rename parameter from

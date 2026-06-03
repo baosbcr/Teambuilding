@@ -22,7 +22,7 @@ For the full reference (all flags, edge case behaviour, troubleshooting) see **[
    git clone <repository-url>
    ```
 
-> **Sample data included:** The repository contains exported survey and group files from multiple course runs under `Learn Exports/<run>/`. Each run folder follows the same structure. You must always pass `--reports` and `--groups` explicitly when using the CLI — there are no default paths.
+> **Sample data included:** The repository contains exported survey and group files from multiple course runs under `Learn Exports/<run>/`. Each run folder follows the same structure. You must always pass `--surveys` and `--groups` explicitly when using the CLI — there are no default paths.
 
 ---
 
@@ -102,7 +102,7 @@ Then run the pipeline, pointing it at your input files:
 
 ```
 python pipeline.py \
-    --reports "../Learn Exports/<run>/Team Formation Survey Individual Attempts" \
+    --surveys "../Learn Exports/<run>/Team Formation Survey Individual Attempts" \
     --groups  "../Learn Exports/<run>/Group Exports/<filename>.csv"
 ```
 
@@ -111,7 +111,7 @@ Replace `<run>` with the course run folder (e.g. `January 2026`) and `<filename>
 For a full run that also produces per-team diversity stats:
 
 ```
-python pipeline.py --reports <dir> --groups <csv> --summary teams_summary.csv
+python pipeline.py --surveys <dir> --groups <csv> --summary teams_summary.csv
 ```
 
 ---

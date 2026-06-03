@@ -60,17 +60,17 @@ def _parse_form_params(form) -> dict:
 def _save_uploads(req, dest_dir: Path) -> tuple[Path, Path, Path | None]:
     """
     Save uploaded files to dest_dir.
-    Returns (reports_dir, group_path, classlist_path).
+    Returns (surveys_dir, group_path, classlist_path).
     """
-    reports_dir = dest_dir / "reports"
-    reports_dir.mkdir(exist_ok=True)
+    surveys_dir = dest_dir / "surveys"
+    surveys_dir.mkdir(exist_ok=True)
 
-    report_files = req.files.getlist("reports")
+    report_files = req.files.getlist("surveys")
     saved = [f for f in report_files if f.filename]
     if not saved:
         raise ValueError("Please upload at least one Team Formation Survey Individual Attempts file.")
     for f in saved:
-        f.save(reports_dir / f.filename)
+        f.save(surveys_dir / f.filename)
 
     group_file = req.files.get("groups")
     if not group_file or not group_file.filename:
@@ -84,11 +84,11 @@ def _save_uploads(req, dest_dir: Path) -> tuple[Path, Path, Path | None]:
         classlist_path = dest_dir / classlist_file.filename
         classlist_file.save(classlist_path)
 
-    return reports_dir, group_path, classlist_path
+    return surveys_dir, group_path, classlist_path
 
 
 def _run_pipeline_from_files(
-    reports_dir: Path,
+    surveys_dir: Path,
     group_path: Path,
     classlist_path: Path | None,
     params: dict,
@@ -217,7 +217,7 @@ def _run_pipeline_from_files(
                 "    DTU usernames are fully resolved via the group export (identity and group\n"
                 "    assignment) but their sXXXXXX cannot be recovered without the classlist.\n",
             )
-        survey_records = _parse.load_all_surveys(reports_dir)
+        survey_records = _parse.load_all_surveys(surveys_dir)
         students = _resolve.build_student_list(
             group_export_rows    = export_rows,
             survey_records       = survey_records,
@@ -258,8 +258,8 @@ def _run_pipeline_from_files(
 def _run_pipeline(req, tmpdir: Path):
     """Thin wrapper: save uploads, parse params, run full pipeline."""
     params = _parse_form_params(req.form)
-    reports_dir, group_path, classlist_path = _save_uploads(req, tmpdir)
-    return _run_pipeline_from_files(reports_dir, group_path, classlist_path, params, tmpdir)
+    surveys_dir, group_path, classlist_path = _save_uploads(req, tmpdir)
+    return _run_pipeline_from_files(surveys_dir, group_path, classlist_path, params, tmpdir)
 
 
 def _build_zip(teams_path, summary_path, final_path, log_text):
@@ -330,7 +330,7 @@ def run():
     tmpdir = Path(tempfile.mkdtemp())
     try:
         params = _parse_form_params(request.form)
-        reports_dir, group_path, classlist_path = _save_uploads(request, tmpdir)
+        surveys_dir, group_path, classlist_path = _save_uploads(request, tmpdir)
     except (ValueError, SystemExit) as e:
         shutil.rmtree(tmpdir, ignore_errors=True)
         return render_template("index.html", error=str(e)), 400
@@ -348,7 +348,7 @@ def run():
                 classlist_ids, _, _ = (
                     _resolve.load_classlist(classlist_path) if classlist_path else (None, {}, {})
                 )
-                survey_records = _parse.load_all_surveys(reports_dir)
+                survey_records = _parse.load_all_surveys(surveys_dir)
                 edge_cases = _resolve.collect_edge_cases(
                     group_export_rows    = export_rows,
                     survey_records       = survey_records,
@@ -373,7 +373,7 @@ def run():
             tmp_key     = str(uuid.uuid4())
             session_dir = Path(tempfile.gettempdir()) / f"assign_{tmp_key}"
             session_dir.mkdir()
-            shutil.copytree(reports_dir, session_dir / "reports")
+            shutil.copytree(surveys_dir, session_dir / "surveys")
             shutil.copy(group_path, session_dir / group_path.name)
             if classlist_path:
                 shutil.copy(classlist_path, session_dir / classlist_path.name)
@@ -395,7 +395,7 @@ def run():
     # --- Normal run (automatic, or interactive with no edge cases) ---
     try:
         all_teams, log_text, teams_path, summary_path, include_summary = (
-            _run_pipeline_from_files(reports_dir, group_path, classlist_path, params, tmpdir)
+            _run_pipeline_from_files(surveys_dir, group_path, classlist_path, params, tmpdir)
         )
     except (ValueError, SystemExit) as e:
         shutil.rmtree(tmpdir, ignore_errors=True)
@@ -436,13 +436,13 @@ def review_assignments():
             if key.startswith("assign_"):
                 overrides[key[7:]] = value.strip()
 
-        reports_dir    = session_dir / "reports"
+        surveys_dir    = session_dir / "surveys"
         group_path     = session_dir / group_filename
         classlist_path = (session_dir / classlist_filename) if classlist_filename else None
 
         all_teams, log_text, teams_path, summary_path, include_summary = (
             _run_pipeline_from_files(
-                reports_dir, group_path, classlist_path, params,
+                surveys_dir, group_path, classlist_path, params,
                 session_dir, overrides=overrides,
             )
         )
