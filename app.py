@@ -345,7 +345,7 @@ def run():
             with contextlib.redirect_stdout(_discard), contextlib.redirect_stderr(_discard):
                 export_rows    = _resolve.load_group_export_rows(group_path)
                 name_lookup    = _resolve.build_name_lookup(export_rows)
-                classlist_ids, _, _ = (
+                classlist_ids, username_number_map, name_number_map = (
                     _resolve.load_classlist(classlist_path) if classlist_path else (None, {}, {})
                 )
                 survey_records = _parse.load_all_surveys(surveys_dir)
@@ -361,6 +361,8 @@ def run():
                     audit_f1             = params["audit_f1"],
                     audit_dropped        = params["audit_dropped"],
                     force_audit_ids      = params["force_audit_ids"],
+                    username_number_map  = username_number_map,
+                    name_number_map      = name_number_map,
                 )
         except (ValueError, SystemExit) as e:
             shutil.rmtree(tmpdir, ignore_errors=True)

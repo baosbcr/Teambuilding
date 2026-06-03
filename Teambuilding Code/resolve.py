@@ -836,6 +836,8 @@ def collect_edge_cases(
     audit_f1: bool = False,
     audit_dropped: bool = False,
     force_audit_ids: list[str] | None = None,
+    username_number_map: dict | None = None,
+    name_number_map: dict | None = None,
 ) -> list[dict]:
     """
     Return a list of edge-case dicts for the interactive assignment review page.
@@ -868,6 +870,12 @@ def collect_edge_cases(
         cross_challenge = "survey-wins",
         missing_mode    = "keep",
         dropped_mode    = "keep",
+    )
+    # Enrich so classlist_confirmed is accurate on the review page
+    enrich_email_student_numbers(
+        all_students,
+        username_number_map or {},
+        name_number_map or {},
     )
 
     # Pass 2: real lever settings → derive auto_assignment per student
