@@ -69,28 +69,115 @@ From the terminal opened in the project root (the folder containing `app.py`), r
 python app.py
 ```
 
-You will see a line like `Running on http://0.0.0.0:5000`. Open your browser and go to:
-
-**http://localhost:5000**
-
-Upload your files using the form, adjust the options, and click **Run**. The results download automatically as `teams.zip`, containing `teams.csv`, optionally `teams_summary.csv`, and a `run_log.txt` with a full record of the run.
-
-**Challenge Assignment section** — controls how edge cases are handled before team formation:
-
-- **Automatic** (default): the levers (cross-challenge, missing, dropped, late-entries) decide each case silently. Expand *Lever settings* to configure them.
-- **Interactive review**: after uploading, a review page shows every ambiguous case — students whose challenge assignment required a decision. Each row shows the student's full context (export group, survey group(s), studyline, personality, Q1 answer) with a dropdown pre-filled with the automatic suggestion. You can confirm or override any assignment. All possible targets (Challenge A–D, Overflow, Late entry, Skip) are always available — you may have information the pipeline does not (direct student contact, teacher override, etc.).
-
-  Under *Audit options* you can also opt in to reviewing late-entry students who are not in the group export, and add specific student IDs or emails to always include in the review regardless of case type.
-
-> **Settings are saved in your browser.** All form values — including assignment mode, levers, and audit options — are restored automatically the next time you open the app. Use the reset buttons to revert to defaults.
-
-To stop the server, go back to the terminal and press **Ctrl + C**.
+You will see a line like `Running on http://0.0.0.0:5000`. Open your browser and go to **http://localhost:5000**. To stop the server later, press **Ctrl + C** in the terminal.
 
 > The server is also reachable from other devices on the same network via `http://<your-computer-ip>:5000`.
 
+> **Settings are saved in your browser.** All form values are automatically restored the next time you open the app. Use the reset buttons to revert individual sections to defaults.
+
 ---
 
-### 4b. Run via terminal (CLI — no server needed)
+#### Input Files
+
+The form has three file upload fields.
+
+**Team Formation Survey Individual Attempts** *(required)*
+The XLSX files exported from DTU Learn — one per survey group (Challenge A, B, C, D, Overflow, Late entries). Select all files at once using Ctrl+click (Windows) or Cmd+click (Mac).
+
+**Group Export** *(required)*
+The CSV exported from DTU Learn → Groups, after the enrollment deadline. This is the ground truth for which challenge each student enrolled in.
+
+**Classlist** *(optional but strongly recommended)*
+The full student list exported from DTU Learn → Classlist. Providing it unlocks three features:
+- **Ghost detection** — flags students who enrolled in the course but never joined a group and never filled any survey. Without the classlist these students are silently absent from the output.
+- **Dropped-student filtering** — lets the pipeline distinguish students who likely withdrew (absent from the classlist) from valid late additions.
+- **Student number enrichment** — for students with non-standard DTU usernames (short alphabetic accounts), the pipeline looks up their `sXXXXXX` number from their classlist email and adds it to the output for manual verification.
+
+If you submit without a classlist, a warning appears asking you to confirm. It is safe to proceed, but the three features above will be unavailable.
+
+---
+
+#### Team Settings
+
+| Setting | Default | What it does |
+|---------|---------|--------------|
+| Target size | 8 | The size the algorithm aims for when deciding how many teams to create. |
+| Minimum size | 7 | No team will be formed with fewer than this many students. |
+| Maximum size | 10 | No team will grow beyond this size. |
+| Max teams per challenge | 25 | Hard cap on the number of teams per challenge group. |
+| Random seed | 42 | Controls tie-breaking during assignment. The same seed always gives the same output — useful for reproducing a previous run. Change it to explore alternative valid assignments. |
+
+Under **Advanced — diversity weights** you can adjust how much the algorithm values studyline diversity vs personality type diversity when building teams. Both default to 1.0 (equal weight). Increase one to prioritise it more strongly.
+
+---
+
+#### Challenge Assignment
+
+This section controls how students who don't fit cleanly into the normal flow are handled before teams are formed.
+
+##### Automatic mode (default)
+
+The pipeline resolves every ambiguous case silently according to the four levers below. Expand **Edge case settings** to configure them.
+
+| Lever | Default | What it controls |
+|-------|---------|-----------------|
+| **Cross-challenge survey** | survey-wins | A student filled a survey for a *different* challenge than they enrolled in — e.g. they moved groups after completing the survey. `survey-wins` uses their survey answers (studyline, personality) but keeps them in their enrolled challenge. `joker` ignores the survey and assigns UNKNOWN attributes. `survey-overrules` uses the survey answers *and* moves them to the challenge they surveyed for. |
+| **Students with no survey** | keep | Students who appear in the group export but never filled any survey. `keep` includes them with UNKNOWN studyline and personality. `overflow` moves them to the flex pool. `skip` excludes them entirely. |
+| **Students with a survey but not in the export** | keep | Students who submitted a survey but have no matching group export row — likely withdrew from the course after submitting. `keep` includes them. `exclude` removes them. Only meaningfully distinguishable from valid late additions when a classlist is uploaded. |
+| **Late entries** | keep | Controls what happens to students who filled the Late Entries survey. `keep` moves overflow students with a late entry survey to the late entry pool (challenge-group students stay in their challenge). `flex` moves everyone with a late entry survey to late entry, including challenge-group students. `discard-survey-only` excludes students found only in the late entry survey (not in the group export). `discard-all` excludes all students who end up with a late entry allocation. |
+
+Late entry students are not pre-assigned to a challenge — after challenge teams are formed they are distributed across all challenges to balance team sizes.
+
+##### Interactive review mode
+
+Instead of the levers deciding silently, you get a review page before teams are formed. It shows every student whose assignment was ambiguous, one row per student, with their full context:
+
+- **Student** — name, canonical ID, and badges showing where the ID came from and whether it was independently confirmed by the classlist.
+- **Case** — why this student is being reviewed (e.g. cross-challenge survey, no survey, not in group export).
+- **Export group** — the challenge they enrolled in according to the group export.
+- **Survey group(s)** — which challenge(s) they filled surveys for.
+- **Studyline / Personality** — from their survey; UNKNOWN if no survey was found.
+- **Q1 answer** — the raw ID value they typed in the survey, shown for reference only.
+- **Assignment** — a dropdown pre-filled with the auto-suggested assignment. Change it if needed.
+
+All assignments — Challenge A through D, Overflow, Late entry, and Skip (exclude) — are always available in the dropdown regardless of case type. You may have information the pipeline doesn't, such as direct contact from a student or a teacher override.
+
+Dropdowns you have changed are highlighted in red so it is easy to see what you have overridden. Click **Confirm assignments → Form teams** when done.
+
+**Audit options** (optional, for extra scrutiny):
+
+- *Include late-entry students (not in group export) in the review* — late entry students are always kept anyway, but turning this on lets you verify them manually.
+- *Include potentially unenrolled students in the review* — surfaces students who are absent from the classlist, regardless of their normal case type, marked with a warning badge. Requires a classlist upload.
+- *Specific students to always audit* — type a student number (`s253896`, `253896`) or email (`s253896@dtu.dk`) and press Enter to add it as a tag. That student will always appear in the review regardless of their case type. Useful when you have received direct contact from a specific student or teacher.
+
+---
+
+#### Output
+
+**Include per-team diversity summary** — adds `teams_summary.csv` to the download, with one row per team showing team size, number of unique studylines, number of unique personality types, and diversity scores (unique count ÷ team size).
+
+**Final output mode** — controls how the clean `teams_final.csv` (Name, Student Number, Group) is produced:
+- *Automatic* — student numbers are resolved by rule and all decisions are logged in `run_log.txt`.
+- *Interactive* — you are shown a review page for any students whose number could not be resolved with certainty, before the final file is generated.
+
+**Fallback for unresolvable student numbers** *(automatic mode only)* — what to write in the Student Number column for students where no `sXXXXXX` can be found anywhere. Choices: use their DTU username as-is (default), leave it blank, or write `UNRESOLVED:<username>` as an explicit flag.
+
+---
+
+#### What you get
+
+Clicking **Run Pipeline & Download Results** starts the pipeline. A spinner appears while it runs (up to ~90 seconds). When done, `teams.zip` downloads automatically, containing:
+
+| File | Contents |
+|------|----------|
+| `teams.csv` | Full team assignments — one row per student with team ID, challenge, student number, name, studyline, personality, and the original group they enrolled in. |
+| `teams_final.csv` | Clean version for sharing — Name, Student Number, Group only. |
+| `teams_summary.csv` | Per-team diversity stats (only if the summary option was checked). |
+| `run_log.txt` | Complete log of the run, including the settings used, every warning and info message, and a guide to reading the log messages. |
+
+---
+
+### 4b. Run via terminal (CLI — for advanced use)
 
 In the same terminal, navigate into the `Teambuilding Code` subfolder:
 

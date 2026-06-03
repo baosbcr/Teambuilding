@@ -1,6 +1,6 @@
 # DTU Teambuilding — Full Reference
 
-This document covers all command-line options, edge case behaviour, example runs, console output guide, and troubleshooting. For setup and basic usage see **[README.md](README.md)**.
+This document covers all command-line options, edge case behaviour, example runs, console output guide, and troubleshooting. For setup, the Flask app guide, and basic usage see **[README.md](README.md)**.
 
 ---
 

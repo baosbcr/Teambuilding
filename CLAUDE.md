@@ -181,6 +181,8 @@ Session data for the assignment review is stored in `tempfile.gettempdir()/assig
 
 Run locally with `python app.py` (serves on `0.0.0.0:5000`). On the Pi, managed by systemd (`teambuilding.service`) and starts automatically on boot. For production, replace Flask's dev server with a WSGI server (e.g. gunicorn).
 
+**User-facing documentation:** `README.md` contains the complete Flask app usage guide — a plain-language walkthrough of every section of the form (input files, team settings, all levers, interactive review, audit options, output modes). **Keep this guide in sync whenever `templates/index.html`, `templates/review_assignments.html`, or the interactive assignment flow changes.** This includes: adding/removing/renaming form fields or levers, changing lever options or defaults, altering the interactive review table columns, and changing the output ZIP contents.
+
 ---
 
 ## Student ID Normalisation
