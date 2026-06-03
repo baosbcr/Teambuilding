@@ -1,0 +1,950 @@
+Name,UserName,Email,Role
+"Calaon, Matteo",mcal,mcal@dtu.dk,Course Responsible
+"Andersen, Stefan Siggaard",s144230,s144230@student.dtu.dk,Student
+"Ranløv, Anton Nygaard",s170429,s170429@student.dtu.dk,Student
+"Henriksen, Frederik Verne",s173394,s173394@student.dtu.dk,Student
+"Sehested, Frederik Gregers Gyldenstierne",s173779,s173779@student.dtu.dk,Student
+"Lorenzen, Clara Mejlhede",s180350,s180350@student.dtu.dk,Student
+"Jiang, Mickael Mathiias",s180351,s180351@student.dtu.dk,Student
+"Nielsen, Oskar Barslund Raupach",s180530,s180530@student.dtu.dk,Student
+"Harsaae, Astrid Louise",s181486,s181486@student.dtu.dk,Student
+"Eriksen, Jacob Borregaard",s181487,s181487@student.dtu.dk,Student
+"Strandberg, Anton Wang",s183220,s183220@student.dtu.dk,Student
+"Carstensen, Aske Schultz",s183707,s183707@student.dtu.dk,Student
+"Ørdam, Niels Krätzel",s183720,s183720@student.dtu.dk,Student
+"Haupt, Anne Sørensen",s184120,s184120@student.dtu.dk,Student
+"Knudsen, Emil",emknu,s184360@student.dtu.dk,Student
+"Ma, Thomas",s184785,s184785@student.dtu.dk,Student
+"Zahed, Mohammed",s186517,s186517@student.dtu.dk,Student
+"Lage, Anton",s191270,s191270@student.dtu.dk,Student
+"Lund, Emilie Graae",s191274,s191274@student.dtu.dk,Student
+"Ali, Souar Ramzi Mohammad",s191446,s191446@student.dtu.dk,Student
+"Resho, Mohamed Ali",moare,moare@dtu.dk,Student
+"Petersen, Emil Valdemar",s192894,s192894@student.dtu.dk,Student
+"Leeden, Ida Wedell van der",s193210,s193210@student.dtu.dk,Student
+"Skydsgaard, Emil Arnika",s193579,s193579@student.dtu.dk,Student
+"Wenner, Emilie Leonora",s193602,s193602@student.dtu.dk,Student
+"Bouquin, Astrid Lind",albouq,s193623@student.dtu.dk,Student
+"Jensen, Christian Bang",s193815,s193815@student.dtu.dk,Student
+"Sachmann, Nicoline Simone",s193868,s193868@student.dtu.dk,Student
+"Davidsen, Sofie",s193869,s193869@student.dtu.dk,Student
+"Baggers, Frederik Orry",s194837,s194837@student.dtu.dk,Student
+"Hagedorn-Rasmussen, William",s194545,s194545@student.dtu.dk,Student
+"Mambu, Arsene Ibinsan",s194003,s194003@student.dtu.dk,Student
+"Villesen, Katrine Bukh",s194795,s194795@student.dtu.dk,Student
+"Olsen, Astrid Aabo",astraa,astraa@kemi.dtu.dk,Student
+"Jensen, Anna Sky Kastl",s194824,s194824@student.dtu.dk,Student
+"Henriksen, Frederik Baj",s194645,s194645@student.dtu.dk,Student
+"Lukic, Aleksandar",s194066,s194066@student.dtu.dk,Student
+"Printz, Jacqueline",s194377,s194377@student.dtu.dk,Student
+"Karkov, Sara",s195388,s195388@student.dtu.dk,Student
+"Malik, Maliha Asif",s195296,s195296@student.dtu.dk,Student
+"Kristensen, Jonas Brems",s195194,s195194@student.dtu.dk,Student
+"Toft, Kenneth Plum",s195171,s195171@student.dtu.dk,Student
+"Schøning, Adrian Roed",s195459,s195459@student.dtu.dk,Student
+"Sharif, Lillian Goran",s195761,s195761@student.dtu.dk,Student
+"Thygesen, Kasper",s195793,s195793@student.dtu.dk,Student
+"Matar, Fadl Abbas",s195846,s195846@student.dtu.dk,Student
+"Aggelis, Nikolas Vengberg",s196727,s196727@student.dtu.dk,Student
+"Wachs, Silje Mai",s200010,s200010@student.dtu.dk,Student
+"Stenholt, Mathilde",s200047,s200047@student.dtu.dk,Student
+"Jensen, Mikkel Jon Frangu",s200518,s200518@student.dtu.dk,Student
+"Hansen, Thomas Rønnebek",s200513,s200513@student.dtu.dk,Student
+"Jørgensen, Adam Harald",s200718,s200718@student.dtu.dk,Student
+"Bigom, Andreas Holmer",s200925,s200925@student.dtu.dk,Student
+"Petersen, Frederikke Paulin",s201203,s201203@student.dtu.dk,Student
+"Haugaard, Julie Alsing",s201523,s201523@student.dtu.dk,Student
+"Simonsen, Jonathan",s201680,s201680@student.dtu.dk,Student
+"Rasmussen, Jonas Munk",s201693,s201693@student.dtu.dk,Student
+"Christiansen, Gustav Dobel",s201704,s201704@student.dtu.dk,Student
+"Søgaard, Julius Lunde",s201709,s201709@student.dtu.dk,Student
+"Alkjærsig, Mads Albert",s203372,s203372@student.dtu.dk,Student
+"Alin, Yusuf",s203488,s203488@student.dtu.dk,Student
+"Grier, Anton Egeskov",s203557,s203557@student.dtu.dk,Student
+"Udsen, Line Cecilie",s203694,s203694@student.dtu.dk,Student
+"Rasmussen, Jonas Sennek",s203516,s203516@student.dtu.dk,Student
+"Zinck, Rikke Wulff",s203534,s203534@student.dtu.dk,Student
+"Estad, Alberte Heering",s203572,s203572@student.dtu.dk,Student
+"Skaarup, Jacob Sterup",s203693,s203693@student.dtu.dk,Student
+"Skytthe, Lea Eschen",s203531,s203531@student.dtu.dk,Student
+"Ajek, Ola",s203708,s203708@student.dtu.dk,Student
+"Catruc, Alexandru",s203696,s203696@student.dtu.dk,Student
+"Kofod, Martha Marie Halkjær",s203703,s203703@student.dtu.dk,Student
+"Christensen, Johanne Birk",s203788,s203788@student.dtu.dk,Student
+"Reimert, Frederik Valdemar Holck",s203520,s203520@student.dtu.dk,Student
+"Jensen, Mikkel Lyskjær",s203514,s203514@student.dtu.dk,Student
+"Vilhjálmsson, Benedicte Maul",s203581,s203581@student.dtu.dk,Student
+"Heckscher, Jasmin Megan",s203674,s203674@student.dtu.dk,Student
+"Danielsen, Lasse Schnell",s203512,s203512@student.dtu.dk,Student
+"Jensen, Freja Klint",s203570,s203570@student.dtu.dk,Student
+"Jørgensen, Thais Peter Bredal",s203723,s203723@student.dtu.dk,Student
+"Stürup, Freja Bonde",s203517,s203517@student.dtu.dk,Student
+"Kragh, Marie Murmann",s203566,s203566@student.dtu.dk,Student
+"Jensen, Maiken Høgh",s203560,s203560@student.dtu.dk,Student
+"Odgaard, Jonathan Henius",s203699,s203699@student.dtu.dk,Student
+"Krehan, Frederik Springer",s203684,s203684@student.dtu.dk,Student
+"Schacht, Ida Marie",s203738,s203738@student.dtu.dk,Student
+"Holmstrup, Frederik",freho,s203540@student.dtu.dk,Student
+"Christensen, Albert Middelfart",s203585,s203585@student.dtu.dk,Student
+"Witt, Christian",s203667,s203667@student.dtu.dk,Student
+"Mathias, Signe May",s204516,s204516@student.dtu.dk,Student
+"Pedersen, Robert Dunker",s204299,s204299@student.dtu.dk,Student
+"Paredes, Marco Philip",s204578,s204578@student.dtu.dk,Student
+"Jørgensen, Emilie Ahrnkiel",s204350,s204350@student.dtu.dk,Student
+"Hockauf, Linnea",s204547,s204547@student.dtu.dk,Student
+"Elster, Frederik Østerbæk",freoes,freoes@dtu.dk,Student
+"Fink-Jensen, Isabella Hochstenbach",ishof,s204037@student.dtu.dk,Student
+"Høgsted, August",s204630,s204630@student.dtu.dk,Student
+"Petersen, Asbjørn Hammershøi",s204084,s204084@student.dtu.dk,Student
+"Nissen, Kristian Jerichau",s203895,s203895@student.dtu.dk,Student
+"Horneman, Carla Helene",s203837,s203837@student.dtu.dk,Student
+"Storgaard, Klara Pihl",s204130,s204130@student.dtu.dk,Student
+"Nielsen, Emilie Vestergaard",s204320,s204320@student.dtu.dk,Student
+"Bosquetti, Arthur Conrado Veiga",s204718,s204718@student.dtu.dk,Student
+"Nikolajsen, Mathias Munck",s204271,s204271@student.dtu.dk,Student
+"Riis-Klinkvort, Laura",s204319,s204319@student.dtu.dk,Student
+"Duedahl-Olesen, Christine",s204012,s204012@student.dtu.dk,Student
+"Rising, Mathias Hove",mathri,s204291@student.dtu.dk,Student
+"Sjøgren, Natascha Bonnén",s204318,s204318@student.dtu.dk,Student
+"Laukamp, Alexander Philip Hoffmann",s204092,s204092@student.dtu.dk,Student
+"Hagedorn, Maria Louise Thorup",s204214,s204214@student.dtu.dk,Student
+"Azar, Vandad Kolahi",s205073,s205073@student.dtu.dk,Student
+"Sinha, Vidisha",s204081,s204081@student.dtu.dk,Student
+"Aaløse, Jesper Clement",s205488,s205488@student.dtu.dk,Student
+"Olsen, Frederik Sartov",s204118,s204118@student.dtu.dk,Student
+"Krenk, Anders Otto Oscar",s204749,s204749@student.dtu.dk,Student
+"Rezvani, Nojan",s204426,s204426@student.dtu.dk,Student
+"Cai, Chenxi",s205420,s205420@student.dtu.dk,Student
+"Jørgensen, Victor Schejbel",s205051,s205051@student.dtu.dk,Student
+"Vossoughi, Ryan",s203970,s203970@student.dtu.dk,Student
+"Bjaldby, Catrine Maagaard",s204650,s204650@student.dtu.dk,Student
+"Byberg, Jeppe Urup",s204381,s204381@student.dtu.dk,Student
+"Verrecchia, Johan Nino",s204127,s204127@student.dtu.dk,Student
+"Christensen, Oliver Grønborg",s204479,s204479@student.dtu.dk,Student
+"Noes-Rasmussen, Patrick",patno,s204275@student.dtu.dk,Student
+"Eskildsen, Louis Kamp",s203977,s203977@student.dtu.dk,Student
+"Grundtvig, Nicholas Oliver",s203823,s203823@student.dtu.dk,Student
+"Proudfoot, Steven Christian",s205465,s205465@student.dtu.dk,Student
+"Helsted, Philip Johannes Fog",s204147,s204147@student.dtu.dk,Student
+"Jensen, Marcus Rosenkilde",s204237,s204237@student.dtu.dk,Student
+"Helmark, Malthe",s203985,s203985@student.dtu.dk,Student
+"Kristensen, Miranda Niemann",s204257,s204257@student.dtu.dk,Student
+"Khalil, Ilaf Wafic",s204902,s204902@student.dtu.dk,Student
+"Wejendorp, Christoffer Høeg",s204090,s204090@student.dtu.dk,Student
+"Tams, Thomas Malthe Mølgaard",s204540,s204540@student.dtu.dk,Student
+"Krarup, Emil Kim",s204449,s204449@student.dtu.dk,Student
+"Nuur, Suhail Abdi",s205135,s205135@student.dtu.dk,Student
+"Jakobsen, Mads Hagen",s203955,s203955@student.dtu.dk,Student
+"Gerds, Olivia Kaya",s203915,s203915@student.dtu.dk,Student
+"Julsgart, Hannah Wolfe",s204308,s204308@student.dtu.dk,Student
+"Nielsen, Jacob Corkill",jconi,jconi@dtu.dk,Student
+"Skjoldager, Magnús Jarl",s204244,s204244@student.dtu.dk,Student
+"Vestergaard, Lea Birch",s203907,s203907@student.dtu.dk,Student
+"Klarlund, Povl Árni",parkl,parkl@dtu.dk,Student
+"Broager, Oliver Birkmose",s204259,s204259@student.dtu.dk,Student
+"Petersen, Nicklas Johnsen",s205157,s205157@student.dtu.dk,Student
+"Andersen, Kristine Rigmor Agergaard",s204608,s204608@student.dtu.dk,Student
+"Brockhoff, Julie Bruun",s204519,s204519@student.dtu.dk,Student
+"Kold, Clara Regine Hoeg",s204623,s204623@student.dtu.dk,Student
+"Mouritsen, Jacob Egebjerg",s204195,s204195@student.dtu.dk,Student
+"Raahauge, Kenneth",s204420,s204420@student.dtu.dk,Student
+"Siggaard, Oliver Tobias",s204450,s204450@student.dtu.dk,Student
+"Rasmussen, Jonas Attrup",s203859,s203859@student.dtu.dk,Student
+"Poulsen, Johannes Christian",s204399,s204399@student.dtu.dk,Student
+"Eriksen, Mads Dan",s204170,s204170@student.dtu.dk,Student
+"Svartá, Andreas Lyngsø",s204185,s204185@student.dtu.dk,Student
+"Nagel, Frederik Emil",s204213,s204213@student.dtu.dk,Student
+"Schytte, Emma Bindslev",s204246,s204246@student.dtu.dk,Student
+"Johannesen, Maja Rebien",s204287,s204287@student.dtu.dk,Student
+"Andersen, Oliver Rosenkvist",s204298,s204298@student.dtu.dk,Student
+"Andersen, Sophia Helena",s204311,s204311@student.dtu.dk,Student
+"Nielsen, Rebecca Elmquist",s204331,s204331@student.dtu.dk,Student
+"Sadowski, Viktor Eldrup",s204379,s204379@student.dtu.dk,Student
+"Strandfelt, August",augst,augst@dtu.dk,Student
+"Lumbye, Benjamin Noah",s204428,s204428@student.dtu.dk,Student
+"Harder, Mads Riber",s204473,s204473@student.dtu.dk,Student
+"Jacobsen, Esther Arentoft",s204567,s204567@student.dtu.dk,Student
+"Eriksen, Thor Nørgaard",s204618,s204618@student.dtu.dk,Student
+"Schultz-Nielsen, Amalie",s204643,s204643@student.dtu.dk,Student
+"Sandelius, Ida Johanne",s204649,s204649@student.dtu.dk,Student
+"Martins, Patrick Jensen",s204748,s204748@student.dtu.dk,Student
+"Krenk, Sara Laura Louisa",s204750,s204750@student.dtu.dk,Student
+"Meci, Denis",s204763,s204763@student.dtu.dk,Student
+"Harmandjiev, Michail",s204801,s204801@student.dtu.dk,Student
+"Blomsterberg, Tobias Klæbel",s205358,s205358@student.dtu.dk,Student
+"Urskov, Andreas Gudemoos",aguur,aguur@dtu.dk,Student
+"Niemann, Rasmus Pultz",s204029,s204029@student.dtu.dk,Student
+"Johansen, Eva Filippa Scott",s204067,s204067@student.dtu.dk,Student
+"Saraiva, Rita",s205717,s205717@student.dtu.dk,Student
+"Jespersen, Gustav Alexander",s205831,s205831@student.dtu.dk,Student
+"Krüger, Rasmus",s205855,s205855@student.dtu.dk,Student
+"Olsen, Signe Djernis",s206759,s206759@student.dtu.dk,Student
+"Reimer, Anne",s210794,s210794@student.dtu.dk,Student
+"Jankovic, Viktor",s210892,s210892@student.dtu.dk,Student
+"Andersen, Cornelia Helle Wiberg",s210955,s210955@student.dtu.dk,Student
+"Hansen, Emma Lærke Cartland",s210940,s210940@student.dtu.dk,Student
+"Tuxen, Nicolaj Nørgaard",s211496,s211496@student.dtu.dk,Student
+"Flores, Michelle Hueramo",s211812,s211812@student.dtu.dk,Student
+"Thorn, Felix Erik Snæbom",s211939,s211939@student.dtu.dk,Student
+"Hegelund, Thomas Seifert",s211899,s211899@student.dtu.dk,Student
+"Thorn, Harald Axel Snæbom",s211940,s211940@student.dtu.dk,Student
+"Tissot, Marcos Cabana",s212166,s212166@student.dtu.dk,Student
+"Monleon, Santiago",s212301,s212301@student.dtu.dk,Student
+"Meyer, Toke",s214250,s214250@student.dtu.dk,Student
+"Pedersen, Casper Lindballe Lehmann",s214231,s214231@student.dtu.dk,Student
+"Brink, Magnus Eriksen",s214241,s214241@student.dtu.dk,Student
+"Feld, Emil Sandholt",s214191,s214191@student.dtu.dk,Student
+"Sund, Ida Kjølhede Hundebøl",s214211,s214211@student.dtu.dk,Student
+"Møller, Mathias Krøis",s214422,s214422@student.dtu.dk,Student
+"Petersen, Malthe Brandbyge",s214452,s214452@student.dtu.dk,Student
+"Søndergaard, Rasmus Duus",s214262,s214262@student.dtu.dk,Student
+"Christensen, Anders Hays Hofmann",s214493,s214493@student.dtu.dk,Student
+"Nielsen, Magnus Vejby",s214433,s214433@student.dtu.dk,Student
+"Ahmed, Mohamad",s214203,s214203@student.dtu.dk,Student
+"Thuesen, Anna",s214253,s214253@student.dtu.dk,Student
+"Rosenquist, Andreas",s214604,s214604@student.dtu.dk,Student
+"Nielsen, Nikolaj Schejbel",s214494,s214494@student.dtu.dk,Student
+"Sørensen, Jonas",s214504,s214504@student.dtu.dk,Student
+"Søndergaard, Andreas",s214635,s214635@student.dtu.dk,Student
+"Vallentin, David Bøg",s214535,s214535@student.dtu.dk,Student
+"Hvilsted, Cecilie Dahl",s214605,s214605@student.dtu.dk,Student
+"Emcken, Lucas Mørch",s214625,s214625@student.dtu.dk,Student
+"Nielsen, Gustav Louis",s214585,s214585@student.dtu.dk,Student
+"Christensen, Aleksander Mathias Karoli",s214455,s214455@student.dtu.dk,Student
+"Gude, Alma Kvist",s214856,s214856@student.dtu.dk,Student
+"Droob, Olivia Sommer",s214696,s214696@student.dtu.dk,Student
+"Høyberg-Nielsen, Lucas Sylvester",s214636,s214636@student.dtu.dk,Student
+"Munkstrup, Gustav Saxe Konrad",s214826,s214826@student.dtu.dk,Student
+"Hamburger, Malene Ræbild",s214476,s214476@student.dtu.dk,Student
+"Bjarning, John William Gaard",s214506,s214506@student.dtu.dk,Student
+"Juhler-Nøttrup, Ditte",s214566,s214566@student.dtu.dk,Student
+"Østfeldt, Rasmus",s214666,s214666@student.dtu.dk,Student
+"Kanstrup, Andreas",s214546,s214546@student.dtu.dk,Student
+"Branner, Andreas",s214897,s214897@student.dtu.dk,Student
+"Damsgaard, Mathias Correll",s214647,s214647@student.dtu.dk,Student
+"Olsen, Martin Priess",s214187,s214187@student.dtu.dk,Student
+"Hassan, Abaas Mohamed Ahmed",s214847,s214847@student.dtu.dk,Student
+"Hansen, Anastasia Thyregod",s214397,s214397@student.dtu.dk,Student
+"Rørhauge, Carl Gustav Lindstrøm",s214657,s214657@student.dtu.dk,Student
+"Helsø, Morten Lindhardt",s214927,s214927@student.dtu.dk,Student
+"Breüner, Tore Sebastian",s214937,s214937@student.dtu.dk,Student
+"Johansen, Stine With",s214547,swijo@dtu.dk,Student
+"Norby, Marika Birkedal",s214457,s214457@student.dtu.dk,Student
+"Bang, Fie Søndergaard",s214917,s214917@student.dtu.dk,Student
+"Levin, Mikkel Christian Rask",s214557,s214557@student.dtu.dk,Student
+"Bisp, Lasse Røhling",s214807,s214807@student.dtu.dk,Student
+"Schrøder, Max-Peter",s214238,s214238@student.dtu.dk,Student
+"Bonvang, Peter",s214658,s214658@student.dtu.dk,Student
+"Sørensen, Jonas Brandt",s214218,s214218@student.dtu.dk,Student
+"Hansen, Karoline Klan",s214638,s214638@student.dtu.dk,Student
+"Nielsen, Markus Skov",s214938,s214938@student.dtu.dk,Student
+"Kirkegaard, Louise",s215038,s215038@student.dtu.dk,Student
+"Mouritzen, Markus Bjerg",s214518,s214518@student.dtu.dk,Student
+"Furia, Isabella del",s215138,s215138@student.dtu.dk,Student
+"Nielsen, Andreas Berg Kildemark",s215078,s215078@student.dtu.dk,Student
+"Rahbek-Palm, Andreas",s214598,s214598@student.dtu.dk,Student
+"Ehlert, Andreas Michael Gottlieb",s214888,s214888@student.dtu.dk,Student
+"Hartmann-Petersen, Ulrikke Dreisig",s214758,s214758@student.dtu.dk,Student
+"Moral, Olivier Nicolas Jarrosson",s215118,s215118@student.dtu.dk,Student
+"Zederkof, Caroline Bugge",s215068,s215068@student.dtu.dk,Student
+"Simony, Malthe Nelausen",s214259,s214259@student.dtu.dk,Student
+"Holme, Lauritz Christian",s214619,s214619@student.dtu.dk,Student
+"Andersson, Rasmus",s214479,s214479@student.dtu.dk,Student
+"Michalczyk, Milena",s215219,s215219@student.dtu.dk,Student
+"Larsen, Rolf",s215109,s215109@student.dtu.dk,Student
+"Hansen, Andreas",s214969,s214969@student.dtu.dk,Student
+"Gauguin, Astrid Marie",s214789,s214789@student.dtu.dk,Student
+"Jakobsen, Freja Rølle",s214249,s214249@student.dtu.dk,Student
+"Christiansen, Clara Sofie",s214659,s214659@student.dtu.dk,Student
+"Meyer-Kristensen, Ida Lundberg",s215029,s215029@student.dtu.dk,Student
+"Dupont, Philip Skov",s214209,s214209@student.dtu.dk,Student
+"Neergaard, Sigurd Valentin Flach de",s215149,s215149@student.dtu.dk,Student
+"Kringelhede, Mia Fenja",s214949,s214949@student.dtu.dk,Student
+"Thorleifsson, Nikolina",s214851,s214851@student.dtu.dk,Student
+"Bresler, Malthe August Bordin",s214631,s214631@student.dtu.dk,Student
+"Ries, Daniel Damkjær",s214641,s214641@student.dtu.dk,Student
+"Watering, Anke Julia van de",s215231,s215231@student.dtu.dk,Student
+"Olesen, Katrine Lambæk",s215061,s215061@student.dtu.dk,Student
+"Granlund, Paula Johanna Maria",s215001,s215001@student.dtu.dk,Student
+"Surmacz, Bartosz",s214561,s214561@student.dtu.dk,Student
+"Sørensen, Jeppe Holm",s214961,s214961@student.dtu.dk,Student
+"Heinze, Mikkel Langberg",s215021,s215021@student.dtu.dk,Student
+"Reventlow, Sebastian Lucas",s214871,s214871@student.dtu.dk,Student
+"Stalzer, Maximilian",s215141,s215141@student.dtu.dk,Student
+"Storgaard, Anton Mosquera",s214611,s214611@student.dtu.dk,Student
+"Kold, Rasmus",s214541,s214541@student.dtu.dk,Student
+"Ravn, Cathrine Bonne",cabra,s214801@student.dtu.dk,Student
+"Oscarsson, Andreas",s214481,s214481@student.dtu.dk,Student
+"Rasmussen, Anna Rantzau Pugerup",s215071,s215071@student.dtu.dk,Student
+"Laksafoss, Ísakur Zachariassen",s214701,s214701@student.dtu.dk,Student
+"Hansen, Valdemar Hee",s214621,s214621@student.dtu.dk,Student
+"Klemp, Vilma Marie Riel",s214431,s214431@student.dtu.dk,Student
+"Wimmelmann, Clara Ruby",s214471,s214471@student.dtu.dk,Student
+"Heinricy, Viktor",s214902,s214902@student.dtu.dk,Student
+"Hansen, Louise Ingeman Brandt",s214542,s214542@student.dtu.dk,Student
+"Sørensen, Rasmus Saugmann",s214622,s214622@student.dtu.dk,Student
+"Nybroe, Martha Falkesgaard",s214692,s214692@student.dtu.dk,Student
+"Thomassen, Simon René",s214872,s214872@student.dtu.dk,Student
+"Mortensen, Niels Boelt",s214502,s214502@student.dtu.dk,Student
+"Nielsen, Christoffer",s214892,s214892@student.dtu.dk,Student
+"Thomsen, Dannie Bach",s215692,s215692@student.dtu.dk,Student
+"Lindhardtsen, Ida",s214532,s214532@student.dtu.dk,Student
+"Wiberg, Sille Louise Beyer",s214712,s214712@student.dtu.dk,Student
+"Stycke, Thomas Dyrup",s214742,s214742@student.dtu.dk,Student
+"Rasmussen, Joanna Sela",s215092,s215092@student.dtu.dk,Student
+"Larsen, Marie Dyrekær",s215082,s215082@student.dtu.dk,Student
+"Iglesias, Lucas Lojo",s215244,s215244@student.dtu.dk,Student
+"Andersen, Oscar Aakvist",s214884,s214884@student.dtu.dk,Student
+"Christensen, Benjamin Rospilloso",s215124,s215124@student.dtu.dk,Student
+"Kurtz, Sofie Marie",s215304,s215304@student.dtu.dk,Student
+"Broncano, Lukas Kristensen",s215764,s215764@student.dtu.dk,Student
+"Singh, Anshjyot",s215806,s215806@student.dtu.dk,Student
+"Hyltoft, Christian Øster",s215816,s215816@student.dtu.dk,Student
+"Rad, Anahita",s215496,s215496@student.dtu.dk,Student
+"Nossa, Alessio",s215206,s215206@student.dtu.dk,Student
+"Ildor, Johan Bjørn",s214866,s214866@student.dtu.dk,Student
+"Fernando, Antoney Raphael Stylinars",s215519,s215519@student.dtu.dk,Student
+"Hyltoft, Victor Øster",s214964,s214964@student.dtu.dk,Student
+"Li, Qizhong",s215125,s215125@student.dtu.dk,Student
+"Hjortshøj, Nikolaj",s214945,s214945@student.dtu.dk,Student
+"Larsen, Mark Andrew",s215525,s215525@student.dtu.dk,Student
+"Søndergaard, Rasmus",s214925,s214925@student.dtu.dk,Student
+"El-Madani, Mustafa Jawad",s215225,s215225@student.dtu.dk,Student
+"Clausen, Oscar Flensburg",s214735,s214735@student.dtu.dk,Student
+"Rasmussen, Lauge Arndal",s215115,s215115@student.dtu.dk,Student
+"Pacurar, Onisim-Florin",s215155,s215155@student.dtu.dk,Student
+"Jerlach, Mikkel Gerner",s214895,s214895@student.dtu.dk,Student
+"Hansen, Simon Kjøller",s214865,s214865@student.dtu.dk,Student
+"Olsen, Astrid Eline",s214795,s214795@student.dtu.dk,Student
+"Vindelev, Anders Skovgaard",s214905,s214905@student.dtu.dk,Student
+"Lee, Samuel",s215686,s215686@student.dtu.dk,Student
+"Møller-Jensen, Cecilie Martine",s215086,s215086@student.dtu.dk,Student
+"Fratini, Andrea",s215177,s215177@student.dtu.dk,Student
+"Fuglsang, Anders",s215207,s215207@student.dtu.dk,Student
+"Marner, Lukas Tej",s215167,s215167@student.dtu.dk,Student
+"Yasar, Melisa Nielsen",s215217,s215217@student.dtu.dk,Student
+"Bailey, Dylan Connor",s215228,s215228@student.dtu.dk,Student
+"Ceccuti, Jacopo",s215158,s215158@student.dtu.dk,Student
+"Rasmussen, Oliver Percy",s215690,s215690@student.dtu.dk,Student
+"Møller, Nina Emilie",s214570,s214570@student.dtu.dk,Student
+"Mira, Marcos Bauch",s215210,s215210@student.dtu.dk,Student
+"Schou, Mathilde Saltoft",s214520,s214520@student.dtu.dk,Student
+"Torp, Rasmus",s214430,s214430@student.dtu.dk,Student
+"Andersen, Cecilie Mørch Baden",s215270,s215270@student.dtu.dk,Student
+"Adeniran-Lowe, Akira-Miranda Adeyomi",s215170,s215170@student.dtu.dk,Student
+"Dietz, Nina Gehres",s215200,s215200@student.dtu.dk,Student
+"Jensen, Oliver Thomas Mestrov",s214500,s214500@student.dtu.dk,Student
+"Mogensen, Joakim Bagge",s214890,s214890@student.dtu.dk,Student
+"Gandløse, Victor Boesen",s214490,s214490@student.dtu.dk,Student
+"Clausen, Gustav Grøn Risager",s214940,s214940@student.dtu.dk,Student
+"Mekki, Mehdi",s215140,s215140@student.dtu.dk,Student
+"Skovsager, Gustav Viborg Krarup",s214900,s214900@student.dtu.dk,Student
+"Vestergaard, Sarah",s214440,s214440@student.dtu.dk,Student
+"Toft, Christopher Walling",s214450,s214450@student.dtu.dk,Student
+"Stephansen, Mikkel Ravn",s214893,s214893@student.dtu.dk,Student
+"Haugbølle, Martin Vennick",s215073,s215073@student.dtu.dk,Student
+"Moesgaard, Helene Ørberg",s214933,s214933@student.dtu.dk,Student
+"Petersen, Sidsel Cappelen Bonde",s215033,s215033@student.dtu.dk,Student
+"Yu, Botong",botyu,botyu@dtu.dk,Student
+"Falkow, Hans Christian",s215183,s215183@student.dtu.dk,Student
+"Allermand, Mikkel",s214953,s214953@student.dtu.dk,Student
+"Miles-Skov, Marcus John",s216053,s216053@student.dtu.dk,Student
+"Mandrupsen, Oscar Wulff",s216163,s216163@student.dtu.dk,Student
+"Kühl, Søren Lauridsen",s216161,s216161@student.dtu.dk,Student
+"Thormann, Niels",s216160,s216160@student.dtu.dk,Student
+"Langås, Anja",s221781,s221781@student.dtu.dk,Student
+"Siitam, Martin",s221871,s221871@student.dtu.dk,Student
+"Pocujeva, Alisa",s221982,s221982@student.dtu.dk,Student
+"Emmanouilidi, Panagiota",s223531,s223531@student.dtu.dk,Student
+"Lundsteen, Caroline Degner",s224373,s224373@student.dtu.dk,Student
+"Bundesen, Thor Venø",s224688,s224688@student.dtu.dk,Student
+"Mengedoht, Fabian",s226530,s226530@student.dtu.dk,Student
+"Chowdhury, Nipa",s230040,s230040@student.dtu.dk,Student
+"Lonsdale, Jessie Lauren",s230002,s230002@student.dtu.dk,Student
+"Hossein, Ajmal",s230044,s230044@student.dtu.dk,Student
+"Ardangelou, Xanthippi",s230260,s230260@student.dtu.dk,Student
+"Pirvu, Gabriela",s230804,s230804@student.dtu.dk,Student
+"Perez, Alejandra Caballero",s231912,s231912@student.dtu.dk,Student
+"Peinado, Kailas Bermudez",s231852,s231852@student.dtu.dk,Student
+"Dombóvári, Gergely",s232055,s232055@student.dtu.dk,Student
+"Laudisio, Arnau Sage Costa I",s231997,s231997@student.dtu.dk,Student
+"Pirvu, Adrian Lopez",s232101,s232101@student.dtu.dk,Student
+"Moral, Ana Paula Rodríguez Del",s232119,s232119@student.dtu.dk,Student
+"Sun, Ning",s232171,s232171@student.dtu.dk,Student
+"Yu, Yuehang",s232206,s232206@student.dtu.dk,Student
+"Dong, Zheng",s232281,s232281@student.dtu.dk,Student
+"Pan, Yuhang",s232282,s232282@student.dtu.dk,Student
+"Rohweder, Timm",s232529,s232529@student.dtu.dk,Student
+"Tuda, Enrico",s232438,s232438@student.dtu.dk,Student
+"Breznik, Blaz",s232421,s232421@student.dtu.dk,Student
+"Pirc, Tibor Pasanovic",s232420,s232420@student.dtu.dk,Student
+"Gonçalves, Sérgio Francisco Karelin",s233214,s233214@student.dtu.dk,Student
+"Bompolou, Despoina",desbolo,desbolo@dtu.dk,Student
+"Punsoda, Andrea Salvia",s233149,s233149@student.dtu.dk,Student
+"Lifousi, Anna",s232979,s232979@student.dtu.dk,Student
+"Vidal, Gloria Tintore",gvidal,gvidal@dtu.dk,Student
+"Gómez, Marta Fernández",s233157,s233157@student.dtu.dk,Student
+"Perkowska, Julia Katarzyna",jkape,jkape@dtu.dk,Student
+"Refve, Solveig",s233193,s233193@student.dtu.dk,Student
+"Kinne, Daniel",s232931,s232931@student.dtu.dk,Student
+"Ferreira, Mariana",s233180,s233180@student.dtu.dk,Student
+"MICHAILIDOU, AMALIA",ammich,ammich@food.dtu.dk,Student
+"Zhou, Yuan Sheng",s232925,s232925@student.dtu.dk,Student
+"Maliha, Mayisha",s232922,s232922@student.dtu.dk,Student
+"Poupado, João",s232657,s232657@student.dtu.dk,Student
+"Pechirra, Vasco Lança Xerez Mendes",s232654,s232654@student.dtu.dk,Student
+"Oprisan, Madalin",s232652,s232652@student.dtu.dk,Student
+"Onorato, Andrea",s233336,s233336@student.dtu.dk,Student
+"Santos, Mariana",masps,s233360@student.dtu.dk,Student
+"Zhang, Jinming",s233386,s233386@student.dtu.dk,Student
+"Roszkowski, Filip Mateusz",s233421,s233421@student.dtu.dk,Student
+"Jensen, Phillip Ravn Boe",s233478,s233478@student.dtu.dk,Student
+"Schøtt-Edholm, William",s233495,s233495@student.dtu.dk,Student
+"Grzelak, Sandra Maria",s233484,s233484@student.dtu.dk,Student
+"Hirsch, Julien",s233493,s233493@student.dtu.dk,Student
+"Joensen, Marin Theodora Skaalum",s233693,s233693@student.dtu.dk,Student
+"Sajin-Henningsen, Stefan",s235177,s235177@student.dtu.dk,Student
+"Müller, Jannes",s240020,s240020@student.dtu.dk,Student
+"MAVROGIANNI, EIRINI",s240140,s240140@student.dtu.dk,Student
+"Klavdianos, Marios",s240152,s240152@student.dtu.dk,Student
+"Papanikolaou, Christina",s240142,s240142@student.dtu.dk,Student
+"Margariti, Georgia",s240153,s240153@student.dtu.dk,Student
+"Pajola, Tommaso",s240106,s240106@student.dtu.dk,Student
+"Theilacker, Felicia",s240026,s240026@student.dtu.dk,Student
+"Promi, Sumaya Ahmed",s240007,s240007@student.dtu.dk,Student
+"Guerra, Fernando",s240098,s240098@student.dtu.dk,Student
+"Bey, Sebastian",s240019,s240019@student.dtu.dk,Student
+"Dimitriou, Katerina",s240059,s240059@student.dtu.dk,Student
+"Muhi, Kristof",s240194,s240194@student.dtu.dk,Student
+"Cao, Xuanyuan",s240396,s240396@student.dtu.dk,Student
+"Bøggild, Christoffer",s240377,s240377@student.dtu.dk,Student
+"Dextre, Rodrigo Gallegos",rogall,s243563@student.dtu.dk,Student
+"Mañas, Juan José MArtínez",s240451,s240451@student.dtu.dk,Student
+"Hock, Philipp",s240459,s240459@student.dtu.dk,Student
+"Nylander, Petr Boska",s240466,s240466@student.dtu.dk,Student
+"Xia, Siyu",s240464,s240464@student.dtu.dk,Student
+"Moncada, Arnór Daníel",s241645,s241645@student.dtu.dk,Student
+"Sejdenfaden, Simone",s241647,s241647@student.dtu.dk,Student
+"Hajebrahimi, Alireza",alihaj,alihaj@dtu.dk,Student
+"Brandaris, Nicole Victoria Delgado",s242512,s242512@student.dtu.dk,Student
+"Kumar, Ravi",s242513,s242513@student.dtu.dk,Student
+"Bellary, Amritha",s242506,s242506@student.dtu.dk,Student
+"Nagda, Aryan Yogesh",s242525,s242525@student.dtu.dk,Student
+"Akheel, Mohamed",s242528,s242528@student.dtu.dk,Student
+"Dhuraisamy, Arun Kumar",s242529,s242529@student.dtu.dk,Student
+"Xu, Boyang",s242519,s242519@student.dtu.dk,Student
+"Gui, Chengzhe",s242650,s242650@student.dtu.dk,Student
+"Huang, Qiwen",s242640,s242640@student.dtu.dk,Student
+"Yin, Lingxiao",s242610,s242610@student.dtu.dk,Student
+"Desu, Gokul",s242580,s242580@student.dtu.dk,Student
+"Mutlu, Eray",s242541,s242541@student.dtu.dk,Student
+"Pacheco, Mariana Carolina Lopez",s242551,s242551@student.dtu.dk,Student
+"Muhammad, Satrio",s242591,s242591@student.dtu.dk,Student
+"Kayadibinli, Ekim",s242542,s242542@student.dtu.dk,Student
+"Ong, John",s242672,s242672@student.dtu.dk,Student
+"Taska, Denis",s242622,s242622@student.dtu.dk,Student
+"Zhou, Hang",s242592,s242592@student.dtu.dk,Student
+"Zeng, Yan",s242652,s242652@student.dtu.dk,Student
+"Chapekar, Rishikesh Kedar",s242573,s242573@student.dtu.dk,Student
+"Owen, Manon",s242593,s242593@student.dtu.dk,Student
+"Intarat, Intira",s242543,s242543@student.dtu.dk,Student
+"Kalabukhov, Vladimir",s242674,s242674@student.dtu.dk,Student
+"Zhao, Ruikang",s242644,s242644@student.dtu.dk,Student
+"Nagaraj, Yogitha Pothenahalli",s242564,s242564@student.dtu.dk,Student
+"Khan, Zohair",s242544,s242544@student.dtu.dk,Student
+"Jia, Ruizhi",s242625,s242625@student.dtu.dk,Student
+"Ásgeirsdóttir, Valgerður",s242685,s242685@student.dtu.dk,Student
+"Xu, Ran",s242605,s242605@student.dtu.dk,Student
+"Langyan, Paras Kumar",s242566,s242566@student.dtu.dk,Student
+"Jørgensen, Eline",s242716,s242716@student.dtu.dk,Student
+"Wang, Ziming",s242626,s242626@student.dtu.dk,Student
+"Zou, Senhao",s242606,s242606@student.dtu.dk,Student
+"Xie, Wenji",s242597,s242597@student.dtu.dk,Student
+"Paul, Upasana",s242577,s242577@student.dtu.dk,Student
+"Singh, Aastha",s242578,s242578@student.dtu.dk,Student
+"Wang, Pengxiang",penwang,s242638@student.dtu.dk,Student
+"Lu, Jiayi",s242648,s242648@student.dtu.dk,Student
+"Li, Leyao",s242598,s242598@student.dtu.dk,Student
+"Fjærli, Jørgen Hassel",s242728,s242728@student.dtu.dk,Student
+"Molla, Edrin",s242628,s242628@student.dtu.dk,Student
+"Vainionpää, Niko",s242708,s242708@student.dtu.dk,Student
+"Tannason, Sigurdur Teitur",s242739,s242739@student.dtu.dk,Student
+"Aandahl, Kristoffer Høiaas",s242679,s242679@student.dtu.dk,Student
+"Yamaner, Özkan",s242539,s242539@student.dtu.dk,Student
+"Mahdi, Milton",s242810,s242810@student.dtu.dk,Student
+"Gröller, Matthias",s242880,s242880@student.dtu.dk,Student
+"Andréoletti, Antoine",s242830,s242830@student.dtu.dk,Student
+"Klein, Nicolas",s242890,s242890@student.dtu.dk,Student
+"Terça, Guilherme Henriques de Almeida",s243020,s243020@student.dtu.dk,Student
+"Koutsis, Dionysios",s243180,s243180@student.dtu.dk,Student
+"Gilbert, Mathias",s243250,s243250@student.dtu.dk,Student
+"Condesso, Miguel Carlos",s243010,s243010@student.dtu.dk,Student
+"Grüne, Carla Roberta",s243220,s243220@student.dtu.dk,Student
+"Egkher, Lukas",s243430,s243430@student.dtu.dk,Student
+"Bragadóttir, Kristina",s242740,s242740@student.dtu.dk,Student
+"Santucci, Edoardo",s243100,s243100@student.dtu.dk,Student
+"Prasula, Natalia Barbara",s243060,s243060@student.dtu.dk,Student
+"Figueiredo, José Ferreira Martins Garrido de",s243030,s243030@student.dtu.dk,Student
+"Mas, Alba Pi",s243280,s243280@student.dtu.dk,Student
+"Tassios, Marios",s242850,s242850@student.dtu.dk,Student
+"Richard, Francesco",s243110,s243110@student.dtu.dk,Student
+"Luna, Pablo Zorrilla Medina",s242931,s242931@student.dtu.dk,Student
+"Unnarsson, Eidur Snær",s242751,s242751@student.dtu.dk,Student
+"Caviola, Camilla",s243141,s243141@student.dtu.dk,Student
+"Karagianni, Sofia",s243211,s243211@student.dtu.dk,Student
+"Charles, Juliette Marie Denise",s243261,s243261@student.dtu.dk,Student
+"Doudesis, Christos",s242851,s242851@student.dtu.dk,Student
+"Soare, Ruxandra Gabriela",s243001,s243001@student.dtu.dk,Student
+"Bartoszewicz, Konrad",s243071,s243071@student.dtu.dk,Student
+"Gonzalez, Maria Alejandra Casbas",s243281,s243281@student.dtu.dk,Student
+"Calbet, Edgar Fabregat",s242781,s242781@student.dtu.dk,Student
+"Barcelo, Marc Burgell I",s243341,s243341@student.dtu.dk,Student
+"Bandini, Michele",s243121,s243121@student.dtu.dk,Student
+"Lombardo, Pol Triquell",s243271,s243271@student.dtu.dk,Student
+"Jurkiewicz, Nikolaos",s242871,s242871@student.dtu.dk,Student
+"Guerrero, Miquel Fernández",s243361,s243361@student.dtu.dk,Student
+"Ferreira, Nathan",s243231,s243231@student.dtu.dk,Student
+"Furlanetto, Guido",s243131,s243131@student.dtu.dk,Student
+"Avrillon, Constance",s243241,s243241@student.dtu.dk,Student
+"Almeida, Francisco Cadima",s243042,s243042@student.dtu.dk,Student
+"Pey, Meritxell La Haba",s242782,s242782@student.dtu.dk,Student
+"Stefanizzi, Giacomo",s242952,s242952@student.dtu.dk,Student
+"Kazakos, Vasileios",s243202,s243202@student.dtu.dk,Student
+"Morais, Manuel Rui Andrade",s243032,s243032@student.dtu.dk,Student
+"Almeida, Patrícia Sela Orbe Galrão de",s243002,s243002@student.dtu.dk,Student
+"Chouchouli, Christina",s243212,s243212@student.dtu.dk,Student
+"Palza, Lorena Veronica Möller",s242812,s242812@student.dtu.dk,Student
+"Szilágyi, Martin",s243162,s243162@student.dtu.dk,Student
+"Stepien, Tomasz Gabriel",s243062,s243062@student.dtu.dk,Student
+"Labeikis, Tautvydas",s243092,s243092@student.dtu.dk,Student
+"Juncu, Antonia",s242902,s242902@student.dtu.dk,Student
+"Cício, António Pedro Lopes",s243012,s243012@student.dtu.dk,Student
+"Tsefereklis, Georgios",s242802,s242802@student.dtu.dk,Student
+"Ruggeri, Daiana Soledad",s243432,s243432@student.dtu.dk,Student
+"Vazquez, Maria Diaz",s243333,s243333@student.dtu.dk,Student
+"Leisis, Gediminas",s243093,s243093@student.dtu.dk,Student
+"Sorgiovanni, Pier Francesco",s242943,s242943@student.dtu.dk,Student
+"Voukalis, Athanasios",s243203,s243203@student.dtu.dk,Student
+"Sellinas, Dionysios",s242973,s242973@student.dtu.dk,Student
+"Cortanze, Paul Roero de",s243223,s243223@student.dtu.dk,Student
+"Patounas, Vagelis",s243193,s243193@student.dtu.dk,Student
+"Stathopoulos, Charalampos",s243183,s243183@student.dtu.dk,Student
+"Mlatiati, Francesca Aimee Mees",s242783,s242783@student.dtu.dk,Student
+"Harenberg, Jost",s243413,s243413@student.dtu.dk,Student
+"Aubry, Antoine",s243253,s243253@student.dtu.dk,Student
+"Lovo, Manuel",s243123,s243123@student.dtu.dk,Student
+"Serratosa, Patricia",s243323,s243323@student.dtu.dk,Student
+"Pavone, Carlo",s243153,s243153@student.dtu.dk,Student
+"Cazzador, Lorenzo",s243133,s243133@student.dtu.dk,Student
+"Skre, Vebjørn Sæten",s242723,s242723@student.dtu.dk,Student
+"Lobão, Afonso Patrício",s243033,s243033@student.dtu.dk,Student
+"Lucarini, Paolo",s243103,s243103@student.dtu.dk,Student
+"Bittár, Molly Beijar",s242713,s242713@student.dtu.dk,Student
+"Garnier, Louise Marguerite",s242833,s242833@student.dtu.dk,Student
+"Bruggeling, Tessa Eva Johanna",s243083,s243083@student.dtu.dk,Student
+"Muñoz Triviño, Juan Diego",s243304,s243304@student.dtu.dk,Student
+"Valente, Daniela Maria Perico Ferreira",s243004,s243004@student.dtu.dk,Student
+"Keulen, Karin van",s243084,s243084@student.dtu.dk,Student
+"Janotová, Alica",s242984,s242984@student.dtu.dk,Student
+"Vidal, Juan Manuel Ruso",s243334,s243334@student.dtu.dk,Student
+"FRANÇOISE, Élise",s243264,s243264@student.dtu.dk,Student
+"Küstner, Carina",s242784,s242784@student.dtu.dk,Student
+"LYKOURESIS, NIKOLAOS DIMITRIOS",s243174,s243174@student.dtu.dk,Student
+"Konstantinidis, Konstantinos",s242834,s242834@student.dtu.dk,Student
+"Pettinari, Cecilia",cecpe,s243114@student.dtu.dk,Student
+"Basaglia, Alberto",s243124,s243124@student.dtu.dk,Student
+"Chatzigiannakou, Theofania",s243214,s243214@student.dtu.dk,Student
+"Santiago, Alberto Gomez de",s242874,s242874@dtu.dk,Student
+"Ondrejka, Jakub",s243074,s243074@student.dtu.dk,Student
+"Caixinha, Sara Salvador",s243044,s243044@student.dtu.dk,Student
+"Przeor, Hubert",s242914,s242914@student.dtu.dk,Student
+"Pancu, Andreea-Stefana",s242994,s242994@student.dtu.dk,Student
+"Capricho Ludovino Martins Leitão, Madalena",s243024,s243024@student.dtu.dk,Student
+"Milesi, Maria",s243144,s243144@student.dtu.dk,Student
+"Tsiliakidis, Dimitrios",s243204,s243204@student.dtu.dk,Student
+"Lopez, Magali Rocio",s243434,s243434@student.dtu.dk,Student
+"Gavriilidis, Nikolaos Ioannis",s242835,s242835@student.dtu.dk,Student
+"Correia, Matilde Feliciano",s242905,s242905@student.dtu.dk,Student
+"Fabião, Miguel",s243025,s243025@student.dtu.dk,Student
+"Figueroa, Xerman Amaro",s242885,s242885@student.dtu.dk,Student
+"Mitsopoulos, Thomas",s242855,s242855@student.dtu.dk,Student
+"Pla, Núria Domenech",s243315,s243315@student.dtu.dk,Student
+"Lindegaard, Yann Christian",s243225,s243225@student.dtu.dk,Student
+"Escolà, Ricardo Burbano",s243285,s243285@student.dtu.dk,Student
+"Vianelli, Jacopo",s242945,s242945@student.dtu.dk,Student
+"Solano, Carla Gil",s243355,s243355@student.dtu.dk,Student
+"Hong-Minh, Molly",s242955,s242955@student.dtu.dk,Student
+"Rossi, Roland Carlo",s243155,s243155@student.dtu.dk,Student
+"Spohn, Leon",s242845,s242845@student.dtu.dk,Student
+"Garen, Gisle Joe",s242715,s242715@student.dtu.dk,Student
+"Malvezzi, Francesco",s243145,s243145@student.dtu.dk,Student
+"Voorrips, Ewout",s243085,s243085@student.dtu.dk,Student
+"Mesquida, Marina Muñoz",s243305,s243305@student.dtu.dk,Student
+"Pulido, Javier Yanes",s243345,s243345@student.dtu.dk,Student
+"Pazdera, Zdenek",s243415,s243415@student.dtu.dk,Student
+"Antunes, Sílvia",s243005,s243005@student.dtu.dk,Student
+"Athanasiadis, Andreas",s243205,s243205@student.dtu.dk,Student
+"Zielinski, Adam",s243055,s243055@student.dtu.dk,Student
+"Olsen, Johannes Vegsgaard",s242725,s242725@student.dtu.dk,Student
+"Cas, Jure",s242985,s242985@student.dtu.dk,Student
+"Georgiadis, Georgios",s243196,s243196@student.dtu.dk,Student
+"Vendas, Maria Morais Veiga Madeira",s242906,s242906@student.dtu.dk,Student
+"Martinez, Leire Hernandez",s243266,s243266@student.dtu.dk,Student
+"Palazón, Antón N. Casarejos",s243336,s243336@student.dtu.dk,Student
+"Koilakos, Nikolaos",s242846,s242846@student.dtu.dk,Student
+"Cunha, Marta",s243006,s243006@student.dtu.dk,Student
+"Moran, Noelia Alonso",s243306,s243306@student.dtu.dk,Student
+"Luyen, Trung Kien",s243416,s243416@student.dtu.dk,Student
+"Papageorgiou, Anastasia",s243206,s243206@student.dtu.dk,Student
+"Manolopoulou, Lydia",s242806,s242806@student.dtu.dk,Student
+"Salvador, Daniel Morales",s242876,s242876@student.dtu.dk,Student
+"Perello, Macarena Burguera",s243296,s243296@student.dtu.dk,Student
+"Munteanu, Mihai",s242996,s242996@student.dtu.dk,Student
+"Lenarczyk, Zofia Agata",s242916,s242916@student.dtu.dk,Student
+"Kountras, Konstantinos",s242786,s242786@student.dtu.dk,Student
+"Silvestre, Guillem Eliasson",s243326,s243326@student.dtu.dk,Student
+"Delattre, Charles",s243256,s243256@student.dtu.dk,Student
+"Ilisco, Maria Laura",s242946,s242946@student.dtu.dk,Student
+"Agrillo, Giulia",s243106,s243106@student.dtu.dk,Student
+"Vera, Mireia",s243286,s243286@student.dtu.dk,Student
+"Plissart, Gabriel Jean M",s243426,s243426@student.dtu.dk,Student
+"Tacsi, Tamas Lajos",s242966,s242966@student.dtu.dk,Student
+"Barbé, Émile Knut",s242826,s242826@student.dtu.dk,Student
+"Efraimidou, Anna",s243216,s243216@student.dtu.dk,Student
+"Llorens, Nicolas",s243246,s243246@student.dtu.dk,Student
+"Prazeres, João",s243036,s243036@student.dtu.dk,Student
+"Calò, Adriano",s243147,s243147@student.dtu.dk,Student
+"D'Souza, Matteo",s242947,s242947@student.dtu.dk,Student
+"Astagneau, Mathieu",s243237,s243237@student.dtu.dk,Student
+"Supac, Maxim",s243007,s243007@student.dtu.dk,Student
+"Scaperrotta, Giulia",s243107,s243107@student.dtu.dk,Student
+"Schimicci, Nicolò",s243127,s243127@student.dtu.dk,Student
+"Martinez, Raquel Chaves",s243297,s243297@student.dtu.dk,Student
+"Aybar, Tomás Ruiz",s242887,s242887@student.dtu.dk,Student
+"Marull, Alex Serrano",s243277,s243277@student.dtu.dk,Student
+"Casas, Albert Feliu",s243327,s243327@student.dtu.dk,Student
+"Rute, Lucía Ronda",s243347,s243347@student.dtu.dk,Student
+"Slowik, Piotr",s243067,s243067@student.dtu.dk,Student
+"Wulf, Pablo De",s243427,s243427@student.dtu.dk,Student
+"Bottani, Letizia",s243157,s243157@student.dtu.dk,Student
+"Bozic, Andrej",s243167,s243167@student.dtu.dk,Student
+"Martín-Gromaz, Juan Gracia",s243287,s243287@student.dtu.dk,Student
+"Tetepoulidis, Dimitrios",s242968,s242968@student.dtu.dk,Student
+"Rybak, Maciej Jacek",s242918,s242918@student.dtu.dk,Student
+"Liger, Carlos Fernández de Heredia",s243308,s243308@student.dtu.dk,Student
+"Venda, Tomás Reis Messias",s243028,s243028@student.dtu.dk,Student
+"Corona, Marco",s243108,s243108@student.dtu.dk,Student
+"Lelidou, Zografia",s242838,s242838@student.dtu.dk,Student
+"Jurkosek, Tina",s242988,s242988@student.dtu.dk,Student
+"Monchal, Hadrien",s242828,s242828@student.dtu.dk,Student
+"Monteagudo, Natàlia Franco",s243278,s243278@student.dtu.dk,Student
+"Janyga, Karolina Malgorzata",s243068,s243068@student.dtu.dk,Student
+"Gutierrez, Beatriz de Souza",s243418,s243418@student.dtu.dk,Student
+"Schonrock, Alexandra Jane",s242818,s242818@student.dtu.dk,Student
+"Houwald, Matteo von",mfvho,mfvho@aqua.dtu.dk,Student
+"Varela, Natalia Morenilla",s243088,s243088@student.dtu.dk,Student
+"Ruf, Philipp",s243368,s243368@student.dtu.dk,Student
+"Gladkowski, Kornel",s242908,s242908@student.dtu.dk,Student
+"Papantzikos, Dimitris",s242798,s242798@student.dtu.dk,Student
+"Muresan, Adela",s242998,s242998@student.dtu.dk,Student
+"Marra, Federico",s243138,s243138@student.dtu.dk,Student
+"Ordeig, Pablo Martínez",s243299,s243299@student.dtu.dk,Student
+"Martinez, Ines",s243349,s243349@student.dtu.dk,Student
+"Bourgeois, Antoine",s242829,s242829@student.dtu.dk,Student
+"Anglelopoulos, Pavlos Neoklis",s243209,s243209@student.dtu.dk,Student
+"Luzuriaga, Lucia Añó",s243339,s243339@student.dtu.dk,Student
+"Hernando, Lucas Aranda",s243309,s243309@student.dtu.dk,Student
+"Dampierre, Julien René Yves",s243239,s243239@student.dtu.dk,Student
+"Sanchez, Alex Ruiz",s243329,s243329@student.dtu.dk,Student
+"Demiquels, Elena",s243269,s243269@student.dtu.dk,Student
+"Huang, Xin",s243442,s243442@student.dtu.dk,Student
+"Raya, Sandra Valentí",s243486,s243486@student.dtu.dk,Student
+"Svensson, Mathias",s243492,s243492@student.dtu.dk,Student
+"Shin, Yujeong",s243495,s243495@student.dtu.dk,Student
+"Mainzer, Benedikt",s243497,s243497@student.dtu.dk,Student
+"Shahid, Hamna",s243553,s243553@student.dtu.dk,Student
+"Tselios, Dimitrios",s243544,s243544@student.dtu.dk,Student
+"Yamamoto, Shintaro",s243556,s243556@student.dtu.dk,Student
+"Cofré, Nicoline Marie Brun",s243537,s243537@student.dtu.dk,Student
+"Caseiro, Guilherme",s243546,s243546@student.dtu.dk,Student
+"Maciejewski, Kacper",s243548,s243548@student.dtu.dk,Student
+"Wang, Yayi",s243559,s243559@student.dtu.dk,Student
+"Castro, Edir Sebastian Vidal",s243564,s243564@student.dtu.dk,Student
+"Auburtin, Juliette Claire Thérèse",s243581,s243581@student.dtu.dk,Student
+"Tass, Mihály",mihta,mihta@dtu.dk,Student
+"Niedzia¿kowski, Tomasz",s243600,s243600@student.dtu.dk,Student
+"Petergác, Jakub",s243601,s243601@student.dtu.dk,Student
+"Colas, Eliot Abraham",s243592,s243592@student.dtu.dk,Student
+"Haring, Lukas",s243594,s243594@student.dtu.dk,Student
+"Larsen, Mathilde Melgaard",s243633,s243633@student.dtu.dk,Student
+"Sparwath, Christine",chrsp,chrsp@dtu.dk,Student
+"Buttiero, Germán",s243660,s243660@student.dtu.dk,Student
+"Marques, Raquel Moleiro",s243636,s243636@student.dtu.dk,Student
+"Gaardlykke, Frida",s243648,s243648@student.dtu.dk,Student
+"Jaronczyk, Adam",s243649,s243649@student.dtu.dk,Student
+"Roller, Miriam",s243684,s243684@student.dtu.dk,Student
+"Cresp, Aurélien Paul Armand",s243674,s243674@student.dtu.dk,Student
+"Ali, Abdulkarim Abdi",s243686,s243686@student.dtu.dk,Student
+"Gkopi, Konstantina",s243692,s243692@student.dtu.dk,Student
+"Tryfonas, Alexandros",s243691,s243691@student.dtu.dk,Student
+"Kottis, Theodoros",s243693,s243693@student.dtu.dk,Student
+"Martino, Marianna",s243739,s243739@student.dtu.dk,Student
+"Sánchez, Alfredo",s243766,s243766@student.dtu.dk,Student
+"Vincentelli, Anton Brons",s243792,s243792@student.dtu.dk,Student
+"Sindrason, Sólon Nói",s243793,s243793@student.dtu.dk,Student
+"Vendrell, Oriol Baldris",s243805,s243805@student.dtu.dk,Student
+"Pezzati, Camilla",s243806,s243806@student.dtu.dk,Student
+"Wilczek, Janusz Jakub",s243891,s243891@student.dtu.dk,Student
+"Duerlund, Johannes Krog",s243870,s243870@student.dtu.dk,Student
+"Baral, Sachin",s243871,s243871@student.dtu.dk,Student
+"Gurung, Satish",s243872,s243872@student.dtu.dk,Student
+"Eker, Emre",s243892,s243892@student.dtu.dk,Student
+"Andersen, Karen Møller",s243875,s243875@student.dtu.dk,Student
+"Hansson, David Domingo",s243886,s243886@student.dtu.dk,Student
+"Sun, Ming Hui",s243876,s243876@student.dtu.dk,Student
+"Steinhoff, Jone Egon",s243867,s243867@student.dtu.dk,Student
+"Reimers, Christopher",s243868,s243868@student.dtu.dk,Student
+"Jurco, Andrej",s243889,s243889@student.dtu.dk,Student
+"Bondarciuk, Nikita",s243888,s243888@student.dtu.dk,Student
+"Theimert, Joanna",s243879,s243879@student.dtu.dk,Student
+"Romero, Claudia Ximénez",s243921,s243921@student.dtu.dk,Student
+"Bang, Mathias",s243924,s243924@student.dtu.dk,Student
+"Desu, Sree Keerthi",s243933,s243933@student.dtu.dk,Student
+"Cecan, Alexandru",s243905,s243905@student.dtu.dk,Student
+"Wójcik, Hubert",s243896,s243896@student.dtu.dk,Student
+"Kraljevic, Katarina",s243906,s243906@student.dtu.dk,Student
+"Tauro, Sarah Abigail",s243927,s243927@student.dtu.dk,Student
+"Saleh, Joyce Abi",s243948,s243948@student.dtu.dk,Student
+"Faggion, Alberto",albfa,albfa@dtu.dk,Student
+"Majoros, Sarolta",s243952,s243952@student.dtu.dk,Student
+"Gandum, Nuno Miguel Góis",s243964,s243964@student.dtu.dk,Student
+"Rasmussen, Aske",s243970,s243970@student.dtu.dk,Student
+"Staropoli, Gea",s243967,s243967@student.dtu.dk,Student
+"Bulacio, Pedro Francisco Martínez",s243972,s243972@student.dtu.dk,Student
+"Busa, Barbara",s243957,s243957@student.dtu.dk,Student
+"Specchia, Salvatore",s244095,s244095@student.dtu.dk,Student
+"Giacomelli, Philip",s244086,s244086@student.dtu.dk,Student
+"Madsen, Karoline",s246419,s246419@student.dtu.dk,Student
+"Losev, Daniil",s246416,s246416@student.dtu.dk,Student
+"Gerder, Janina",s246417,s246417@student.dtu.dk,Student
+"Narvestad, Eva Fasting",s250062,s250062@student.dtu.dk,Student
+"Hassan, Syed Taimur",s250112,s250112@student.dtu.dk,Student
+"Molepo, Maisha Tumelo",s250172,s250172@student.dtu.dk,Student
+"Ojha, Samrat",s250140,s250140@student.dtu.dk,Student
+"Hlabane, Tintswalo Primrose",s250183,s250183@student.dtu.dk,Student
+"Rupere, Takue",s250187,s250187@student.dtu.dk,Student
+"Piatkova, Renata",renpi,renpi@dtu.dk,Student
+"Bheemra, Karthik Deshmukh",s250174,s250174@student.dtu.dk,Student
+"Seenivasan, Priyadharrshini",s250166,s250166@student.dtu.dk,Student
+"Karnati, Akhil",s250114,s250114@student.dtu.dk,Student
+"Crawford, Gabriel Lawrence",s250167,s250167@student.dtu.dk,Student
+"Latif, Muhammad Owais",s250184,s250184@student.dtu.dk,Student
+"Hennayake, Shalika Anushani",s250117,s250117@student.dtu.dk,Student
+"Xiong, Hangyu",s250121,s250121@student.dtu.dk,Student
+"Firdaus, Rifki",s250169,s250169@student.dtu.dk,Student
+"Ji, Chrystal",s250118,s250118@student.dtu.dk,Student
+"Khan, Muhammad Abbas",s250145,s250145@student.dtu.dk,Student
+"Karnati, Nandini",s250131,s250131@student.dtu.dk,Student
+"Pecku, Derek K.",s250165,s250165@student.dtu.dk,Student
+"Karalinganawar, Omkar Satish",s250115,s250115@student.dtu.dk,Student
+"Mwangi, Kevin Kago",s250185,s250185@student.dtu.dk,Student
+"Rizky, Mohammad",s250152,s250152@student.dtu.dk,Student
+"Marfo, Elijah Duah",s250188,s250188@student.dtu.dk,Student
+"Tyagi, Aditya",s250135,s250135@student.dtu.dk,Student
+"Kawadkar, Neel Parag",s250142,s250142@student.dtu.dk,Student
+"Wu, Junjie",s250176,s250176@student.dtu.dk,Student
+"Fida, Aali",s250113,s250113@student.dtu.dk,Student
+"Cebrián, Estela Martín",s250221,s250221@student.dtu.dk,Student
+"Stolte, Leif Erik",s250243,s250243@student.dtu.dk,Student
+"Ossowska, Izabela",s250205,s250205@student.dtu.dk,Student
+"Sitek, Michal Jakub",s250210,s250210@student.dtu.dk,Student
+"Chairani, Orestis",s250224,s250224@student.dtu.dk,Student
+"Stepniewski, Maksymilian Tomasz",s250235,s250235@student.dtu.dk,Student
+"López, Álvaro Quintana",s250202,s250202@student.dtu.dk,Student
+"Pozzobon, Alessandro",s250232,s250232@student.dtu.dk,Student
+"Vitiello, Stefany",s250203,s250203@student.dtu.dk,Student
+"Grossi, Tommaso",s250223,s250223@student.dtu.dk,Student
+"Iliakis, Nikolaos",s250201,s250201@student.dtu.dk,Student
+"Forero, Federico",s250234,s250234@student.dtu.dk,Student
+"Georgakopoulou, Theodora",s250199,s250199@student.dtu.dk,Student
+"Dimakopoulos, Spyridon",s250240,s250240@student.dtu.dk,Student
+"Wang, Davide",s250204,s250204@student.dtu.dk,Student
+"Schmidt, Lara",s250241,s250241@student.dtu.dk,Student
+"Florea, Alexandru-Daniel",s250246,s250246@student.dtu.dk,Student
+"Sándor, Elod",s250238,s250238@student.dtu.dk,Student
+"Papadopoulos, Kostas",s250219,s250219@student.dtu.dk,Student
+"Pontzouktzidis, Theodoros",s250239,s250239@student.dtu.dk,Student
+"Pruzzi, Filippo",s250237,s250237@student.dtu.dk,Student
+"Cogo, Samuele",s250218,s250218@student.dtu.dk,Student
+"Balducci, Francesco",s250200,s250200@student.dtu.dk,Student
+"Jene, Martina Gallego",mgaje,mgaje@dtu.dk,Student
+"Szalai, Liza",s250208,s250208@student.dtu.dk,Student
+"Gerogianni, Ioanna",s250230,s250230@student.dtu.dk,Student
+"Bocci, Lara",s250261,s250261@student.dtu.dk,Student
+"Kray, Joost",s250268,s250268@student.dtu.dk,Student
+"Papa, Alessia",s250260,s250260@student.dtu.dk,Student
+"Oliveira, João Diogo Silva",s250263,s250263@student.dtu.dk,Student
+"García, Pablo Rocamora",s250272,s250272@student.dtu.dk,Student
+"Vallecillo, Jorge Ernesto Figueroa",s250273,s250273@student.dtu.dk,Student
+"Rosa, Ilaria La",s250287,s250287@student.dtu.dk,Student
+"Belitselis, Christos",s250292,s250292@student.dtu.dk,Student
+"Kordubel, Jan Simon",s250309,s250309@student.dtu.dk,Student
+"Bodzás, Gábor",s250315,s250315@student.dtu.dk,Student
+"Brandolini, Lorenzo",s250313,s250313@student.dtu.dk,Student
+"Lujan, Irene Gonzalez",s250310,s250310@student.dtu.dk,Student
+"Esteve, Maria Dolors Grau",s250314,s250314@student.dtu.dk,Student
+"Plati, Vasiliki",s250316,s250316@student.dtu.dk,Student
+"Alier, Ignasi Gil-Penna",s250331,s250331@student.dtu.dk,Student
+"Méndez, Mario Poujade",s250328,s250328@student.dtu.dk,Student
+"Borzdynski, Szymon",s250372,s250372@student.dtu.dk,Student
+"Bekiaris, Ioannis",s250379,s250379@student.dtu.dk,Student
+"Calero, Carlos Canoyra",s250421,s250421@student.dtu.dk,Student
+"Berlato, Michele",s250437,s250437@student.dtu.dk,Student
+"Llobet, Nil Mataró",s250443,s250443@student.dtu.dk,Student
+"Gordin, Marianna",s250440,s250440@student.dtu.dk,Student
+"Holm, Tomte Lennart",s250442,s250442@student.dtu.dk,Student
+"Ntemkas, Christos Andreas",s250448,s250448@student.dtu.dk,Student
+"Colombo, Mario Lorenzo",s250436,s250436@student.dtu.dk,Student
+"Monni, Giorgia",s250433,s250433@student.dtu.dk,Student
+"Costa, Afonso",s250452,s250452@student.dtu.dk,Student
+"Giarrizzo, Erica",s250438,s250438@student.dtu.dk,Student
+"Nunez, Albert Saez",s250445,s250445@student.dtu.dk,Student
+"Kildelund, Ask",s250684,s250684@student.dtu.dk,Student
+"Hardt, Monica",s250691,s250691@student.dtu.dk,Student
+"Ritter, Hannis",s250707,s250707@student.dtu.dk,Student
+"Dam, Johan Nónskarð",s250705,s250705@student.dtu.dk,Student
+"Nielsen, Signe",s250677,s250677@student.dtu.dk,Student
+"Tomuta, Stefania Gabriela",s250692,s250692@student.dtu.dk,Student
+"Silva, Renato",s250675,s250675@student.dtu.dk,Student
+"Wirkus, Yunis",s250700,s250700@student.dtu.dk,Student
+"Knaeblein-Greene, Arden",s250703,s250703@student.dtu.dk,Student
+"Danielsen, Regin",s250706,s250706@student.dtu.dk,Student
+"Lietavcova, Veronika",s250695,s250695@student.dtu.dk,Student
+"Sørensen, Magnus Munch Nielsen",s250689,s250689@student.dtu.dk,Student
+"Olesen, Rasmus",s250685,s250685@student.dtu.dk,Student
+"Egressy, András",s250729,s250729@student.dtu.dk,Student
+"Ros Quintana, David",s250752,s250752@student.dtu.dk,Student
+"Devkota, Nilanjana",s250753,s250753@student.dtu.dk,Student
+"Hagelund, Sofie Emilie",s132347,s132347@student.dtu.dk,Student
+"Babica, Jakub",s250777,s250777@student.dtu.dk,Student
+"Sloma, Tomasz Jakub",s250779,s250779@student.dtu.dk,Student
+"Polymenakou, Ersi",s250782,s250782@student.dtu.dk,Student
+"Zbyslaw, Mateusz",s250778,s250778@student.dtu.dk,Student
+"Carrara, Emiliano",s250828,s250828@student.dtu.dk,Student
+"Salles, Caio Lorenzo Iriarte",s250821,s250821@student.dtu.dk,Student
+"Gutiérrez, Cristina Fente",s250817,s250817@student.dtu.dk,Student
+"Tapia, Cesia Niquen",s250829,s250829@student.dtu.dk,Student
+"Sonidou, Alexandra",s250818,s250818@student.dtu.dk,Student
+"Benkler, Cora",s250823,s250823@student.dtu.dk,Student
+"Gunnarsdóttir, Alexandra Von Athena",s250833,s250833@student.dtu.dk,Student
+"Honore, Alberte",s250964,s250964@student.dtu.dk,Student
+"Maza, Maria de los Angeles Uceda",s251160,s251160@student.dtu.dk,Student
+"Al-Nader, Huthifa",s251218,s251218@student.dtu.dk,Student
+"Riposati, Andreas",s153426,anrip@dtu.dk,Student*
+"Christensen, Rasmus Hays Hofmann",s183692,s183692@student.dtu.dk,Student*
+"Pedersen, Magnus Severin Houge",s191252,s191252@student.dtu.dk,Student*
+"Brorson, Lui Valentin",s192107,s192107@student.dtu.dk,Student*
+"Yar, Mads",s193992,s193992@student.dtu.dk,Student*
+"Bjerg, Morten Rønde",s193997,s193997@student.dtu.dk,Student*
+"Neumann, Mikkel Birk",s200926,s200926@student.dtu.dk,Student*
+"Nielsen, Anna Zol",s201184,s201184@student.dtu.dk,Student*
+"Sagos, Constantin Branth",s201423,s201423@student.dtu.dk,Student*
+"Andersen, Oliver Wadskjær",s201732,s201732@student.dtu.dk,Student*
+"Brinck-Jensen, Marie",s203804,s203804@student.dtu.dk,Student*
+"Poulsen, Jakob Hedegaard",jhepo,jhepo@dtu.dk,Student*
+"Tramm, Laura Ulm",s203812,s203812@student.dtu.dk,Student*
+"Flamand, Melina Bruun",s203751,s203751@student.dtu.dk,Student*
+"Hansen, Balder Høy",s203791,s203791@student.dtu.dk,Student*
+"Thrane, Andreas",s203707,s203707@student.dtu.dk,Student*
+"Bessing, Lucas Lydik",s203808,s203808@student.dtu.dk,Student*
+"Bessing, Magnus Lydik",s203809,s203809@student.dtu.dk,Student*
+"Olsen, Mikkel Ditlev Sjøgren",s204094,s204094@student.dtu.dk,Student*
+"Dam, Anders",s204384,s204384@student.dtu.dk,Student*
+"Stage, Esben Kristian Starup",s205265,s205265@student.dtu.dk,Student*
+"Konstantinowich, Simon Kjær",s205251,s205251@student.dtu.dk,Student*
+"Pedersen, Rasmus Jehn Dedenroth",s205357,s205357@student.dtu.dk,Student*
+"Kristjánsdóttir, Bryndís",s205323,s205323@student.dtu.dk,Student*
+"Heen, Patrick Guldager",s205271,s205271@student.dtu.dk,Student*
+"Yang, Alan",s204168,s204168@student.dtu.dk,Student*
+"Mikkelsen, Aske Termøhlen",s204371,s204371@student.dtu.dk,Student*
+"Erichsen, Rasmus Søndergaard",rsoer,rsoer@dtu.dk,Student*
+"Nielsen, Andreas Bach Berg",s205869,s205869@student.dtu.dk,Student*
+"Raffnsøe, Sophie Rosenstand",s211108,s211108@student.dtu.dk,Student*
+"Nielsen, Buster Bøgild",s211548,s211548@student.dtu.dk,Student*
+"Christensen, Anna Vang",s211625,s211625@student.dtu.dk,Student*
+"Grzymala-Lubanski, Lukas Drejer",s211629,s211629@student.dtu.dk,Student*
+"Lange, Julie Kruse",s214340,s214340@student.dtu.dk,Student*
+"Rosgaard, Amanda",s214341,s214341@student.dtu.dk,Student*
+"Bøe, Ina Sun",s214361,s214361@student.dtu.dk,Student*
+"Kronborg, Katherina",s214352,s214352@student.dtu.dk,Student*
+"Sonnenborg, Daniel Cleverland",s214342,s214342@student.dtu.dk,Student*
+"Schultz-Jensen, Rikke Skjellerup",s214353,s214353@student.dtu.dk,Student*
+"Graversen, Bertram Krogh",s214344,s214344@student.dtu.dk,Student*
+"Lund, Tobias Canger",s214365,s214365@student.dtu.dk,Student*
+"Hansen, Andreas Ørgård Posniak",s214907,s214907@student.dtu.dk,Student*
+"Glahn, Nynne Sofie Egede",s214788,s214788@student.dtu.dk,Student*
+"Sylvest, Sofie Heinsen",s214349,s214349@student.dtu.dk,Student*
+"Jensen, Nikolaj Hjortholm",s215804,s215804@student.dtu.dk,Student*
+"Wendelboe, Andreas",s215489,s215489@student.dtu.dk,Student*
+"Buhl, Lasse Aaby",s215025,s215025@student.dtu.dk,Student*
+"Milutin, Filip Christian",s215627,s215627@student.dtu.dk,Student*
+"Johannesen, Ralph Jade Nieves",s215688,s215688@student.dtu.dk,Student*
+"Holm-Hansen, Andreas Rattenborg",araho,araho@dtu.dk,Student*
+"Hoff, Nora Mohamed Kamal Farag",s216128,s216128@student.dtu.dk,Student*
+"Krogshede, Anna Louise Harpøth",s216127,s216127@student.dtu.dk,Student*
+"Larsen, Emma Malte",s216126,s216126@student.dtu.dk,Student*
+"Correro, Lucía Calvo",s221912,s221912@student.dtu.dk,Student*
+"Lindgreen, Ditte Marie Næss",dmnl,s223971@student.dtu.dk,Student*
+"Elvedahl, Ida",s223962,s223962@student.dtu.dk,Student*
+"Gier, Josefine de",jdegi,jdegi@dtu.dk,Student*
+"Dürr, August",s230749,s230749@student.dtu.dk,Student*
+"Corcuera, Adolfo",s233131,s233131@student.dtu.dk,Student*
+"Fabrykiewicz, Ada",s232689,s232689@student.dtu.dk,Student*
+"Olason, Oli",s234053,s234053@student.dtu.dk,Student*
+"Martínez, Daniel Páez",s237098,s237098@student.dtu.dk,Student*
+"Murphree, Aidan Glenn",s240058,s240058@student.dtu.dk,Student*
+"Husher, Maj",s240412,s240412@student.dtu.dk,Student*
+"Fu, Tongzheng",s242601,s242601@student.dtu.dk,Student*
+"Huang, Shimin",s242614,s242614@student.dtu.dk,Student*
+"Villa, Julieta Guerrero",s242772,s242772@student.dtu.dk,Student*
+"Semrau, Josephine",s243375,s243375@student.dtu.dk,Student*
+"Panopoulou, Eriana",s242896,s242896@student.dtu.dk,Student*
+"Bonafede, Marco Michel Léonardo",s243247,s243247@student.dtu.dk,Student*
+"Edelstein, Dan Howard",s243446,s243446@student.dtu.dk,Student*
+"Hermans, Faye Anna",s243498,s243498@student.dtu.dk,Student*
+"Jelstrup, Simon",s243644,s243644@student.dtu.dk,Student*
+"Larsen, Troels",s243781,s243781@student.dtu.dk,Student*
+"Ahlbom, Ida",s243932,s243932@student.dtu.dk,Student*
+"Jakobsen, Klara",s243909,s243909@student.dtu.dk,Student*
+"Wester, Mathias Remming",s243919,s243919@student.dtu.dk,Student*
+"Illana, Sara",s244091,s244091@student.dtu.dk,Student*
+"Falch-Rosenberg, Mie Eun Sook",s244615,s244615@student.dtu.dk,Student*
+"Banck, Adam",s246381,s246381@student.dtu.dk,Student*
+"Lu, Xinya",s250122,s250122@student.dtu.dk,Student*
+"Campopiano, Lucas Patricio Martin",s250484,s250484@student.dtu.dk,Student*
+"Heldbo, Malthe",s250679,s250679@student.dtu.dk,Student*
+"Kapp, Torben",s250988,s250988@student.dtu.dk,Student*
+"Mortensen, Niels Henrik",nhmo,nhmo@dtu.dk,Teacher
+"Pollmann-Larsen, Marie Louise",mlml,mlml@dtu.dk,Teacher
+"Klevang, David Arge",dakp,dakp@dtu.dk,Teacher
+"Oehmen, Josef Peter Helmut",jooehm,Jooehm@dtu.dk,Teacher
+"Shafiee, Sara",sashaf,sashaf@dtu.dk,Teacher
+"Hjartarson, Björgvin",bjhj,bjhj@dtu.dk,Teacher
+"Jørgensen, Henrik René",hrejo,hrejo@dtu.dk,Teacher
+"Østergård, Ellen Kirstine Riegels",s203799,s203799@student.dtu.dk,Teacher
+"Malm, Toke",tokmalm,tokmalm@dtu.dk,Teacher
+"Kongstad, Alexander Gabriel",s223945,alexgk@dtu.dk,Teacher
+"Guo, Yi",yiguo,yiguo@dtu.dk,Teacher
+"Barbieri, Marta",mabarb,mabarb@dtu.dk,Teacher
+"Jespersen, Christian Brunbjerg",cbrje,s174460@student.dtu.dk,Teaching Assistant Plus
+"Ahrensberg, Benedikte Mia",bmiah,bmiah@dtu.dk,Teaching Assistant Plus
+"Jørgensen, Frederik Valdemar Riis",s214887,s214887@student.dtu.dk,Teaching Assistant Plus
+"Ghalwash, Seham",sehgh,s220125@student.dtu.dk,Teaching Assistant Plus
+"Sanchez, Norah Birkeland",s224737,s224737@student.dtu.dk,Teaching Assistant Plus
+"Yousuf, Mohammad Abu",s230077,s230077@student.dtu.dk,Teaching Assistant Plus
+"Plainos, Konstantinos Emmanouil",konpl,konpl@dtu.dk,Teaching Assistant Plus
+"Dale, Bjørnar",baada,baada@space.dtu.dk,Teaching Assistant Plus
+"Riojas, Fernando Herrera",s232388,s232388@student.dtu.dk,Teaching Assistant Plus
+"Torre, Micaela Alejandra de la",s233192,s233192@student.dtu.dk,Teaching Assistant Plus
+"Gromiha, Michael Mozim Michael",s232885,mmmgr@dtu.dk,Teaching Assistant Plus
+"Susilla, Angela Calvo",s243267,s243267@student.dtu.dk,Teaching Assistant Plus
