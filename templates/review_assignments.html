@@ -52,12 +52,10 @@
       display: inline-block; font-size: 0.68rem; font-weight: 600;
       padding: 0.12rem 0.4rem; border-radius: 3px; white-space: nowrap; margin-top: 0.2rem;
     }
-    .id-export-email    { background: #e3f2fd; color: #1565c0; }
-    .id-export-username { background: #fff3e0; color: #e65100; }
-    .id-survey          { background: #e8f5e9; color: #2e7d32; }
-    .id-survey-drop     { background: #ffebee; color: #b71c1c; }
-    .id-survey-unverif  { background: #f3e5f5; color: #6a1b9a; }
-    .id-confirmed       { background: #e8f5e9; color: #1b5e20; }
+    .id-group-export { background: #e3f2fd; color: #1565c0; }
+    .id-classlist    { background: #e8f5e9; color: #1b5e20; }
+    .id-q1-warn      { background: #fff3e0; color: #e65100; }
+    .id-q1-danger    { background: #ffebee; color: #b71c1c; }
 
     /* Challenge group badges */
     .ch-badge {
@@ -148,24 +146,21 @@
 {% endmacro %}
 
 {% macro id_source_badge(id_source, classlist_confirmed) %}
-  {%- if id_source == "export:email" -%}
-    <span class="id-badge id-export-email">export email</span>
-  {%- elif id_source == "export:username" -%}
-    <span class="id-badge id-export-username">export username</span>
-  {%- elif id_source == "survey:in-classlist" -%}
-    <span class="id-badge id-survey">survey + classlist</span>
-  {%- elif id_source == "survey:not-in-classlist" -%}
-    <span class="id-badge id-survey-drop">survey only — not in classlist</span>
-  {%- elif id_source == "survey:no-classlist" -%}
-    <span class="id-badge id-survey-unverif">survey only — no classlist</span>
-  {%- elif id_source == "survey:late-entry" -%}
-    <span class="id-badge id-survey">survey (late entry)</span>
-  {%- elif id_source == "survey:unresolvable" -%}
-    <span class="id-badge id-survey-drop">unresolvable</span>
-  {%- else -%}
-    <span class="id-badge id-export-username">{{ id_source }}</span>
+  {%- set from_export = id_source and id_source.startswith("export:") -%}
+  {%- set confirmed   = classlist_confirmed in (True, "True") -%}
+  {%- if from_export -%}
+    <span class="id-badge id-group-export">group export</span>
   {%- endif -%}
-  {%- if classlist_confirmed in (True, "True") %}&nbsp;<span class="id-badge id-confirmed">✓ classlist</span>{% endif %}
+  {%- if confirmed -%}
+    {% if from_export %}&nbsp;{% endif %}<span class="id-badge id-classlist">classlist</span>
+  {%- endif -%}
+  {%- if not from_export and not confirmed -%}
+    {%- if id_source in ("survey:not-in-classlist", "survey:unresolvable") -%}
+      <span class="id-badge id-q1-danger">Q1 answer</span>
+    {%- else -%}
+      <span class="id-badge id-q1-warn">Q1 answer</span>
+    {%- endif -%}
+  {%- endif -%}
 {% endmacro %}
 
 {% macro ch_badge(cat) %}
