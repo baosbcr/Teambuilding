@@ -148,7 +148,7 @@ Dropdowns you have changed are highlighted in red so it is easy to see what you 
 
 - *Include late-entry students (not in group export) in the review* — late entry students are always kept anyway, but turning this on lets you verify them manually.
 - *Include potentially unenrolled students in the review* — surfaces students who are absent from the classlist, regardless of their normal case type, marked with a warning badge. Requires a classlist upload.
-- *Specific students to always audit* — type a student number (`s253896`, `253896`) or email (`s253896@dtu.dk`) and press Enter to add it as a tag. That student will always appear in the review regardless of their case type. Useful when you have received direct contact from a specific student or teacher.
+- *Specific students to always audit* — type a student number (`s253896`, `253896`), email (`s253896@dtu.dk`), or non-standard DTU username (`nipac`, `nipac@dtu.dk`) and press Enter to add it as a tag. That student will always appear in the review regardless of their case type. Useful when you have received direct contact from a specific student or teacher.
 
 ---
 
@@ -171,6 +171,7 @@ Clicking **Run Pipeline & Download Results** starts the pipeline. A spinner appe
 | File | Contents |
 |------|----------|
 | `teams.csv` | Full team assignments — one row per student with team ID, challenge, student number, name, studyline, personality, and the original group they enrolled in. |
+| `teams_overview.csv` | Always included. Side-by-side grid showing each challenge's teams with team ID, challenge, and size — designed for quick visual inspection in a spreadsheet. |
 | `teams_final.csv` | Clean version for sharing — Name, Student Number, Group only. |
 | `teams_summary.csv` | Per-team diversity stats (only if the summary option was checked). |
 | `run_log.txt` | Complete log of the run, including the settings used, every warning and info message, and a guide to reading the log messages. |
@@ -222,6 +223,7 @@ Teambuilding/                              <- project root
     form_teams.py                          <- Step 2: team formation algorithm
     students_combined.csv                  <- (auto-generated) intermediate student list
     teams.csv                              <- (auto-generated) final team assignments
+    teams_overview.csv                     <- (auto-generated) compact side-by-side grid
     teams_summary.csv                      <- (auto-generated) per-team diversity stats
 ```
 
@@ -286,7 +288,7 @@ Save the file into your run folder, e.g. `Learn Exports/January 2026/Classlist E
 
 | Column | Example | Notes |
 |--------|---------|-------|
-| `team_id` | `A-01` | Challenge letter + team number |
+| `team_id` | `A01` | Challenge letter + team number |
 | `challenge` | `A` | Final challenge assignment |
 | `student_number` | `s253896` | Canonical student ID |
 | `dtu_username` | `nipac` | DTU Learn username when it was replaced by an email-derived ID; empty if username equals the canonical ID |
@@ -296,11 +298,15 @@ Save the file into your run folder, e.g. `Learn Exports/January 2026/Classlist E
 | `studyline` | `Biotechnology` | From survey (or UNKNOWN) |
 | `personality_type` | `INFJ` | MBTI type from survey (or UNKNOWN) |
 
+### `teams_overview.csv` — always produced
+
+Side-by-side grid with one column block per challenge (A → B → C → D) separated by a blank spacer column. Each block has three columns: `team_id`, `challenge`, `size`. Designed for quick visual inspection in a spreadsheet.
+
 ### `teams_summary.csv` — one row per team (with `--summary`)
 
 | Column | Notes |
 |--------|-------|
-| `team_id` | e.g. `A-01` |
+| `team_id` | e.g. `A01` |
 | `challenge` | `A`–`D` |
 | `size` | Number of students |
 | `unique_studylines` | Count of distinct studylines |

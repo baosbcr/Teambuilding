@@ -122,7 +122,7 @@ Available under *Audit options* in the interactive mode section:
 
 - **Audit late-entry students**: include students who appear only in the Late Entries survey (not in the group export) in the review. Off by default since they are always kept anyway — useful if you want to manually verify them.
 - **Audit potentially unenrolled students**: include students absent from the classlist in the review, regardless of their normal case type. These students are clearly marked with a "not in classlist" warning badge. Requires classlist upload.
-- **Specific students to always audit**: a tag input accepting student numbers (`s253896`, `253896`) or emails (`s253896@dtu.dk`). These students always appear in the review even if their assignment is unambiguous. Useful when you have received direct contact from a student or teacher. Unmatched entries are logged as `WARNING [force-audit]` in the run log.
+- **Specific students to always audit**: a tag input accepting student numbers (`s253896`, `253896`), emails (`s253896@dtu.dk`), or non-standard DTU usernames (`nipac`, `nipac@dtu.dk`). These students always appear in the review even if their assignment is unambiguous. Useful when you have received direct contact from a student or teacher. Unmatched entries are logged as `WARNING [force-audit]` in the run log.
 
 ### Settings persistence
 
