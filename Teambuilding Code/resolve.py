@@ -906,15 +906,19 @@ def collect_edge_cases(
         case_type        = s.get("_case_type", "happy")
         nid              = s["student_number"]
         not_in_classlist = s.get("_not_in_classlist", False)
+        dtu_username     = s.get("dtu_username", "")
         is_edge          = case_type not in silent_types
-        is_forced        = nid in force_id_map
+        is_forced        = nid in force_id_map or (dtu_username and dtu_username in force_id_map)
         is_dropped_audit = audit_dropped and not_in_classlist
 
         if not is_edge and not is_forced and not is_dropped_audit:
             continue
 
         if is_forced:
-            matched_force_ids.add(nid)
+            if nid in force_id_map:
+                matched_force_ids.add(nid)
+            if dtu_username and dtu_username in force_id_map:
+                matched_force_ids.add(dtu_username)
 
         # Assign display case_type for silent students surfaced by audit flags
         if not is_edge:
