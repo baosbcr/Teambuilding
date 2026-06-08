@@ -470,28 +470,43 @@ def _write_summary(
         "unique_studylines", "unique_personalities",
         "studyline_diversity", "personality_diversity",
     ]
-    rows = []
-    dummy_weights = {"studyline": 1.0, "personality": 1.0}
+
+    # Build a flat list of value rows per challenge
+    ch_rows: dict[str, list[list]] = {}
     for ch in CHALLENGES:
+        rows = []
         for t_idx, team in enumerate(all_teams[ch], start=1):
             tid = f"{ch}{t_idx:02d}"
             sl = len({s["studyline"]        for s in team})
             p  = len({s["personality_type"] for s in team})
             n  = len(team)
-            rows.append({
-                "team_id":               tid,
-                "challenge":             ch,
-                "size":                  n,
-                "unique_studylines":     sl,
-                "unique_personalities":  p,
-                "studyline_diversity":   f"{sl/n:.2f}" if n else "0.00",
-                "personality_diversity": f"{p/n:.2f}"  if n else "0.00",
-            })
+            rows.append([
+                tid, ch, n, sl, p,
+                f"{sl/n:.2f}" if n else "0.00",
+                f"{p/n:.2f}"  if n else "0.00",
+            ])
+        ch_rows[ch] = rows
+
+    max_rows   = max((len(r) for r in ch_rows.values()), default=0)
+    empty_cell = [""] * len(fieldnames)
 
     with open(path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
+        writer = csv.writer(f)
+        # Header: fieldnames for each challenge separated by one empty spacer column
+        header = []
+        for i, ch in enumerate(CHALLENGES):
+            if i:
+                header.append("")
+            header.extend(fieldnames)
+        writer.writerow(header)
+        # One output row per team index; shorter challenges get blank cells
+        for row_idx in range(max_rows):
+            row = []
+            for i, ch in enumerate(CHALLENGES):
+                if i:
+                    row.append("")
+                row.extend(ch_rows[ch][row_idx] if row_idx < len(ch_rows[ch]) else empty_cell)
+            writer.writerow(row)
 
 
 def print_summary(all_teams: dict[str, list[list[dict]]], cfg: Config) -> None:
