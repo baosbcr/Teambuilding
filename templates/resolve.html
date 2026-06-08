@@ -184,7 +184,8 @@
               {{ c.q1_answer }}
               {% if c.q1_answer %}
                 <button type="button" class="accept-q1-btn"
-                        onclick="acceptQ1(this, {{ c.q1_answer|tojson }})">↓ use</button>
+                        data-q1="{{ c.q1_answer }}"
+                        onclick="acceptQ1(this)">↓ use</button>
               {% endif %}
             </td>
             <td>
@@ -221,9 +222,9 @@ function startResolve() {
   document.getElementById('overlay').classList.add('active');
 }
 
-function acceptQ1(btn, q1Value) {
+function acceptQ1(btn) {
   const input = btn.closest('tr').querySelector('input[type="text"]');
-  if (input) { input.value = q1Value; input.focus(); }
+  if (input) { input.value = btn.dataset.q1; input.focus(); }
 }
 
 // Poll for the download_ready cookie (same pattern as index.html)
