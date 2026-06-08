@@ -55,6 +55,15 @@
     .src-survey-dropped    { background: #ffebee; color: #b71c1c; }
     .src-survey-other      { background: #e8f5e9; color: #1b5e20; }
 
+    .accept-q1-btn {
+      display: inline-block; margin-left: 0.4rem;
+      padding: 0.1rem 0.45rem; font-size: 0.68rem; font-weight: 600;
+      background: #fff3e0; color: #e65100; border: 1px solid #ffcc80;
+      border-radius: 3px; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s; vertical-align: middle;
+    }
+    .accept-q1-btn:hover { background: #ffe0b2; }
+
     .home-btn {
       display: inline-block; margin-bottom: 1.25rem; padding: 0.5rem 1rem;
       background: white; border: 1px solid #ddd; border-radius: 6px;
@@ -171,7 +180,13 @@
           <tr class="row-warn">
             <td>{{ c.name }}</td>
             <td class="mono">{{ c.pipeline_id }}</td>
-            <td class="mono">{{ c.q1_answer }}</td>
+            <td class="mono">
+              {{ c.q1_answer }}
+              {% if c.q1_answer %}
+                <button type="button" class="accept-q1-btn"
+                        onclick="acceptQ1(this, {{ c.q1_answer|tojson }})">↓ use</button>
+              {% endif %}
+            </td>
             <td>
               {{ src_badge(c.id_badge_key) }}
               {% if c.proposed_badge_key != c.id_badge_key %}
@@ -204,6 +219,11 @@
 <script>
 function startResolve() {
   document.getElementById('overlay').classList.add('active');
+}
+
+function acceptQ1(btn, q1Value) {
+  const input = btn.closest('tr').querySelector('input[type="text"]');
+  if (input) { input.value = q1Value; input.focus(); }
 }
 
 // Poll for the download_ready cookie (same pattern as index.html)
