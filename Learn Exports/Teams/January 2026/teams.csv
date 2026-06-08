@@ -1,0 +1,936 @@
+team_id,challenge,student_number,dtu_username,email_student_number,id_source,student_name,original_category,studyline,personality_type
+A01,A,s203827,,,export:email,Jónas Holm Wentzlau,challenge A,Autonomous Systems,INFP
+A01,A,s254141,,,export:email,Julie Ravignat,challenge A,Civil Engineering,INTJ
+A01,A,s214503,,,export:email,Kirstine Johanne Berg-Munch,challenge A,Earth and Space Physics and Engineering,ENFJ
+A01,A,s240041,,,export:email,Niyaz Mahmud Sayem,challenge A,Communication Technologies and System Design (Telecommunication),ENTJ
+A01,A,s203906,,,export:email,Jonas Winther,challenge A,Physics and Nanotechnology,INTP
+A01,A,s215072,,,export:email,Frederikke Sofie Kvistborg Henriksen,challenge A,Biotechnology,ISTJ
+A01,A,s253506,,,export:email,Sara Canseco Pla,challenge A,Food Technology,INFJ
+A01,A,s253328,,,export:email,Maria Sole Colombo,challenge A,Biotechnology,ENFJ
+A01,A,s252612,,,export:email,Jinran Yi,overflow,Computer Science and Engineering,INTP
+A01,A,s253282,,,export:email,Andrus Arula,overflow,UNKNOWN,UNKNOWN
+A02,A,s215249,,,export:email,Jens-Christian Rabøl,challenge A,Environmental Engineering,ENTP
+A02,A,s252647,,,export:email,Yihan Zhang,challenge A,Engineering Acoustics,ENFP
+A02,A,s242959,,,export:email,Ákos Gelencsér,challenge A,Computer Science and Engineering,ISTJ
+A02,A,s253553,,,export:email,Brynjar Halldórsson,challenge A,Pharmaceutical Design and Engineering,ENTJ
+A02,A,s253093,,,export:email,Kristín Böðvarsdóttir,challenge A,Mathematical Modelling and Computation,ENFJ
+A02,A,s215305,,,export:email,Enes Kenan Domurcuk,challenge A,Architectural Engineering,ISTP
+A02,A,s252761,,,export:email,Swarnavo Sen,challenge A,Advanced Materials and Healthcare Engineering,INFP
+A02,A,s252581,,,export:email,Samiksha Milind Bujone,challenge A,Biotechnology,ENFJ
+A02,A,s253579,,,export:email,Alice Canas Valente,overflow,Materials and Manufacturing Engineering,INFP
+A02,A,s253368,,,export:email,Rosa Ceano-Vivas,overflow,Engineering Acoustics,ENFP
+A03,A,s215097,,,export:email,Iben Korbø Rasmussen,challenge A,Food Technology,ESTJ
+A03,A,s242050,,,export:email,Lisa Gattermann,challenge A,Biomedical Engineering,ESFJ
+A03,A,s221701,,,export:email,Andreas Ellebo Nielsen,challenge A,Earth and Space Physics and Engineering,INTJ
+A03,A,s253454,,,export:email,Weronika Muszynska,challenge A,Biotechnology,ENFJ
+A03,A,s252720,,,export:email,Edith Kavutha Musili,challenge A,Environmental Engineering,INFJ
+A03,A,s253299,,,export:email,Simon Strobel,challenge A,Sustainable Energy,ISFJ
+A03,A,s252700,,,export:email,Haoran Qin,challenge A,Electrical Engineering,INTP
+A03,A,s253493,,,export:email,Mareike Leoni Pfützner,challenge A,Biotechnology,ENFJ
+A03,A,s254358,,,export:email,Ida Sayk Sørensen,overflow,Aquatic Science and Technology,ENTJ
+A03,A,s253536,,,survey:late-entry,Matteo Sartor,late entry,UNKNOWN,UNKNOWN
+A04,A,s242899,,,export:email,Simon Wäschle,challenge A,Biomedical Engineering,ENFJ
+A04,A,s214444,,,export:username,Elias Kjelstrup Bakhauge,challenge A,Physics and Nanotechnology,ESTJ
+A04,A,s243666,,,export:email,Natalia Sofia Cossa Dos Santos,challenge A,Chemical and Biochemical Engineering,INFP
+A04,A,s243921,,,export:email,Claudia Ximénez Romero,challenge A,UNKNOWN,UNKNOWN
+A04,A,s242747,,,export:email,Dadey Asta Halfdansdottir,challenge A,Sustainable Energy,ESFJ
+A04,A,s205720,,,export:email,Irene Abigail Sotomayor Munoz,challenge A,Computer Science and Engineering,ESFP
+A04,A,s192919,,,export:email,Mads Michael Evensen,challenge A,Civil Engineering,INTJ
+A04,A,s253672,,,export:email,Luna Pacheco Santos,challenge A,Biotechnology,ENFJ
+A04,A,s253896,,,export:email,Martina Medini,late entry,Chemical and Biochemical Engineering,INFJ
+A04,A,s253602,,,export:email,Mateusz Przewdzing,overflow,Aquatic Science and Technology,ENTP
+A05,A,s252882,,,export:email,Arnkatla Dahlmann Ívarsdóttir,challenge A,Industrial Engineering and Management,INFJ
+A05,A,s243663,,,export:email,Mathilde Ransborg,challenge A,Environmental Engineering,ISFJ
+A05,A,s214477,,,export:email,Alba Bech Larsen,challenge A,Physics and Nanotechnology,INTJ
+A05,A,s224163,jskan,,export:email,Johannes Skaaning Andersen,challenge A,Applied Chemistry,ENFJ
+A05,A,s205034,,,export:email,Phillip Skovbon Mikkelsen,challenge A,Electrical Engineering,ISTP
+A05,A,s252725,,,export:email,Chloe Kim,challenge A,Biotechnology,ENFP
+A05,A,s253869,,,export:email,Beatricia Nagit,challenge A,Computer Science and Engineering,ESTJ
+A05,A,s253428,,,export:email,Ana Catarina Neves de Ana  Catarina Neves de Almeida,challenge A,Biomedical Engineering,ENFJ
+A05,A,s243227,,,export:email,Noé Husser,overflow,Sustainable Energy,INTJ
+A05,A,s250153,,,export:email,Joshendra Bahadur Khadka,overflow,Food Technology,INTJ
+A06,A,s203642,,,export:email,Sylvester Elias Tryde Schmidt,challenge A,UNKNOWN,UNKNOWN
+A06,A,s253392,,,export:email,Carlos Boyer,challenge A,Biomedical Engineering,ENFJ
+A06,A,s191511,,,export:email,Anna Zacho Jacobsen,challenge A,Materials and Manufacturing Engineering,ENTJ
+A06,A,s221770,,,export:email,Anna Ganter,challenge A,Biotechnology,ISFJ
+A06,A,s252609,,,export:email,Roshan John,challenge A,Autonomous Systems,INTJ
+A06,A,s253189,,,export:email,Jeanne Froget,challenge A,Chemical and Biochemical Engineering,ENFP
+A06,A,s225049,,,export:email,Ida Sofie Goldschmidt,challenge A,Bioinformatics and Systems Biology,ESTJ
+A06,A,s253361,,,export:email,Ona Girbau,challenge A,Pharmaceutical Design and Engineering,ENFJ
+A06,A,s253332,,,export:email,Teresa Vallese,overflow,Biotechnology,ENFP
+A06,A,s250699,,,export:email,Helena Mundbjerg Kobborg,overflow,Chemical and Biochemical Engineering,INTJ
+A07,A,s205483,,,export:email,Irsa Azher Javed,challenge A,Civil Engineering,ENFJ
+A07,A,s253516,,,export:email,Raisa Meller,challenge A,Biotechnology,INFP
+A07,A,s252868,,,export:email,Luca Bühring,challenge A,Industrial Engineering and Management,ENTP
+A07,A,s253835,,,export:email,Mathias Jens Hedegaard,challenge A,Pharmaceutical Design and Engineering,ISTP
+A07,A,s223929,,,export:email,Marie Pedersen,challenge A,Architectural Engineering,ISFJ
+A07,A,s254743,,,export:email,Julia Papiernik,challenge A,Computer Science and Engineering,ISFP
+A07,A,s253382,,,export:email,Ruth De la Fuente,challenge A,Biomedical Engineering,ESFJ
+A07,A,s253334,,,export:email,Þórdís Lilja Ólafsdóttir,challenge A,Biotechnology,INTP
+A07,A,s252723,,,export:email,Alexandra Trzpis,overflow,Biomedical Engineering,ENTP
+A07,A,s253035,,,export:email,Adam Zvalo,overflow,Computer Science and Engineering,ENTJ
+A08,A,s224659,,,export:email,Sebastian Lukas Beske Nielsen,challenge A,Mechanical Engineering,ENFJ
+A08,A,s214445,,,export:email,Annika Dalsgaard Jensen,challenge A,Physics and Nanotechnology,INTP
+A08,A,s225081,,,export:email,Vivvian Sun Liang,challenge A,Biotechnology,ISFJ
+A08,A,s223823,,,export:email,Nicolai Hagelund Vedelsparre Jensen,challenge A,Civil Engineering,ISTP
+A08,A,s225007,nipac,,export:email,Nikita Julius Fogelstrøm Pachkova,challenge A,Pharmaceutical Design and Engineering,ENTP
+A08,A,s252702,,,export:email,Sreemoyee Biswas,challenge A,Biomedical Engineering,INFJ
+A08,A,s242822,,,export:email,Jonas Schildt,challenge A,Industrial Engineering and Management,ENTJ
+A08,A,s215050,,,export:email,Katrine Boldsen Lund,challenge A,Pharmaceutical Design and Engineering,INTJ
+A08,A,s252632,,,export:email,Nikhil Kaarthik Sangeetha Selvakumar,overflow,Industrial Engineering and Management,ENFP
+A08,A,s253794,,,export:email,Amélie Tanré,overflow,Applied Chemistry,ISFJ
+A09,A,macoda,,,export:username,Marc Correll Damsgaard,challenge A,Biotechnology,INTJ
+A09,A,s224045,,,export:email,Asger Wenneberg,challenge A,Electrical Engineering,INTP
+A09,A,s253048,,,export:email,Yann Becker,challenge A,Environmental Engineering,ENFJ
+A09,A,s224108,,,export:email,Emil Nikolaj Sørensen,challenge A,Applied Chemistry,ENTJ
+A09,A,s252687,,,export:email,Pratyush Bhushan,challenge A,Mechanical Engineering,INFJ
+A09,A,s244504,,,export:email,Emil Møller Kristensen,challenge A,Sustainable Energy,INFP
+A09,A,s250696,,,export:email,Jakub Nowak,challenge A,Computer Science and Engineering,ENTP
+A09,A,s225037,,,export:email,Belma Mestrebasic,challenge A,Pharmaceutical Design and Engineering,ENFJ
+A09,A,s252737,,,export:email,Aditya Radhakrishna,overflow,Materials and Manufacturing Engineering,ISFP
+A09,A,s253757,,,survey:late-entry,Stanislaw Piotr Kolodziejczyk,late entry,Autonomous Systems,INTJ
+A10,A,s214212,,,export:email,Lasse Balleby Knudsen,challenge A,Civil Engineering,ESFP
+A10,A,s253319,,,export:email,Daniel Stach,challenge A,Biotechnology,ENTJ
+A10,A,s223921,,,export:email,Line Kragh-Sørensen,challenge A,Architectural Engineering,ENFJ
+A10,A,s215108,,,export:email,Helena Hvid Hansen,challenge A,Pharmaceutical Design and Engineering,ISFJ
+A10,A,s253435,,,export:email,Joana Rita Viola Serafim,challenge A,UNKNOWN,UNKNOWN
+A10,A,s253373,,,export:email,Isabel Nieves Serrano,challenge A,Biomedical Engineering,ENFP
+A10,A,s253490,,,export:email,Ulrich Schütze,challenge A,Engineering Acoustics,INTJ
+A10,A,s224975,,,export:email,Karoline Søe Nedergaard,challenge A,Biotechnology,ISTJ
+A10,A,s253330,,,export:email,Giulia Dissette,overflow,Biotechnology,ENFP
+A11,A,s195758,,,export:email,Rasmus Bruun Poulsen,challenge A,Engineering Acoustics,ISFP
+A11,A,s225047,,,export:email,Caroline Elisabeth Kartvedt Paulsen,challenge A,Biotechnology,INFJ
+A11,A,s253875,,,export:email,Kevin Kluka,challenge A,Computer Science and Engineering,ENTP
+A11,A,s243228,,,export:email,Matis Bertrand Michel Carpentier,challenge A,Environmental Engineering,INTJ
+A11,A,s252907,,,export:email,Lyna Rebaï,challenge A,Electrical Engineering,ESTJ
+A11,A,s214195,,,export:email,Asger Faurbye,challenge A,Civil Engineering,ENTJ
+A11,A,s253556,,,export:email,María Arnarsdóttir,challenge A,Architectural Engineering,ENFJ
+A11,A,s253501,,,export:email,Sergi Serrat Domenech,challenge A,Pharmaceutical Design and Engineering,ENFJ
+A11,A,s243322,,,export:email,Jorge García Fernández,overflow,Sustainable Energy,INFP
+A12,A,s183547,,,export:email,Anne Christine Tetens,challenge A,Civil Engineering,ISFJ
+A12,A,s254134,,,export:email,Marta Carneletto,challenge A,Pharmaceutical Design and Engineering,ESFJ
+A12,A,s223997,,,export:email,Jacob Juel Dehlsen,challenge A,Electrical Engineering,ENTJ
+A12,A,s253312,,,export:email,Djordje Krupljanin,challenge A,Sustainable Energy,INFJ
+A12,A,s215195,,,export:email,Katherine Fernandez Quibal,challenge A,Biotechnology,ISTP
+A12,A,s253359,,,export:email,Ágata Pérez Jiménez,challenge A,Biomedical Engineering,ENFP
+A12,A,s253684,,,export:email,Regina Kovács,challenge A,Advanced Materials and Healthcare Engineering,ENFJ
+A12,A,s254733,,,export:email,Jessica Kimberley Kniess,challenge A,Civil Engineering,INTJ
+A12,A,s225175,,,export:email,Victor Rousting Holm-Larsen,overflow,Materials and Manufacturing Engineering,INTJ
+A13,A,s253671,,,export:email,María Caballero Chacón,challenge A,Advanced Materials and Healthcare Engineering,ESFJ
+A13,A,s252595,,,export:email,Pouya Bayrami,challenge A,Biomedical Engineering,ENTP
+A13,A,s253573,,,export:email,Natali Sakurako Baba Jensen,challenge A,Pharmaceutical Design and Engineering,ENFP
+A13,A,s252799,,,export:email,Pricilla Marie de la Torre,challenge A,Biotechnology,INTJ
+A13,A,s240388,,,export:email,Livia Darboe,challenge A,Physics and Nanotechnology,ENFJ
+A13,A,s223905,,,export:email,Oskar Hvidt Albertsen,challenge A,UNKNOWN,UNKNOWN
+A13,A,s243080,,,export:email,Lea Grünberg,challenge A,Industrial Engineering and Management,ISFJ
+A13,A,s250449,,,export:email,Mahdis Khazraie,challenge A,Biotechnology,ISTJ
+A13,A,s243075,,,export:email,Viktor Pavlov Milenov,overflow,Autonomous Systems,INFJ
+A14,A,s252775,,,export:email,Rosana González Granado,challenge A,Advanced Materials and Healthcare Engineering,INTP
+A14,A,s252681,,,export:email,Chen Yu,challenge A,Computer Science and Engineering,INFJ
+A14,A,s254602,,,export:email,Maria Wasilewska,challenge A,Biotechnology,ENFJ
+A14,A,s243254,,,export:email,Zoé Mieussens,challenge A,Wind Energy,ENTJ
+A14,A,s211111,,,export:email,Asta Mari Bartholin Johnsen,challenge A,Pharmaceutical Design and Engineering,ISTJ
+A14,A,s233287,,,export:email,Frederik Valentin Jeppesen,challenge A,Electrical Engineering,INTJ
+A14,A,s211950,,,export:email,Celina Bregensøe,challenge A,Food Technology,ESFJ
+A14,A,s215848,,,export:email,Amalie Tandrup,challenge A,Biomedical Engineering,ENFJ
+A14,A,s250110,,,export:email,Priti Acharya,overflow,Food Technology,ISTJ
+A15,A,s252821,,,export:email,Claas Lindner,challenge A,Industrial Engineering and Management,ESTJ
+A15,A,s253800,,,export:email,Evangelos Balatsos,challenge A,Applied Chemistry,INTP
+A15,A,s253413,,,export:email,Inês Neto Samora Marques,challenge A,Biomedical Engineering,ISFP
+A15,A,s252616,,,export:email,Janica Agpalo Lising,challenge A,Biotechnology,ENFJ
+A15,A,s252713,,,export:email,Yixuan Wang,challenge A,Food Technology,INTJ
+A15,A,s243903,,,export:email,Ida Sofie Lindorff Adrian,challenge A,Bioinformatics and Systems Biology,ISTJ
+A15,A,s253687,,,export:email,Fotoula Kounelaki,challenge A,Pharmaceutical Design and Engineering,ENTJ
+A15,A,s253257,,,export:email,Magdalena Dziegielowska,challenge A,Chemical and Biochemical Engineering,ENFJ
+A15,A,s253537,,,export:email,Remi Defina-Sperando,overflow,Pharmaceutical Design and Engineering,ESTP
+A16,A,s180367,,,export:email,Mikkel Agerbo Hermansen,challenge A,Engineering Acoustics,ENFJ
+A16,A,s253824,,,export:email,Thor Theis Svendsen,challenge A,Biotechnology,ENTJ
+A16,A,s253433,,,export:email,Carlota Coelho,challenge A,Biomedical Engineering,INTJ
+A16,A,s254142,,,export:email,Natacha Théron,challenge A,Environmental Engineering,INFP
+A16,A,s214323,,,export:email,Magnus Grumstrup Simonsen,challenge A,Architectural Engineering,ESFJ
+A16,A,s233691,,,export:email,Hauge Bang Jacobsen,challenge A,Food Technology,INTP
+A16,A,s224372,,,export:email,Jacob Brünnich Knudsen,challenge A,Computer Science and Engineering,ISFJ
+A16,A,s243764,,,export:email,Leslie Genevieve Chua Ong,challenge A,Applied Chemistry,INTJ
+A16,A,s250470,,,export:email,Eleni Kompocholi,overflow,UNKNOWN,UNKNOWN
+A17,A,s250258,,,export:email,Michal Grudzinski,challenge A,Industrial Engineering and Management,ENFJ
+A17,A,s194262,,,export:email,Aron Djurhuus Jacobsen,challenge A,Human-Centered Artificial Intelligence (Digital Media Engineering),INFJ
+A17,A,s243682,,,export:email,Suzannah Mary Brown,challenge A,Civil Engineering,INTP
+A17,A,s226432,,,export:email,Ximena Leal Gómez,challenge A,Advanced Materials and Healthcare Engineering,INTJ
+A17,A,s253326,,,export:email,Donatela Palcic,challenge A,Biotechnology,ENTJ
+A17,A,s253019,,,export:email,Fenja Wegener,challenge A,Wind Energy,ISFJ
+A17,A,s254615,,,export:email,Román Olalla García,challenge A,Biomedical Engineering,ENFP
+A17,A,s252724,,,export:email,Vignaraja Sundar Murugan,challenge A,Autonomous Systems,ENFJ
+A17,A,s242702,,,export:email,Hilmar Snær Örvarsson,overflow,Computer Science and Engineering,INTJ
+A18,A,s232895,,,export:email,Ying Li,challenge A,Computer Science and Engineering,INFP
+A18,A,s254616,,,export:email,Elena Barriopedro,challenge A,Autonomous Systems,ENFJ
+A18,A,s254128,,,export:email,Anastasia Brunello,challenge A,Earth and Space Physics and Engineering,ENFP
+A18,A,s220182,,,export:email,Patrick Sneftrup Møller Hansen,challenge A,Biotechnology,INTJ
+A18,A,s253095,,,export:email,Hlynur Blær Sigurðsson,challenge A,Mathematical Modelling and Computation,ISFP
+A18,A,s253411,,,export:email,Pedro Miguel Apolinario Correia,challenge A,Biomedical Engineering,ENTJ
+A18,A,s253252,,,export:email,Dimitra Divrami,challenge A,Chemical and Biochemical Engineering,INFJ
+A18,A,s253540,,,export:email,Ausrine Butrimaite,challenge A,Biotechnology,ISTJ
+A18,A,s242662,,,export:email,Jasraunaq Singh,overflow,Sustainable Energy,INFJ
+A19,A,s253402,,,export:email,Maria Neacsu,challenge A,Biotechnology,ESTJ
+A19,A,s242620,,,export:email,Rifath Mahmud,challenge A,Electrical Engineering,INFJ
+A19,A,s223898,,,export:email,Oline Mei Mervig,challenge A,Architectural Engineering,ISTJ
+A19,A,s211676,,,export:email,Freya Sofie Olesen,challenge A,Pharmaceutical Design and Engineering,INTJ
+A19,A,s224457,,,export:email,Nana Bjerring-Kjærsgaard,challenge A,Biomedical Engineering,ENFJ
+A19,A,s242987,,,export:email,Matija Ma¿us,challenge A,Engineering Acoustics,ENTP
+A19,A,s223903,,,export:email,Aisha Arfan,challenge A,Civil Engineering,ENTJ
+A19,A,s253514,,,export:email,Karolina Gajewska,challenge A,Biotechnology,INTP
+A19,A,s243226,,,export:email,Clément Camille Jérôme Aranda,overflow,Industrial Engineering and Management,ISTJ
+A20,A,s253354,,,export:email,Amaiur De Diego Alcorta,challenge A,Biomedical Engineering,INTJ
+A20,A,s223884,,,export:email,Joakim Flatau Sønderup,challenge A,Sustainable Energy,ESTP
+A20,A,s252662,,,export:email,Mohan Zhu,challenge A,Food Technology,ISFP
+A20,A,s243140,,,export:email,Alicia Masero,challenge A,Wind Energy,ISFJ
+A20,A,s253280,,,export:email,Júlia Esteso González,challenge A,Chemical and Biochemical Engineering,ENFJ
+A20,A,s253551,,,export:email,Tara Jónsdóttir,challenge A,Biotechnology,ESFJ
+A20,A,s243194,avato,,export:email,Aimilia Vasileia Tolia,challenge A,Civil Engineering,INFJ
+A20,A,s225076,,,export:email,Jakob Schøier Kovsted,challenge A,Pharmaceutical Design and Engineering,ENFJ
+A20,A,s253416,,,export:email,Diogo Colorado Miranda,overflow,Biotechnology,INTP
+A21,A,s253663,,,export:email,Sergi Soler Reyné,challenge A,Advanced Materials and Healthcare Engineering,INTJ
+A21,A,s253223,,,export:email,Nadja Oliversdóttir,challenge A,Chemical and Biochemical Engineering,ENFP
+A21,A,s214196,,,export:email,Carl Herman Tambour Mikkelsen,challenge A,Civil Engineering,INFJ
+A21,A,s253855,,,export:email,Theodor Kakulidis,challenge A,Environmental Engineering,ENTP
+A21,A,s214174,,,export:email,Kristin Dahl Rasmussen,challenge A,UNKNOWN,UNKNOWN
+A21,A,s224492,,,export:email,Christoffer Roland Olesen,challenge A,Biomedical Engineering,ENFJ
+A21,A,s253331,,,export:email,Andrea Carretti,challenge A,Biotechnology,ESTJ
+A21,A,s253124,,,export:email,Eniko Horninger,challenge A,Computer Science and Engineering,ENFJ
+A21,A,s253530,,,export:email,Andre Hortencio Grollo,overflow,Biotechnology,INTP
+A22,A,s253329,,,export:email,Elena Sofia Brancato,challenge A,Biotechnology,ENFP
+A22,A,s214505,,,export:email,Christina Vejby Larsen,challenge A,Earth and Space Physics and Engineering,ESFJ
+A22,A,s252643,,,export:email,César Pérez de León,challenge A,Biomedical Engineering,INTJ
+A22,A,s214221,,,export:email,Jeppe Woetmann Pedersen,challenge A,Civil Engineering,ESFP
+A22,A,s240036,,,export:email,Christos Komninos,challenge A,Materials and Manufacturing Engineering,ENTP
+A22,A,s252777,,,export:email,Misael Ponce,challenge A,Sustainable Energy,INTP
+A22,A,s224158,kscst,,export:email,Katrine Schollert Steenstrup,challenge A,Chemical and Biochemical Engineering,ENFJ
+A22,A,s253517,,,export:email,Magdalena Paulina Flaszynska,challenge A,Pharmaceutical Design and Engineering,ENTJ
+A22,A,s214301,svime,,export:email,Sebastian Vinther Mervog,overflow,UNKNOWN,UNKNOWN
+A23,A,s225163,,,export:email,Inés de Pablo Santamaria,challenge A,Biotechnology,INFJ
+A23,A,s223912,,,export:email,August Heine Andersen,challenge A,UNKNOWN,UNKNOWN
+A23,A,s202142,,,export:email,Rasmus Poulsen,challenge A,Sustainable Energy,ESTP
+A23,A,s250830,,,export:email,Dimitra Konstantinou,challenge A,Pharmaceutical Design and Engineering,INFP
+A23,A,s224520,,,export:email,Niels Due Rasmussen,challenge A,Biomedical Engineering,INTJ
+A23,A,s190605,,,export:email,Christian Wantzin,challenge A,Computer Science and Engineering,ENFJ
+A23,A,s224117,,,export:email,Oliver Castenschiold,challenge A,Chemical and Biochemical Engineering,ENTJ
+A23,A,s252843,,,export:email,Francesco Verruso,challenge A,Industrial Engineering and Management,ENFJ
+A23,A,s252715,,,export:email,Om Upadhye,overflow,Sustainable Energy,INTJ
+A24,A,s223918,,,export:email,Clara Nielsen Baadsgaard,challenge A,Architectural Engineering,ISFJ
+A24,A,s242790,,,export:email,Nikolaos Koukoulitsios,challenge A,Civil Engineering,ISTP
+A24,A,s224111,,,export:email,Maia Lynnerup Wegmann,challenge A,Applied Chemistry,INFP
+A24,A,s224527,,,export:username,Visnukaran Kirubakaran,challenge A,Biomedical Engineering,ISTJ
+A24,A,s250212,,,export:email,Annelie June Moebius,challenge A,Pharmaceutical Design and Engineering,INFJ
+A24,A,s243702,,,export:email,Durvesh Gosavi,challenge A,UNKNOWN,UNKNOWN
+A24,A,s214573,,,export:email,Lin Bigom-Eriksen,challenge A,Chemical and Biochemical Engineering,ENFJ
+A24,A,s253822,,,export:email,Laia Linyuan Martí Serra,challenge A,Biotechnology,INTJ
+A24,A,s210851,,,export:email,Cassandra Ann Brandt,overflow,Biotechnology,ENFJ
+A25,A,s252722,,,export:email,Amogh Prakash Shetty,challenge A,Mechanical Engineering,ISFP
+A25,A,s254259,,,export:email,Nikolaj Kristiansen,challenge A,Electrical Engineering,INTJ
+A25,A,s253341,,,export:email,Katharina Maja Blum,challenge A,Biomedical Engineering,ENFJ
+A25,A,s253077,,,export:email,Jakub Lukasz Lukaszewski,challenge A,Computer Science and Engineering,ENTJ
+A25,A,s243406,,,export:email,Emily Weidner,challenge A,Applied Chemistry,INFP
+A25,A,s253646,,,export:email,Henrique Antunes dos Santos Dias,challenge A,Earth and Space Physics and Engineering,ENTP
+A25,A,s215074,,,export:email,Yaren Kayhan,challenge A,Biotechnology,ISFJ
+A25,A,s252669,,,export:email,Yasaswini Reddy Avu,challenge A,Environmental Engineering,INFJ
+A25,A,s252947,,,export:email,August Pallesen,overflow,Mathematical Modelling and Computation,ENFJ
+B01,B,s253546,,,export:email,Constantinos Heotis,challenge B,Pharmaceutical Design and Engineering,ENTJ
+B01,B,s253377,,,export:email,Juliana Siac Berardo,challenge B,Food Technology,ENFJ
+B01,B,s253644,,,export:email,Inês Ramalhosa Aroeira Carriço,challenge B,Physics and Nanotechnology,INFJ
+B01,B,s214654,,,export:email,Mark Andrawes,challenge B,Mathematical Modelling and Computation,ISTJ
+B01,B,s252825,,,export:email,Snorri Arnarsson,challenge B,Industrial Engineering and Management,ISTP
+B01,B,s190088,,,export:email,Magnus Lupnaav Søndergaard,challenge B,Mechanical Engineering,ENTP
+B01,B,s214918,,,export:email,Marcus Kjær Pihl,challenge B,Computer Science and Engineering,INTP
+B01,B,s253224,,,export:email,Ingibjörg Embla Davíðsdóttir,challenge B,Chemical and Biochemical Engineering,INTJ
+B01,B,s220757,,,export:email,Oskar Kistrup,overflow,Biotechnology,ENTP
+B01,B,s203840,,,export:email,Viktor Hinding Hansen,overflow,Electrical Engineering,INTP
+B02,B,s253441,,,export:email,Anthony del Rosario Hernandez,challenge B,Biotechnology,ENTJ
+B02,B,s183838,,,export:email,Thor Peter Nyhegn Kistrup,challenge B,Chemical and Biochemical Engineering,INTP
+B02,B,s180383,,,export:email,Sabah Khan,challenge B,Pharmaceutical Design and Engineering,ISFP
+B02,B,s253191,,,export:email,Krists Sturmanis,challenge B,Sustainable Energy,INTJ
+B02,B,s175236,,,export:email,Sara Popal,challenge B,Biomedical Engineering,INFJ
+B02,B,s173394,,,export:email,Frederik Verne Henriksen,challenge B,Computer Science and Engineering,ISFJ
+B02,B,s214848,,,export:email,Mille Rebien,challenge B,Environmental Engineering,ENFJ
+B02,B,s210852,,,export:email,Lucas Hother Hald,challenge B,Chemical and Biochemical Engineering,INTJ
+B02,B,s242965,,,export:email,Attila Istvan Kiri,overflow,Autonomous Systems,ENFP
+B02,B,s253251,,,export:email,Christopher Lampridis,overflow,Chemical and Biochemical Engineering,INTJ
+B03,B,s252855,,,export:email,Francesco Gazzina,challenge B,Industrial Engineering and Management,ENFJ
+B03,B,s256884,,,export:email,Filip Ustrobinski,challenge B,Electrical Engineering,ENTJ
+B03,B,s200008,,,export:email,Khalil Ahmad Othman,challenge B,UNKNOWN,UNKNOWN
+B03,B,s195783,,,export:email,Burcu Demirci,challenge B,Applied Chemistry,ISFJ
+B03,B,s253557,,,export:email,Theodoros Messinis,challenge B,Food Technology,ENFP
+B03,B,s254386,,,export:email,Mariano Zarate,challenge B,Chemical and Biochemical Engineering,ENTP
+B03,B,s242582,,,export:email,Vinit Nilesh Vasa,challenge B,Bioinformatics and Systems Biology,INFP
+B03,B,s253195,,,export:email,Sofia Nuvoloni,challenge B,Sustainable Energy,ENFJ
+B03,B,s253401,,,survey:late-entry,Dragos Burlui,late entry,Biomedical Engineering,INTP
+B03,B,s253426,,,export:email,Matilde Cerqueira,overflow,Earth and Space Physics and Engineering,INFP
+B04,B,s232226,,,export:email,Can Eraydin,challenge B,UNKNOWN,UNKNOWN
+B04,B,s253588,,,export:email,Giulia Paoloni,challenge B,Chemical and Biochemical Engineering,INTJ
+B04,B,s242992,,,export:email,Mark-Norbert Baka,challenge B,Mechanical Engineering,INFP
+B04,B,s252585,,,export:email,Aditya Powar,challenge B,Biotechnology,ENTJ
+B04,B,s253653,,,export:email,Mariana Bagulho,challenge B,Earth and Space Physics and Engineering,ENTP
+B04,B,s253786,,,export:email,Kyriakos Michail,challenge B,Autonomous Systems,ENFJ
+B04,B,s254390,,,export:email,Solange Magali Lagrutta,challenge B,Sustainable Energy,ESFJ
+B04,B,s246420,,,export:email,Emma Fuglsig Helgesen,challenge B,Chemical and Biochemical Engineering,ENFJ
+B04,B,s253074,,,export:email,Jakub Piotrowski,overflow,Computer Science and Engineering,ENTJ
+B04,B,s243536,,,export:email,Abdul Karim Dalati,overflow,Chemical and Biochemical Engineering,ENFP
+B05,B,s253108,,,export:email,Louise Dumoulin,challenge B,Architectural Engineering,INFJ
+B05,B,s250214,,,export:email,Jakub Grzegorz Modrzejewski,challenge B,Biotechnology,INTP
+B05,B,s253518,,,export:email,Matilde Lapão de Morais de Abreu Sarmento,challenge B,Biomedical Engineering,ENFP
+B05,B,s253274,,,export:email,Iago Meijide Hidalgo,challenge B,Sustainable Energy,INTJ
+B05,B,s214530,,,export:email,Amalie Vestentoft,challenge B,Applied Chemistry,ISFJ
+B05,B,s210850,,,export:email,Magnus Bækgaard Andersen,challenge B,Chemical and Biochemical Engineering,ISTJ
+B05,B,s223873,,,export:email,Casper Helvig Larsen,challenge B,Electrical Engineering,ENFJ
+B05,B,s254385,,,export:email,Eleni Anna Kouvelioti,challenge B,Chemical and Biochemical Engineering,ENFJ
+B05,B,s253455,,,export:email,Marcelina Jagoda Kulczycka,overflow,Biomedical Engineering,ISTJ
+B05,B,s221937,,,export:email,Tymoteusz Barcinski,overflow,Mathematical Modelling and Computation,ENTJ
+B06,B,s253094,,,export:email,Telma Jeanne Bonthonneau,challenge B,Environmental Engineering,INFJ
+B06,B,s254382,,,export:email,Iago Carballo Fernández,challenge B,Chemical and Biochemical Engineering,INTP
+B06,B,s252934,,,export:email,Marius Alexander Pollok,challenge B,Industrial Engineering and Management,ENTJ
+B06,B,s253232,,,export:email,ANNA KOLA,challenge B,Sustainable Energy,ESTJ
+B06,B,s214727,,,export:email,Bastian Gulstad Ravn,challenge B,Mathematical Modelling and Computation,ISTP
+B06,B,s253396,,,export:email,Gabriela Felgueiras,challenge B,Biomedical Engineering,ENFJ
+B06,B,s214794,,,export:email,Mads Feldvoss Olsen,challenge B,Biotechnology,ENTP
+B06,B,s243111,,,export:email,Leonardo Di Terlizzi,challenge B,Chemical and Biochemical Engineering,INTJ
+B06,B,s250289,,,export:email,Eugenia Kwallu Nilsson,overflow,Pharmaceutical Design and Engineering,INTP
+B06,B,s256755,,,export:email,Sebastian Vigh,overflow,Mathematical Modelling and Computation,INTP
+B07,B,s253834,,,export:email,Fruzsina Eniko Egyed,challenge B,Pharmaceutical Design and Engineering,ESFJ
+B07,B,s254347,,,export:email,Heikki Vainø Juhani Hukka,challenge B,Biotechnology,ENTP
+B07,B,s201345,,,export:email,August Rendtorff,challenge B,Earth and Space Physics and Engineering,ISFP
+B07,B,s223935,,,export:email,Aksel Zayas Teglgaard,challenge B,Civil Engineering,ENFJ
+B07,B,s253955,,,export:email,Petra Brecková,challenge B,Chemical and Biochemical Engineering,INFP
+B07,B,s253891,,,export:email,Cathal Tomas Hurley,challenge B,Applied Chemistry,INTJ
+B07,B,s253087,,,export:email,Sara Pascali,challenge B,Environmental Engineering,INTP
+B07,B,s214567,,,export:email,Tobias Bæk,challenge B,Chemical and Biochemical Engineering,ENTJ
+B07,B,s253020,,,export:email,Simon Kurtenbach,overflow,Mathematical Modelling and Computation,INTJ
+B07,B,s215317,,,export:email,Mathias Rosenborg Lund Hendriksen,overflow,Civil Engineering,INFJ
+B08,B,s252698,,,export:email,Vigneswaran Sekar,challenge B,Computer Science and Engineering,INFJ
+B08,B,s253818,,,export:email,Henrik Bongers,challenge B,Autonomous Systems,ENTJ
+B08,B,s223841,,,export:email,Christian Henrik Sørensen,challenge B,Civil Engineering,ISFJ
+B08,B,s250451,,,export:email,Bishal Niraula,challenge B,Communication Technologies and System Design (Telecommunication),ENFJ
+B08,B,s253222,,,export:email,Dagur Snær Hilmarsson,challenge B,Chemical and Biochemical Engineering,INTJ
+B08,B,s252920,,,export:email,Georgios Loulakis,challenge B,Business Analytics,ESTJ
+B08,B,s223895,,,export:email,Mathilde Lærke Hvilsted-Olsen,challenge B,Architectural Engineering,INTP
+B08,B,s254290,,,export:email,Michele Berardi,challenge B,Environmental Engineering,ENTJ
+B08,B,s247261,,,export:email,Fanny Gómez Martín,overflow,Biomedical Engineering,ENTJ
+B08,B,s205291,,,export:email,Fie Christina Møller,overflow,Business Analytics,INFJ
+B09,B,s253558,,,export:email,Souzanna Vrellou,challenge B,Food Technology,ISFJ
+B09,B,s254287,,,export:email,Camilla Mastrandrea Rouget,challenge B,Environmental Engineering,ENFJ
+B09,B,s214496,,,export:email,Kasper Mejer Lærche Laursen,challenge B,Earth and Space Physics and Engineering,ENTP
+B09,B,s252822,,,export:email,Mattia Lipparini,challenge B,Industrial Engineering and Management,ENFP
+B09,B,s195371,,,export:email,Laura Byvald,challenge B,Chemical and Biochemical Engineering,INTJ
+B09,B,s223877,,,export:email,Anton Høier Troelsen,challenge B,Electrical Engineering,INTP
+B09,B,s232508,,,export:email,Xavier Ràfols Jordà,challenge B,Wind Energy,INFJ
+B09,B,s252738,,,export:email,Joshuva Stephen Alangaram,challenge B,Biotechnology,INTJ
+B09,B,s254321,,,export:email,Jonathan Yves Jacky Belliard,overflow,Electrical Engineering,ENFP
+B09,B,s243284,,,export:email,Miguel Blanco Chilleron,overflow,Bioinformatics and Systems Biology,ENFJ
+B10,B,s253188,,,export:email,Ignacio Marti Plaza,challenge B,Sustainable Energy,ENFP
+B10,B,s253603,,,export:email,ALICE BETTIO,challenge B,Aquatic Science and Technology,ENTP
+B10,B,s253362,,,export:email,Marc Magem Planas,challenge B,Biotechnology,ENFJ
+B10,B,s203618,,,export:email,Amalia Øre Østergaard Petersen,challenge B,Environmental Engineering,ESTJ
+B10,B,s225070,,,export:email,Huria Mohamed Shishay Hissabu,challenge B,UNKNOWN,UNKNOWN
+B10,B,s253484,,,export:email,Anna Finnsdóttir,challenge B,Biomedical Engineering,ISFP
+B10,B,s253954,,,export:email,Andreas Borggaard Petersen,challenge B,Chemical and Biochemical Engineering,ISTJ
+B10,B,s253281,,,export:email,Marta López Pleguezuelos,challenge B,Chemical and Biochemical Engineering,ENTJ
+B10,B,s244405,,,export:email,Pither Tene Bermeo,overflow,Computer Science and Engineering,INFJ
+B11,B,s243208,,,export:email,Georgios Karasakalidis,challenge B,UNKNOWN,UNKNOWN
+B11,B,s174590,,,export:email,Sigrid Kofod Christiansen,challenge B,Food Technology,INFJ
+B11,B,s254383,,,export:email,Gerard Fuertes Codina,challenge B,Chemical and Biochemical Engineering,ISTJ
+B11,B,s224465,,,export:email,Aniq Kashaf Shamim,challenge B,Biomedical Engineering,ENTJ
+B11,B,s224150,,,export:email,Bine Marie Johansson,challenge B,Applied Chemistry,ISFJ
+B11,B,s253597,,,export:email,Hugo Fanjul,challenge B,Materials and Manufacturing Engineering,ESTJ
+B11,B,s254763,,,export:email,Hjalte Tromborg,challenge B,Computer Science and Engineering,ENTP
+B11,B,s253178,,,export:email,Maria da Costa Monteiro,challenge B,Sustainable Energy,ENFJ
+B11,B,s214639,,,export:email,Jesper Berg Lund,overflow,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTP
+B12,B,s243665,,,export:email,Victoria Herraiz Bertolin,challenge B,Chemical and Biochemical Engineering,ISTP
+B12,B,s250333,,,export:email,Sebastian Mathias Johannes Schmid,challenge B,Industrial Engineering and Management,ESTJ
+B12,B,s253383,,,export:email,Sara Remuiñán,challenge B,Biomedical Engineering,INFP
+B12,B,s204763,,,export:email,Denis Meci,challenge B,UNKNOWN,UNKNOWN
+B12,B,s254253,,,export:email,Davide Armandi,challenge B,Sustainable Energy,ENTP
+B12,B,s204317,,,export:email,Frederikke Hauge Mørcke,challenge B,Environmental Engineering,INTJ
+B12,B,s194428,,,export:email,Magdalena Joanna Dzierzynska,challenge B,Food Technology,ENFJ
+B12,B,s253225,,,export:email,Nityapriya Hari Krishnan,challenge B,Chemical and Biochemical Engineering,ENTJ
+B12,B,s253365,,,export:email,Felipe Campos,overflow,Biotechnology,ENTJ
+B13,B,s235375,,,export:email,Victor Georg Hyllegaard Rossing,challenge B,Biotechnology,ENTJ
+B13,B,s214693,,,export:email,Johan Jannik Augsburg,challenge B,Mathematical Modelling and Computation,INTJ
+B13,B,s251210,,,export:email,Bartosz Juliusz Ochedzan,challenge B,Computer Science and Engineering,ENFP
+B13,B,s253233,,,export:email,Markela Brahimi,challenge B,UNKNOWN,UNKNOWN
+B13,B,s253917,,,export:email,Bjørt Í Niðristovu,challenge B,Aquatic Science and Technology,ENFJ
+B13,B,s214539,,,export:email,Tom Schmidt Hansen,challenge B,Chemical and Biochemical Engineering,ESTP
+B13,B,s223825,,,export:email,Malte Algreen Reimer,challenge B,Civil Engineering,ESTJ
+B13,B,s243011,,,export:email,Beatriz Carneiro,challenge B,Biomedical Engineering,INTJ
+B13,B,s204133,,,export:email,Sonny Ma,overflow,Autonomous Systems,INTP
+B14,B,s253012,,,export:email,Ebba Cotton,challenge B,Environmental Engineering,ENFP
+B14,B,s253815,,,export:email,Anastasia-Ioana Cozma,challenge B,Autonomous Systems,INTJ
+B14,B,s253175,,,export:email,Laura Loureiro Pelc,challenge B,Chemical and Biochemical Engineering,ENFJ
+B14,B,s253637,,,export:email,Lydia Aikaterini Molla,challenge B,Physics and Nanotechnology,INFJ
+B14,B,s214610,,,export:email,Albert Frisch Møller,challenge B,Mathematical Modelling and Computation,ISTJ
+B14,B,s252820,,,export:email,Carolina Guerra Fernandes Goncalves Baltazar,challenge B,Electrical Engineering,ISFJ
+B14,B,s253544,,,export:email,Valentini Vasileiou,challenge B,Pharmaceutical Design and Engineering,ENTJ
+B14,B,s251209,,,export:email,Talemana Mujahed,challenge B,Biotechnology,ENFJ
+B14,B,s253029,,,export:email,Valentina Trolese,overflow,Mathematical Modelling and Computation,ENTJ
+B15,B,s210866,,,export:email,Marcus Harder Birkeslund,challenge B,Applied Chemistry,ISTJ
+B15,B,s252791,,,export:email,Lorena Garcia Carvajal,challenge B,Industrial Engineering and Management,ESFJ
+B15,B,s253779,,,export:email,Silvia Wille,challenge B,Autonomous Systems,ISFJ
+B15,B,s214229,,,export:email,Frederik Ehlig Salomon Hansen,challenge B,Civil Engineering,ENTJ
+B15,B,s253044,,,export:email,Coralie Marcotte,challenge B,Environmental Engineering,INTJ
+B15,B,s253545,,,export:email,Panagiotis Ktenas,challenge B,Biotechnology,ENFJ
+B15,B,s253393,,,export:email,Núria Campillos Teixidó,challenge B,Food Technology,INFJ
+B15,B,s243090,,,export:email,Hannah Marie Huth,challenge B,Sustainable Energy,ENFJ
+B15,B,s240413,,,export:email,Andrea Cozzolino,late entry,Architectural Engineering,ENTJ
+B16,B,s253564,,,export:email,Argyrios Karangelis,challenge B,Food Technology,INTP
+B16,B,s214379,,,export:email,Christian Stubkjær Petersen,challenge B,Electrical Engineering,INTJ
+B16,B,s253168,,,export:email,Oriol Rovira Arbalat,challenge B,Mathematical Modelling and Computation,ENFP
+B16,B,s253569,,,export:email,Konstantina Arkoulaki,challenge B,Biotechnology,ENFJ
+B16,B,s253017,,,export:email,Martina Albà González,challenge B,Computer Science and Engineering,ESTJ
+B16,B,s210056,,,export:email,Emilie Dorow Hansen,challenge B,Applied Chemistry,INFJ
+B16,B,s252701,,,export:email,Adhvaidh G,challenge B,Sustainable Energy,ENTJ
+B16,B,s253609,,,export:email,Beatriz Albuquerque Raposo Salema,challenge B,Environmental Engineering,ENFJ
+B16,B,s253521,,,export:email,Diogo Castelo Cardoso,overflow,Engineering Acoustics,INTP
+B17,B,s253054,,,export:email,Martin Deleuze,challenge B,Architectural Engineering,ENFJ
+B17,B,s253204,,,export:email,Tommaso Fabbro,challenge B,Sustainable Energy,ENFP
+B17,B,s203589,,,export:email,Jonathan Michael Nørregaard Thulstrup,challenge B,Civil Engineering,ESTJ
+B17,B,s243244,,,export:email,Margaux Martine Nicole Millaret,challenge B,Environmental Engineering,ISFJ
+B17,B,s254152,,,export:email,Fatima Outoutouh,challenge B,Biotechnology,ISTJ
+B17,B,s233855,,,export:email,Pawel Mazurczak,challenge B,Industrial Engineering and Management,INTJ
+B17,B,s253207,,,export:email,ALESSANDRO ROSETTI,challenge B,Chemical and Biochemical Engineering,ENTJ
+B17,B,s253508,,,export:email,Marcos Solís,challenge B,Biomedical Engineering,ENFJ
+B17,B,s253363,,,export:email,Oriol Monfar Genové,overflow,Engineering Acoustics,ENFJ
+B18,B,s253309,,,export:email,Pantelia Themistokleous,challenge B,Sustainable Energy,ENTJ
+B18,B,s253533,,,export:email,Carlotta Cappuccio,challenge B,Biotechnology,ENFJ
+B18,B,s254364,,,export:email,Nicholas Adam Wood,challenge B,Computer Science and Engineering,ISFJ
+B18,B,s214578,,,export:email,Mads Søndergaard Christensen,challenge B,Applied Chemistry,ENTP
+B18,B,s252878,,,export:email,Dániel Dénes Szabó,challenge B,UNKNOWN,UNKNOWN
+B18,B,s254610,,,export:email,Valentina Buscaglia,challenge B,Biomedical Engineering,INTJ
+B18,B,s253792,,,export:email,Theo Haes,challenge B,Autonomous Systems,ESTJ
+B18,B,s253318,,,export:email,Amalia Villar Jakobsen,challenge B,Chemical and Biochemical Engineering,INTJ
+B18,B,s242940,,,export:email,Pietro Perego,overflow,Materials and Manufacturing Engineering,INTJ
+B19,B,s253112,,,export:email,Simon Weiser,challenge B,Environmental Engineering,ENTJ
+B19,B,s243667,,,export:email,Jonas Dyrby Wittmann,challenge B,Chemical and Biochemical Engineering,INTJ
+B19,B,s243146,,,export:email,Matilde Cilento,challenge B,Materials and Manufacturing Engineering,ESTJ
+B19,B,s253408,,,export:email,Jon Znidarcic,challenge B,Biotechnology,ENFJ
+B19,B,s205238,,,export:email,Christoffer Anton West Nielsen,challenge B,Mechanical Engineering,ISTJ
+B19,B,s224136,,,export:email,Katrine Hedemann Schougaard,challenge B,Applied Chemistry,INFJ
+B19,B,s253655,,,export:email,Aikaterini Mari,challenge B,Aquatic Science and Technology,ISFJ
+B19,B,s214194,,,export:email,Kasper Vöge Ommundsen,challenge B,Civil Engineering,ENTJ
+B19,B,s253349,,,export:username,Àlex Müller Bort,overflow,Pharmaceutical Design and Engineering,ISTP
+B20,B,s254356,,,export:email,Ivan Rodriguez Herrero,challenge B,Materials and Manufacturing Engineering,ENTJ
+B20,B,s214407,,,export:email,Søren Ingemann Petersen,challenge B,Sustainable Energy,ENFJ
+B20,B,s252915,,,export:email,Jekabs Gints Heiss,challenge B,Electrical Engineering,ENTP
+B20,B,s243095,,,export:email,Antonio Lo Schiavo,challenge B,Biotechnology,ENFP
+B20,B,s210861,,,export:email,Kasper Hartung Damsgaard,challenge B,Chemical and Biochemical Engineering,INFP
+B20,B,s223840,,,export:email,Birk Immanuel Tjelum,challenge B,Civil Engineering,ISTP
+B20,B,s211109,,,export:email,Oliver Mathias Thomsen,challenge B,Architectural Engineering,INTJ
+B20,B,s253376,,,export:email,José Luis Imaña Barragán,challenge B,Earth and Space Physics and Engineering,INTJ
+B20,B,s253583,,,export:email,Fiamma Irene Amelia Battisti,overflow,Materials and Manufacturing Engineering,ISFJ
+B21,B,s214774,,,export:email,Emma Sofie Bock,challenge B,Biomedical Engineering,ESFJ
+B21,B,s225177,,,export:email,Rune Møller Christensen,challenge B,Sustainable Energy,ESTJ
+B21,B,s253422,,,export:email,Afonso Narciso de Freitas Santos,challenge B,Food Technology,ENFJ
+B21,B,s253066,,,export:email,Marc Rejndrup,challenge B,Computer Science and Engineering,INTP
+B21,B,alesu,,,export:username,Alejandro Suay Enguix,challenge B,Aquatic Science and Technology,ENTJ
+B21,B,s215120,,,export:email,Caroline Aroha Schmidt Morthorst Rasmussen,challenge B,Biotechnology,INTJ
+B21,B,s214544,,,export:email,Emilie Normann Langhorn,challenge B,Chemical and Biochemical Engineering,ISTJ
+B21,B,s240112,,,export:email,Giorgio Fantasia,challenge B,Industrial Engineering and Management,ENTJ
+B21,B,s253279,,,export:email,Javier Pérez de Cobos,overflow,Chemical and Biochemical Engineering,ENTJ
+B22,B,s252933,,,export:email,Thibaut Heim,challenge B,Business Analytics,INTJ
+B22,B,s252842,,,export:email,András Márton Ferenczi,challenge B,Electrical Engineering,ENTJ
+B22,B,s253421,,,export:email,André Ribau,challenge B,Biomedical Engineering,INFP
+B22,B,s214948,,,export:email,Alexander Madsen,challenge B,Civil Engineering,INTP
+B22,B,s253803,,,export:email,Vasilis Koutsogiannopoulos,challenge B,Applied Chemistry,ENFJ
+B22,B,s254612,,,export:email,CHRYSANTHI PAPADIMOU,challenge B,Pharmaceutical Design and Engineering,INFJ
+B22,B,s253176,,,export:email,Matilde Vaz Neto Homem da Trindade,challenge B,Chemical and Biochemical Engineering,ESFJ
+B22,B,s254637,,,export:email,Helene Weper Jensen,challenge B,Biotechnology,ISTJ
+B22,B,jhaja,,,export:username,Johan Hauser Jacobsen,overflow,UNKNOWN,UNKNOWN
+B23,B,s243096,,,export:email,Pietro Strada,challenge B,Mechanical Engineering,ENTJ
+B23,B,s253650,,,export:email,Pablo Manjon Delgado,challenge B,Earth and Space Physics and Engineering,INFJ
+B23,B,s253172,,,export:email,Maria Paz Infante,challenge B,Chemical and Biochemical Engineering,ENFJ
+B23,B,s253430,,,export:email,Rita Santos Esteves,challenge B,Biomedical Engineering,ESFJ
+B23,B,s252784,,,export:email,Anairis Navarro Montero,challenge B,Pharmaceutical Design and Engineering,INFP
+B23,B,s224974,,,export:email,Rasmus Kamp Nielsen,challenge B,Biotechnology,ENTP
+B23,B,s214255,,,export:email,Marcus Irming Hansen,challenge B,Sustainable Energy,ESTJ
+B23,B,s214844,,,export:email,Jonas Wentzel Sørensen,challenge B,Environmental Engineering,INTJ
+B23,B,s214982,,,export:email,Jonas Özyurteri Rasmussen,overflow,Sustainable Energy,INTP
+B24,B,s243412,,,export:email,Fabio Koopmann,challenge B,UNKNOWN,UNKNOWN
+B24,B,s253398,,,export:email,Rafaela Reis,challenge B,Biomedical Engineering,INTJ
+B24,B,s253895,,,export:email,Asmaa Mohamad Yusuf Muse,challenge B,Chemical and Biochemical Engineering,INFP
+B24,B,s253084,,,export:email,Alessandro Rana,challenge B,Environmental Engineering,ESFJ
+B24,B,s252862,,,export:email,Jóhann Steinn Miiller Ólafsson,challenge B,Industrial Engineering and Management,INFJ
+B24,B,s195687,,,export:email,Joao Maria De Sacadura Botte Corte-Real,challenge B,Materials and Manufacturing Engineering,ENTP
+B24,B,s225040,,,export:email,Frederik Just Olsen,challenge B,Biotechnology,INTP
+B24,B,s242516,,,export:email,Yahir Diaz Flores,overflow,Earth and Space Physics and Engineering,ISTJ
+B24,B,s252819,,,export:email,Víðir Snær Knútsson,overflow,Industrial Engineering and Management,ENTJ
+B25,B,s254346,,,export:email,Tea Pedersen,challenge B,Biotechnology,ENFP
+B25,B,s252930,,,export:email,Vincenzo testini,challenge B,UNKNOWN,UNKNOWN
+B25,B,s253306,,,export:email,Lilly-Malin Schrade,challenge B,Sustainable Energy,ENFJ
+B25,B,s252592,,,export:email,Shreshtpratap Mathur,challenge B,Chemical and Biochemical Engineering,ENTJ
+B25,B,s223876,,,export:email,William Obdrup Nissen,challenge B,Electrical Engineering,INTJ
+B25,B,s253559,,,export:email,Despoina Zervogianni,challenge B,Food Technology,ISTP
+B25,B,s253599,,,export:email,Emma Grace Jinschek,challenge B,Environmental Engineering,INFJ
+B25,B,s252998,,,export:email,Jeppe Evensen Thy,overflow,Computer Science and Engineering,INTP
+B25,B,s252587,,,export:email,Jharana Shrestha,overflow,UNKNOWN,UNKNOWN
+C01,C,s242699,,,export:email,Tómas Kolbeinn Georgsson,challenge C,Mathematical Modelling and Computation,ENTP
+C01,C,s221668,,,export:email,Leanne Marie Sto Domingo,challenge C,Autonomous Systems,INTP
+C01,C,s204315,,,export:email,Sander Ohm Jægersdorf,challenge C,Aquatic Science and Technology,INTJ
+C01,C,s252691,,,export:email,Mashal E Zahra,challenge C,Biotechnology,INFJ
+C01,C,s224248,,,export:email,Nazlihan Kulak,challenge C,Pharmaceutical Design and Engineering,ENTJ
+C01,C,s242788,,,export:email,Yiannis Kardampikis,challenge C,Industrial Engineering and Management,ENFJ
+C01,C,s242724,,,export:email,Saab Singh,challenge C,Computer Science and Engineering,ENFP
+C01,C,s254322,,,export:email,Esben Kok,challenge C,Business Analytics,ENTJ
+C01,C,s250249,,,survey:late-entry,Pedro Lynce de Faria Gomes da Silva,late entry,Computer Science and Engineering,INTJ
+C01,C,s250690,,,export:email,Viggo Starcke,overflow,Computer Science and Engineering,INFJ
+C02,C,s184092,tgaha,,export:email,Trine Galberg Hansen,challenge C,Aquatic Science and Technology,ENTP
+C02,C,s216096,,,export:email,Caroline Reimer Thøgersen,challenge C,Architectural Engineering,ISFJ
+C02,C,s253523,,,export:email,Bárbara Machado,challenge C,Biotechnology,INFP
+C02,C,s230083,,,export:email,Gabriel Buchila,challenge C,Computer Science and Engineering,INTJ
+C02,C,s214626,,,export:email,Frederik Nicolai Hesel Lundgren,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ESTJ
+C02,C,s203957,,,export:email,Viktor Isaksen,challenge C,Mathematical Modelling and Computation,ISTJ
+C02,C,s243009,,,export:email,Diogo Miguel Lobo Forte,challenge C,Industrial Engineering and Management,ENTJ
+C02,C,s203920,,,export:email,Albert Lausten Riber,challenge C,Physics and Nanotechnology,ENTJ
+C02,C,s253031,,,export:email,Gianluca Violoni,overflow,Computer Science and Engineering,INTP
+C02,C,s242749,,,export:email,Mikael Máni Vidal,overflow,Mechanical Engineering,ENFP
+C03,C,s214460,,,export:email,Alexander Johan Olsen,challenge C,Physics and Nanotechnology,ESTJ
+C03,C,s224228,,,export:email,Alexander Guldager,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTP
+C03,C,s252913,,,export:email,Vito Antonio Vultaggio,challenge C,Electrical Engineering,ENFJ
+C03,C,s243810,,,export:email,Benjamin Unger,challenge C,Autonomous Systems,INFP
+C03,C,s252740,,,export:email,Wenxuan Liu,challenge C,Sustainable Energy,ISTJ
+C03,C,s242510,,,export:email,Gishan Dilruwan Thuiya Handi,challenge C,Civil Engineering,ENTJ
+C03,C,s223998,,,export:email,Alexander Wang Aakersø,challenge C,Computer Science and Engineering,INTJ
+C03,C,s224925,,,export:email,Anders Valbak Laurents,challenge C,Industrial Engineering and Management,ENTJ
+C03,C,s253438,,,export:email,Laura Sofia Tomás Barreto,overflow,Biotechnology,ISFJ
+C03,C,s250129,,,export:email,Pragalva Dhungana,overflow,UNKNOWN,UNKNOWN
+C04,C,s252693,,,export:email,Kushagra Kapoor,challenge C,Sustainable Energy,ENTP
+C04,C,s214596,,,export:email,Jacob Seerup Kirkeby,challenge C,Mathematical Modelling and Computation,INTJ
+C04,C,s252726,,,export:email,Yimiao Liu,challenge C,Electrical Engineering,ESFJ
+C04,C,s224936,,,export:email,Emile Gebara,challenge C,Industrial Engineering and Management,ESTJ
+C04,C,s252675,,,export:email,Chen Hou,challenge C,Computer Science and Engineering,ISFP
+C04,C,s253554,,,export:email,Gísli Snær Guðmundsson,challenge C,Civil Engineering,ISTJ
+C04,C,s253323,,,export:email,Thuy Duoeng Le,challenge C,Biotechnology,INFP
+C04,C,s214983,,,export:email,Søren Holthe Mondrup,challenge C,Business Analytics,ENTJ
+C04,C,s253378,,,export:email,Elsa Moreno Barragán,overflow,Earth and Space Physics and Engineering,INFJ
+C04,C,s254155,,,export:email,Paula Huguet i Albareda,overflow,Pharmaceutical Design and Engineering,ESFJ
+C05,C,s253884,,,export:email,Claus Christensen,challenge C,Physics and Nanotechnology,INTP
+C05,C,s215105,,,export:email,Tobias Alexander Christiansen,challenge C,Bioinformatics and Systems Biology,ENTP
+C05,C,s214744,,,export:email,Thomas Riis,challenge C,Mathematical Modelling and Computation,INTJ
+C05,C,s232246,,,export:email,Wenhao Li,challenge C,Computer Science and Engineering,ISFJ
+C05,C,s221710,,,export:email,Felix Jonathan Thomsen,challenge C,Business Analytics,ENFP
+C05,C,s253809,,,export:email,Melvin Angel Oparah-Bengtsen,challenge C,Autonomous Systems,INFP
+C05,C,s214975,,,export:email,Thomas Olsen,challenge C,Industrial Engineering and Management,ISTJ
+C05,C,s253746,,,export:email,Carles Bataller Sebastiá,challenge C,Autonomous Systems,ENTJ
+C05,C,s204552,,,export:email,Kia Jespersen,overflow,Pharmaceutical Design and Engineering,ESTJ
+C05,C,s253263,,,export:email,Yanis Miot,overflow,Sustainable Energy,ISTJ
+C06,C,s253051,,,export:email,Miguel Louis Noé Castells,challenge C,Mathematical Modelling and Computation,ENTJ
+C06,C,s225786,,,export:email,Rasmus Nørgaard Jensen,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ENFJ
+C06,C,s214821,,,export:email,Saifdin Elkhatib,challenge C,Biomedical Engineering,INTJ
+C06,C,s252897,,,export:email,Sivert Magnussen,challenge C,Industrial Engineering and Management,ENTP
+C06,C,s253155,,,export:email,Kristófer Birgir Hjörleifsson,challenge C,Computer Science and Engineering,ESTP
+C06,C,s204617,,,export:email,Rasmus Lyhne Fiehn,challenge C,Business Analytics,INTP
+C06,C,s253888,,,export:email,Bjørt Nattestad Lamhauge,challenge C,Food Technology,ENFP
+C06,C,s214306,,,export:email,Thomas Fredbjørn Fenger Nielsen,challenge C,Architectural Engineering,ENTJ
+C06,C,s242804,,,export:email,Antonios Sideris,overflow,Autonomous Systems,ENTJ
+C06,C,s243222,,,export:email,Erwan Dubourg,overflow,Industrial Engineering and Management,ENFJ
+C07,C,s252646,,,export:email,Linxin Jing,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),INTP
+C07,C,s233487,,,export:email,Shaoyu Liu,challenge C,UNKNOWN,UNKNOWN
+C07,C,s232737,,,export:email,Jóhann Davíð Ólafsson,challenge C,Electrical Engineering,INFP
+C07,C,s243930,,,export:email,Asiya Mohamad Yusuf Muse,challenge C,Bioinformatics and Systems Biology,ENFP
+C07,C,s224038,,,export:email,Georg Brink Dyvad,challenge C,Computer Science and Engineering,ENTP
+C07,C,s250336,,,export:email,Lilly-Marie Mayer,challenge C,Industrial Engineering and Management,ENTJ
+C07,C,s253013,,,export:email,Måns Jonas Redin,challenge C,Mathematical Modelling and Computation,ENFJ
+C07,C,s253391,,,export:email,Irene Carriazo Badillo,challenge C,Biomedical Engineering,ENFJ
+C07,C,s252936,,,export:email,Simon Johannes Jensen,overflow,Electrical Engineering,ENTP
+C07,C,s215151,,,export:email,David Philip Wakeman,overflow,Engineering Acoustics,ISFJ
+C08,C,s253497,,,export:email,Lukas Schieble,challenge C,Biotechnology,INTJ
+C08,C,s204703,,,export:email,Simona Tican,challenge C,Business Analytics,ENTJ
+C08,C,s243968,,,export:email,Leon Wirth,challenge C,UNKNOWN,UNKNOWN
+C08,C,s214741,,,export:email,Ella Kirsten Dinesen,challenge C,Mathematical Modelling and Computation,ISTP
+C08,C,s204640,,,export:email,Jakob Weimann,challenge C,Pharmaceutical Design and Engineering,INFJ
+C08,C,s243590,,,export:email,Silas Stuhldreier,challenge C,Engineering Acoustics,ENTP
+C08,C,s250822,,,export:email,Andrea Albasini,challenge C,Autonomous Systems,ISTJ
+C08,C,s243367,,,export:email,Pascal Díez Dencker,challenge C,Industrial Engineering and Management,ENFJ
+C08,C,s253511,,,export:email,Marina Richart Olba,overflow,Pharmaceutical Design and Engineering,INFJ
+C08,C,s253936,,,export:email,Catriona Maria Bell,overflow,Applied Chemistry,ISTJ
+C09,C,s224086,fmako,,export:email,Frederik Malling Kørvéll,challenge C,Earth and Space Physics and Engineering,ENTP
+C09,C,s224930,,,export:email,Christian Houlberg Rand,challenge C,Business Analytics,ENTJ
+C09,C,s250376,,,export:email,Costanza Camilla Pulsoni,challenge C,Environmental Engineering,ENFJ
+C09,C,s250141,,,export:email,Kriti Shrestha,challenge C,UNKNOWN,UNKNOWN
+C09,C,s253610,,,export:email,Ana Gonçalves Freitas de Sousa Araújo,challenge C,Sustainable Energy,ISFP
+C09,C,s242181,,,export:email,Saray Kleeberg García,challenge C,Autonomous Systems,INFJ
+C09,C,s214443,,,export:email,Maximus Marsella Rosenstrøm,challenge C,Physics and Nanotechnology,ESTJ
+C09,C,s253004,,,export:email,Tina Mørk,challenge C,Computer Science and Engineering,INTJ
+C09,C,s242811,,,export:email,Saskia Paasch,overflow,Industrial Engineering and Management,ENTJ
+C09,C,s253049,,,export:email,Virginia Orlando,overflow,Architectural Engineering,ENTJ
+C10,C,s214750,,,export:email,Andreas Bacher Hannah,challenge C,Mathematical Modelling and Computation,ENTJ
+C10,C,s252794,,,export:email,Hui-Ju Wang,challenge C,Sustainable Energy,ESFJ
+C10,C,s250453,,,export:email,Sara Alexandra Meneses Fernandes Vieira Horta,challenge C,Physics and Nanotechnology,ENFJ
+C10,C,s214612,,,export:email,Weinan Xiong,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ISTJ
+C10,C,s252657,,,export:email,Arman Cheraghvandi,challenge C,Computer Science and Engineering,INTP
+C10,C,s243791,,,export:email,Ana Ciochina,challenge C,Applied Chemistry,INFJ
+C10,C,s242750,,,export:email,Hilmar Logi Pálsson,challenge C,Mechanical Engineering,INTJ
+C10,C,s253774,,,export:email,Stefanos Liakas,challenge C,Autonomous Systems,ENFJ
+C10,C,s253262,,,export:email,Mathieu Lafitte,overflow,Sustainable Energy,ENFJ
+C11,C,s214936,,,export:email,Mathias Steen Jelshøj,challenge C,Computer Science and Engineering,ISFJ
+C11,C,s215065,,,export:email,Henrik Servais Janssen Knudsen,challenge C,Bioinformatics and Systems Biology,ENTJ
+C11,C,s252996,,,export:email,Sara Nekkøy Klokkernes,challenge C,Architectural Engineering,ENFJ
+C11,C,s253496,,,export:email,Paul Hohenstein,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ISTJ
+C11,C,s253751,,,export:email,Álvaro Ballesteros Martín,challenge C,Autonomous Systems,ISFP
+C11,C,s252619,,,export:email,Aoxuan Wang,challenge C,Electrical Engineering,INTJ
+C11,C,s253040,,,export:email,Matteo Versaen,challenge C,Mathematical Modelling and Computation,ENFP
+C11,C,s254257,,,export:email,Botond Bencsik,challenge C,Autonomous Systems,INTP
+C11,C,s215019,,,export:email,Filippa Boye Jensen,overflow,Pharmaceutical Design and Engineering,INFJ
+C12,C,s253293,,,export:email,Paul Duden,challenge C,Sustainable Energy,INTP
+C12,C,s214710,,,export:email,Magnus Elfenbein,challenge C,Mathematical Modelling and Computation,ISTJ
+C12,C,s252971,,,export:email,Selma Clara Skjølingstad,challenge C,Architectural Engineering,ENFJ
+C12,C,s223860,,,export:email,William Ancher Krogsgaard Ammentorp,challenge C,Electrical Engineering,ENTJ
+C12,C,s243388,,,export:email,Gregoire Laurent Mathieu,challenge C,Industrial Engineering and Management,ENFP
+C12,C,s253713,,,export:email,Aleksandra Wozniak,challenge C,Bioinformatics and Systems Biology,INFP
+C12,C,s215791,,,export:email,Sebastian Ingemann Goldbach,challenge C,Computer Science and Engineering,ISTP
+C12,C,s214609,,,export:email,Kristoffer Kaalund Helms Kjær,challenge C,Business Analytics,INTJ
+C12,C,s253144,,,export:email,Carolina Inês Silva,overflow,UNKNOWN,UNKNOWN
+C13,C,s204591,,,export:email,Rasmus Linde Mønsted,challenge C,Business Analytics,ENTP
+C13,C,s253100,,,export:email,Nsfsika Theou,challenge C,Architectural Engineering,ENFJ
+C13,C,s250672,,,export:email,Sebastian Hansen,challenge C,Autonomous Systems,ESTJ
+C13,C,s221705,,,export:email,Javier Suarez Grandal,challenge C,Electrical Engineering,ENTJ
+C13,C,s214706,valfr,,export:email,Valdemar Friis,challenge C,Mathematical Modelling and Computation,INTJ
+C13,C,s252719,,,export:email,Govind Nair,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ENFP
+C13,C,s224252,,,export:email,Nishanky Sivarajan,challenge C,Pharmaceutical Design and Engineering,ISFP
+C13,C,s225226,,,export:email,Nikolay Yuliyanov Marinov,challenge C,Sustainable Energy,INFJ
+C13,C,s242680,,,export:email,Claes Rasmus Peter Weibull,overflow,Industrial Engineering and Management,INTJ
+C14,C,s204701,,,export:email,Lukas Raad,challenge C,Mathematical Modelling and Computation,ENFP
+C14,C,s216132,,,export:email,Julie Asbæk Wolf,challenge C,Physics and Nanotechnology,ISTJ
+C14,C,s242769,,,export:email,Torsteinn Örn Fridriksson,challenge C,Mechanical Engineering,INTP
+C14,C,s214584,,,export:email,Felix Lund Frandsen,challenge C,Business Analytics,ENTJ
+C14,C,s224012,,,export:email,Hatem Amer Ghaith,challenge C,Electrical Engineering,INFJ
+C14,C,s204465,,,export:email,Muhammad Numan Bashir,challenge C,Computer Science and Engineering,INTJ
+C14,C,s253097,,,export:email,Thordis Lilja Wilcox,challenge C,Architectural Engineering,ENFJ
+C14,C,s252767,,,export:email,Chen-Yu Wu,challenge C,Sustainable Energy,INTJ
+C14,C,s252995,,,export:email,Antoni Kania,overflow,Computer Science and Engineering,ENFP
+C15,C,jcoro,,,export:username,Jake Rockliff,challenge C,Biomedical Engineering,INTP
+C15,C,s252778,,,export:email,Nguyen Hoan Nhi Tran,challenge C,Computer Science and Engineering,ENFJ
+C15,C,s253612,,,export:email,Krystof Grygar,challenge C,Aquatic Science and Technology,ENTP
+C15,C,s242049,,,export:email,Emeline Anne Hervéa Marie Duboys de Lavigerie,challenge C,Physics and Nanotechnology,INFJ
+C15,C,s254627,,,export:email,Daniel Lee Fraga Horton,challenge C,Materials and Manufacturing Engineering,INTJ
+C15,C,s224028,,,export:email,Liou Xia,challenge C,Electrical Engineering,ENTJ
+C15,C,s201974,,,export:email,Iben Jørgensen,challenge C,Mathematical Modelling and Computation,ISFJ
+C15,C,s203929,,,export:email,Julian Oll,challenge C,Autonomous Systems,ENTP
+C15,C,s253750,,,export:email,Lara Berenguer Fernández,overflow,Autonomous Systems,ENFP
+C16,C,s253045,,,export:email,Augustin CARRÉ,challenge C,Mathematical Modelling and Computation,INTJ
+C16,C,s252851,,,export:email,Laurenz Walter Torni,challenge C,Mechanical Engineering,ENTJ
+C16,C,s203676,,,export:email,Martin Koch Jørgensen,challenge C,Sustainable Energy,ISFP
+C16,C,s253162,,,export:email,Jara Gracia Román,challenge C,Architectural Engineering,ESTJ
+C16,C,s253519,,,export:email,Cristina Melnyk,challenge C,Biotechnology,ISFJ
+C16,C,s205030,,,export:email,Jonas Matthiesen,challenge C,Electrical Engineering,ENFJ
+C16,C,s204740,,,export:email,William Christian Brøchner Søndergaard,challenge C,Computer Science and Engineering,INTP
+C16,C,s253419,,,export:email,Matilde Miranda Mendes,challenge C,Biomedical Engineering,ISTJ
+C16,C,s215016,,,export:email,Caroline Sofie Hermannsen,overflow,Biotechnology,ENFJ
+C17,C,s254122,,,export:email,Izabela Kasznicka,challenge C,Sustainable Energy,INFP
+C17,C,s224941,,,export:email,Jonas Sætre,challenge C,Industrial Engineering and Management,ESTJ
+C17,C,s253777,,,export:email,Konstantinos Bantos,challenge C,Autonomous Systems,INTP
+C17,C,s252972,,,export:email,Michael Ruben Johansen,challenge C,Mathematical Modelling and Computation,ISTJ
+C17,C,s195122,,,export:email,Michael Lund Larsen,challenge C,Electrical Engineering,INTJ
+C17,C,s233462,,,export:email,Igor Pawel Smorag,challenge C,UNKNOWN,UNKNOWN
+C17,C,s243646,,,export:email,Sebastian Kyhe,challenge C,Physics and Nanotechnology,ENTJ
+C17,C,s253477,,,export:email,Ioannis Svoliantopoulos,challenge C,Pharmaceutical Design and Engineering,ENFJ
+C17,C,s252857,,,export:email,Juliusz Dominik G¿odek,overflow,Business Analytics,INTP
+C18,C,s253456,,,export:email,Klaudia Dziuba,challenge C,Pharmaceutical Design and Engineering,INFP
+C18,C,s253572,,,export:email,Anton Aaes Jakobsen,challenge C,Biomedical Engineering,ENFJ
+C18,C,s253495,,,export:email,Florian Klein,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),INTJ
+C18,C,s251189,,,export:email,Juan Ignacio Rojo,challenge C,Mathematical Modelling and Computation,INTP
+C18,C,s214474,,,export:email,Johan Holmgaard Nielsen,challenge C,Physics and Nanotechnology,ISTJ
+C18,C,s214469,,,export:email,Jakob Faurskov,challenge C,Sustainable Energy,ENFP
+C18,C,s251186,,,export:email,Wirginia Sandra Szoltysek,challenge C,Computer Science and Engineering,ISTP
+C18,C,s203999,,,export:email,Jens Christian Manniche,challenge C,Chemical and Biochemical Engineering,ENTJ
+C18,C,s254608,,,export:email,Rita Afonso Melo Lavos,overflow,Biomedical Engineering,ESFJ
+C19,C,s224254,,,export:email,Dewa Safi,challenge C,Pharmaceutical Design and Engineering,INTJ
+C19,C,s253298,,,export:email,Josefine Klara Maria Häussling Löwgren,challenge C,Chemical and Biochemical Engineering,ENTJ
+C19,C,s243575,,,export:email,Hendrik Jon Schmidt,challenge C,Autonomous Systems,INFJ
+C19,C,s200431,,,export:email,Benjamin Kock Fazal,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTP
+C19,C,s203978,,,export:email,Ninna Juul Ligaard,challenge C,Earth and Space Physics and Engineering,ISTJ
+C19,C,s242768,,,export:email,Sævaldur Örn Hardarson,challenge C,Mechanical Engineering,ESTJ
+C19,C,s253032,,,export:email,Riccardo Lussana,challenge C,Computer Science and Engineering,INTP
+C19,C,s253345,,,export:email,Réka Czaun,challenge C,Engineering Acoustics,ENFJ
+C19,C,s253062,,,export:email,Sai Shashank Maktala,overflow,Computer Science and Engineering,ENTJ
+C20,C,s205829,,,export:email,Jonas Dahl Larsen,challenge C,Computer Science and Engineering,ISTJ
+C20,C,s224296,,,export:email,Victor Skaarup Justesen,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTP
+C20,C,s195121,,,export:email,Mohammed Bilall Warrad,challenge C,Electrical Engineering,INTP
+C20,C,s242805,,,export:email,Christos Papakonstantinou,challenge C,Industrial Engineering and Management,ENFJ
+C20,C,s243489,,,export:email,Sveinn Sigurdarson,challenge C,Mechanical Engineering,ENFP
+C20,C,s224253,,,export:email,Alisha Ahmad,challenge C,Transport and Logistics,INTJ
+C20,C,s253748,,,export:email,Isabel Marin Garcia,challenge C,Autonomous Systems,INFJ
+C20,C,s221221,,,export:email,Alexander Schiøtz,challenge C,Business Analytics,ENTJ
+C20,C,s205349,,,export:email,Villads Hellmann Andersen,overflow,Computer Science and Engineering,ISTJ
+C21,C,s224014,,,export:email,Sebastian Bochineck,challenge C,Electrical Engineering,INTJ
+C21,C,s253744,,,export:email,Félix Muñoz Miguel,challenge C,Autonomous Systems,ENFJ
+C21,C,s253163,,,export:email,Petteri Lauri Markus Raita,challenge C,Computer Science and Engineering,ENTJ
+C21,C,s253485,,,export:email,Sigvaldi Oern Oskarsson,challenge C,Civil Engineering,ISTJ
+C21,C,s224264,,,export:email,Inas Abourakba,challenge C,Pharmaceutical Design and Engineering,ESFP
+C21,C,s242763,,,export:email,Þorgeir Sólveigar Gunnarsson,challenge C,Engineering Acoustics,ENFP
+C21,C,s213334,,,export:email,Caroline Hørlykke,challenge C,Industrial Engineering and Management,INFJ
+C21,C,s194344,,,export:email,Loke Skjoldan Gødsbøll Jørgensen,challenge C,Computer Science and Engineering,INTP
+C21,C,s204605,,,export:email,Emma Christine Berggrein Andersen,overflow,Business Analytics,ESTJ
+C22,C,s242791,,,export:email,Maria Theodoropoulou,challenge C,Sustainable Energy,ENFJ
+C22,C,s214264,,,export:email,Jonas Hyldgaard Langager,challenge C,Wind Energy,ENTJ
+C22,C,s214991,,,export:email,Frederik Hatting Petersen,challenge C,Industrial Engineering and Management,ENTP
+C22,C,s253417,,,export:email,Rita Santos,challenge C,UNKNOWN,UNKNOWN
+C22,C,s204099,,,export:email,Kalle Emil Leander Johansen,challenge C,Business Analytics,ISTJ
+C22,C,s253065,,,export:email,Emma Karlsmose,challenge C,Computer Science and Engineering,INTJ
+C22,C,s253555,,,export:email,Thorsteinn Mar Hoskuldsson,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),INTP
+C22,C,s214743,,,export:email,David Wang Johansen,challenge C,Mathematical Modelling and Computation,INTP
+C22,C,s214370,,,export:email,Mathias Voss Ottow,overflow,Electrical Engineering,INFJ
+C23,C,s252674,,,export:email,Sinthia Jaman,challenge C,Sustainable Energy,ISTJ
+C23,C,s204625,,,export:email,Fridtjof Cerup-Simonsen,challenge C,Business Analytics,INTJ
+C23,C,s252625,,,export:email,Zewei Gao,challenge C,UNKNOWN,UNKNOWN
+C23,C,s242816,,,export:email,MICHAIL DIKAIOPOULOS,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTP
+C23,C,s205835,,,export:email,Vaneeza Fatima Butt,challenge C,Civil Engineering,INFJ
+C23,C,s224247,,,export:email,Rona Hazal Dogan,challenge C,Pharmaceutical Design and Engineering,ENFJ
+C23,C,s215181,,,export:email,Martim Afonso De Oliveira Costa Ribeiro,challenge C,Mechanical Engineering,ENTJ
+C23,C,s250824,,,export:email,Ann-Kathrin Dames,challenge C,Industrial Engineering and Management,ISFP
+C23,C,s253466,,,export:email,Camelia Baciu,overflow,Biomedical Engineering,ISTP
+C24,C,s225115,,,export:username,Mathias Spezia,challenge C,Computer Science and Engineering,INTP
+C24,C,s252727,,,export:email,Zhe Huang,challenge C,Communication Technologies and System Design (Telecommunication),ISFP
+C24,C,s214594,,,export:email,Chelina Emilie Risager,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTJ
+C24,C,s243908,,,export:email,Fernando Ortega Robles,challenge C,Sustainable Energy,ISFJ
+C24,C,s201692,,,export:email,Iben Bach Bols Jeppesen,challenge C,Pharmaceutical Design and Engineering,ISTJ
+C24,C,s253423,,,export:email,Marta Galacho Santos,challenge C,Biomedical Engineering,ENTP
+C24,C,s253105,,,export:email,Aurelia Czekay,challenge C,Architectural Engineering,ENFJ
+C24,C,s250375,,,export:email,Linda Grlas,overflow,Biotechnology,INTJ
+C24,C,s254232,,,export:email,Frederik Bertelsen,overflow,Mathematical Modelling and Computation,ENFP
+C25,C,s250676,,,export:email,Jakub Dargacz,challenge C,Wind Energy,ISTJ
+C25,C,s252649,,,export:email,Anni Maliha,challenge C,Civil Engineering,ENFJ
+C25,C,s244028,,,export:email,Anne Sofie Jokumsen,challenge C,Bioinformatics and Systems Biology,INTJ
+C25,C,s221676,,,export:email,Peter Christian Svensson,challenge C,Earth and Space Physics and Engineering,ENTJ
+C25,C,s250198,,,export:email,Monika Klaudia Binkiewicz,challenge C,Pharmaceutical Design and Engineering,ENTP
+C25,C,s254384,,,export:email,Maria Nart Clapes,challenge C,Chemical and Biochemical Engineering,INTP
+C25,C,s204674,sarste,,export:email,Sara Sterlie,challenge C,Human-Centered Artificial Intelligence (Digital Media Engineering),INFJ
+C25,C,s253356,,,export:email,Eva Arés Usero,overflow,UNKNOWN,UNKNOWN
+C25,C,s252782,,,export:email,Radhika Panacheril Sasidharan Nair,overflow,Mathematical Modelling and Computation,ISFJ
+D01,D,s250264,,,export:email,Tumi Olason,challenge D,Electrical Engineering,ENTP
+D01,D,s254320,,,export:email,Théophile Crenn,challenge D,Industrial Engineering and Management,INTJ
+D01,D,s205356,,,export:email,Tobias Stærmose,challenge D,Computer Science and Engineering,ESTJ
+D01,D,s253099,,,export:email,Katalin Budavári,challenge D,Architectural Engineering,INFJ
+D01,D,s214258,,,export:email,Mathilde Skovgaard Rasksen,challenge D,Sustainable Energy,ENFJ
+D01,D,s253596,,,export:email,Marc Pertiñez Anfruns,challenge D,Materials and Manufacturing Engineering,ISFJ
+D01,D,s253840,,,export:email,Sarunas Bliudzius,challenge D,Wind Energy,ENTJ
+D01,D,s252928,,,export:email,Leó Steinn Larsen,challenge D,Electrical Engineering,ENTJ
+D01,D,s252813,,,export:email,Rowan Alexandra McCallum,overflow,Applied Chemistry,INTJ
+D01,D,s250146,,,export:email,Sahara Katuwal,late entry,Food Technology,INFJ
+D02,D,s254150,,,export:email,Martin Debacker,challenge D,Civil Engineering,INTJ
+D02,D,s253820,,,export:email,Berk Yozkan,challenge D,Autonomous Systems,ISTJ
+D02,D,s254626,,,export:email,Francisca Reis da Encarnação Dantas Cardoso,challenge D,Materials and Manufacturing Engineering,ENFJ
+D02,D,s253308,,,export:email,Alexandros Athanasiou,challenge D,Sustainable Energy,ESFP
+D02,D,s250126,,,export:email,Sandesh Oli,challenge D,Computer Science and Engineering,ENTJ
+D02,D,s256864,,,export:email,Oskar Carl-Samuel Bjorkgren,challenge D,Earth and Space Physics and Engineering,INTP
+D02,D,s223716,,,export:email,Christian Amsinck,challenge D,Physics and Nanotechnology,INFP
+D02,D,s252677,,,export:email,Gunnar Robert Shanafelt,challenge D,Biotechnology,ENTJ
+D02,D,s253549,,,export:email,Brynjar Bjarkason,overflow,Human-Centered Artificial Intelligence (Digital Media Engineering),INFJ
+D02,D,s216135,,,export:email,Jason Aron Merit,overflow,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTP
+D03,D,s223989,,,export:email,Albert Skytte Hornbæk,challenge D,UNKNOWN,UNKNOWN
+D03,D,s214592,,,export:email,Simon Stenbæk Jensen,challenge D,Autonomous Systems,ISFJ
+D03,D,s224485,,,export:email,Khaled Waleed Moustafa,challenge D,Biomedical Engineering,ENFP
+D03,D,s253294,,,export:email,Johannes Wilkens,challenge D,Sustainable Energy,ENTJ
+D03,D,s254308,,,export:email,Albert Caballeria,challenge D,Industrial Engineering and Management,ENFJ
+D03,D,s224036,,,export:email,Oscar Nellemann Sjelle,challenge D,Electrical Engineering,ESTJ
+D03,D,s253117,,,export:email,Arnar Thor Bjornsson,challenge D,Computer Science and Engineering,INTP
+D03,D,s253387,,,export:email,Marta Borja Merino,challenge D,Pharmaceutical Design and Engineering,INTJ
+D03,D,s215094,,,export:email,Lukas Taisbak Hølledig,overflow,UNKNOWN,UNKNOWN
+D03,D,s205875,,,export:email,Sigrid Krake Frandsen,overflow,Pharmaceutical Design and Engineering,ENFJ
+D04,D,s252844,,,export:email,Cristina Ramon Roig,challenge D,Industrial Engineering and Management,ESTJ
+D04,D,s254151,,,export:email,Anaël Bourgouin,challenge D,Civil Engineering,ENTP
+D04,D,s224696,,,export:email,Lucas Frithiof Wybrandt,challenge D,Mechanical Engineering,INFJ
+D04,D,s250380,,,export:email,Emanuele De Caro,challenge D,Engineering Acoustics,INTJ
+D04,D,s253310,,,export:email,Francis Koumoulis,challenge D,Sustainable Energy,ISTJ
+D04,D,s223849,,,export:email,Agnes Stenkjær Hein,challenge D,Electrical Engineering,ENTJ
+D04,D,s253675,,,export:email,Mariana Sousa,challenge D,Advanced Materials and Healthcare Engineering,ENFP
+D04,D,s225183,,,export:email,Morten Tokkesdal Henriksen,challenge D,Computer Science and Engineering,ENTJ
+D04,D,s253481,,,export:email,Antonia Makka,overflow,Earth and Space Physics and Engineering,ENTJ
+D04,D,s215451,,,export:email,Emirhan Özdemir,overflow,Electrical Engineering,ENTP
+D05,D,s253273,,,export:email,Zoe Cardell Hernandez,challenge D,Sustainable Energy,INFJ
+D05,D,s223813,,,export:email,Johan Skovø Krejberg,challenge D,Civil Engineering,ENFJ
+D05,D,s215081,,,export:email,Magnus Orkild,challenge D,Biotechnology,ENTJ
+D05,D,s252630,,,export:email,Ata Türk,challenge D,Electrical Engineering,ENTP
+D05,D,s225153,,,export:email,Auktumis Valiokas,challenge D,Materials and Manufacturing Engineering,ISTP
+D05,D,s254624,,,export:email,Marta Micheli,challenge D,Aquatic Science and Technology,INTP
+D05,D,s252717,,,export:email,Helia Hassani,challenge D,Food Technology,INFP
+D05,D,s243000,,,export:email,Tudor Istrate,challenge D,Wind Energy,INTJ
+D05,D,s252935,,,export:email,Hörður Þór Björnsson,overflow,Electrical Engineering,ISTJ
+D05,D,s252945,,,export:email,Mathis Mourot,overflow,Industrial Engineering and Management,ESFJ
+D06,D,s184456,,,export:email,Nicolai Skytte Mikkelsen,challenge D,Computer Science and Engineering,ENFP
+D06,D,s242813,,,export:email,Andreas Immanuel Geiger,challenge D,Physics and Nanotechnology,ENFJ
+D06,D,s243484,,,export:email,Samuele Pio Lopez,challenge D,Industrial Engineering and Management,INFP
+D06,D,s214413,,,export:email,Christian Bjørk Cornier Cederhorn,challenge D,Electrical Engineering,INFJ
+D06,D,s253606,,,export:email,Pol Bassols Armengol,challenge D,Aquatic Science and Technology,ENTJ
+D06,D,s252999,,,export:email,Heine Heldal Larsen,challenge D,Architectural Engineering,INTJ
+D06,D,s254609,,,export:email,Radoslaw Piotr Stawiarz,challenge D,Biotechnology,INTP
+D06,D,s253769,,,export:email,Zsombor Bognár,challenge D,Autonomous Systems,ENTJ
+D06,D,s254722,,,export:email,Calum Colver,overflow,Civil Engineering,ENTP
+D06,D,s243425,,,export:email,Damian Baudouin Hubert,overflow,Computer Science and Engineering,INFP
+D07,D,s203574,,,export:email,Emily Ahler Tonsberg,challenge D,Biotechnology,ENTP
+D07,D,s254734,,,export:email,Yannis Jean Pierre Ghislain Demoutiez,challenge D,Earth and Space Physics and Engineering,ENTJ
+D07,D,s204006,,,export:email,Louise Dybdal Nilsson,challenge D,Chemical and Biochemical Engineering,ESFJ
+D07,D,s242752,,,export:email,Bjarki Marino Albertsson,challenge D,Electrical Engineering,ENFP
+D07,D,s254316,,,export:email,Valentin Delatte,challenge D,Industrial Engineering and Management,ESTJ
+D07,D,s254234,,,export:email,Andreea-Isabel Asimine,challenge D,Computer Science and Engineering,ENFJ
+D07,D,s252832,,,export:email,Matteo Alessandro Magdici,challenge D,Mechanical Engineering,INTJ
+D07,D,s253342,,,export:email,Larissa Maria Klein,challenge D,Pharmaceutical Design and Engineering,ENTJ
+D07,D,s147197,,,export:email,David Lukas Mikkelsen,overflow,Computer Science and Engineering,ENTJ
+D07,D,s253366,,,export:email,Martí Comas Gayete,overflow,Pharmaceutical Design and Engineering,ENTJ
+D08,D,s252580,,,export:email,Osman Köse,challenge D,Mechanical Engineering,INTP
+D08,D,s253327,,,export:email,Andreas Hajagos Clausen,challenge D,Biotechnology,INTJ
+D08,D,s253737,,,export:email,Julia Melina Jones Borgund,challenge D,Autonomous Systems,ENFP
+D08,D,s253283,,,export:email,Jonah Homm,challenge D,Sustainable Energy,ENTJ
+D08,D,s216133,,,export:email,Nadia Birkemose Hansen,challenge D,Computer Science and Engineering,ISFP
+D08,D,s224771,,,export:email,Michelle Quynh Ngoc Mai,challenge D,Business Analytics,INFJ
+D08,D,s223818,,,export:email,William Rotbøl Carlsen,challenge D,Civil Engineering,ESTJ
+D08,D,s242623,,,export:email,Sizhe Xiong,challenge D,Aquatic Science and Technology,ENTJ
+D08,D,s214582,,,export:email,Emil Wilhardt Jensen,overflow,Applied Chemistry,INTJ
+D08,D,s174130,,,export:email,Jacob Kjærby Christensen,overflow,Computer Science and Engineering,ENTP
+D09,D,s225252,,,export:email,Artur Luchian,challenge D,Biotechnology,ENFJ
+D09,D,s253476,,,export:email,Filippos Konstantinidis,challenge D,Engineering Acoustics,INFJ
+D09,D,s253464,,,export:email,Marco Penati,challenge D,Human-Centered Artificial Intelligence (Digital Media Engineering),INFP
+D09,D,s214417,,,export:email,Lukas Hamann Schou,challenge D,Electrical Engineering,INTP
+D09,D,s253254,,,export:email,Miltiadis Sachinidis,challenge D,Chemical and Biochemical Engineering,ENTP
+D09,D,s243395,,,export:email,Bastian Christian Franziskus Schnitzer,challenge D,Industrial Engineering and Management,ENTJ
+D09,D,s224007,,,export:email,Lasse Mølkjær Slipsager,challenge D,Computer Science and Engineering,ISTJ
+D09,D,s252797,,,export:email,Mariana Garcia Garcia,challenge D,Sustainable Energy,INTJ
+D09,D,s205832,,,export:email,Oliver Lykkebæk Larsen,overflow,Materials and Manufacturing Engineering,ENFJ
+D10,D,s253338,,,export:email,Lars Weinand,challenge D,Earth and Space Physics and Engineering,INFP
+D10,D,s253409,,,export:email,Ozbej Bernik,challenge D,Biotechnology,ENTJ
+D10,D,s205810,,,export:email,Johan Jensby Lütken,challenge D,Architectural Engineering,ENFP
+D10,D,s253736,,,export:email,Kaja Hovinbøle,challenge D,Autonomous Systems,ESTJ
+D10,D,s252889,,,export:email,Laura Sumper,challenge D,Electrical Engineering,ESTP
+D10,D,s253436,,,export:email,Ana Francisca Nogueira,challenge D,UNKNOWN,UNKNOWN
+D10,D,s243289,,,export:email,Javier Palou Queiro,challenge D,Pharmaceutical Design and Engineering,INTJ
+D10,D,s242856,,,export:email,Angelos Konstantinos Sfakianoudis,challenge D,Sustainable Energy,INTP
+D10,D,s252747,,,export:email,Kamana Gautam,overflow,UNKNOWN,UNKNOWN
+D11,D,s243018,,,export:email,Margarida Braz Garcia,challenge D,Industrial Engineering and Management,INFJ
+D11,D,s242608,,,export:email,Weikang Wan,challenge D,Civil Engineering,INTP
+D11,D,s253782,,,export:email,Jan-Luca Laubner,challenge D,Autonomous Systems,ENTJ
+D11,D,s252627,,,export:email,Liam Alejandro Sierra Del Rio,challenge D,Biotechnology,ENFJ
+D11,D,s253119,,,export:email,Klara Monika Skolimowska,challenge D,Environmental Engineering,INTJ
+D11,D,s243252,,,export:email,Olivier Gaufrès,challenge D,Bioinformatics and Systems Biology,INFP
+D11,D,s204290,,,export:email,Jeppe Rasmussen,challenge D,Biomedical Engineering,ENFP
+D11,D,s240100,,,export:email,Elia Ampalla,challenge D,Materials and Manufacturing Engineering,INTJ
+D11,D,s250147,,,export:email,Sujata Birbal,late entry,Food Technology,ENFJ
+D12,D,s252622,,,export:email,Shaurya Patil,challenge D,Chemical and Biochemical Engineering,INFJ
+D12,D,s214189,,,export:email,Hans Petur á Mýrini,challenge D,Civil Engineering,ISTJ
+D12,D,s252792,,,export:email,Alejandro Flores Arias,challenge D,Biotechnology,ISTP
+D12,D,s253351,,,export:email,Unai Pascual Elexpe,challenge D,Pharmaceutical Design and Engineering,ENTJ
+D12,D,s253297,,,export:email,Jana Johanna Busch,challenge D,Sustainable Energy,ENFJ
+D12,D,s243224,,,export:email,Paul Mayé,challenge D,Mechanical Engineering,INTJ
+D12,D,s204469,,,export:email,William Lohmann,challenge D,Computer Science and Engineering,ENTP
+D12,D,s242913,,,export:email,Tomasz Murawski,challenge D,Materials and Manufacturing Engineering,INTP
+D12,D,s243662,,,export:email,Ida Marie Steentoft,overflow,Environmental Engineering,INFP
+D13,D,s214656,,,export:email,Erik Buur Christensen,challenge D,Mathematical Modelling and Computation,INTJ
+D13,D,s253638,,,export:email,Antigone Lapoudi,challenge D,Physics and Nanotechnology,ENFP
+D13,D,s253249,,,export:email,NIKOLAOS GAITANIDIS,challenge D,Sustainable Energy,ENTP
+D13,D,s220559,,,export:email,Daniel Firouzi Binderup,challenge D,Architectural Engineering,ENTJ
+D13,D,s215132,,,export:email,Benjamin Noam Nadelmann,challenge D,Industrial Engineering and Management,ISTJ
+D13,D,s250163,,,export:email,Iqbal Adi Putra,challenge D,Materials and Manufacturing Engineering,INTP
+D13,D,s242991,,,export:email,Flavio Sarno,challenge D,Earth and Space Physics and Engineering,INFJ
+D13,D,s242590,,,export:email,Jessica .,challenge D,Biotechnology,INFP
+D13,D,s253244,,,export:email,Vasiliki Tatouli,overflow,Sustainable Energy,ENTP
+D14,D,s252712,,,export:email,Riya Panokkaran Raphy,challenge D,Pharmaceutical Design and Engineering,INFJ
+D14,D,s194268,,,export:email,Anton Thestrup Jørgensen,challenge D,UNKNOWN,UNKNOWN
+D14,D,s253336,,,export:email,Nikolaos Geleklidis,challenge D,Biotechnology,INTP
+D14,D,s254309,,,export:email,Eloi Colprim Doñate,challenge D,Industrial Engineering and Management,ENTJ
+D14,D,s221212,,,export:email,Benedicte Elsabe Dreyer Jensen,challenge D,Business Analytics,ISFP
+D14,D,s253073,,,export:email,Francisco Torgo,challenge D,Computer Science and Engineering,INTJ
+D14,D,s223832,,,export:email,Mia Steen Duus,challenge D,Civil Engineering,ISTJ
+D14,D,s203982,,,export:username,Mathilde Aalling Steenholdt,challenge D,Earth and Space Physics and Engineering,INTP
+D14,D,s252579,,,export:email,Maria Paula Osuna,overflow,Biotechnology,INFP
+D15,D,s215555,,,export:email,Julie Nedergaard Hansen,challenge D,Applied Chemistry,ESFJ
+D15,D,s204021,,,export:email,Sille Reimer Vendelbo Stenvang,challenge D,Industrial Engineering and Management,ENFJ
+D15,D,s214691,,,export:email,Lucas Loua Buhelt,challenge D,Communication Technologies and System Design (Telecommunication),ISFP
+D15,D,s254153,,,export:email,Elena Sofia Agostini,challenge D,UNKNOWN,UNKNOWN
+D15,D,s242977,,,export:email,Alexander Leonard Vidal,challenge D,Mechanical Engineering,ENTP
+D15,D,s215247,,,export:email,Blanca Morillo Rosado,challenge D,Chemical and Biochemical Engineering,ENTJ
+D15,D,s253526,,,export:email,Sebastian Bulancea,challenge D,Engineering Acoustics,INFP
+D15,D,s242599,,,export:email,Cheng Qian,challenge D,Computer Science and Engineering,INTP
+D15,D,s253567,,,export:email,Stamatina Chatzidimouli,overflow,Pharmaceutical Design and Engineering,INTJ
+D16,D,s252806,,,export:email,Henrique Noro Frizzo,challenge D,Biotechnology,ENTJ
+D16,D,s193584,kinie,,export:email,Kim Nielsen,challenge D,Electrical Engineering,INTP
+D16,D,s253092,,,export:email,Hanna Margrét Pétursdóttir,challenge D,Computer Science and Engineering,ENFJ
+D16,D,s252600,,,export:email,Leonita Dwesti Halim,challenge D,Architectural Engineering,INFJ
+D16,D,kaswu,,,export:username,Kasper Ehlers Wulff,challenge D,Biomedical Engineering,ENFP
+D16,D,s211906,,,export:email,Rebecca Learie,challenge D,Applied Chemistry,ESFJ
+D16,D,s204427,,,export:email,Julius Ellegård Grønager,challenge D,Human-Centered Artificial Intelligence (Digital Media Engineering),INTJ
+D16,D,s253654,,,export:email,Constant Gobron,challenge D,Physics and Nanotechnology,INTP
+D16,D,s202192,,,export:email,Rune Møller Nedergaard,overflow,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTP
+D17,D,s253380,,,export:email,Lucia Pampuro,challenge D,Pharmaceutical Design and Engineering,ENFJ
+D17,D,s203990,,,export:email,Lars Andreas Metsälä Wulff,challenge D,Computer Science and Engineering,INTP
+D17,D,s215142,,,export:email,Oliwia Pindel,challenge D,Mathematical Modelling and Computation,INTJ
+D17,D,s214615,,,export:email,Gabriel Agerholm Ruge,challenge D,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTJ
+D17,D,s253611,,,export:email,Marc López Nohales,challenge D,UNKNOWN,UNKNOWN
+D17,D,s224096,,,export:email,Oliver Frej Hollegaard Hartsteen,challenge D,Earth and Space Physics and Engineering,ENTP
+D17,D,s253002,,,export:email,Vinicius Adrano Bento Ferreira,challenge D,Environmental Engineering,INFP
+D17,D,s160105,,,export:email,Saba Sarantaris Hussain,challenge D,Biotechnology,ENTJ
+D17,D,s253507,,,survey:late-entry,Sofía Gutiérrez,late entry,Biomedical Engineering,INFJ
+D18,D,s184343,,,export:email,Lena Schlüter Nielsen,challenge D,Quantitative Biology and Disease Modelling,ENTJ
+D18,D,s254291,,,export:email,Flora Nika,challenge D,Computer Science and Engineering,INTJ
+D18,D,s216248,,,export:email,Alexander Kiel Elsing,challenge D,UNKNOWN,UNKNOWN
+D18,D,s224513,,,export:email,Eyd Josina Nielsen,challenge D,Biomedical Engineering,INFP
+D18,D,s252873,,,export:email,Gudni Jóelsson,challenge D,Mechanical Engineering,INTP
+D18,D,s214286,,,export:email,Mette Maria Overgaard Nielsen,challenge D,Architectural Engineering,ESFJ
+D18,D,s253755,,,export:email,Mariana Riera Ramos,challenge D,Autonomous Systems,ENFP
+D18,D,mpabo,,,export:username,Marta Pareja Boto,challenge D,Earth and Space Physics and Engineering,ENFJ
+D18,D,s252754,,,export:email,Vignesh Satish Lal,overflow,Biotechnology,ENTJ
+D19,D,s137282,,,export:email,Jonas Puidokas,challenge D,Computer Science and Engineering,INTJ
+D19,D,s224013,,,export:email,Niels Frederik von Tabouillot,challenge D,Electrical Engineering,INFP
+D19,D,s242961,,,export:email,Balázs Peisz,challenge D,Autonomous Systems,INTP
+D19,D,s253364,,,export:email,Álvaro Saiz Bonilla,challenge D,Pharmaceutical Design and Engineering,ENTJ
+D19,D,s242659,,,export:email,Shreenithul Ravindran,challenge D,Industrial Engineering and Management,ENTP
+D19,D,s224494,,,export:email,Freja Just Okholm,challenge D,UNKNOWN,UNKNOWN
+D19,D,s253647,,,export:email,Constança Nunes de Brito Oliveira Santos,challenge D,Physics and Nanotechnology,INFJ
+D19,D,s223934,,,export:email,Louise Karoline Frank Gunge,challenge D,Architectural Engineering,ISFJ
+D19,D,s253386,,,survey:late-entry,Asia Pino,late entry,Biomedical Engineering,ENFJ
+D20,D,s203279,,,export:email,Rasmus Nørgaard Clausen,challenge D,Human-Centered Artificial Intelligence (Digital Media Engineering),INFP
+D20,D,s244082,,,export:email,Norbert Lukács,challenge D,Industrial Engineering and Management,INTP
+D20,D,s253333,,,export:email,Jacopo Alinari,challenge D,Biotechnology,ENFJ
+D20,D,s223830,,,export:email,William Erik Dixon,challenge D,Civil Engineering,ISFJ
+D20,D,s252603,,,export:email,Hilal Melike Yürekli,challenge D,Engineering Acoustics,ENFP
+D20,D,s243496,,,export:email,Maxime Edouard Jean Becuwe,challenge D,Mechanical Engineering,INTJ
+D20,D,dovli,,,export:username,Dovydas Liutkus,challenge D,Electrical Engineering,ENTJ
+D20,D,s252734,,,export:email,Sourav Anand Dehury,challenge D,Autonomous Systems,INFJ
+D20,D,s253211,,,export:email,Matteo Cesa,overflow,Chemical and Biochemical Engineering,ENTJ
+D21,D,s214986,,,export:email,Anne Moll-Elsborg,challenge D,Business Analytics,ENTP
+D21,D,xicsu,,,export:username,Sun Xichu,challenge D,UNKNOWN,UNKNOWN
+D21,D,s253459,,,export:email,Matteo Albano,challenge D,Civil Engineering,ESFJ
+D21,D,s254319,,,export:email,Robin Parnet,challenge D,Industrial Engineering and Management,INTJ
+D21,D,s252718,,,export:email,Kunal Gurudath Athikary,challenge D,Electrical Engineering,INTP
+D21,D,s253467,,,export:email,Matilde Zuliani,challenge D,Food Technology,ENTJ
+D21,D,s250300,,,export:email,Anil Bhattarai,challenge D,Communication Technologies and System Design (Telecommunication),ENFJ
+D21,D,s253461,,,export:email,Matilde Dugoni,challenge D,Earth and Space Physics and Engineering,ISTJ
+D21,D,s252665,,,export:email,Tejas Basavarajappa Sudha,overflow,Biomedical Engineering,ENTJ
+D22,D,s225102,,,export:email,Zivota Milinkovic,challenge D,Autonomous Systems,ESTP
+D22,D,s242888,,,export:email,Tomás Neto Apolónia,challenge D,Electrical Engineering,INTP
+D22,D,s253142,,,export:email,Theodor Nissen-Meyer,challenge D,Computer Science and Engineering,INTJ
+D22,D,s253566,,,export:email,Anastasia Baltzi,challenge D,Food Technology,ENTJ
+D22,D,s254140,,,export:email,Guillaume MOSELE,challenge D,Biotechnology,ISTJ
+D22,D,s204075,,,export:email,Magnus Guldberg Pedersen,challenge D,Mathematical Modelling and Computation,ENFP
+D22,D,s253841,,,export:email,Pavils Kobenkins,challenge D,Wind Energy,ESTJ
+D22,D,s253410,,,export:email,Afonso Osório Brás Santos,challenge D,Biomedical Engineering,INFJ
+D22,D,s253335,,,export:email,Lívia Kas,overflow,Biotechnology,INTJ
+D23,D,s204374,adasj,,export:email,Adam Sjøqvist,challenge D,Sustainable Energy,ENTJ
+D23,D,s210902,,,export:email,Magnus Claudius Hansen,challenge D,UNKNOWN,UNKNOWN
+D23,D,s252804,,,export:email,Ash Aaron Mooney,challenge D,Aquatic Science and Technology,INTP
+D23,D,s253688,,,export:email,Fae Boni,challenge D,Advanced Materials and Healthcare Engineering,INFP
+D23,D,s253394,,,export:email,María Teresa Hernández Maestre,challenge D,Pharmaceutical Design and Engineering,ENFJ
+D23,D,s194816,,,export:email,Caroline Petersen,challenge D,Autonomous Systems,ISTJ
+D23,D,s214931,,,export:email,Magnus Emil Mouritzen,challenge D,Computer Science and Engineering,INFJ
+D23,D,s225024,,,export:email,Mikkel Seegert,challenge D,Biotechnology,ENTP
+D23,D,s253307,,,export:email,Rafail Christodoulou,overflow,Sustainable Energy,ENFJ
+D24,D,s242668,,,export:email,Anna Soderlund,challenge D,Biomedical Engineering,ENTJ
+D24,D,s203597,,,export:email,Simon Lindhardt Svendsen,challenge D,Architectural Engineering,ESTJ
+D24,D,s242766,,,export:email,Dagur Hall,challenge D,Mathematical Modelling and Computation,INTP
+D24,D,s243485,,,export:email,Arthur Chiu,challenge D,Mechanical Engineering,ENFJ
+D24,D,s224098,,,export:email,Nils Jürgensen Muus,challenge D,Earth and Space Physics and Engineering,INTJ
+D24,D,s253042,,,export:email,Maëlle Guillot,challenge D,Environmental Engineering,INFJ
+D24,D,s254387,,,export:email,Ágoston Márkus,challenge D,Chemical and Biochemical Engineering,ISTP
+D24,D,s253038,,,export:email,Martin Gers,overflow,Computer Science and Engineering,ISFJ
+D24,D,s253658,,,export:email,Martyna Joanna Denkowska,overflow,Aquatic Science and Technology,ENFP
+D25,D,s215545,,,export:email,Magnus Byrlund Grønvall,challenge D,Applied Chemistry,ISTP
+D25,D,s253520,,,export:email,Sebastião Pinho de Magalhães Fonseca Taveira,challenge D,Biomedical Engineering,ENFJ
+D25,D,s253787,,,export:email,Apostolos Apostolou,challenge D,Autonomous Systems,INTJ
+D25,D,s201718,,,export:email,Nikolaj Broen Larsen,challenge D,Architectural Engineering,INFP
+D25,D,s252906,,,export:username,Eleni Vlachou,challenge D,Electrical Engineering,ISTJ
+D25,D,s253635,,,export:email,Lizzi Kipping,challenge D,UNKNOWN,UNKNOWN
+D25,D,s254136,,,export:email,Pierre Hollebèque,challenge D,Human-Centered Artificial Intelligence (Digital Media Engineering),ENTJ
+D25,D,s243638,,,export:email,Magnus Hansen,overflow,Sustainable Energy,ESTP
+D25,D,s252985,,,export:email,Afonso Martim Domingues,overflow,Computer Science and Engineering,ESTJ

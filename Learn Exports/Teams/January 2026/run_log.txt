@@ -1,0 +1,234 @@
+DTU Team Formation — Run Log
+Date : 2026-06-08 12:21:46
+============================================================
+
+RUN SETTINGS
+  Team sizes  : target 8, min 7, max 10, max 25 teams per challenge
+  Diversity   : studyline weight 1.0, personality weight 1.0
+  Seed        : 42  (use the same seed to reproduce identical assignments)
+
+EDGE CASE LEVERS
+  cross-challenge=survey-wins
+    Student filled a survey for a different challenge than their group export:
+    survey answers used, student stays in their group export challenge.
+
+  missing=keep
+    Student in the group export who never filled any survey:
+    included with UNKNOWN studyline and personality in their enrolled group.
+
+  dropped=keep
+    Student with a survey but absent from the group export (and classlist):
+    included with their survey category.
+
+  late-entries=keep
+    Overflow + late entry survey: moved to late entry.
+    Challenge group + late entry survey: kept in challenge.
+    Late-entry-only students (not in export): kept.
+
+  assignment-mode=interactive
+    Challenge assignments reviewed and confirmed manually before team formation.
+
+LOG MESSAGE GUIDE
+  WARNING [Name]: Q1 ID 's12345' corrected to 's67890'
+    The student typed the wrong ID in the survey. Corrected automatically
+    using the group export.
+
+  INFO [Name]: Q1 'Full Name' -> 's253672' via name lookup
+    The student typed their full name instead of their student ID.
+    Resolved from the group export by name match.
+
+  INFO [sXXXXX]: survey in 'late entry', export 'overflow' - moved to late entry
+    Student moved to late entry — will be distributed across challenge teams to balance numbers.
+
+  INFO [sXXXXX]: survey in 'challenge A', export 'challenge D' - survey data used, category kept
+    Cross-challenge case (survey-wins): survey answers used, student stays
+    in their group export challenge.
+
+  INFO [missing]: sXXXXX  Name  (challenge A - UNKNOWN)
+    Student found in the group export but no survey matched them.
+    Included with UNKNOWN attributes per missing=keep.
+
+  INFO [not in export]: sXXXXX  Name - late entry, kept
+    Student appears in the Late Entries survey but not in the group export.
+    Kept as a late entry (registered after the export was taken).
+
+  WARNING [ghost]: sXXXXX - enrolled but no group or survey found
+    Student is in the classlist but absent from the group export and all
+    surveys. They enrolled in the course but never joined a group or filled
+    the survey. They will NOT appear in teams.csv.
+
+  WARNING [force-audit]: '<value>' did not match any student — skipped
+    A student ID or email added to the force-audit list could not be matched
+    to any student in the group export or survey records.
+
+============================================================
+
+Classlist  : 952 enrolled students from '42500 Innovation in Engineering (Polytechnical Foundation), January 2026_Classlist_Export_2026-05-28-084042.csv', 943 name->number mappings built  (11 via non-standard username)
+WARNING [s253536]: no studyline selected
+WARNING [s253536]: no personality selected
+  Late entries Team Formation Survey - Individual Attempts.xlsx
+    category : late entry
+    students : 14
+  Team Formation Survey - Challenge A - Individual Attempts.xlsx
+    category : challenge A
+    students : 193
+  Team Formation Survey - Challenge B - Individual Attempts.xlsx
+    category : challenge B
+    students : 188
+  Team Formation Survey - Challenge C - Individual Attempts.xlsx
+    category : challenge C
+    students : 192
+  Team Formation Survey - Challenge D - Individual Attempts.xlsx
+    category : challenge D
+    students : 192
+  Team Formation Survey - Challenge Overflow  - Individual Attempts.xlsx
+    category : overflow
+    students : 121
+WARNING [Marc Correll Damsgaard]: Q1 ID 's224968' corrected to 'macoda'
+INFO [Luna Pacheco Santos]: Q1 'Luna Pacheco Santos' -> 's253672' via name lookup
+WARNING [Alejandro Suay Enguix]: Q1 ID 's253657' corrected to 'alesu'
+WARNING [Solange Magali Lagrutta]: Q1 ID 's25390' corrected to 's254390'
+WARNING [Sara Pascali]: Q1 ID 's243087' corrected to 's253087'
+WARNING [Beatriz Albuquerque Raposo Salema]: Q1 ID 's25609' corrected to 's253609'
+WARNING [Frederik Nicolai Hesel Lundgren]: Q1 ID 's214625' corrected to 's214626'
+WARNING [Jake Rockliff]: Q1 ID 's253482' corrected to 'jcoro'
+WARNING [Marta Pareja Boto]: Q1 ID 's253367' corrected to 'mpabo'
+WARNING [Dagur Hall]: Q1 ID 's232766' corrected to 's242766'
+WARNING [Oliver Frej Hollegaard Hartsteen]: Q1 ID 's2204096' corrected to 's224096'
+WARNING [Dovydas Liutkus]: Q1 ID 's231676' corrected to 'dovli'
+INFO [Sandesh Oli]: Q1 'Sandesh Oli' -> 's250126' via name lookup
+WARNING [Kasper Ehlers Wulff]: Q1 ID 's214793' corrected to 'kaswu'
+WARNING [Kia Jespersen]: Q1 ID 's204452' corrected to 's204552'
+INFO [s250147]: survey in 'late entry', export 'overflow' - moved to late entry (--late-entries=keep)
+INFO [s240413]: survey in 'late entry', export 'overflow' - moved to late entry (--late-entries=keep)
+INFO [s250146]: survey in 'late entry', export 'overflow' - moved to late entry (--late-entries=keep)
+INFO [s252897]: survey in 'late entry', export 'challenge C' - kept in challenge C (confirmed challenge group)
+INFO [s253896]: survey in 'late entry', export 'overflow' - moved to late entry (--late-entries=keep)
+INFO [s214306]: survey in 'late entry', export 'challenge C' - kept in challenge C (confirmed challenge group)
+INFO [s253464]: survey in 'late entry', export 'challenge D' - kept in challenge D (confirmed challenge group)
+INFO [s203618]: survey in 'late entry', export 'challenge B' - kept in challenge B (confirmed challenge group)
+INFO [s203840]: also filled surveys in ['challenge C'] - group export category 'overflow' kept
+INFO [s242991]: also filled surveys in ['challenge C'] - group export category 'challenge D' kept
+INFO [s253466]: also filled surveys in ['challenge D'] - group export category 'overflow' kept
+INFO [s252665]: also filled surveys in ['challenge D'] - group export category 'overflow' kept
+INFO [s253567]: also filled surveys in ['challenge D'] - group export category 'overflow' kept
+INFO [s253279]: also filled surveys in ['challenge D'] - group export category 'overflow' kept
+INFO [s253251]: also filled surveys in ['challenge D'] - group export category 'overflow' kept
+INFO [missing]: s203642  Sylvester Elias Tryde Schmidt  (challenge A - UNKNOWN)
+INFO [missing]: s214174  Kristin Dahl Rasmussen  (challenge A - UNKNOWN)
+INFO [missing]: s223912  August Heine Andersen  (challenge A - UNKNOWN)
+INFO [missing]: s223905  Oskar Hvidt Albertsen  (challenge A - UNKNOWN)
+INFO [missing]: s243702  Durvesh Gosavi  (challenge A - UNKNOWN)
+INFO [missing]: s243921  Claudia Ximénez Romero  (challenge A - UNKNOWN)
+INFO [missing]: s253435  Joana Rita Viola Serafim  (challenge A - UNKNOWN)
+INFO [missing]: s200008  Khalil Ahmad Othman  (challenge B - UNKNOWN)
+INFO [missing]: s204763  Denis Meci  (challenge B - UNKNOWN)
+INFO [missing]: s225070  Huria Mohamed Shishay Hissabu  (challenge B - UNKNOWN)
+INFO [missing]: s232226  Can Eraydin  (challenge B - UNKNOWN)
+INFO [missing]: s243412  Fabio Koopmann  (challenge B - UNKNOWN)
+INFO [missing]: s243208  Georgios Karasakalidis  (challenge B - UNKNOWN)
+INFO [missing]: s252930  Vincenzo testini  (challenge B - UNKNOWN)
+INFO [missing]: s252878  Dániel Dénes Szabó  (challenge B - UNKNOWN)
+INFO [missing]: s253233  Markela Brahimi  (challenge B - UNKNOWN)
+INFO [missing]: s233487  Shaoyu Liu  (challenge C - UNKNOWN)
+INFO [missing]: s233462  Igor Pawel Smorag  (challenge C - UNKNOWN)
+INFO [missing]: s243968  Leon Wirth  (challenge C - UNKNOWN)
+INFO [missing]: s250141  Kriti Shrestha  (challenge C - UNKNOWN)
+INFO [missing]: s252625  Zewei Gao  (challenge C - UNKNOWN)
+INFO [missing]: s253417  Rita Santos  (challenge C - UNKNOWN)
+INFO [missing]: s194268  Anton Thestrup Jørgensen  (challenge D - UNKNOWN)
+INFO [missing]: s210902  Magnus Claudius Hansen  (challenge D - UNKNOWN)
+INFO [missing]: s216248  Alexander Kiel Elsing  (challenge D - UNKNOWN)
+INFO [missing]: s224494  Freja Just Okholm  (challenge D - UNKNOWN)
+INFO [missing]: s223989  Albert Skytte Hornbæk  (challenge D - UNKNOWN)
+INFO [missing]: xicsu  Sun Xichu  (challenge D - UNKNOWN)
+INFO [missing]: s253436  Ana Francisca Nogueira  (challenge D - UNKNOWN)
+INFO [not in classlist]: s253436  Ana Francisca Nogueira (challenge D) - kept (--dropped=keep)
+INFO [missing]: s253635  Lizzi Kipping  (challenge D - UNKNOWN)
+INFO [missing]: s253611  Marc López Nohales  (challenge D - UNKNOWN)
+INFO [missing]: s254153  Elena Sofia Agostini  (challenge D - UNKNOWN)
+INFO [missing]: jhaja  Johan Hauser Jacobsen  (overflow - UNKNOWN)
+INFO [missing]: s214301  Sebastian Vinther Mervog  (overflow - UNKNOWN)
+INFO [missing]: s215094  Lukas Taisbak Hølledig  (overflow - UNKNOWN)
+INFO [missing]: s250129  Pragalva Dhungana  (overflow - UNKNOWN)
+INFO [missing]: s250470  Eleni Kompocholi  (overflow - UNKNOWN)
+INFO [missing]: s252587  Jharana Shrestha  (overflow - UNKNOWN)
+INFO [missing]: s252747  Kamana Gautam  (overflow - UNKNOWN)
+INFO [missing]: s253144  Carolina Inês Silva  (overflow - UNKNOWN)
+INFO [missing]: s253282  Andrus Arula  (overflow - UNKNOWN)
+INFO [missing]: s253356  Eva Arés Usero  (overflow - UNKNOWN)
+  42 students from group export with no survey (--missing=keep)
+  1 students from group export not in classlist (--dropped=keep)
+INFO [not in export]: s253401  Dragos Burlui - late entry, kept
+INFO [not in export]: s253507  Sofía Gutiérrez - late entry, kept
+INFO [not in export]: s253757  Stanislaw Piotr Kolodziejczyk - late entry, kept
+INFO [not in export]: s253386  Asia Pino - late entry, kept
+INFO [not in export]: s253536  Matteo Sartor - late entry, kept
+INFO [not in export]: s250249  Pedro Lynce de Faria Gomes da Silva - late entry, kept
+
+  18 enrolled student(s) in classlist but absent from group export and all surveys:
+  WARNING [ghost]: afrno - enrolled but no group or survey found
+  WARNING [ghost]: s112544 - enrolled but no group or survey found
+  WARNING [ghost]: s117330 - enrolled but no group or survey found
+  WARNING [ghost]: s194963 - enrolled but no group or survey found
+  WARNING [ghost]: s205414 - enrolled but no group or survey found
+  WARNING [ghost]: s214987 - enrolled but no group or survey found
+  WARNING [ghost]: s215215 - enrolled but no group or survey found
+  WARNING [ghost]: s223852 - enrolled but no group or survey found
+  WARNING [ghost]: s224486 - enrolled but no group or survey found
+  WARNING [ghost]: s242704 - enrolled but no group or survey found
+  WARNING [ghost]: s242819 - enrolled but no group or survey found
+  WARNING [ghost]: s252909 - enrolled but no group or survey found
+  WARNING [ghost]: s252917 - enrolled but no group or survey found
+  WARNING [ghost]: s252939 - enrolled but no group or survey found
+  WARNING [ghost]: s253325 - enrolled but no group or survey found
+  WARNING [ghost]: s253500 - enrolled but no group or survey found
+  WARNING [ghost]: s253589 - enrolled but no group or survey found
+  WARNING [ghost]: s254235 - enrolled but no group or survey found
+Loaded 935 students from students_combined.csv
+  Mandatory: A=200  B=198  C=198  D=198
+  Flex pool: 141 (overflow + late entry)
+  Challenge A: 200 students -> 25 teams  (sizes 8-8)
+  Challenge B: 198 students -> 25 teams  (sizes 7-8)
+  Challenge C: 198 students -> 25 teams  (sizes 7-8)
+  Challenge D: 198 students -> 25 teams  (sizes 7-8)
+Placing 141 flex students ...
+  Challenge A: now 234 students in 25 teams
+  Challenge B: now 234 students in 25 teams
+  Challenge C: now 234 students in 25 teams
+  Challenge D: now 233 students in 25 teams
+
+============================================================
+  TEAM FORMATION SUMMARY
+============================================================
+  Challenge A:  25 teams  |  234 students  |  sizes 9-10  |  avg diversity SL=0.90 P=0.86
+  Challenge B:  25 teams  |  234 students  |  sizes 9-10  |  avg diversity SL=0.92 P=0.84
+  Challenge C:  25 teams  |  234 students  |  sizes 9-10  |  avg diversity SL=0.93 P=0.89
+  Challenge D:  25 teams  |  233 students  |  sizes 9-10  |  avg diversity SL=0.93 P=0.88
+------------------------------------------------------------
+  Total:     100 teams  |  935 students
+============================================================
+
+Team assignments -> C:\Users\joaos.BPC\AppData\Local\Temp\assign_f598053e-aa48-4afd-8895-68fade4c1627\teams.csv
+Team summary     -> C:\Users\joaos.BPC\AppData\Local\Temp\assign_f598053e-aa48-4afd-8895-68fade4c1627\teams_summary.csv
+
+FINAL OUTPUT RESOLUTION
+  s224163 (Johannes Skaaning Andersen) -> 's224163'  [interactive]
+  s225007 (Nikita Julius Fogelstrøm Pachkova) -> 's225007'  [interactive]
+  macoda (Marc Correll Damsgaard) -> 'macoda'  [interactive]
+  s243194 (Aimilia Vasileia Tolia) -> 's243194'  [interactive]
+  s224158 (Katrine Schollert Steenstrup) -> 's224158'  [interactive]
+  s214301 (Sebastian Vinther Mervog) -> 's214301'  [interactive]
+  alesu (Alejandro Suay Enguix) -> 'alesu'  [interactive]
+  jhaja (Johan Hauser Jacobsen) -> 'jhaja'  [interactive]
+  s184092 (Trine Galberg Hansen) -> 's184092'  [interactive]
+  s224086 (Frederik Malling Kørvéll) -> 's224086'  [interactive]
+  s214706 (Valdemar Friis) -> 's214706'  [interactive]
+  jcoro (Jake Rockliff) -> 'jcoro'  [interactive]
+  s204674 (Sara Sterlie) -> 's204674'  [interactive]
+  s193584 (Kim Nielsen) -> 's193584'  [interactive]
+  kaswu (Kasper Ehlers Wulff) -> 'kaswu'  [interactive]
+  mpabo (Marta Pareja Boto) -> 'mpabo'  [interactive]
+  dovli (Dovydas Liutkus) -> 's231676'  [interactive]
+  xicsu (Sun Xichu) -> 'xicsu'  [interactive]
+  s204374 (Adam Sjøqvist) -> 's204374'  [interactive]

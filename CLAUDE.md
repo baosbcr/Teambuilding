@@ -137,7 +137,7 @@ Two-pass function used by the interactive assignment review:
 - Pass 2: runs `build_student_list` with real lever settings to derive `auto_assignment` per student (the value pre-selected in the review dropdown). Students absent from pass 2 (excluded by `missing=skip` / `dropped=exclude`) get `auto_assignment="skip"`.
 - `audit_dropped`: when `True`, students absent from the classlist are surfaced in the review with a `not-in-classlist` case type and a warning badge, regardless of their normal case type. Requires a classlist.
 - `username_number_map`, `name_number_map`: the maps returned by `load_classlist`. Passed to `enrich_email_student_numbers` on the Pass 1 results so `classlist_confirmed` is accurate on the review page. Default `None` (treated as empty — same as no classlist).
-- `force_audit_ids`: list of student identifiers (student number, bare digits, or email). Normalised via `normalise_id`. Matched students always appear in the review. Unmatched entries emit `WARNING [force-audit]: '<value>' did not match any student — skipped`.
+- `force_audit_ids`: list of student identifiers (student number, bare digits, email, or non-standard DTU username e.g. `nipac` or `nipac@dtu.dk`). Normalised via `normalise_id`. Matched against both `student_number` and `dtu_username` fields. Matched students always appear in the review. Unmatched entries emit `WARNING [force-audit]: '<value>' did not match any student — skipped`.
 - Returns a list of dicts with `case_type, student_number, student_name, export_challenge, survey_challenges, studyline, personality_type, q1_answer, id_source, classlist_confirmed, auto_assignment`. `survey_challenges` is a list (can be multiple for Case D).
 - F1 cases are excluded unless `audit_f1=True`.
 - Happy-path (A/B) students are excluded unless in `force_audit_ids` or `audit_dropped` applies.
@@ -169,6 +169,7 @@ Runs Steps 1-2 in sequence. Shortcut: `--skip-build CSV` (supply a pre-built stu
 
 Browser-based front end wrapping the same pipeline modules. Accepts file uploads (Individual Reports, Group Export, optional classlist), exposes all levers and review modes as form fields, and returns a `teams.zip` containing:
 - `teams.csv` — one row per student
+- `teams_overview.csv` — always included; side-by-side grid (team_id/challenge/size) for quick visual inspection
 - `teams_summary.csv` — per-team diversity stats (if requested)
 - `run_log.txt` — full pipeline output with a settings header and log message guide
 
@@ -234,7 +235,7 @@ All levers available on both `form_teams.py` (direct) and `pipeline.py` (end-to-
 | `assignment_mode`   | automatic    | `automatic`: levers decide all edge cases. `interactive`: review page shown before team formation, one row per edge case with a dropdown pre-filled with the auto-suggested assignment. All assignments (all challenges + overflow + late entry + skip) are always available to the auditor regardless of case type — the auditor may have out-of-band information not reflected in the exports. |
 | `audit_f1`          | off          | *(interactive only)* Include F1 students (late entry, not in group export) in the review. Off by default since F1 students are always kept anyway. |
 | `audit_dropped`     | off          | *(interactive only)* Include students absent from the classlist in the review, regardless of their normal case type. Requires classlist upload. These students appear with a `not-in-classlist` warning badge. |
-| `force_audit_ids`   | (empty)      | *(interactive only)* Comma-separated list of student identifiers (student number, bare digits, or email) to always include in the review regardless of case type. Unmatched entries emit `WARNING [force-audit]` in the run log. Settings saved in browser localStorage. |
+| `force_audit_ids`   | (empty)      | *(interactive only)* Comma-separated list of student identifiers (student number, bare digits, email, or non-standard username e.g. `nipac` / `nipac@dtu.dk`) to always include in the review regardless of case type. Unmatched entries emit `WARNING [force-audit]` in the run log. Settings saved in browser localStorage. |
 
 ---
 
@@ -259,6 +260,10 @@ One row per student. Fields: `team_id, challenge, student_number, dtu_username, 
 `email_student_number` — only populated for students whose `student_number` is a non-standard DTU username (not matching `s\d+`) and a classlist was provided. Contains the `sXXXXXX` derived from the classlist email for manual verification. Empty for all standard students.
 
 `id_source` — carried through from `students_combined.csv`; see above.
+
+### `teams_overview.csv`
+
+Always produced alongside `teams.csv`. Side-by-side grid with one column block per challenge (A → B → C → D), separated by a single empty spacer column. Fields per block: `team_id, challenge, size`. No diversity metrics — designed for quick visual inspection in a spreadsheet.
 
 ### `teams_summary.csv`
 
