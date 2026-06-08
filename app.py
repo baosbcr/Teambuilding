@@ -266,6 +266,9 @@ def _build_zip(teams_path, summary_path, final_path, log_text):
     zip_buf = io.BytesIO()
     with zipfile.ZipFile(zip_buf, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.write(teams_path, "teams.csv")
+        overview_path = teams_path.with_name("teams_overview.csv")
+        if overview_path.exists():
+            zf.write(overview_path, "teams_overview.csv")
         if summary_path and summary_path.exists():
             zf.write(summary_path, "teams_summary.csv")
         if final_path and final_path.exists():
@@ -294,6 +297,9 @@ def _finish_run(all_teams, log_text, teams_path, summary_path, include_summary,
                     "include_summary": include_summary,
                 }, f)
             shutil.copy(teams_path, session_dir / "teams.csv")
+            overview_src = teams_path.with_name("teams_overview.csv")
+            if overview_src.exists():
+                shutil.copy(overview_src, session_dir / "teams_overview.csv")
             if summary_path and summary_path.exists():
                 shutil.copy(summary_path, session_dir / "teams_summary.csv")
             if cleanup_dir:

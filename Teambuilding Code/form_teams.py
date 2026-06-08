@@ -314,7 +314,7 @@ def write_teams(
     out_path: Path,
     summary_path: Path | None = None,
 ) -> None:
-    """Write team assignments CSV and optional summary CSV."""
+    """Write team assignments CSV, side-by-side overview, and optional full summary CSV."""
     fieldnames = [
         "team_id", "challenge", "student_number", "dtu_username",
         "email_student_number", "id_source", "student_name", "original_category",
@@ -343,6 +343,7 @@ def write_teams(
         writer.writeheader()
         writer.writerows(rows)
 
+    _write_overview(all_teams, out_path.with_name("teams_overview.csv"))
     if summary_path:
         _write_summary(all_teams, summary_path)
 
@@ -470,21 +471,41 @@ def _write_summary(
         "unique_studylines", "unique_personalities",
         "studyline_diversity", "personality_diversity",
     ]
-
-    # Build a flat list of value rows per challenge
-    ch_rows: dict[str, list[list]] = {}
+    rows = []
     for ch in CHALLENGES:
-        rows = []
         for t_idx, team in enumerate(all_teams[ch], start=1):
             tid = f"{ch}{t_idx:02d}"
             sl = len({s["studyline"]        for s in team})
             p  = len({s["personality_type"] for s in team})
             n  = len(team)
-            rows.append([
-                tid, ch, n, sl, p,
-                f"{sl/n:.2f}" if n else "0.00",
-                f"{p/n:.2f}"  if n else "0.00",
-            ])
+            rows.append({
+                "team_id":               tid,
+                "challenge":             ch,
+                "size":                  n,
+                "unique_studylines":     sl,
+                "unique_personalities":  p,
+                "studyline_diversity":   f"{sl/n:.2f}" if n else "0.00",
+                "personality_diversity": f"{p/n:.2f}"  if n else "0.00",
+            })
+
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def _write_overview(
+    all_teams: dict[str, list[list[dict]]],
+    path: Path,
+) -> None:
+    """Side-by-side grid: one column block per challenge, only team_id/challenge/size."""
+    fieldnames = ["team_id", "challenge", "size"]
+
+    ch_rows: dict[str, list[list]] = {}
+    for ch in CHALLENGES:
+        rows = []
+        for t_idx, team in enumerate(all_teams[ch], start=1):
+            rows.append([f"{ch}{t_idx:02d}", ch, len(team)])
         ch_rows[ch] = rows
 
     max_rows   = max((len(r) for r in ch_rows.values()), default=0)
@@ -492,14 +513,12 @@ def _write_summary(
 
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        # Header: fieldnames for each challenge separated by one empty spacer column
         header = []
         for i, ch in enumerate(CHALLENGES):
             if i:
                 header.append("")
             header.extend(fieldnames)
         writer.writerow(header)
-        # One output row per team index; shorter challenges get blank cells
         for row_idx in range(max_rows):
             row = []
             for i, ch in enumerate(CHALLENGES):
