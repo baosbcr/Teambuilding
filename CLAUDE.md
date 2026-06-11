@@ -4,13 +4,15 @@
 
 When the user signals they are done for the session (says goodbye, asks to wrap up, mentions leaving), suggest running `/DtuWrap` before they close Claude. It commits pending work, updates the hours log and weekly status in the Bookkeeping repo, and checks that docs are current.
 
-## Weekly Status Log
+## Status Log
 
 Status messages, the task list, and the hours log all live in the **separate Bookkeeping repo** (`baosbcr/Bookkeeping`, local path `../Bookkeeping`). Do not create or edit `weekly_status.md` or `todo.md` here.
 
-`../Bookkeeping/statuses/weekly_status.md` is the running work-session log used to draft status updates for the supervisor. There is no fixed cadence — sessions may happen on any days. **Append a plain-English bullet or two at the end of every working session** — written as if the reader has only seen the Flask app run once or twice. After the user confirms they've submitted the update, **delete all bullet points and start fresh**.
+`../Bookkeeping/statuses/weekly_status.md` is a rolling backlog used to draft status messages for the supervisor (Toke). **Append a plain-English bullet or two after every working session** — no jargon, written as if the reader has only seen the Flask app run once or twice. No week headings — just a flat list.
 
-Use `/DtuWrap` to handle this automatically at session end.
+João submits status updates at the end of formal workdays (Monday, Wednesday, Thursday) before 19:00. `/DtuWrap` checks the day/time and prompts submission on those days. After confirmed submission, **all bullets are cleared**.
+
+Use `/DtuWrap` to handle all of this automatically at session end.
 
 ---
 
